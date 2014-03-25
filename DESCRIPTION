@@ -1,0 +1,10 @@
+Package: evalpack
+Type: Package
+Title: Utilitarios para proyectos de evaluación
+Version: 1.0
+Date: 2013-12-17
+Author: Felipe Aguirre, Paco Arevalo, Pedro Guarderas, Angel Naranjo, Alejandro Yerovi
+Maintainer: Who to complain to <yourfault@somewhere.net>
+Description: More about what it does (maybe more than one line)
+License: What license is it under?
+Depends: gtools, stringr
