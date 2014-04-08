@@ -37,8 +37,9 @@ correct_char2<-function( data, cols, chr = NULL, rep = NULL ) {
   out<-data[,cols]
   
   if ( length( chr ) == 0 || length( rep ) == 0 ) {
-    chr<-c( ' en ', ' de ', ' la ', ' a ', ' por ', ' y ', '/', " ( )*", ' ', 'á', 'é', 'í', 'ó', 'ú', '-' )
-    rep<-c( ' ', ' ', ' ', ' ', ' ', ' ', '_', ' ', '_', 'a', 'e', 'i', 'o', 'u', '_' )
+    chr<-c( ' en ', ' de ', ' la ', ' a ', ' por ', ' y ', '/', " ( )*", ' ', 'á', 'é', 'í', 
+            'ó', 'ú', '-', '\\(', '\\)' )
+    rep<-c( ' ', ' ', ' ', ' ', ' ', ' ', '_', ' ', '_', 'a', 'e', 'i', 'o', 'u', '_', '', '' )
   }
   
   if ( length( chr ) == length( rep ) ) {
