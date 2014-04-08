@@ -8,27 +8,20 @@ read_utility_function
 Función para leer funciones de utilidad de Logical Decision
 }
 \usage{
-read_utility_functions( file, script )
+read_utility_functions( file, script, nr, skip )
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{file}{
-%%     ~~Describe \code{file} here~~
-}
-  \item{script}{
-%%     ~~Describe \code{script} here~~
-}
+  \item{file}{ Archivo generado por Logical Decisio con las funciones de decisión }
+  \item{script}{ Script de salida en donde se guardan las funciones de decisión }
+  \item{nr}{ Número de filas que se espera leer del script }
+  \item{skip}{ Número de filas que se omiten }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
-\value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
+\value{ No tiene valor de retorno, la salida es el script R con funciones de decisión definidas 
+  dentro }
 \references{
 %% ~put references to the literature/web site here ~
 }

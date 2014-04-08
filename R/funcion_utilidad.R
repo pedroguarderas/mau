@@ -3,11 +3,11 @@
 # Decisions
 
 # Función diseñada para leer 
-read_utility_functions<-function( file, script ) {
+read_utility_functions<-function( file, script, nr, skip = 5 ) {
   options( stringsAsFactors = FALSE )
   
   funs<-read.table( file, header = FALSE, sep = '\t', quote = NULL, encoding = 'latin1', 
-                    skip = 5, nrows = 133, allowEscapes = FALSE, dec = '.', fill = TRUE )
+                    skip = skip, nrows = nr, allowEscapes = FALSE, dec = '.', fill = TRUE )
   
   funs<-funs[ ,!( 1:ncol(funs) %in% c(3,5,8) ) ]
   funs<-data.frame( funs, fun = correct_char2( funs, 1 ) )
