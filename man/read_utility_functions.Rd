@@ -1,25 +1,22 @@
-\name{correct_char}
-\alias{correct_char}
+\name{read_utility_functions}
+\alias{read_utility_functions}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Correción de caracteres
+read_utility_function
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Función para leer funciones de utilidad de Logical Decision
 }
 \usage{
-correct_char(data = stop("data not supplied"), cols = stop("cols not supplied"), case = TRUE)
+read_utility_functions( file, script )
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{data}{
-%%     ~~Describe \code{data} here~~
+  \item{file}{
+%%     ~~Describe \code{file} here~~
 }
-  \item{cols}{
-%%     ~~Describe \code{cols} here~~
-}
-  \item{case}{
-%%     ~~Describe \code{case} here~~
+  \item{script}{
+%%     ~~Describe \code{script} here~~
 }
 }
 \details{
@@ -36,10 +33,9 @@ correct_char(data = stop("data not supplied"), cols = stop("cols not supplied"),
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Pedro Guarderas
 }
 \note{
-%%  ~~further notes~~
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
@@ -52,7 +48,6 @@ correct_char(data = stop("data not supplied"), cols = stop("cols not supplied"),
 ##-- ==>  Define data, use random,
 ##--	or do  help(data=index)  for the standard data sets.
 }
-
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 %\keyword{ ~kwd1 }

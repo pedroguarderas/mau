@@ -8,5 +8,5 @@ library(stringr)
 source('R/corchar.R')
 
 #___________________________________________________________________________________________________
-# Macro para leer funciones que provienen del Logical Decision
-source('R/funutil.R')
+# Función para leer funciones de utilidad que provienen del Logical Decision
+source('R/funcion_utilidad.R')
