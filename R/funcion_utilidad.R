@@ -33,7 +33,7 @@ read_utility_functions<-function( file, script, nr, skip = 5 ) {
         if ( funs$c[j] == 0.0 ) {
           f<-paste( f, '\t\tf<-(', funs$b[j], ')*x + (', funs$a[j], ')\n\t} ', sep = '' )
         } else {
-          f<-paste( f, '\t\tf<-(', funs$b[j], ')*exp( -(', funs$c[j], ')*x ) + (', funs$a[j], ')\n\t}', 
+          f<-paste( f, '\t\tf<-(', funs$b[j], ')*exp( -(', funs$c[j], ')*x ) + (', funs$a[j], ')\n\t} ', 
                     sep = '' )
         }
         j<-j+1
