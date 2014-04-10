@@ -2,7 +2,8 @@
 # Script para construir funciones en R a partir de funciones de utilidad definidas en Logical
 # Decisions
 
-# Función diseñada para leer 
+#___________________________________________________________________________________________________
+# Función diseñada para leer funciones de utilidad
 read_utility_functions<-function( file, script, nr, skip = 5 ) {
   options( stringsAsFactors = FALSE )
   
@@ -44,3 +45,15 @@ read_utility_functions<-function( file, script, nr, skip = 5 ) {
   }
   rm(funs,i,j,f)
 }
+
+#___________________________________________________________________________________________________
+# Función para leer pesos del modelo
+read_weights<-function( file, nrows, skip = 5, encoding = 'latin1' ) {
+  data<-read.table( file, header = FALSE, sep = '\t', quote = NULL,
+                    encoding = encoding, skip = skip, nrows = nrows, allowEscapes = FALSE, 
+                    dec = '.', fill = TRUE )
+  data<-data.frame( nom = data[,1], fnom = correct_char2( data, 1 ), 
+                    weight = as.numeric( data[,2] ) / 100.0 )
+  return( data )
+}
+
