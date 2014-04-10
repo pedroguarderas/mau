@@ -22,7 +22,7 @@ read_utility_functions<-function( file, script, nr, skip = 5 ) {
   i<-1
   while ( i < nrow(funs) ) { # i<-1
     if ( funs$fun[i] != "" ) {
-      f<-paste( funs$fun[i], '<-function(x) { \n\tf<-NULL \n', sep = '' )
+      f<-paste( funs$fun[i], '<-function(x) { \n\tf<-0 \n', sep = '' )
       j<-i+1
       while ( funs$fun[j] == "" && j <= nrow(funs) ) {
         if ( j == i + 1 ) {
@@ -54,6 +54,24 @@ read_weights<-function( file, nrows, skip = 5, encoding = 'latin1' ) {
                     dec = '.', fill = TRUE )
   data<-data.frame( nom = data[,1], fnom = correct_char2( data, 1 ), 
                     weight = as.numeric( data[,2] ) / 100.0 )
+  colnames( data )<-c( 'nom', 'fnom', 'weight' )
   return( data )
 }
 
+#___________________________________________________________________________________________________
+# Función para evaluar indicadores con funciones de utilidad
+eval_index<-function( index, names, indexsub, colcod = 1, colpos, colfun, envir = .GlobalEnv ) {
+  
+  data<-data.frame( cod = index[ ,colcod ] )
+
+  for ( i in 1:nrow( names ) ) {
+    # Se verifica si la función a sido definida
+    if ( names[ i, colfun ] %in% ls( envir = envir ) ) {
+      col<-paste( indexsub, names[ i, colpos ], sep = '' )
+      data<-cbind( data, sapply( index[ , col ], FUN = names[ i, colfun ] ) )
+      colnames( data )[ ncol(data) ]<-paste( 'eva_', names[ i, colpos ], sep = '' )
+    }
+  }
+  rm( i, col )
+  return( data )
+}
