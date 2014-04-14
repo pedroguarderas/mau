@@ -26,7 +26,9 @@ eval_index(index, names, colcod = 1, colpos, colfun, envir = .GlobalEnv)
   \item{colpos}{ 
 }
   \item{colfun}{
-%%     ~~Describe \code{colfun} here~~
+}
+  \item{coltip}{
+  Columna con el tipo de variable
 }
   \item{envir}{
   Entorno

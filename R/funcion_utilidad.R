@@ -60,15 +60,22 @@ read_weights<-function( file, nrows, skip = 5, encoding = 'latin1' ) {
 
 #___________________________________________________________________________________________________
 # Función para evaluar indicadores con funciones de utilidad
-eval_index<-function( index, names, indexsub, colcod = 1, colpos, colfun, envir = .GlobalEnv ) {
+eval_index<-function( index, names, indexsub, colcod = 1, colpos, colfun, coltip, 
+                      envir = .GlobalEnv ) {
   
   data<-data.frame( cod = index[ ,colcod ] )
 
   for ( i in 1:nrow( names ) ) {
     # Se verifica si la función a sido definida
-    if ( names[ i, colfun ] %in% ls( envir = envir ) ) {
+    if ( names[ i, coltip ] == 'CUANTITATIVA' ) {
+      if ( names[ i, colfun ] %in% ls( envir = envir ) ) {
+        col<-paste( indexsub, names[ i, colpos ], sep = '' )
+        data<-cbind( data, sapply( index[ , col ], FUN = names[ i, colfun ] ) )
+        colnames( data )[ ncol(data) ]<-paste( 'eva_', names[ i, colpos ], sep = '' )
+      }
+    } else {
       col<-paste( indexsub, names[ i, colpos ], sep = '' )
-      data<-cbind( data, sapply( index[ , col ], FUN = names[ i, colfun ] ) )
+      data<-cbind( data, index[ , col ] )
       colnames( data )[ ncol(data) ]<-paste( 'eva_', names[ i, colpos ], sep = '' )
     }
   }
