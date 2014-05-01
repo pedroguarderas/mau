@@ -48,7 +48,8 @@ eval_index(index, names, colcod = 1, colpos, colfun, envir = .GlobalEnv)
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Julio Andrade, Daniel Lagos, Andrés Lopez, Pedro Guarderas, Paul Recalde, 
+Edison Salazar
 }
 \note{
 %%  ~~further notes~~

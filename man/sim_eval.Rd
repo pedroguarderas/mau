@@ -42,7 +42,8 @@ sim_eval(N = 1, W = stop("W not supplied"), S = stop("S not supplied"), F = stop
 %% ~put references to the literature/web site here ~
 }
 \author{
-Equipo modelamiento CEAACES
+Julio Andrade, Daniel Lagos, Andrés Lopez, Pedro Guarderas, Paul Recalde, 
+Edison Salazar
 }
 \note{
 %%  ~~further notes~~
