@@ -1,5 +1,5 @@
 #___________________________________________________________________________________________________
-# Funcines para trabajar con fechas
+# Funciones para trabajar con fechas
 
 #___________________________________________________________________________________________________
 # Cálculo de meses entre dos fechas datas presentes en columnas de un data.frame
