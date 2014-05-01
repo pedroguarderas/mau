@@ -42,7 +42,7 @@ sim_eval(N = 1, W = stop("W not supplied"), S = stop("S not supplied"), F = stop
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Equipo modelamiento CEAACES
 }
 \note{
 %%  ~~further notes~~

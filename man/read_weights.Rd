@@ -39,7 +39,7 @@ read_weights(file, nrows, skip = 5, encoding = "latin1")
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Felipe Aguiree, Pedro Guarderas
 }
 \note{
 %%  ~~further notes~~

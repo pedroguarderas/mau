@@ -39,7 +39,7 @@ correct_char2(data, cols, chr = NULL, rep = NULL)
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Julio Andrade, Daniel Lagos, Andrés Lopez, Pedro Guarderas, Edison Salazar
 }
 \note{
 %%  ~~further notes~~

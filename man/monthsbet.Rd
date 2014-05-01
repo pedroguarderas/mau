@@ -33,7 +33,7 @@ monthsbet(X, cols)
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Julio Andrade, Pedro Guarderas
 }
 \note{
 %%  ~~further notes~~

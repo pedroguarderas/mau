@@ -30,7 +30,7 @@ AHPmatrix(M)
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Edison Salazar, Pedro Guarderas
 }
 \note{
 %%  ~~further notes~~

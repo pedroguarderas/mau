@@ -39,7 +39,7 @@ funsLogicalDecision(data = stop("data not supplied"), file = stop("file not supp
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Felipe Aguirre, Pedro Guarderas
 }
 \note{
 %%  ~~further notes~~
