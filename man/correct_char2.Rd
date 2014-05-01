@@ -56,29 +56,8 @@ Julio Andrade, Daniel Lagos, Andrés Lopez, Pedro Guarderas, Edison Salazar
 ##--	or do  help(data=index)  for the standard data sets.
 
 ## The function is currently defined as
-function (data, cols, chr = NULL, rep = NULL) 
-{
-    out <- data[, cols]
-    if (length(chr) == 0 || length(rep) == 0) {
-        chr <- c(" en ", " de ", " la ", " a ", " por ", " y ", 
-            "/", " ( )*", " ", "á", "é", "í", "ó", "ú", 
-            "-")
-        rep <- c(" ", " ", " ", " ", " ", " ", "_", " ", "_", 
-            "a", "e", "i", "o", "u", "_")
-    }
-    if (length(chr) == length(rep)) {
-        out <- apply(as.data.frame(out), c(1, 2), FUN = tolower)
-        out <- apply(as.data.frame(out), c(1, 2), FUN = str_trim)
-        for (i in 1:length(chr)) {
-            out <- apply(as.data.frame(out), c(1, 2), FUN = owngsub, 
-                pattern = chr[i], replacement = rep[i])
-        }
-    }
-    out <- data.frame(out)
-    return(out)
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+%\keyword{ ~kwd1 }
+%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
