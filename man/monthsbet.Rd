@@ -5,7 +5,7 @@
 monthsbet
 }
 \description{
-Cálculo de meses entre dos fechas datas presentes en columnas de un data.frame
+Cálculo de meses entre dos fechas dadas presentes en columnas de un data.frame
 }
 \usage{
 monthsbet(X, cols)
