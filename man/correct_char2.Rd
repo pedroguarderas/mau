@@ -2,7 +2,7 @@
 \alias{correct_char2}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Correción de caracteres
+Corrección de caracteres
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
