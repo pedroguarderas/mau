@@ -15,35 +15,60 @@ read_utility_functions<-function( file, script, nr, skip = 5 ) {
   
   colnames(funs)<-c('nom','min','max','nivel','val','a','b','c','fun')
   
+  nom<-funs$nom[1]
+  nomf<-funs$fun[1]
+  for ( i in 1:nrow(funs) ) {
+    if ( nchar( funs$fun[i] ) == 0 )  {
+      funs$nom[i]<-nom
+      funs$fun[i]<-nomf
+    } else {
+      nom<-funs$nom[i]
+      nomf<-funs$fun[i]
+    }
+  }
+  funs<-subset( funs, complete.cases( funs ) )
+  rownames( funs )<-NULL
+  
   if ( file.exists( script ) ) {
     file.remove( script )
   }
-
+  
   i<-1
-  while ( i < nrow(funs) ) { # i<-1
-    if ( funs$fun[i] != "" ) {
+  j<-1
+  n<-nrow( funs )
+  nomf<-funs$fun[1]
+  for ( i in 1:n ) { # i<-1
+    if ( funs$fun[i] != nomf || i == 1 ) {
       f<-paste( funs$fun[i], '<-function(x) { \n\tf<-0 \n', sep = '' )
-      j<-i+1
-      while ( funs$fun[j] == "" && j <= nrow(funs) ) {
-        if ( j == i + 1 ) {
-          f<-paste( f, '\tif ( x >=', funs$min[j], " && x <=", funs$max[j], ' ) {\n',sep = '')
-        } else {
-          f<-paste( f, 'else if ( x >= ', funs$min[j], " && x < ", funs$max[j], ' ) {\n',sep = '')
-        }
-        if ( funs$c[j] == 0.0 ) {
-          f<-paste( f, '\t\tf<-(', funs$b[j], ')*x + (', funs$a[j], ')\n\t} ', sep = '' )
-        } else {
-          f<-paste( f, '\t\tf<-(', funs$b[j], ')*exp( -(', funs$c[j], ')*x ) + (', funs$a[j], ')\n\t} ', 
-                    sep = '' )
-        }
-        j<-j+1
+      j<-i
+    }
+    
+    if ( j == i ) {
+      f<-paste( f, '\tif ( x >=', funs$min[i], " && x <=", funs$max[i], ' ) {\n',sep = '')
+    } else {
+      f<-paste( f, 'else if ( x >= ', funs$min[i], " && x < ", funs$max[i], ' ) {\n',sep = '')
+    }
+    
+    if ( funs$c[i] == 0.0 ) {
+      f<-paste( f, '\t\tf<-(', funs$b[i], ')*x + (', funs$a[i], ')\n\t} ', sep = '' )
+    } else {
+      f<-paste( f, '\t\tf<-(', funs$b[i], ')*exp( -(', funs$c[i], ')*x ) + (', funs$a[i], ')\n\t} ', 
+                sep = '' )
+    }
+    
+    nomf<-funs$fun[i]
+    if ( i < n ) {
+      if ( funs$fun[i+1] != nomf ) {  
+        f<-paste( f, '\n\treturn(f)\n}', sep = '' )
+        write( f, file = script, append = TRUE )
       }
+    } else {
       f<-paste( f, '\n\treturn(f)\n}', sep = '' )
       write( f, file = script, append = TRUE )
-      i<-j
     }
   }
-  rm(funs,i,j,f)
+  rm(i,j,f)
+  return( funs )
 }
 
 #___________________________________________________________________________________________________
