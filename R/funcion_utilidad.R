@@ -58,11 +58,15 @@ read_utility_functions<-function( file, script, nr, skip = 5 ) {
     
     nomf<-funs$fun[i]
     if ( i < n ) {
-      if ( funs$fun[i+1] != nomf ) {  
+      if ( funs$fun[i+1] != nomf ) {
+        f<-paste( f, '\n\tf<-max(0.0,f)', sep = '' )
+        f<-paste( f, '\n\tf<-min(1.0,f)', sep = '' )
         f<-paste( f, '\n\treturn(f)\n}', sep = '' )
         write( f, file = script, append = TRUE )
       }
     } else {
+      f<-paste( f, '\n\tf<-max(0.0,f)', sep = '' )
+      f<-paste( f, '\n\tf<-min(1.0,f)', sep = '' )
       f<-paste( f, '\n\treturn(f)\n}', sep = '' )
       write( f, file = script, append = TRUE )
     }
