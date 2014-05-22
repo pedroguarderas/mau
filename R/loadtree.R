@@ -41,7 +41,7 @@ write_tree<-function( file, tree, col_id, col_nom, col_parent, col_weight, col_f
   </key>
   <key id=\"f\" for=\"node\" attr.name=\"weight\" attr.type=\"string\"/>
 
-<graph id=\"G\" edgedefault=\"undirected\">
+<graph id=\"G\" edgedefault=\"directed\">
 "
   nodes<-NULL
   edges<-NULL
@@ -54,7 +54,7 @@ write_tree<-function( file, tree, col_id, col_nom, col_parent, col_weight, col_f
                  <data key=\"w\">", tree[i,col_weight], "</data>
                  <data key=\"f\">", tree[i,col_func], "</data>
                  </node>\n", sep = '' )
-      edge<-paste( "<edge id=\"e", j, "\" source=\"", 
+      edge<-paste( "<edge id=\"e", j, "\" ", "directed=\"true\" ", "source=\"", 
                    tree[ tree[,col_nom] == tree[i,col_parent], col_id ],
                    "\" target=\"", tree[i,col_id], "\"/>\n", sep = '' )
       edges<-paste( edges, edge, sep = '' )
@@ -71,4 +71,29 @@ write_tree<-function( file, tree, col_id, col_nom, col_parent, col_weight, col_f
   
   grphxml<-paste( grphxml, nodes, edges, "\t</graph>\n</graphml>", sep = '' )
   write( grphxml, file = file, append = FALSE ) 
+}
+
+#___________________________________________________________________________________________________
+# Función para asignar pesos a las ramas internas dados los pesos en las raíces
+asign_weight<-function( tree ) {
+  leafs<-neighborhood( tree, 0, V( tree )[ V( tree )$weight == 0 ] )
+  
+  for ( i in leafs ) {
+    childs<-unlist( neighborhood( tree, 100, V(tree)[i], mode = 'out' ) )
+    childs<-childs[ childs != i ]
+    if ( length( childs ) ) {
+      V( tree )[i]$weight<-sum( V( tree )[ childs ]$weight )
+    }
+  }
+  
+  leafs<-neighborhood( tree, 0 )
+  for ( i in leafs ) {
+    childs<-unlist( neighborhood( tree, 1, V(tree)[i], mode = 'in' ) )
+    childs<-childs[ childs != i ]
+    if ( length( childs ) == 1 ) {
+      V( tree )[i]$weight<-V( tree )[ i ]$weight / V( tree )[ childs ]$weight
+    }
+  }
+  
+  return( tree )
 }
