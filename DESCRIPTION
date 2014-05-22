@@ -7,4 +7,4 @@ Author: Felipe Aguirre, Paco Arevalo, Pedro Guarderas, Angel Naranjo, Alejandro 
 Maintainer: Who to complain to <yourfault@somewhere.net>
 Description: More about what it does (maybe more than one line)
 License: What license is it under?
-Depends: gtools, stringr
+Depends: gtools, stringr, xlsx
