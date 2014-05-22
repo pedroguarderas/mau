@@ -39,7 +39,7 @@ write_tree<-function( file, tree, col_id, col_nom, col_parent, col_weight, col_f
   <key id=\"w\" for=\"node\" attr.name=\"weight\" attr.type=\"double\">
   <default>1.0</default>
   </key>
-  <key id=\"f\" for=\"node\" attr.name=\"weight\" attr.type=\"string\"/>
+  <key id=\"f\" for=\"node\" attr.name=\"function\" attr.type=\"string\"/>
 
 <graph id=\"G\" edgedefault=\"directed\">
 "
