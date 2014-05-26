@@ -48,28 +48,29 @@ write_tree<-function( file, tree, col_id, col_nom, col_parent, col_weight, col_f
   j<-0
   for ( i in 1:nrow(tree) ) { #i<-2
     if ( tree[i,col_nom] != tree[i,col_parent] ) {
-      node<-paste( "<node id=\"", tree[i,col_id], "\">
-                 <data key=\"n\">", tree[i,col_nom], "</data>
-                 <data key=\"c\">", 'dodgerblue3', "</data>
-                 <data key=\"w\">", tree[i,col_weight], "</data>
-                 <data key=\"f\">", tree[i,col_func], "</data>
-                 </node>\n", sep = '' )
-      edge<-paste( "<edge id=\"e", j, "\" ", "directed=\"true\" ", "source=\"", 
+      node<-paste( "\t<node id=\"", tree[i,col_id], "\">\n",
+                    "\t\t<data key=\"n\">", tree[i,col_nom], "</data>\n",
+                    "\t\t<data key=\"c\">", 'dodgerblue3', "</data>\n",
+                    "\t\t<data key=\"w\">", tree[i,col_weight], "</data>\n",
+                    "\t\t<data key=\"f\">", ifelse( !is.na( tree[i,col_weight] ), 
+                                                    tree[i,col_func], NA ), "</data>\n",
+                    "\t</node>\n", sep = '' )
+      edge<-paste( "\t<edge id=\"e", j, "\" ", "directed=\"true\" ", "source=\"", 
                    tree[ tree[,col_nom] == tree[i,col_parent], col_id ],
                    "\" target=\"", tree[i,col_id], "\"/>\n", sep = '' )
       edges<-paste( edges, edge, sep = '' )
       j<-j+1
     } else {
-      node<-paste( "<node id=\"", tree[i,col_id], "\">
-                 <data key=\"n\">", tree[i,col_nom], "</data>
-                 <data key=\"c\">", 'dodgerblue3', "</data>
-                 <data key=\"w\">", tree[i,col_weight], "</data>
-                 </node>\n", sep = '' )
+      node<-paste( "\t<node id=\"", tree[i,col_id], "\">\n",
+                 "\t\t<data key=\"n\">", tree[i,col_nom], "</data>\n",
+                 "\t\t<data key=\"c\">", 'dodgerblue3', "</data>\n",
+                 "\t\t<data key=\"w\">", tree[i,col_weight], "</data>\n",
+                 "\t</node>\n", sep = '' )
     }
     nodes<-paste( nodes, node, sep = '' )
   }
   
-  grphxml<-paste( grphxml, nodes, edges, "\t</graph>\n</graphml>", sep = '' )
+  grphxml<-paste( grphxml, nodes, edges, "</graph>\n</graphml>", sep = '' )
   write( grphxml, file = file, append = FALSE ) 
 }
 
