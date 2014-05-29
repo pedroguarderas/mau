@@ -88,25 +88,37 @@ write_tree<-function( file, tree, col_id, col_cod, col_nom, col_parent, col_weig
 
 #___________________________________________________________________________________________________
 # Función para asignar pesos a las ramas internas dados los pesos en las raíces
-asign_weight<-function( tree ) {
-  leafs<-neighborhood( tree, 0, V( tree )[ V( tree )$weight == 0 ] )
-  
-  for ( i in leafs ) {
-    childs<-unlist( neighborhood( tree, 100, V(tree)[i], mode = 'out' ) )
-    childs<-childs[ childs != i ]
-    if ( length( childs ) ) {
-      V( tree )[i]$weight<-sum( V( tree )[ childs ]$weight )
+sum_weights<-function( tree, leaves ) {
+  if ( length( leaves ) > 0 ) {
+    new_leaves<-NULL
+    for ( i in leaves ) { # i<-leafs[1]
+      parent<-unlist( neighborhood( tree, 1, V(tree)[i], mode = 'in' ) )
+      parent<-parent[ parent != i ]
+      parent<-parent[ !( parent %in% new_leaves ) ]
+      if ( length( parent ) == 1 ) {
+        new_leaves<-unique( c( new_leaves, parent ) )
+        childs<-unlist( neighborhood( tree, 1, V(tree)[parent], mode = 'out' ) )
+        childs<-childs[ childs != parent ]
+        V( tree )[parent]$weight<-sum( V( tree )[ childs ]$weight )
+      }
     }
+    tree<-sum_weights( tree, new_leaves )
   }
-  
-  leafs<-neighborhood( tree, 0 )
-  for ( i in leafs ) {
-    childs<-unlist( neighborhood( tree, 1, V(tree)[i], mode = 'in' ) )
-    childs<-childs[ childs != i ]
-    if ( length( childs ) == 1 ) {
-      V( tree )[i]$weight<-V( tree )[ i ]$weight / V( tree )[ childs ]$weight
+  return( tree )
+}
+
+divide_weights<-function( tree, leaves ) {
+  if ( length( leaves ) > 0 ) {
+    new_leaves<-NULL
+    for ( i in leaves ) { # i<-leafs[1]
+      parent<-unlist( neighborhood( tree, 1, V(tree)[i], mode = 'in' ) )
+      parent<-parent[ parent != i ]
+      if ( length( parent ) == 1 ) {
+        new_leaves<-unique( c( new_leaves, parent ) )
+        V( tree )[i]$weight<-V( tree )[ i ]$weight / V( tree )[ parent ]$weight
+      }
     }
+    tree<-divide_weights( tree, new_leaves )
   }
-  
   return( tree )
 }
