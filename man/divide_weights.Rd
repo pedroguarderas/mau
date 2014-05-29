@@ -1,19 +1,22 @@
-\name{asign_weight}
-\alias{asign_weight}
+\name{divide_weights}
+\alias{divide_weights}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-asign_weight
+divide_weights
 }
 \description{
-Función para asignar pesos a las ramas internas dados los pesos en las raíces
+Reasigna pesos
 }
 \usage{
-asign_weight(tree)
+divide_weights(tree, leafs)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{tree}{
 %%     ~~Describe \code{tree} here~~
+}
+  \item{leafs}{
+%%     ~~Describe \code{leafs} here~~
 }
 }
 \details{
@@ -30,7 +33,7 @@ asign_weight(tree)
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Pedro Guarderas
 }
 \note{
 %%  ~~further notes~~
