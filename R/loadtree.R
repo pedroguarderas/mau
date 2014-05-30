@@ -88,37 +88,40 @@ write_tree<-function( file, tree, col_id, col_cod, col_nom, col_parent, col_weig
 
 #___________________________________________________________________________________________________
 # Función para asignar pesos a las ramas internas dados los pesos en las raíces
-sum_weights<-function( tree, leaves ) {
-  if ( length( leaves ) > 0 ) {
-    new_leaves<-NULL
-    for ( i in leaves ) { # i<-leafs[1]
-      parent<-unlist( neighborhood( tree, 1, V(tree)[i], mode = 'in' ) )
-      parent<-parent[ parent != i ]
-      parent<-parent[ !( parent %in% new_leaves ) ]
-      if ( length( parent ) == 1 ) {
-        new_leaves<-unique( c( new_leaves, parent ) )
-        childs<-unlist( neighborhood( tree, 1, V(tree)[parent], mode = 'out' ) )
-        childs<-childs[ childs != parent ]
-        V( tree )[parent]$weight<-sum( V( tree )[ childs ]$weight )
-      }
-    }
-    tree<-sum_weights( tree, new_leaves )
+sum_weights<-function( tree ) {
+  noleaves<-which( V(tree)$leaf == 0 )
+  leaves<-which( V(tree)$leaf == 1 )
+  for ( i in noleaves ) { # i<-leaves[1]
+    childs<-unlist( neighborhood( tree, 100, V(tree)[i], mode = 'out' ) )
+    childs<-childs[ childs %in% leaves ]
+    V( tree )[i]$weight<-sum( V( tree )[ childs ]$weight )
   }
   return( tree )
 }
 
-divide_weights<-function( tree, leaves ) {
-  if ( length( leaves ) > 0 ) {
-    new_leaves<-NULL
-    for ( i in leaves ) { # i<-leafs[1]
-      parent<-unlist( neighborhood( tree, 1, V(tree)[i], mode = 'in' ) )
-      parent<-parent[ parent != i ]
-      if ( length( parent ) == 1 ) {
-        new_leaves<-unique( c( new_leaves, parent ) )
-        V( tree )[i]$weight<-V( tree )[ i ]$weight / V( tree )[ parent ]$weight
-      }
+divide_weights<-function( tree ) {
+  w<-V(tree)$weight
+  for ( i in 1:length( V(tree)$weight ) ) { # i<-leaves[1]
+    parent<-unlist( neighborhood( tree, 1, V(tree)[i], mode = 'in' ) )
+    parent<-parent[ parent != i ]
+    if ( length( parent ) == 1 ) {
+      V( tree )[i]$weight<-w[i] / w[parent]
     }
-    tree<-divide_weights( tree, new_leaves )
   }
   return( tree )
+}
+
+#___________________________________________________________________________________________________
+# Extrae valor de indicadores a partir de un árbol con pesos relativos
+index_weights<-function( tree ) {
+  leaves<-which( V(tree)$leaf == 1 )
+  weights<-data.frame()
+  for ( i in leaves ) {
+    parents<-unlist( neighborhood( tree, 5, V(tree)[i], mode = 'in' ) )
+    weights<-rbind( weights, c( V(tree)[i]$codigo, prod( V(tree)[parents]$weight ) ) )
+  }
+  colnames( weights )<-c( 'cod', 'weight' )
+  weights<-weights[ order( weights$cod ), ]
+  rownames( weights )<-NULL
+  return( weights )
 }
