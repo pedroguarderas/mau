@@ -15,13 +15,13 @@ kriging_simple<-function( Z, X, x0, k ) {
 }
 
 conjugate_gradient<-function( A, b, x, n, e ) {
-  r<-2.0 * A %*% x - b
+  r<-2.0 * A %*% x - 2.0 * b
   d<- -r
   alpha<- as.numeric( -( t(r) %*% d ) / ( 2.0 * t(d) %*% A %*% d ) )
   x<-x + alpha * d
   k<-0
   while( k < n && sqrt( t(r)%*%r ) > e ) {
-    r<-2.0 * A %*% x - b
+    r<-2.0 * A %*% x - 2.0 * b
     beta<-as.numeric( ( 2.0 * t(d) %*% A %*% r ) / ( t(d) %*% d ) )
     d<- -r + beta * d
     alpha<- as.numeric( -( t(r) %*% d ) / ( 2.0 * t(d) %*% A %*% d ) )
