@@ -14,18 +14,37 @@ kriging_simple<-function( Z, X, x0, k ) {
   return( list( Z0 = Z0, K = K, k0 = k0, L = L, J = J ) )
 }
 
+# conjugate_gradient<-function( A, b, x, n, e ) {
+#   r<-A %*% x - b
+#   d<- -r
+#   alpha<- -as.numeric( ( t(r) %*% d ) / ( t(d) %*% A %*% d ) )
+#   x<-x + alpha * d
+#   k<-0
+#   while( k < n && sqrt( t(r)%*%r ) > e ) {
+#     r<- A %*% x - b
+#     beta<-as.numeric( ( t(d) %*% A %*% r ) / ( t(d) %*% d ) )
+#     d<- -r + beta * d
+#     alpha<- -as.numeric( ( t(r) %*% d ) / ( t(d) %*% A %*% d ) )
+#     x<-x + alpha * d
+#     k<-k + 1
+#   }
+#   return( x )
+# }
+
 conjugate_gradient<-function( A, b, x, n, e ) {
-  r<-2.0 * A %*% x - 2.0 * b
-  d<- -r
-  alpha<- as.numeric( -( t(r) %*% d ) / ( 2.0 * t(d) %*% A %*% d ) )
-  x<-x + alpha * d
+  r<-b - A %*% x 
+  p<-r
+  g<-as.numeric( t(r) %*% r )
   k<-0
-  while( k < n && sqrt( t(r)%*%r ) > e ) {
-    r<-2.0 * A %*% x - 2.0 * b
-    beta<-as.numeric( ( 2.0 * t(d) %*% A %*% r ) / ( t(d) %*% d ) )
-    d<- -r + beta * d
-    alpha<- as.numeric( -( t(r) %*% d ) / ( 2.0 * t(d) %*% A %*% d ) )
-    x<-x + alpha * d
+  while ( k < n & g > e ) {
+    y<-A %*% p
+    alpha<-g / as.numeric( t(y) %*% p )
+    x<-x + alpha * p
+    r<-r - alpha * y
+    g0<-g
+    g<-as.numeric( t(r) %*% r )
+    beta<-g / g0
+    p<-r + beta * p
     k<-k + 1
   }
   return( x )
@@ -43,6 +62,6 @@ kriging_simple_cg<-function( Z, X, x0, k, l, n, e ) {
   for ( i in 1:dim(x0)[2] ) {
     L<-cbind( L, conjugate_gradient( K, k0[,i], l, n, e ) )
   }
-  Z0<-t( Z %*% L )
+  Z0<-t( L ) %*% Z
   return( list( Z0 = Z0, K = K, k0 = k0, L = L ) )
 }
