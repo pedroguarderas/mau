@@ -32,7 +32,7 @@ kriging_simple_cg<-function( Z, X, x0, k, l, n, e ) {
 
 #___________________________________________________________________________________________________
 # Ordinary kriging
-kriging_ordinary<-function( Z, U, X, x0, u0, k ) {
+kriging_ordinary<-function( Z, X, x0, k ) {
   K<-NULL
   k0<-NULL
   d<-dim( X )
@@ -42,7 +42,9 @@ kriging_ordinary<-function( Z, U, X, x0, u0, k ) {
   }
   L<-chol( K )
   J<-chol2inv( L )
-  Z0<-u0 + t( k0 ) %*% J %*% ( Z - U )
+  ones<-matrix( 1, d[2], 1 )
+  u<-as.numeric( ( 1.0 / ( t( ones ) %*% J %*% ones ) ) * ( t( ones ) %*% J %*% Z ) )
+  Z0<-u + t( k0 ) %*% J %*% ( Z - u )
   return( list( Z0 = Z0, K = K, k0 = k0, L = L, J = J ) )
 }
 
