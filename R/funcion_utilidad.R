@@ -83,9 +83,9 @@ read_weights<-function( file, cols, encoding = 'latin1' ) {
   weights<-t( weights[ 2:ncol( weights ) ] )
   weights<-data.frame( nom = rownames( weights ), weight = weights[,1] )
   rownames( weights )<-NULL
-  correct_char2( weights, 1 )
   weights$nom<-gsub( '\\.(\\.)*', ' ', weights$nom )
-  weights$nom<-gsub( ' indicador', '', weights$nom )
+  weights$nom<-correct_char2( weights, 1 )$out
+  weights$nom<-gsub( '_indicador', '', weights$nom )
   return( weights )
 }
 
