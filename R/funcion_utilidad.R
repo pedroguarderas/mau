@@ -77,15 +77,17 @@ read_utility_functions<-function( file, script, nr, skip = 5 ) {
 
 #___________________________________________________________________________________________________
 # Función para leer pesos del modelo
-read_weights<-function( file, nrows, skip = 5, encoding = 'latin1' ) {
-  data<-read.table( file, header = FALSE, sep = '\t', quote = NULL,
-                    encoding = encoding, skip = skip, nrows = nrows, allowEscapes = FALSE, 
-                    dec = '.', fill = TRUE )
-  data<-data.frame( nom = data[,1], fnom = correct_char2( data, 1 ), 
-                    weight = as.numeric( data[,2] ) / 100.0 )
-  colnames( data )<-c( 'nom', 'fnom', 'weight' )
-  return( data )
+read_weights<-function( file, cols, encoding = 'latin1' ) {
+  weights<-read.xlsx( file = file, sheetIndex = 1, colIndex = cols, 
+                      startRow = 1, endRow = 2 )
+  weights<-t( weights[ 2:ncol( weights ) ] )
+  weights<-data.frame( nom = rownames( weights ), weight = weights[,1] )
+  rownames( weights )<-NULL
+  correct_char2( weights, 1 )
+  weights$nom<-gsub('\\.(\\.)*',' ',weights$nom)
+  return( weights )
 }
+
 
 #___________________________________________________________________________________________________
 # Función para evaluar indicadores con funciones de utilidad
