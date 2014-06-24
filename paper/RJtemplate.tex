@@ -1,85 +1,215 @@
 % !TeX root = RJwrapper.tex
 % !TeX root = RJwrapper.tex
-\title{Evalpack}
-\author{por J. Andrade, P. Guarderas, D. Lagos, A. López, P. Recalde y E. Salazar }
+\title{Evalpack, package for multi-attribute decision models.}
+\author{by J. Andrade, P. Guarderas, D. Lagos, A. López, P. Recalde y E. Salazar }
 
 \maketitle
 
 \abstract{
-%An abstract of less than 150 words.
-Macro para simular evaluaciones\\
-Calcula una matrix para AHP\checkmark\\
-Mide complejidad de la función de decisión dada\\
-Macro para leer funciones del Logical Decision\checkmark\\
-Función para leer funciones de utilidad de Logical Decision\checkmark\\
-Función para leer pesos de un modelo Logical Decision\\
-Función para evaluar los indicadores\checkmark\\
-Corrección de caracteres \checkmark\\
-Función para reemplazo de caracteres\checkmark\\
-Cálculo de meses entre dos fechas dadas presentes en columnas de un data.frame\checkmark\\
+In the construction of decision models is imperative to control every aspect from data mining to
+the ranking itself and passing through the design of utility functions, we consider that the best
+option is a customized flexible solution. The R language with many of its packages offers several
+possibilities and is just necessary to integrate multiple of such tools to construct a reliable
+decision model fitted to exact requirements. For the particular case of the decision models employed
+inside the CEAACES \footnote{Consejo de Evaluación, Acreditación y Aseguramiento de la Calidad de la
+Educación Superior} in Ecuador, we have developed the \textit{\textbf{evalpack}} package for
+decision models.
+
+
+% Macro para simular evaluaciones\\
+% Calcula una matrix para AHP\checkmark\\
+% Mide complejidad de la función de decisión dada\\
+% Macro para leer funciones del Logical Decision\checkmark\\
+% Función para leer funciones de utilidad de Logical Decision\checkmark\\
+% Función para leer pesos de un modelo Logical Decision\\
+% Función para evaluar los indicadores\checkmark\\
+% Corrección de caracteres \checkmark\\
+% Función para reemplazo de caracteres\checkmark\\
+% Cálculo de meses entre dos fechas dadas presentes en columnas de un data.frame\checkmark\\
 }
 
-
+%---------------------------------------------------------------------------------------------------
+\section{Introduction}
 %Introductory section which may include references in parentheses
-Los procesos de evaluación de Institutos de Educación Superior ({\it IES}) que incluyen a Institutos Técnicos Superiores, Institutos de Arte, Conservatorios, Universidades y Escuelas Politécnicas del Ecuador llevados a cabo por el \textit{\textbf{CEAACES}} se fundamentan en un modelo de decisión multicriterio que busca evidenciar fortalezas y debilidades de las {\it IES} para la toma de correctivos y asegurar la calidad de la educación superior \citep{1}. La valoración a través de un modelo de decisión requiere de la ejecución de varias etapas, estas son: construcción del modelo de evaluación, recolección de datos de las {\it IES}, evaluación de evidencias que soportan los datos, levantamiento de información, depuración de bases de datos, cálculo de variables, cálculo de indicadores y categorización de las {\it IES}. La trascendencia de los procesos de evaluación en el avance de la educación superior ecuatoriana requiere de alta precisión e imparcialidad en su realización, por este motivo, se ha elaborado un paquete de herramientas en lenguaje {\bf R }que permite garantizar la transparencia y eficiencia de los procesos.    
+Los procesos de evaluación de Institutos de Educación Superior ({\it IES}) que incluyen a Institutos
+Técnicos Superiores, Institutos de Arte, Conservatorios, Universidades y Escuelas Politécnicas del
+Ecuador llevados a cabo por el \textit{\textbf{CEAACES}} se fundamentan en un modelo de decisión
+multicriterio que busca evidenciar fortalezas y debilidades de las {\it IES} para la toma de
+correctivos y asegurar la calidad de la educación superior \citep{1}. La valoración a través de un
+modelo de decisión requiere de la ejecución de varias etapas, estas son: construcción del modelo de
+evaluación, recolección de datos de las {\it IES}, evaluación de evidencias que soportan los datos,
+levantamiento de información, depuración de bases de datos, cálculo de variables, cálculo de
+indicadores y categorización de las {\it IES}. La trascendencia de los procesos de evaluación en el
+avance de la educación superior ecuatoriana requiere de alta precisión e imparcialidad en su
+realización, por este motivo, se ha elaborado el paquete \textbf{evalpack} en {\bf R } que
+permite garantizar la transparencia y eficiencia de los procesos.    
 
-%\citep{R}, or cite a reference such as \citet{R} in the text.
-\section{Proceso de Evaluación de las \textit{\textbf{IES}} }
-La evaluación de las {\it IES} es un proceso complejo donde intervienen varios factores que son tomados en cuenta, la teoría de la medida permite mediante los modelos de decisión multicriterio representar las características de las {\it IES} numéricamente\citep{2}, y de esta forma determinar su estado. El modelo debe ser capaz de medir a través de cada uno de sus indicadores el grado de cumplimiento de requisitos mínimos que debe satisface una {\it IES} para garantizar una educación de calidad. Además, el modelo debe reflejar las fortalezas y debilidades de cada una de las {\it IES} para permitir la toma de decisiones oportunas para el mejoramiento de la educación superior, la cual es prioridad del estado ecuatoriano.
 
-Los indicadores que conforman cada uno de los criterios del modelo están estructurados por variables cualitativas y cuantitativas, la información para establecer cada una de las variables son capturadas in-situ por evaluadores calificados, recolectada por la {\it IES} en un formulario predeterminado, ingresada en el sistema de gestión de información de instituciones educativas superiores {\it GIIES} del \textit{\textbf{CEAACES}}. Los problemas más frecuentes que aparecen en las bases de datos son formatos de fecha distintos y la aparición de caracteres especiales lo que dificulta el manejo de los mismos. Las tareas de depuración realizadas manualmente por los analistas de bases de datos toman demasiado tiempo y no están exentas de errores.
+%---------------------------------------------------------------------------------------------------
+\section{Evaluation process}
+La evaluación de las {\it IES} es un proceso complejo donde intervienen varios factores que son
+tomados en cuenta, la teoría de la medida permite mediante los modelos de decisión multicriterio
+representar las características de las {\it IES} numéricamente\citep{2}, y de esta forma determinar
+su estado. El modelo debe ser capaz de medir a través de cada uno de sus indicadores el grado de
+cumplimiento de requisitos mínimos que debe satisface una {\it IES} para garantizar una educación de
+calidad. Además, el modelo debe reflejar las fortalezas y debilidades de cada una de las {\it IES}
+para permitir la toma de decisiones oportunas para el mejoramiento de la educación superior, la cual
+es prioridad del estado ecuatoriano.
 
-\textit{\textbf{Evalpack}} ha sido creado con la finalidad de proveer de una herramienta que permita realizar los procesos de evaluación de las {\it IES} de una manera precisa y eficiente. Las principal característica de \textit{\textbf{Evalpack}} es el diseño y procesamiento de modelos de decisión multicriterio, es decir, desde la captura de datos, cálculo de variables, definición de funciones de valor, pesos de las funciones que componen la función de valor, gráficos para la presentación de resultados y pruebas de sensibilidad para modelos multicriterio.
+Los indicadores que conforman cada uno de los criterios del modelo están estructurados por variables
+cualitativas y cuantitativas, la información para establecer cada una de las variables son
+capturadas in-situ por evaluadores calificados, recolectada por la {\it IES} en un formulario
+predeterminado, ingresada en el sistema de gestión de información de instituciones educativas
+superiores {\it GIIES} del \textit{\textbf{CEAACES}}. Los problemas más frecuentes que aparecen en
+las bases de datos son formatos de fecha distintos y la aparición de caracteres especiales lo que
+dificulta el manejo de los mismos. Las tareas de depuración realizadas manualmente por los analistas
+de bases de datos toman demasiado tiempo y no están exentas de errores.
+
+\textit{\textbf{evalpack}} ha sido creado con la finalidad de proveer de una herramienta que permita
+realizar los procesos de evaluación de las {\it IES} de una manera precisa y eficiente. Las
+principal característica de \textit{\textbf{evalpack}} es el diseño y procesamiento de modelos de
+decisión multicriterio, es decir, desde la captura de datos, cálculo de variables, definición de
+funciones de valor, pesos de las funciones que componen la función de valor, gráficos para la
+presentación de resultados y pruebas de sensibilidad para modelos multicriterio.
        
-Las funciones {\it correct\_char} y {\it correct\_char2} están enfocadas en la eliminación de caracteres especiales, por ejemplo: ñ, vocales con tildes, espacios y el cambio de caracteres a mayúsculas o minúsculas, con el objeto de facilitar las consultas y cálculos entre los distintos dataframes de la base de datos, por ejemplo, para la  evaluación de indicadores se emplea la función {\it eval\_index}. Adicionalmente, la homologación de formatos y cálculo de intervalos con fechas se realiza mediante la función {\it monthsbet}, esta función es de vital importancia ya que existen variables que son ponderadas en función del tiempo.\\
+Las funciones {\it correct\_char} y {\it correct\_char2} están enfocadas en la eliminación
+de caracteres especiales, por ejemplo: ñ, vocales con tildes, espacios y el cambio de caracteres a
+mayúsculas o minúsculas, con el objeto de facilitar las consultas y cálculos entre los distintos
+dataframes de la base de datos, por ejemplo, para la  evaluación de indicadores se emplea la función
+{\it eval\_index}. Adicionalmente, la homologación de formatos y cálculo de intervalos con fechas se
+realiza mediante la función {\it monthsbet}, esta función es de vital importancia ya que existen
+variables que son ponderadas en función del tiempo.\\
 
-\section{Modelos de Decisión Multicriterio }
 
+%---------------------------------------------------------------------------------------------------
+\section{Multi-criteria decision models}
+En los modelos de decisión multicriterio el número de criterios corresponde a sus dimensiones,
+los descriptores son las funciones que permiten representar numéricamente a cada uno de los
+indicadores y el conjunto de valores que pueden tomar los indicadores se denominan alternativas. Los
+modelos de decisión multicriterio se fundamentan en comparaciones ordinales entre alternativas o
+estimados de la fuerza de preferencia entre pares de alternativas\citep{3}.
 
-En los modelos de decisión multicriterio el número de criterios corresponde a sus dimensiones, los descriptores son las funciones que permiten representar numéricamente a cada uno de los indicadores y el conjunto de valores que pueden tomar los indicadores se denominan alternativas. Los modelos de decisión multicriterio se fundamentan en comparaciones ordinales entre alternativas o estimados de la fuerza de preferencia entre pares de alternativas\citep{3}.
+La teoría de utilidad multiatributo \textit{(MAUT)} estudia los modelos con relaciones de
+preferencia basados en axiomas rigurosos que caracterizan el comportamiento individual de elección.
+Los axiomas de preferencia son esenciales para establecer los descriptores, los cuales proveen de la
+racionalidad para el análisis cuantitativo de preferencias. Los descriptores bajo condiciones de
+certeza son conocidos como funciones de valor.
 
-La teoría de utilidad multiatributo \textit{(MAUT)} estudia los modelos con relaciones de preferencia basados en axiomas rigurosos que caracterizan el comportamiento individual de elección. Los axiomas de preferencia son esenciales para establecer los descriptores, los cuales proveen de la racionalidad para el análisis cuantitativo de preferencias. Los descriptores bajo condiciones de certeza son conocidos como funciones de valor.
-
-\textit{MAUT} trata con relaciones de preferencia $\succeq$ que pueden ser representados por una función de valor $u$ de la siguiente manera:
+\textit{MAUT} trata con relaciones de preferencia $\succeq$ que pueden ser representados por
+una función de valor $u$ de la siguiente manera:
 \[x\succeq y \Leftrightarrow u(x)\geq u(y)\]
-donde $x$ e $y$ son las alternativas, $u(x)$ y $u(y)$ son sus funciones de valor respectivas. Las relaciones de preferencia son de orden débil, es decir son asimétricas y transitivas negativamente \citep{3}.
+donde $x$ e $y$ son las alternativas, $u(x)$ y $u(y)$ son sus funciones de valor respectivas. 
+Las relaciones de preferencia son de orden débil, es decir son asimétricas y
+transitivas negativamente \citep{3}.
 
-La forma de función de valor es de tipo aditivo puesto que permite evaluar a cada uno de los criterios de forma independiente. Cada alternativa se describe como un vector de rendimiento $x=$($x_{1}, x_{2},..., x_{n}$), y todo vector varía sus coordenadas dentro de un rango específico entonces, se asigna una función $u(x)=\sum\limits_{i=1}^{n}u_i(x_i)$ que se descompone aditivamente a través de las $n$ dimensiones. Las condiciones sobre las preferencias deben satisfacer la expresión
+La forma de función de valor es de tipo aditivo puesto que permite evaluar a cada uno de
+los criterios de forma independiente. Cada alternativa se describe como un vector de rendimiento
+$x=$($x_{1}, x_{2},..., x_{n}$), y todo vector varía sus coordenadas dentro de un rango específico
+entonces, se asigna una función $u(x)=\sum\limits_{i=1}^{n}u_i(x_i)$ que se descompone aditivamente
+a través de las $n$ dimensiones. Las condiciones sobre las preferencias deben satisfacer la
+expresión
 \[x\succeq y \Leftrightarrow \sum\limits_{i=1}^{n}u_i(x_i)\geq \sum\limits_{i=1}^{n}u_i(y_i)\]
-para funciones $u_i$ preservadoras de orden\citep{3}. Adicionalmente, solo las preferencias independientes y de orden débil pueden ser representadas de esta forma\citep{2}.
+para funciones $u_i$ preservadoras de orden\citep{3}. Adicionalmente, solo las
+preferencias independientes y de orden débil pueden ser representadas de esta forma\citep{2}.
 
-El proceso de análisis jerárquico \textit{(AHP)} permite comparar las preferencias entre si por medio de proporciones, por lo tanto, se pueden asignar distintos grados de importancia a los criterios de evaluación. Si se toman funciones de valor de tipo aditivo, sea $x_{1}(a),..., x_{n}(a)$ y $x_{1}(b),..., x_{n}(b)$ los rendimientos de dos alternativas $a$ y $b$; se considera a $a \succeq b$ si y sólo si
-\[f(a)=\sum\limits_{i=1}^{n}\alpha_if_i(x_i(a))\succeq \sum\limits_{i=1}^{n}\alpha_if_i(x_i(b))=f(b)\]
-donde $\alpha_i$ es el peso asociado a la dimensión $i$ y $f_i(x_i)$ la función de valor asociada a la dimensión $i$\citep{2}.   
+El proceso de análisis jerárquico \textit{(AHP)} permite comparar las preferencias entre si por
+medio de proporciones, por lo tanto, se pueden asignar distintos grados de importancia a los
+criterios de evaluación. Si se toman funciones de valor de tipo aditivo, sea $x_{1}(a),...,
+x_{n}(a)$ y $x_{1}(b),..., x_{n}(b)$ los rendimientos de dos alternativas $a$ y $b$; se considera a
+$a \succeq b$ si y sólo si
+\[f(a)=\sum\limits_{i=1}^{n} w_i f_i(x_i(a))\succeq \sum\limits_{i=1}^{n}w_i f_i(x_i(b))=f(b)\]
+donde $w_i$ es el peso asociado a la dimensión $i$ y $f_i(x_i)$ la función de valor asociada
+a la dimensión $i$\citep{2}.   
    
-{\it Logical Decisions\textregistered } es uno de los programas utilizado en los distintos organismos de evaluación educativa del Ecuador para bosquejar los modelos multicriterio por su  amigable interfaz gráfica sin embargo, para el análisis y generación de reportes sus herramientas son ineficientes. Este programa permite construir funciones de valor y sus correspondientes gráficos, así como también diagramas jerárquicos donde son representados cada uno de los criterios del modelo de evaluación. La función de valor que se genera en {\it Logical Decisions\textregistered } para una alternativa $x$ tiene la siguiente forma:
-\[f(x)=\sum\limits_{i=1}^{n}\alpha_if_i(x_i)\]
-donde $f_i(x_i)$ es la función de valor que corresponde al criterio de evaluación $i$ y $\alpha_i$ es el peso que se le asigna a este criterio.
+{\it Logical Decisions\textregistered } es uno de los programas utilizado en los distintos
+organismos de evaluación educativa del Ecuador para bosquejar los modelos multicriterio por su 
+amigable interfaz gráfica sin embargo, para el análisis y generación de reportes sus herramientas
+son ineficientes. Este programa permite construir funciones de valor y sus correspondientes
+gráficos, así como también diagramas jerárquicos donde son representados cada uno de los criterios
+del modelo de evaluación. La función de valor que se genera en {\it Logical Decisions\textregistered
+} para una alternativa $x$ tiene la siguiente forma:
+\[f(x)=\sum\limits_{i=1}^{n}w_i f_i(x_i)\]
+donde $f_i(x_i)$ es la función de valor que corresponde al criterio de evaluación $i$ y $w_i$
+es el peso que se le asigna a este criterio.
+% \begin{figure}[htbp]
+%   \centering
+%    \includegraphics[scale=0.4]{function.pdf}
+%   \caption{Función utilidad}
+%   \label{figure:fut}
+% \end{figure}
  
-Cada una de las funciones que componen la función de valor diseñada en {\it Logical Decisions\textregistered } son exportadas en un archivo de texto plano. El archivo de texto plano contiene los coeficientes de las funciones de interpolación lineal y exponencial que genera {\it Logical Decisions\textregistered }, así como también sus respectivos dominios. Las funciones {\it funsLogicalDecision} y {\it read\_utility\_functions} de \textit{\textbf{Evalpack}} pueden reconstruir las funciones de valor para que sean manejables, ya que muchas veces se necesita modificarlas y visualizarlas mientras se establecen los parámetros de evaluación para las {\it IES}.
+Cada una de las funciones que componen la función de valor diseñada en {\it Logical
+Decisions\textregistered } son exportadas en un archivo de texto plano. El archivo de texto plano
+contiene los coeficientes de las funciones de interpolación lineal y exponencial que genera {\it
+Logical Decisions\textregistered }, así como también sus respectivos dominios. Las funciones {\it
+funsLogicalDecision} y {\it read\_utility\_functions} de \textit{\textbf{evalpack}} pueden
+reconstruir las funciones de valor para que sean manejables, ya que muchas veces se necesita
+modificarlas y visualizarlas mientras se establecen los parámetros de evaluación para las {\it IES}.
 
-Los pesos que acompañan a cada uno de los términos de la función de valor son definidos por expertos que conforman el consejo del \textit{\textbf{CEAACES}} según la naturaleza de las {\it IES} que se estén evaluando. La función {\it AHPmatrix} de \textit{\textbf{Evalpack}} calcula una matriz para {\it AHP} con el objetivo de facilitar la recolección de  valoraciones hechas por los expertos. Además, {\it read\_weights} de \textit{\textbf{Evalpack}} tiene la capacidad de leer los archivos de texto plano que exporta {\it Logical Decisions\textregistered } con los pesos de cada criterio, para posteriormente integrarlos a su respectiva función de valor del modelo multicriterio.  
+Los pesos que acompañan a cada uno de los términos de la función de valor son definidos por expertos
+que conforman el consejo del \textit{\textbf{CEAACES}} según la naturaleza de las {\it IES} que se
+estén evaluando. La función {\it AHPmatrix} de \textit{\textbf{evalpack}} calcula una matriz para
+{\it AHP} con el objetivo de facilitar la recolección de  valoraciones hechas por los expertos.
+Además, {\it read\_weights} de \textit{\textbf{evalpack}} tiene la capacidad de leer los archivos de
+texto plano que exporta {\it Logical Decisions\textregistered } con los pesos de cada criterio, para
+posteriormente integrarlos a su respectiva función de valor del modelo multicriterio.  
 
-Los árboles de decisión de {\it Logical Decisions\textregistered } pueden ser leídos y graficados por {\it load\_tree}, los pesos de cada una de las ramas se calculan a partir de los pesos de las raíces con la función {\it sum\_weights}, posteriormente estos pesos son reasignados por la función {\it divide\_weights}.     
+Los árboles de decisión de {\it Logical Decisions\textregistered } pueden ser leídos y graficados
+por {\it load\_tree}, los pesos de cada una de las ramas se calculan a partir de los pesos de las
+raíces con la función {\it sum\_weights}, posteriormente estos pesos son reasignados por la función
+{\it divide\_weights}.     
+
+Entre las capacidades de \textit{\textbf{evalpack}} tenemos:
+\begin{enumerate}
+\item Macro para simular evaluaciones
+\item Calcula una matrix para AHP
+\item Mide complejidad de la función de decisión dada
+\item Macro para leer funciones del Logical Decision
+\item Función para leer funciones de utilidad de Logical Decision
+\item Función para leer pesos de un modelo Logical Decision
+\item Función para evaluar los indicadores
+\item Corrección de caracteres 
+\item Función para reemplazo de caracteres
+\item Cálculo de meses entre dos fechas dadas presentes en columnas de un data.frame
+\end{enumerate}
 
 
+%---------------------------------------------------------------------------------------------------
+\section{Ranking simulation}
+Ranking simulation
+\[ S = F W \]
+Where $F\in[0,1]^{p\times m}$ is the utility matrix, where for $k\in\{1,\ldots p\}$ and
+$l\in\{1,\ldots m\}$
+\[ F = [F_{kl}] := [f_l(x_k)] \]
+$W\in[0,1]^{m\times n}$ is the matrix of simulated weights
+\[ \sum_{i=1}^m W_{ij} = 1 \quad \forall j\in\{1,\ldots,n\}\]
+de tal forma que cada columna $W_{\bullet j} = (W_{1j},W_{2j},\ldots,W_{mj})^T\rightsquigarrow
+Dir(\alpha_1,\ldots,\alpha_m)$ mediante una
+y $S\in[0,1]^{p\times n}$ es la simulación resultante
+% \begin{figure}[htbp]
+%   \centering
+%    \includegraphics[scale=0.4]{simulacion.pdf}
+%   \caption{Ejemplo simulación}
+%   \label{figure:sim}
+% \end{figure}
 
-\section{Análisis de Sensibilidad}
 
+%---------------------------------------------------------------------------------------------------
+\section{Sensitivity Analysis}
 Los análisis de sensibilidad
-Se dice que una solución es estable cuando esta no varía por pequeños cambios o perturbaciones en los datos o parámetros que fueron usados para determinarla\citep{2}.
+Se dice que una solución es estable cuando esta no varía por pequeños cambios o perturbaciones en
+los datos o parámetros que fueron usados para determinarla\citep{2}.
 
 
-\section{Resultados}
-
+%---------------------------------------------------------------------------------------------------
+\section{Results}
 %This section may contain a figure such as Figure~\ref{figure:rlogo}.
-
-\begin{figure}[htbp]
-  \centering
-  \includegraphics{Rlogo}
-  \caption{The logo of R.}
-  \label{figure:rlogo}
-\end{figure}
+% \begin{figure}[htbp]
+%   \centering
+%    \includegraphics[scale=0.4]{rank_inst_1.pdf}
+%   \caption{The logo of R.}
+%   \label{figure:rlogo}
+% \end{figure}
 
 There will likely be several sections, perhaps including code snippets, such as:
 
@@ -88,44 +218,50 @@ There will likely be several sections, perhaps including code snippets, such as:
   result <- myFunction(x)
 \end{example}
 
+
+%---------------------------------------------------------------------------------------------------
 \section{Summary}
 
-This file is only a basic article template. For full details of \emph{The R Journal} style and information on how to prepare your article for submission, see the \href{http://journal.r-project.org/latex/RJauthorguide.pdf}{Instructions for Authors}.
+This file is only a basic article template. For full details of \emph{The R Journal} style
+and information on how to prepare your article for submission, see the
+\href{http://journal.r-project.org/latex/RJauthorguide.pdf}{Instructions for Authors}.
 
+
+%---------------------------------------------------------------------------------------------------
+\newpage
 \bibliography{RJreferences}
+\address{J. Andrade\\
+  CEAACES\\
+  Calle Germán Alemán E11 – 32 y Javier Arauz\\
+  Ecuador}
+\email{jandrade@ceaaces.gob.ec}
 
-\address{Author One\\
-  Affiliation\\
-  Address\\
-  Country}
-\email{author1@work}
+\address{P. Guarderas\\
+  CEAACES\\
+  Calle Germán Alemán E11 – 32 y Javier Arauz\\
+  Ecuador}
+\email{pguarderas@ceaaces.gob.ec}
 
-\address{Author Two\\
-  Affiliation\\
-  Address\\
-  Country}
-\email{author2@work}
+\address{D. Lagos\\
+  CEAACES\\
+  Calle Germán Alemán E11 – 32 y Javier Arauz\\
+  Ecuador}
+\email{dlagos@ceaaces.gob.ec}
 
-\address{Author Three\\
-  Affiliation\\
-  Address\\
-  Country}
-\email{author3@work}
+\address{A. López\\
+  CEAACES\\
+  Calle Germán Alemán E11 – 32 y Javier Arauz\\
+  Ecuador}
+\email{alopez@ceaaces.gob.ec}
 
-\address{Author Four\\
-  Affiliation\\
-  Address\\
-  Country}
-\email{author3@work}
+\address{P. Recalde\\
+  CEAACES\\
+  Calle Germán Alemán E11 – 32 y Javier Arauz\\
+  Ecuador}
+\email{nrecalde@ceaaces.gob.ec}
 
-\address{Author Five\\
-  Affiliation\\
-  Address\\
-  Country}
-\email{author3@work}
-
-\address{Author Six\\
-  Affiliation\\
-  Address\\
-  Country}
-\email{author3@work}
+\address{E. Salazar\\
+  CEAACES\\
+  Calle Germán Alemán E11 – 32 y Javier Arauz\\
+  Ecuador}
+\email{esalazar@ceaaces.gob.ec}
