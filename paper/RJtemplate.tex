@@ -100,7 +100,10 @@ una función de valor $u$ de la siguiente manera:
 \[x\succeq y \Leftrightarrow u(x)\geq u(y)\]
 donde $x$ e $y$ son las alternativas, $u(x)$ y $u(y)$ son sus funciones de valor respectivas. 
 Las relaciones de preferencia son de orden débil, es decir son asimétricas y
-transitivas negativamente \citep{3}.
+transitivas negativamente \citep{3}.\\
+
+\textit{MAUT} Do not allow the Condor paradox.
+
 
 La forma de función de valor es de tipo aditivo puesto que permite evaluar a cada uno de
 los criterios de forma independiente. Cada alternativa se describe como un vector de rendimiento
@@ -209,6 +212,11 @@ los datos o parámetros que fueron usados para determinarla\citep{2}. Mientras m
 fluctuaciones de las variables de entrada y el número de variables de entrada del modelo que se van
 a alterar, se espera una mayor varianza en la salida del modelo\citep{5}. 
 
+\begin{proposition}
+For kernel satisfies $k_0$ defin
+ 
+\end{proposition}
+
 By the kernel properties we have
 \begin{equation*}
 \int\limits_D k_0(x,z)k_0(z,y)\,d\mu(z) = k_0(x,y)
@@ -221,8 +229,8 @@ also employing the $k_0$ definition
 + \alpha^2 I(z)^2 I(x)I(y) \right\}\,d\mu(z) \\
 & = & k(x,y) - 2 \alpha I(x)I(y) + \alpha^2 \int\limits_D I(z)^2 I(x)I(y) \,d\mu(z) \\
 \end{eqnarray*}
-where $I(x) := \int\limits_D k(x,y) \, d\mu(y)$ and $\alpha := \frac{1}{\int\limits_D\int\limits_D
-k(x,y) \,d\mu(x)d\mu(y)}$, now
+where $I(x) := \int\limits_D k(x,y) \, d\mu(y)$ and $\alpha := (\int\limits_D\int\limits_D
+k(x,y) \,d\mu(x)d\mu(y) )^{-1}$, now
 \begin{eqnarray*}
  \alpha^2 \int\limits_D I(z)^2 I(x)I(y) \,d\mu(z) & = & \alpha^2 I(x)I(y) \int\limits_D
 I(z)^2 \,d\mu(z) \\
@@ -240,12 +248,12 @@ then
 
 Sensitivity indices $S_I$
 \begin{equation*}
- S_I = \frac{var( m_I(X_I))}{var(m(X))} =
+ S_I = \frac{Var(m_I(X_I))}{Var(m(X))} =
 \frac{ \mathbf{F}^tK^{-1} \left( \bigodot_{i\in I}\Gamma_i \right) K^{-1}  \mathbf{F} }
 {\mathbf{F}^tK^{-1} \left( \bigodot_{i=1}^n ( I + \Gamma_i ) - I \right) K^{-1} 
 \mathbf{F}}
 \end{equation*}
-where $I$ is the identity matrix and $\Gamma_i$ is the matrix
+where $I$ is the identity matrix, $\Gamma_i$ is the matrix
 \begin{equation}
  \Gamma_i := \left[ \int\limits_D k_0^i( x_k, z )k_0^i( z, x_l ) \, d\mu(z) \right]_{k,l}
 \end{equation}
@@ -254,6 +262,42 @@ by \ref{eq:1} is possible to extract the following equivalence
  \Gamma_i := \left[ k^i(x_k,x_l) - \alpha_i I_i(x_k)I_i(x_l) \right]_{k,l}
 \end{equation*}
 where $I_i(x) := \int\limits_D k^i(x,y) \, d\mu(y)$
+
+and $\mathbf{F}$
+\begin{equation*}
+ \mathbf{F} := \left[
+ \begin{array}{ccc}
+  f( \mathbf{x}_1 ) \\
+  f( \mathbf{x}_2 ) \\
+  \vdots \\
+  f( \mathbf{x}_m )
+ \end{array}
+ \right]
+\end{equation*}
+and $K$ is the matrix
+\begin{equation*}
+ K := \left[ \prod\limits_{i=1}^n ( 1 + k_0^i( x_{ki}, x_{li} ) ) \right]_{kl}
+\end{equation*}
+
+
+\section{Varianza of ranking function}
+Simulation are made taking $(w_1,\ldots,w_n) \rightsquigarrow Dir( \alpha_1, \ldots, \alpha_n )$
+\begin{equation*}
+ r(x) = \scalar{w}{F(x)}
+\end{equation*}
+
+\begin{eqnarray*}
+ Var(r(x,w)) & = & \sum\limits_{i=1}^n\sum\limits_{j=1}^n Cov( w_i f_i(x_i), w_j f_j(x_j) ) \\
+ & = &  \sum\limits_{i=1}^n\sum\limits_{j=1}^n Cov( w_i, w_j ) Cov( f_i(x_i), f_j(x_j) ) \\
+ & = &  \frac{1}{\alpha^2(\alpha + 1 )} \left\{ \sum\limits_{i=1}^n \alpha_i( \alpha - \alpha_i)
+Var(f_i(x_i)) - \sum\limits_{i=1}^n\sum\limits_{j=1,j\neq i}^n \alpha_i\alpha_j Cov( f_i(x_i),
+f_j(x_j) ) \right\}
+\end{eqnarray*}
+
+\begin{algorithm}
+ 
+\end{algorithm}
+
 
 
 %---------------------------------------------------------------------------------------------------
