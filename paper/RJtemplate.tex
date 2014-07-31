@@ -196,9 +196,64 @@ y $S\in[0,1]^{p\times n}$ es la simulación resultante
 
 %---------------------------------------------------------------------------------------------------
 \section{Sensitivity Analysis}
-Los análisis de sensibilidad tienen por objeto identificar a las variables de entrada que más contribuyen en una cierta cantidad a la salida de un modelo, también permite discriminar las variables que no influyen a la salida de un modelo y además, conocer las interaciónes exitentes entre variables\citep{4}. A través de este tipo de análisis se puede identificar errores técnicos en el modelo, establecer cuestiones a ser investigadas, identificar regiones críticas en el espacio de las variables entrada, simplificar modelos y defenderse contra intentos de falsificación en el análisis\citep{5}. 
+Los análisis de sensibilidad tienen por objeto identificar a las variables de entrada que más 
+contribuyen en una cierta cantidad a la salida de un modelo, también permite discriminar las
+variables que no influyen a la salida de un modelo y además, conocer las interaciónes exitentes
+entre variables\citep{4}. A través de este tipo de análisis se puede identificar errores técnicos en
+el modelo, establecer cuestiones a ser investigadas, identificar regiones críticas en el espacio de
+las variables entrada, simplificar modelos y defenderse contra intentos de falsificación en el
+análisis\citep{5}. 
 
-Se dice que una solución es estable cuando esta no varía por pequeños cambios o perturbaciones en los datos o parámetros que fueron usados para determinarla\citep{2}. Mientras mayores sean las fluctuaciones de las variables de entrada y el número de variables de entrada del modelo que se van a alterar, se espera una mayor varianza en la salida del modelo\citep{5}.    
+Se dice que una solución es estable cuando esta no varía por pequeños cambios o perturbaciones en 
+los datos o parámetros que fueron usados para determinarla\citep{2}. Mientras mayores sean las
+fluctuaciones de las variables de entrada y el número de variables de entrada del modelo que se van
+a alterar, se espera una mayor varianza en la salida del modelo\citep{5}. 
+
+By the kernel properties we have
+\begin{equation*}
+\int\limits_D k_0(x,z)k_0(z,y)\,d\mu(z) = k_0(x,y)
+\end{equation*}
+also employing the $k_0$ definition
+\begin{eqnarray*}
+\int\limits_D k_0(x,z)k_0(z,y)\,d\mu(z) & = & \int\limits_D \left\{ k(x,z) - \alpha I(x)I(z)
+\right\} \left\{ k(z,y) - \alpha I(z)I(y) \right\}\,d\mu(z) \\
+& = & \int\limits_D \left\{ k(x,z)k(z,y) - \alpha k(x,z)I(z)I(y) - \alpha k(x,z)I(z)I(y)
++ \alpha^2 I(z)^2 I(x)I(y) \right\}\,d\mu(z) \\
+& = & k(x,y) - 2 \alpha I(x)I(y) + \alpha^2 \int\limits_D I(z)^2 I(x)I(y) \,d\mu(z) \\
+\end{eqnarray*}
+where $I(x) := \int\limits_D k(x,y) \, d\mu(y)$ and $\alpha := \frac{1}{\int\limits_D\int\limits_D
+k(x,y) \,d\mu(x)d\mu(y)}$, now
+\begin{eqnarray*}
+ \alpha^2 \int\limits_D I(z)^2 I(x)I(y) \,d\mu(z) & = & \alpha^2 I(x)I(y) \int\limits_D
+I(z)^2 \,d\mu(z) \\
+& = & \alpha^2 I(x)I(y) \int\limits_D \left( \int\limits_D k(z,s) \,d\mu(s) \right ) \left(
+\int\limits_D k(z,t) \,d\mu(t) \right ) \,d\mu(z) \\
+& = & \alpha^2 I(x)I(y) \int\limits_D \int\limits_D \int\limits_D k(s,z) k(z,t) \,d\mu(z)
+d\mu(s) d\mu(t) \\
+& = & \alpha^2 I(x)I(y) \int\limits_D \int\limits_D k(s,t) \, d\mu(s) d\mu(t) \\
+& = & \alpha I(x)I(y)
+\end{eqnarray*}
+then
+\begin{eqnarray}\label{eq:1}
+\int\limits_D k_0(x,z)k_0(z,y)\,d\mu(z) & = & k(x,y) - \alpha I(x)I(y)
+\end{eqnarray}
+
+Sensitivity indices $S_I$
+\begin{equation*}
+ S_I = \frac{var( m_I(X_I))}{var(m(X))} =
+\frac{ \mathbf{F}^tK^{-1} \left( \bigodot_{i\in I}\Gamma_i \right) K^{-1}  \mathbf{F} }
+{\mathbf{F}^tK^{-1} \left( \bigodot_{i=1}^n ( I + \Gamma_i ) - I \right) K^{-1} 
+\mathbf{F}}
+\end{equation*}
+where $I$ is the identity matrix and $\Gamma_i$ is the matrix
+\begin{equation}
+ \Gamma_i := \left[ \int\limits_D k_0^i( x_k, z )k_0^i( z, x_l ) \, d\mu(z) \right]_{k,l}
+\end{equation}
+by \ref{eq:1} is possible to extract the following equivalence
+\begin{equation*}
+ \Gamma_i := \left[ k^i(x_k,x_l) - \alpha_i I_i(x_k)I_i(x_l) \right]_{k,l}
+\end{equation*}
+where $I_i(x) := \int\limits_D k^i(x,y) \, d\mu(y)$
 
 
 %---------------------------------------------------------------------------------------------------
