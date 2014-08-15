@@ -39,7 +39,7 @@ read_utility_functions<-function( file, script, nr, skip = 5 ) {
   nomf<-funs$fun[1]
   for ( i in 1:n ) { # i<-1
     if ( funs$fun[i] != nomf || i == 1 ) {
-      f<-paste( funs$fun[i], '<-function(x) { \n\tf<-0 \n', sep = '' )
+      f<-paste( funs$fun[i], '<-function(x) { \n\tf<-', 0.0, '\n', sep = '' )
       j<-i
     }
     
@@ -59,12 +59,28 @@ read_utility_functions<-function( file, script, nr, skip = 5 ) {
     nomf<-funs$fun[i]
     if ( i < n ) {
       if ( funs$fun[i+1] != nomf ) {
+        f<-paste( f, 'else if ( x >= ', funs$max[i], ' ) {\n',sep = '')
+        if ( funs$c[i] == 0.0 ) {
+          f<-paste( f, '\t\tf<-(', funs$b[i], ')*', funs$max[i], 
+                    ' + (', funs$a[i], ')\n\t} ', sep = '' )
+        } else {
+          f<-paste( f, '\t\tf<-(', funs$b[i], ')*exp( -(', funs$c[i], ')*', 
+                    funs$max[i], ') + (', funs$a[i], ')\n\t} ', sep = '' )
+        }
         f<-paste( f, '\n\tf<-max(0.0,f)', sep = '' )
         f<-paste( f, '\n\tf<-min(1.0,f)', sep = '' )
         f<-paste( f, '\n\treturn(f)\n}', sep = '' )
         write( f, file = script, append = TRUE )
       }
     } else {
+      f<-paste( f, 'else if ( x >= ', funs$max[i], ' ) {\n',sep = '')
+      if ( funs$c[i] == 0.0 ) {
+        f<-paste( f, '\t\tf<-(', funs$b[i], ')*', funs$max[i], 
+                  ' + (', funs$a[i], ')\n\t} ', sep = '' )
+      } else {
+        f<-paste( f, '\t\tf<-(', funs$b[i], ')*exp( -(', funs$c[i], ')*', 
+                  funs$max[i], ') + (', funs$a[i], ')\n\t} ', sep = '' )
+      }
       f<-paste( f, '\n\tf<-max(0.0,f)', sep = '' )
       f<-paste( f, '\n\tf<-min(1.0,f)', sep = '' )
       f<-paste( f, '\n\treturn(f)\n}', sep = '' )
