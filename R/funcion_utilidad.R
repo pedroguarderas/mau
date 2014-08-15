@@ -27,6 +27,7 @@ read_utility_functions<-function( file, script, nr, skip = 5 ) {
     }
   }
   funs<-subset( funs, complete.cases( funs ) )
+  funs<-funs[ order( funs$nom, funs$min ), ]
   rownames( funs )<-NULL
   
   if ( file.exists( script ) ) {
