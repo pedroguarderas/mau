@@ -12,9 +12,9 @@ texto en minúsculas o mayúsculas.
 }
 \usage{
 %- maybe also 'usage' for other objects documented here.
-correct_char(data = data.frame; ("data not supplied"), 
-             cols = columna; ("cols not supplied"), 
-             case = TRUE; FALSE)
+correct_char( data = stop("data not supplied"), 
+              cols = stop("cols not supplied"), 
+              case = TRUE )
 }
 
 \arguments{
@@ -60,14 +60,10 @@ Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edi
 }
 \examples{
 tst<-data.frame(a=c('HÚàn', 'Marìa','juLIO Pér', 'Stevén'), b=1:4)
-correct_char(tst, 1) o
-View(tst)
-correct_char(tst, 1, TRUE)
-View(tst)
+correct_char(tst, 1)
 
 tst<-data.frame(a=c('HÚàn', 'Marìa','juLIO Pér', 'Stevén'), b=1:4)
 correct_char(tst, 1, FALSE)
-View(tst)
 
 }
 %##---- Should be DIRECTLY executable !! ----
