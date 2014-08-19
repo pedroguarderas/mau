@@ -2,24 +2,35 @@
 \alias{correct_char}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Correción de caracteres
+Corrección de caracteres
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Función para correción de caracteres, está diseñada para eliminar vocales con tíldes y colocar 
+texto en minúsculas o mayúsculas.
+
 }
 \usage{
-correct_char(data = stop("data not supplied"), cols = stop("cols not supplied"), case = TRUE)
-}
 %- maybe also 'usage' for other objects documented here.
+correct_char(data = data.frame; ("data not supplied"), 
+             cols = columna; ("cols not supplied"), 
+             case = TRUE; FALSE)
+}
+
 \arguments{
   \item{data}{
 %%     ~~Describe \code{data} here~~
+Data frame que contiene el texto a modificar.
+
 }
   \item{cols}{
 %%     ~~Describe \code{cols} here~~
+Número de columna que contiene el texto a modificar.
 }
   \item{case}{
 %%     ~~Describe \code{case} here~~
+Opción TRUE o FALSE, si es TRUE elimina vocales con tíldes y coloca el texto en mayúsculas, si es FALSE
+elimina vocales con tíldes y coloca el texto en minúsculas.
 }
 }
 \details{
@@ -36,7 +47,7 @@ correct_char(data = stop("data not supplied"), cols = stop("cols not supplied"),
 %% ~put references to the literature/web site here ~
 }
 \author{
-Julio Andrade, Daniel Lagos, Andrés Lopez, Pedro Guarderas, Edison Salazar
+Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar
 }
 \note{
 %%  ~~further notes~~
@@ -48,10 +59,20 @@ Julio Andrade, Daniel Lagos, Andrés Lopez, Pedro Guarderas, Edison Salazar
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+tst<-data.frame(a=c('HÚàn', 'Marìa','juLIO Pér', 'Stevén'), b=1:4)
+correct_char(tst, 1) o
+View(tst)
+correct_char(tst, 1, TRUE)
+View(tst)
+
+tst<-data.frame(a=c('HÚàn', 'Marìa','juLIO Pér', 'Stevén'), b=1:4)
+correct_char(tst, 1, FALSE)
+View(tst)
+
 }
+%##---- Should be DIRECTLY executable !! ----
+%##-- ==>  Define data, use random,
+%##--  or do  help(data=index)  for the standard data sets.
 
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
