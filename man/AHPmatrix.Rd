@@ -15,7 +15,8 @@ AHPmatrix(M)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{M}{
-Matriz triangular superior positiva cuadrada a normalizar. 
+Matriz cuadrada triangular superior donde cada coordenada es positiva y definen la relación 
+relevancia entre los criterios que represente cada fila y columna.
 %%     ~~Describe \code{M} here~~
 }
 }
@@ -45,10 +46,9 @@ Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edi
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-m1 <- matrix(1:20, 5, 5)
-m1[lower.tri(m1)] <- 0
-m1
-AHPmatrix(m1)
+m1<-matrix( 1:20, 5, 5 )
+m1[ lower.tri( m1 ) ]<-0
+ahp<-AHPmatrix(m1)
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

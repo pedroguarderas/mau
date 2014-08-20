@@ -17,6 +17,6 @@ AHPmatrix<-function( M ) {
   for ( j in 1:d[2] ) { # j<-3
     M[,j] <- M[,j] / cols[j]
   }
-  return( list( rowMeans(M), M ) )
+  return( list( row.mean = rowMeans(M), ahp = M ) )
 }
 
