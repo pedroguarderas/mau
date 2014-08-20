@@ -15,7 +15,7 @@ AHPmatrix(M)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{M}{
-Matriz triangular superior positiva cuadrada a normalizar  
+Matriz triangular superior positiva cuadrada a normalizar. 
 %%     ~~Describe \code{M} here~~
 }
 }
