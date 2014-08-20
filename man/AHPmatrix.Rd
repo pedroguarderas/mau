@@ -5,7 +5,9 @@
 AHPmatrix
 }
 \description{
-Calcula una matrix para AHP
+Función para normalizar matrices triangulares superiores positivas cuadradas, utilizada para elaborar
+matrices de comparación en el Analytic Hierarchy Process.
+
 }
 \usage{
 AHPmatrix(M)
@@ -13,6 +15,7 @@ AHPmatrix(M)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{M}{
+Matriz triangular superior positiva cuadrada a normalizar  
 %%     ~~Describe \code{M} here~~
 }
 }
@@ -30,7 +33,7 @@ AHPmatrix(M)
 %% ~put references to the literature/web site here ~
 }
 \author{
-Edison Salazar, Pedro Guarderas
+Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar
 }
 \note{
 %%  ~~further notes~~
@@ -42,11 +45,11 @@ Edison Salazar, Pedro Guarderas
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+m1 <- matrix(1:20, 5, 5)
+m1[lower.tri(m1)] <- 0
+m1
+AHPmatrix(m1)
 
-## The function is currently defined as
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
