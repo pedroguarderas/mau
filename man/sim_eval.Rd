@@ -5,33 +5,43 @@
 sim_eval
 }
 \description{
-Macro para simular evaluaciones
+Macro para simular evaluaciones con distribuciones de Dirichlet.
 }
 \usage{
-sim_eval(N = 1, W = stop("W not supplied"), S = stop("S not supplied"), F = stop("F not supplied"), p = stop("p not supplied"))
+sim_eval(N = 1, W = stop("W not supplied"), 
+         S = stop("S not supplied"), 
+         F = stop("F not supplied"), 
+         p = stop("p not supplied"))
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{N}{
-  Número de simulaciones
+  Número de simulaciones.
 }
   \item{W}{
-  Pesos simulados
+  Pesos simulados.
 }
   \item{S}{
-  Simulaciones
+  Simulaciones.
 }
   \item{F}{
-  Matriz de indicadores evaluados
+  Matriz de indicadores evaluados.
 }
   \item{p}{
-  Parámetro
+  Vector de pesos extraídos de Logical Decisions.
 }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
+
 }
 \value{
+sim_eval retorna los siguientes objetos:
+
+\item{S}{Data frame de Simulaciones}
+
+\item{W}{Matriz de Pesos simulados}
+
 %%  ~Describe the value returned
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}
@@ -42,8 +52,7 @@ sim_eval(N = 1, W = stop("W not supplied"), S = stop("S not supplied"), F = stop
 %% ~put references to the literature/web site here ~
 }
 \author{
-Julio Andrade, Daniel Lagos, Andrés Lopez, Pedro Guarderas, Paúl Recalde, 
-Edison Salazar
+Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar
 }
 \note{
 %%  ~~further notes~~
@@ -55,11 +64,24 @@ Edison Salazar
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+# Matriz de indicadores
+indic<-data.frame(cod=c('A', 'B', 'C', 'D'), 
+                  ind1=c(0.3428570, 1, 1, 1),
+                  ind2=c(0.5, 0.5, 1, 0.5), 
+                  ind3=c(0, 0.2696746, 0.6751261, 0.7401660),
+                  ind3=c(0.2797259, 0.2981198, 1, 0.1952864))
 
-## The function is currently defined as
+# Matriz de pesos
+rank<-data.frame(cod=c('A', 'B', 'C', 'D'), 
+                 weigth=c(0.0376573868, 0.0264447427, 0.0240244958, 0.0179347528))
+
+N<-10
+F<-indic
+p<-rank$weigth
+
+sim_eval( N, indic, p )
+
+%## The function is currently defined as
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
