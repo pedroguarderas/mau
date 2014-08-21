@@ -5,7 +5,7 @@
 AHPmatrix
 }
 \description{
-Función para normalizar matrices triangulares superiores positivas cuadradas, utilizada para elaborar
+Función para normalizar matrices cuadradas triangulares superiores positivas, utilizada para elaborar
 matrices de comparación en el Analytic Hierarchy Process.
 
 }
@@ -15,7 +15,7 @@ AHPmatrix(M)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{M}{
-Matriz cuadrada triangular superior donde cada coordenada es positiva y definen la relación 
+Matriz cuadrada triangular superior dónde las coordenadas son positivas y definen la relación 
 relevancia entre los criterios que represente cada fila y columna.
 %%     ~~Describe \code{M} here~~
 }
@@ -24,6 +24,10 @@ relevancia entre los criterios que represente cada fila y columna.
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
+AHPmatrix retorna los siguientes objetos:
+
+\item{rowMean}{ Vector promedio de filas de la matriz. }
+\item{ahp}{ Matriz normalizada. }
 %%  ~Describe the value returned
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}

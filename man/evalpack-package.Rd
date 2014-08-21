@@ -3,8 +3,8 @@
 \alias{evalpack}
 \docType{package}
 \title{
-What the package does (short line)
-~~ package title ~~
+Utilitarios para proyectos de evaluación
+
 }
 \description{
 More about what it does (maybe more than one line)
@@ -21,8 +21,8 @@ License: \tab What license is it under?\cr
 ~~ An overview of how to use the package, including the most important functions ~~
 }
 \author{
-Felipe Aguirre, Julio Andrade, Daniel Lagos, Andrés Lopez, Pedro Guarderas, Paul Recalde, 
-Edison Salazar
+Felipe Aguirre, Julio Andrade, Daniel Lagos, Andrés López, Pedro Guarderas, Paúl Recalde, 
+Edison Salazar.
 
 Maintainer: Who to complain to <yourfault@somewhere.net>
 ~~ The author and/or maintainer of the package ~~

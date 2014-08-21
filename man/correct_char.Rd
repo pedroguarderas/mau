@@ -6,7 +6,7 @@ Corrección de caracteres
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
-Función para correción de caracteres, está diseñada para eliminar vocales con tíldes y colocar 
+Función para corrección de caracteres, está diseñada para eliminar vocales con tíldes y colocar 
 texto en minúsculas o mayúsculas.
 
 }
@@ -37,6 +37,7 @@ elimina vocales con tíldes y coloca el texto en minúsculas.
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
+correct_char retorna el data frame modificado de acuerdo a la columna y opción seleccionada.
 %%  ~Describe the value returned
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}
