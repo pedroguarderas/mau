@@ -6,8 +6,8 @@ monthsbet
 }
 \description{
 %Cálculo de meses entre dos fechas dadas presentes en columnas de un data.frame
-Permite calcular el número (número continuo) de meses que han transcurrido entre dos fechas dadas
-presentes en columnas de un data frame.
+Permite calcular el número de meses que han transcurrido entre dos fechas dadas, donde la fecha final 
+es mayor a la fecha inicial, presentes en columnas de un data frame.
 }
 \usage{
 monthsbet(X, cols)
@@ -20,7 +20,7 @@ monthsbet(X, cols)
   \item{cols}{
   %Dos columnas con fechas
   Columnas del data frame, la primera contiene la fecha inicial y la segunda la fecha final,
-  con el formato date "\%Y-\%m-\%d"
+  con el formato date "\%Y-\%m-\%d".
 }
 }
 \details{
@@ -32,6 +32,10 @@ monthsbet(X, cols)
 %%  \item{comp1 }{Description of 'comp1'}
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
+La función monthsbet retorna el siguiente objeto:
+
+MP Array que contiene la diferencia en meses entre las fechas final e inicial.
+
 }
 \references{
 %% ~put references to the literature/web site here ~
@@ -50,22 +54,26 @@ Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edi
 }
 \examples{
 
-month1 <- sample(1:12, 50, replace = TRUE)
-month2 <- sample(1:12, 50, replace = TRUE)
-day1 <- sample(1:28, 50, replace = TRUE)
-day2 <- sample(1:28, 50, replace = TRUE)
+month1<-sample(1:12, 30, replace = TRUE)
+month2<-sample(1:12, 30, replace = TRUE)
+day1<-sample(1:28, 30, replace = TRUE)
+day2<-sample(1:28, 30, replace = TRUE)
 
-start_date <- paste("2013", month1, day1 ,sep= "-")
-ending_date <- paste("2014", month2, day2 ,sep= "-")
+start_date<-as.Date(paste("2013", month1, day1 ,sep= "-"))
+ending_date<-as.Date(paste("2014", month2, day2 ,sep= "-"))
 
-start_date <- as.Date(start_date)
-ending_date <- as.Date(ending_date)
+tst<-data.frame(init=start_date, end=ending_date)
 
-x <- data.frame(SD = start_date, ED = ending_date)
+# Uso por filas específicas del data frame
+monthsbet(tst[2,], c(1,2))
+monthsbet(tst[10,], c(1,2))
+monthsbet(tst[24,], c(1,2))
 
-prev<-data.frame( x[,c(1,2)], prctj_mes = apply( x, 1, FUN = monthsbet, cols = c(1,2) ) )
+# Uso en todas las filas del data frame
+apply( tst, 1, FUN = monthsbet, cols = c(1,2) )
 
-
+tst$num<-apply( tst, 1, FUN = monthsbet, cols = c(1,2) )
+tst
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
