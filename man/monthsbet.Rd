@@ -54,6 +54,7 @@ Julio Andrade, Pedro Guarderas
 
 ## The function is currently defined as
 
+source('R/dates.R')
 
 month1 <- sample(1:12, 50, replace = TRUE)
 month2 <- sample(1:12, 50, replace = TRUE)
@@ -68,7 +69,9 @@ ending_date <- as.Date(ending_date)
 
 x <- data.frame(SD = start_date, ED = ending_date)
 
-prev<-data.frame( x[,c(1,2)], prctj_mes = apply( x, 1, FUN = monthsbet, cols = c(1,2) ) )
+prctj_mes  <-  apply( x, 1, FUN = monthsbet, cols = c(1,2) )
+
+CNM<-data.frame( x[,c(1,2)], prctj_mes )
 
 
 
