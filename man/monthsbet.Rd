@@ -6,7 +6,8 @@ monthsbet
 }
 \description{
 %Cálculo de meses entre dos fechas dadas presentes en columnas de un data.frame
-Calcula el número (número continuo) de meses que han transcurrido entre dos fechas determinadas, ordenadas en columnas.
+Permite calcular el número (número continuo) de meses que han transcurrido entre dos fechas dadas
+presentes en columnas de un data frame.
 }
 \usage{
 monthsbet(X, cols)
@@ -14,11 +15,11 @@ monthsbet(X, cols)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{X}{
-  Data frame.
+  Data frame que contiene las fechas.
 }
   \item{cols}{
   %Dos columnas con fechas
-  Columnas de fechas, la primera columna contendrá la fecha de inicial y la segunda la fecha final,
+  Columnas del data frame, la primera contiene la fecha inicial y la segunda la fecha final,
   con el formato date "\%Y-\%m-\%d"
 }
 }
@@ -36,7 +37,7 @@ monthsbet(X, cols)
 %% ~put references to the literature/web site here ~
 }
 \author{
-Julio Andrade, Pedro Guarderas
+Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar
 }
 \note{
 %%  ~~further notes~~
@@ -48,12 +49,6 @@ Julio Andrade, Pedro Guarderas
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-
 
 month1 <- sample(1:12, 50, replace = TRUE)
 month2 <- sample(1:12, 50, replace = TRUE)
@@ -69,7 +64,6 @@ ending_date <- as.Date(ending_date)
 x <- data.frame(SD = start_date, ED = ending_date)
 
 prev<-data.frame( x[,c(1,2)], prctj_mes = apply( x, 1, FUN = monthsbet, cols = c(1,2) ) )
-
 
 
 
