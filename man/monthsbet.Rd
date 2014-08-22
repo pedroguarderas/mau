@@ -51,8 +51,11 @@ Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edi
 
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
+sample, paste, apply, data.frame and monthsbet.Rd.
 }
 \examples{
+
+source('R/dates.R')
 
 month1<-sample(1:12, 30, replace = TRUE)
 month2<-sample(1:12, 30, replace = TRUE)
