@@ -3,7 +3,7 @@
 \alias{evalpack}
 \docType{package}
 \title{
-Utilitarios para proyectos de evaluación
+Utilitarios para proyectos de evaluación.
 
 }
 \description{

@@ -38,7 +38,7 @@ AHPmatrix retorna los siguientes objetos:
 %% ~put references to the literature/web site here ~
 }
 \author{
-Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar
+Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar.
 }
 \note{
 %%  ~~further notes~~
