@@ -38,21 +38,16 @@ sim_eval(N = 1, W = stop("W not supplied"),
 \value{
 sim_eval retorna los siguientes objetos:
 
-\item{S}{Data frame de Simulaciones}
+\item{S}{Data frame de Simulaciones.}
 
-\item{W}{Matriz de Pesos simulados}
+\item{W}{Matriz de Pesos simulados.}
 
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar
+Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar.
 }
 \note{
 %%  ~~further notes~~
@@ -69,19 +64,16 @@ indic<-data.frame(cod=c('A', 'B', 'C', 'D'),
                   ind1=c(0.3428570, 1, 1, 1),
                   ind2=c(0.5, 0.5, 1, 0.5), 
                   ind3=c(0, 0.2696746, 0.6751261, 0.7401660),
-                  ind3=c(0.2797259, 0.2981198, 1, 0.1952864))
+                  ind4=c(0.2797259, 0.2981198, 1, 0.1952864))
 
 # Matriz de pesos
 rank<-data.frame(cod=c('A', 'B', 'C', 'D'), 
                  weigth=c(0.0376573868, 0.0264447427, 0.0240244958, 0.0179347528))
 
 N<-10
-F<-indic
 p<-rank$weigth
 
 sim_eval( N, indic, p )
-
-%## The function is currently defined as
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
