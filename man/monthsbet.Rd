@@ -6,8 +6,7 @@ monthsbet
 }
 \description{
 %Cálculo de meses entre dos fechas dadas presentes en columnas de un data.frame
-Permite calcular el número de meses que han transcurrido entre dos fechas dadas, donde la fecha final 
-es mayor a la fecha inicial, presentes en columnas de un data frame.
+Permite calcular el número de meses que han transcurrido entre dos fechas dadas presentes en columnas de un data frame, donde la fecha final es mayor a la fecha inicial.
 }
 \usage{
 monthsbet(X, cols)
@@ -32,9 +31,7 @@ monthsbet(X, cols)
 %%  \item{comp1 }{Description of 'comp1'}
 %%  \item{comp2 }{Description of 'comp2'}
 %% ...
-La función monthsbet retorna el siguiente objeto:
-
-MP Array que contiene la diferencia en meses entre las fechas final e inicial.
+La función \code{monthsbet} retorna un Array que contiene la diferencia en meses entre las fechas final e inicial.
 
 }
 \references{
@@ -51,12 +48,9 @@ Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edi
 
 \seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-sample, paste, apply, data.frame and monthsbet.Rd.
+
 }
 \examples{
-
-source('R/dates.R')
-
 month1<-sample(1:12, 30, replace = TRUE)
 month2<-sample(1:12, 30, replace = TRUE)
 day1<-sample(1:28, 30, replace = TRUE)
@@ -83,6 +77,3 @@ tst
 % R documentation directory.
 %\keyword{ ~kwd1 }
 %\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
-
-
-
