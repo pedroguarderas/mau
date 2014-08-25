@@ -17,7 +17,7 @@ read_utility_functions<-function( file, script, nr, skip = 5 ) {
   
   nom<-funs$nom[1]
   nomf<-funs$fun[1]
-  for ( i in 1:nrow(funs) ) {
+  for ( i in 1:nrow(funs) ) { # i<-1
     if ( nchar( funs$fun[i] ) == 0 )  {
       funs$nom[i]<-nom
       funs$fun[i]<-nomf

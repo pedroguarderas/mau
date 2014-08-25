@@ -5,28 +5,30 @@
 read_utility_function
 }
 \description{
-Función para leer funciones de utilidad de Logical Decision
+Función para construir funciones en R a partir de funciones de utilidad definidas en Logical Decisions.
 }
 \usage{
 read_utility_functions( file, script, nr, skip )
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{file}{ Archivo generado por Logical Decisio con las funciones de decisión }
-  \item{script}{ Script de salida en donde se guardan las funciones de decisión }
-  \item{nr}{ Número de filas que se espera leer del script }
-  \item{skip}{ Número de filas que se omiten }
+  \item{file}{ 
+  Archivo generado por Logical Decisions con las funciones de decisión, se debe indicar la path del
+  archivo. }
+  \item{script}{ Script R de salida en donde se guardan las funciones de decisión, se debe indicar la 
+  path del archivo. }
+  \item{nr}{ Número de filas que se espera leer del script. }
+  \item{skip}{ Número de filas que se omiten. }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
-\value{ No tiene valor de retorno, la salida es el script R con funciones de decisión definidas 
-  dentro }
+\value{ La función \code{read_utility_functions} no tiene un valor de retorno, genera un script R con funciones de decisión definidas dentro la path especificada previamente. }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-Pedro Guarderas
+Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar.
 }
 \note{
 }
@@ -37,9 +39,14 @@ Pedro Guarderas
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+# Utilice el archivo funciones_utilidad.txt
+file<-'example/funciones_utilidad.txt'
+sheet<-'example/funciones_utilidad.R'
+nr<-15
+skip<-5
+
+read_utility_functions( file, sheet, nr, skip )
+# Revise el archivo funciones_utilidad.R
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
