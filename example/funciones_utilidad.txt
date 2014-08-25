@@ -1,0 +1,18 @@
+SUF Formulas for Preference Set NEW PREF. SET1
+ 
+	--------------Range--------------	----Midpoint----		SUF Parameters
+	Minimum	Maximum	nivel	utilidad		a	b	c
+
+Programas de Estudio de las Asignaturas (PEA)
+	80		100		90	1		1	0	0
+	0		80		50	0.5		-0.5431	0.5431	-0.01305
+
+Plan curricular
+	0.8		1		0.9	1		1	0	0
+	0		0.8		0.5	0.5		-0.5431	0.5431	-1.305
+
+Prácticas preprofesionales
+	1		2		1.5	0.75		1.5	-0.5	0
+	2		3		2.5	0.25		1.5	-0.5	0
+
+SUF Parameters: if c = 0, U(x) = a + bx, if c # 0, U(x) = a + b(EXP(-cx))
