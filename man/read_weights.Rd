@@ -19,7 +19,7 @@ read_weights(file, cols, encoding = "latin1")
   Número de columnas a leerse.
 }
   \item{encoding}{
-  Caracter que representa el encoding del archivo, por defecto 'latint1'.
+  Caracter que representa el encoding del archivo, por defecto 'latin1'.
 }
 }
 \details{
