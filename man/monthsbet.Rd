@@ -51,6 +51,10 @@ Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edi
 
 }
 \examples{
+
+# carga la funcion monthsbet.
+source('R/dates.R')
+
 month1<-sample(1:12, 30, replace = TRUE)
 month2<-sample(1:12, 30, replace = TRUE)
 day1<-sample(1:28, 30, replace = TRUE)
