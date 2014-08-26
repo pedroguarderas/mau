@@ -24,7 +24,7 @@ relevancia entre los criterios que represente cada fila y columna.
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-AHPmatrix retorna los siguientes objetos:
+La función \code{AHPmatrix} retorna los siguientes objetos:
 
 \item{rowMean}{ Vector promedio de filas de la matriz. }
 \item{ahp}{ Matriz normalizada. }

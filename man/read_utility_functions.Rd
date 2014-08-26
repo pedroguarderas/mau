@@ -13,11 +13,11 @@ read_utility_functions( file, script, nr, skip )
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{file}{ 
-  Archivo generado por Logical Decisions con las funciones de decisión, se debe indicar la path del
+  Archivo txt generado por Logical Decisions con las funciones de decisión, se debe indicar la path del
   archivo. }
   \item{script}{ Script R de salida en donde se guardan las funciones de decisión, se debe indicar la 
   path del archivo. }
-  \item{nr}{ Número de filas que se espera leer del script. }
+  \item{nr}{ Número de filas a leerse del archivo txt. }
   \item{skip}{ Número de filas que se omiten. }
 }
 \details{

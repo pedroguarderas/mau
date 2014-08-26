@@ -37,7 +37,7 @@ elimina vocales con tíldes y coloca el texto en minúsculas.
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-correct_char retorna el data frame modificado de acuerdo a la columna y opción seleccionada.
+\code{correct_char} retorna el data frame modificado de acuerdo a la columna y opción seleccionada.
 %%  ~Describe the value returned
 %%  If it is a LIST, use
 %%  \item{comp1 }{Description of 'comp1'}
