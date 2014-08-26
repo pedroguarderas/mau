@@ -5,41 +5,34 @@
 read_weights
 }
 \description{
-Función para leer pesos de un modelo Logical Decision
+Función para leer los pesos del modelo de Logical Decisions en un data frame.
 }
 \usage{
-read_weights(file, nrows, skip = 5, encoding = "latin1")
+read_weights(file, cols, encoding = "latin1")
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{file}{
-  Archivo de entrada
+  Archivo xls/xslx de entrada que contiene los pesos de Logical Decisions, se debe indicar la path.
 }
-  \item{nrows}{
-  Número de filas a leerse
-}
-  \item{skip}{
-  Número de filas iniciales no consideradas, por defecto 5
+  \item{cols}{
+  Número de columnas a leerse.
 }
   \item{encoding}{
-  Character representando el encoding del archivo, por defecto 'latint1'
+  Caracter que representa el encoding del archivo, por defecto 'latint1'.
 }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+La función \code{read_weights} retorna un data frame que contiene los pesos del modelo de Logical Decisions.
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-Felipe Aguirre, Pedro Guarderas
+Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar.
 }
 \note{
 %%  ~~further notes~~
@@ -51,11 +44,8 @@ Felipe Aguirre, Pedro Guarderas
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
+# Utilice el archivo weights.xls
+weights<-read_weights( 'example/weights.xls', 1:64 )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
