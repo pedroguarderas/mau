@@ -1,31 +1,29 @@
 \name{read_utility_functions}
 \alias{read_utility_functions}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 read_utility_function
 }
 \description{
-Función para construir funciones en R a partir de funciones de utilidad definidas en Logical Decisions.
+  Función para construir funciones en R a partir de funciones de utilidad definidas en Logical 
+  Decisions.
 }
 \usage{
 read_utility_functions( file, script, nr, skip )
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{file}{ 
-  Archivo txt generado por Logical Decisions con las funciones de decisión, se debe indicar la path del
-  archivo. }
-  \item{script}{ Script R de salida en donde se guardan las funciones de decisión, se debe indicar la 
-  path del archivo. }
+  Archivo txt generado por Logical Decisions con las funciones de decisión, se debe indicar la path 
+  del archivo. }
+  \item{script}{ Script R de salida en donde se guardan las funciones de decisión, se debe indicar 
+  la path del archivo. }
   \item{nr}{ Número de filas a leerse del archivo txt. }
   \item{skip}{ Número de filas que se omiten. }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
 }
-\value{ La función \code{read_utility_functions} no tiene un valor de retorno, genera un script R con funciones de decisión definidas dentro la path especificada previamente. }
+\value{ La función \code{read_utility_functions} no tiene un valor de retorno, genera un script R 
+con funciones de decisión definidas dentro la path especificada por la variable \code{script}. }
 \references{
-%% ~put references to the literature/web site here ~
 }
 \author{
 Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar.
@@ -33,10 +31,7 @@ Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edi
 \note{
 }
 
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
 # Utilice el archivo funciones_utilidad.txt
