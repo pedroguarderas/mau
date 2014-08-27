@@ -1,12 +1,15 @@
 \name{sim_eval}
 \alias{sim_eval}
-%- Also NEED an '\alias' for EACH other topic documented here.
+
 \title{
 sim_eval
 }
+
 \description{
-Macro para simular evaluaciones con distribuciones de Dirichlet.
+  Macro para simular diferentes modelos MAUT al cambiar los pesos siguiendo una distribución de 
+  Dirichlet.
 }
+
 \usage{
 sim_eval( N = 1, 
           W = stop("W not supplied"), 
@@ -14,51 +17,43 @@ sim_eval( N = 1,
           F = stop("F not supplied"), 
           p = stop("p not supplied") )
 }
-%- maybe also 'usage' for other objects documented here.
+
 \arguments{
   \item{N}{
   Número de simulaciones.
-}
+  }
   \item{W}{
-  Pesos simulados.
-}
+  Pesos simulados con distribución de Dirichlet y concentrados según el valor de los indicadores.
+  }
   \item{S}{
   Simulaciones.
-}
+  }
   \item{F}{
   Matriz de indicadores evaluados.
-}
+  }
   \item{p}{
   Vector de pesos extraídos de Logical Decisions.
-}
+  }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
-
 }
 \value{
-sim_eval retorna los siguientes objetos:
+  sim_eval retorna los siguientes objetos:
 
-\item{S}{Data frame de Simulaciones.}
-
-\item{W}{Matriz de Pesos simulados.}
-
+  \item{S}{Data frame de Simulaciones.}
+  \item{W}{Matriz de Pesos simulados.}
 }
 \references{
-%% ~put references to the literature/web site here ~
 }
 \author{
 Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar.
 }
 \note{
-%%  ~~further notes~~
 }
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
 }
+
 \examples{
 # Matriz de indicadores
 indic<-data.frame(cod=c('A', 'B', 'C', 'D'), 
