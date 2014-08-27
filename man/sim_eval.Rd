@@ -8,10 +8,11 @@ sim_eval
 Macro para simular evaluaciones con distribuciones de Dirichlet.
 }
 \usage{
-sim_eval(N = 1, W = stop("W not supplied"), 
-         S = stop("S not supplied"), 
-         F = stop("F not supplied"), 
-         p = stop("p not supplied"))
+sim_eval( N = 1, 
+          W = stop("W not supplied"), 
+          S = stop("S not supplied"), 
+          F = stop("F not supplied"), 
+          p = stop("p not supplied") )
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -73,7 +74,7 @@ rank<-data.frame(cod=c('A', 'B', 'C', 'D'),
 N<-10
 p<-rank$weigth
 
-sim_eval( N, indic, p )
+sim_eval( N, W, S, indic, p )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
