@@ -2,13 +2,12 @@
 \alias{evalpack-package}
 \alias{evalpack}
 \docType{package}
-\title{
-Utilitarios para proyectos de evaluación.
 
+\title{
+Rutinas para Modelos de Decision y Evaluacion.
 }
 \description{
-More about what it does (maybe more than one line)
-~~ A concise (1-5 lines) description of the package ~~
+Paquete que contiene un conjunto de rutinas para generar modelos decision.
 }
 \details{
 \tabular{ll}{
@@ -16,26 +15,20 @@ Package: \tab evalpack\cr
 Type: \tab Package\cr
 Version: \tab 1.0\cr
 Date: \tab 2013-12-17\cr
-License: \tab What license is it under?\cr
+License: \tab LGPL-3\cr
 }
-~~ An overview of how to use the package, including the most important functions ~~
 }
 \author{
 Felipe Aguirre, Julio Andrade, Daniel Lagos, Andrés López, Pedro Guarderas, Paúl Recalde, 
 Edison Salazar.
-
-Maintainer: Who to complain to <yourfault@somewhere.net>
-~~ The author and/or maintainer of the package ~~
+Maintainer: CEAACES <info@ceaaces.gob.ec>
 }
 \references{
-~~ Literature or other references for background information ~~
 }
 
 \keyword{ package }
 \seealso{
-~~ Optional links to other man pages, e.g. ~~
-~~ \code{\link[<pkg>:<pkg>-package]{<pkg>}} ~~
+\code{CEAACES http://www.ceaaces.gob.ec/}
 }
 \examples{
-~~ simple examples of the most important functions ~~
 }
