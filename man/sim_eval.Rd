@@ -38,7 +38,7 @@ sim_eval( N = 1,
 \details{
 }
 \value{
-  sim_eval retorna los siguientes objetos:
+  La función \code{sim_eval} retorna los siguientes objetos:
 
   \item{S}{Data frame de Simulaciones.}
   \item{W}{Matriz de Pesos simulados.}
@@ -71,7 +71,3 @@ p<-rank$weigth
 
 sim_eval( N, W, S, indic, p )
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-%\keyword{ ~kwd1 }
-%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
