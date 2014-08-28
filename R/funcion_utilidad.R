@@ -114,7 +114,7 @@ eval_index<-function( index, names, indexsub, colcod = 1, colpos, colfun, coltip
   
   data<-data.frame( cod = index[ ,colcod ] )
 
-  for ( i in 1:nrow( names ) ) {
+  for ( i in 1:nrow( names ) ) { # i<-2
     # Se verifica si la función ha sido definida
     if ( names[ i, coltip ] == 'CUANTITATIVA' ) {
       if ( names[ i, colfun ] %in% ls( envir = envir ) ) {
