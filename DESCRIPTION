@@ -1,11 +1,10 @@
 Package: evalpack
 Type: Package
-Title: Utilitarios para proyectos de evaluación
+Title: Rutinas para Modelos de Decision y Evaluacion.
 Version: 1.0
 Date: 2013-12-17
-Author: Felipe Aguirre, Pedro Guarderas, Daniel Lagos, Julio Andrade, Andrés López, Nelson Recalde, 
-        Edison Salazar.
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
-Depends: gtools, stringr, xlsx
+Author: Felipe Aguirre, Julio Andrade, Pedro Guarderas, Daniel Lagos, Andres Lopez, Nelson Recalde, Edison Salazar.
+Maintainer: CEAACES <info@ceaaces.gob.ec>
+Description: Paquete que contiene un conjunto de rutinas para generar modelos decision.
+License: LGPL-3
+Depends: R (>= 3.0), gtools, stringr, xlsx, igraph

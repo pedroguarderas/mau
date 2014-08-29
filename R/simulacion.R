@@ -1,7 +1,6 @@
 #___________________________________________________________________________________________________
 # Macro para simular evaluaciones
-sim_eval<-defmacro( N = 1, F, p, expr = {
-# sim_eval<-defmacro( N = 1, W, S, F, p, expr = {
+sim_eval<-defmacro( N = 1, W, S, F, p, expr = {
   alpha<-100 * p
   W<-cbind( p, t( rdirichlet( n = N, alpha ) ) )
   S<-as.matrix( F[ , 2:ncol(F) ] ) %*% W  
