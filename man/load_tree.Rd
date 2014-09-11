@@ -5,7 +5,7 @@
 load_tree
 }
 \description{
-Función para leer árboles de decisión producidos por Logical Decision
+Función para leer árboles de decisión producidos por Logical Decisions.
 }
 \usage{
 load_tree(file, indexfile, col_id, cold_weight, col_func)
@@ -13,36 +13,34 @@ load_tree(file, indexfile, col_id, cold_weight, col_func)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{file}{
-%%     ~~Describe \code{file} here~~
+  Path donde se encuentra el árbol en formato xlsx.
 }
   \item{indexfile}{
-%%     ~~Describe \code{indexfile} here~~
+  Data frame que contiene los pesos del árbol.
 }
   \item{col_id}{
-%%     ~~Describe \code{col_id} here~~
+  Columna del data frame \code{indexfile} que contiene el código de los nodos y de las ramas.
 }
-  \item{cold_weight}{
-%%     ~~Describe \code{cold_weight} here~~
+  \item{col_weight}{
+  Columna del data frame \code{indexfile} que contiene los pesos de los nodos y de las ramas.
 }
   \item{col_func}{
-%%     ~~Describe \code{col_func} here~~
+  Columna del data frame \code{indexfile} que contiene el nombre las funciones de los nodos y de 
+  las ramas.
 }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+  La función \code{load_tree} retorna un data frame que contiene la información necesaria para 
+  escribir un árbol de decisión en formato "GraphML".
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar.
 }
 \note{
 %%  ~~further notes~~
@@ -51,14 +49,37 @@ load_tree(file, indexfile, col_id, cold_weight, col_func)
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+ \code{\link{write_tree}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+options( stringsAsFactors = FALSE )
 
-## The function is currently defined as
+# Nombre de indicadores
+nomb_indic<-data.frame(cod=1:4, 
+                       nom0=c('PROYECTO INSTITUCIONAL', 'SEGUIMIENTO IMPLEMENTADO',
+                              'PROYECTOS DE VINCULACION', 'ACTIVIDADES DE EXTENSION Y DIVULGACION'),
+                       nom1=c('Proyecto institucional', 'Seguimiento implementado', 
+                              'Proyectos de vinculación', 'Actividades de extensión y divulgación'),
+                       nomfun=c('proyecto_institucional', 'seguimiento_implementado', 
+                                'proyectos_vinculacion', 'actividades_extension_divulgacion'),
+                       tip=c('CUALITATIVA', 'CUALITATIVA', 'CUANTITATIVA', 'CUANTITATIVA'))
+
+# Leyendo pesos del modelo
+weights<-read_weights( 'example/weights.xls', 1:5 )
+
+nomind<-subset( nomb_indic, select = c(cod,nom1,nomfun,tip) )
+colnames(nomind)<-c( "cod", "nombre", "nomfun", "tip" )
+weights<-merge( weights, nomind, by.x='nom', by.y='nomfun', all.x = TRUE )
+
+index_file<-data.frame( nomb_indic[,c(1,4)], weight = weights$weight )
+
+# Funcion load_tree
+file<-'example/arbol.xls'
+col_id<-1
+col_weight<-3
+col_func<-2
+
+tree_data<-load_tree( file, index_file, col_id, col_weight, col_func )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

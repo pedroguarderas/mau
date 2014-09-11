@@ -23,7 +23,8 @@ load_tree<-function( file, indexfile, col_id, cold_weight, col_func ) {
 
 #___________________________________________________________________________________________________
 # Función para escribir estructura de árbol en formato graphml
-write_tree<-function( file, tree, col_id, col_cod, col_nom, col_parent, col_weight, col_func ) {
+write_tree<-function( file, tree, col_id, col_cod, col_nom, col_parent, col_weight, col_func, 
+                      color_node ) {
   grphxml<-"<?xml version=\"1.0\" encoding=\"UTF-8\"?>
   <graphml xmlns=\"http://graphml.graphdrawing.org/xmlns\"
   xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"
@@ -56,7 +57,7 @@ write_tree<-function( file, tree, col_id, col_cod, col_nom, col_parent, col_weig
                    "\t\t<data key=\"cod\">", ifelse( !is.na( tree[i,col_cod] ), 
                                                      tree[i,col_cod], '' ), "</data>\n",
                     "\t\t<data key=\"n\">", tree[i,col_nom], "</data>\n",
-                    "\t\t<data key=\"c\">", 'dodgerblue3', "</data>\n",
+                    "\t\t<data key=\"c\">", color_node, "</data>\n",
                     "\t\t<data key=\"w\">", ifelse( !is.na( tree[i,col_weight] ), 
                                                     tree[i,col_weight], '' ), "</data>\n",
                     "\t\t<data key=\"lf\">", ifelse( !is.na( tree[i,col_weight] ), 
@@ -73,7 +74,7 @@ write_tree<-function( file, tree, col_id, col_cod, col_nom, col_parent, col_weig
       node<-paste( "\t<node id=\"", tree[i,col_id], "\">\n",
                    "\t\t<data key=\"cod\">", "", "</data>\n",
                  "\t\t<data key=\"n\">", tree[i,col_nom], "</data>\n",
-                 "\t\t<data key=\"c\">", 'dodgerblue3', "</data>\n",
+                 "\t\t<data key=\"c\">", color_node, "</data>\n",
                  "\t\t<data key=\"w\">", "", "</data>\n",
                  "\t\t<data key=\"lf\">", 0, "</data>\n",
                  "\t\t<data key=\"f\">", "", "</data>\n",
