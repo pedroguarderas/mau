@@ -1,54 +1,53 @@
 \name{write_tree}
 \alias{write_tree}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 write_tree
 }
 \description{
-Función para escribir estructura de árbol en formato graphml
+Función para escribir la estructura del árbol de decisión del modelo de evaluación en formato "GraphML".
 }
 \usage{
-write_tree( file, tree, col_id, col_nom, col_parent, col_weight, col_func )
+write_tree( file, tree, col_id, col_nom, col_parent, col_weight, col_func, color_node )
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{file}{
-%%     ~~Describe \code{file} here~~
+  Path donde se guardará el árbol en formato \code{graphml}.
 }
   \item{tree}{
-%%     ~~Describe \code{tree} here~~
+  Data frame que contiene la información de los nodos y hojas del árbol.
 }
   \item{col_id}{
-%%     ~~Describe \code{col_id} here~~
+  Columna que contiene la identificación de los nodos y hojas.
 }
   \item{col_nom}{
-%%     ~~Describe \code{col_nom} here~~
+  Columna que contiene el nombre de los nodos y hojas.
 }
   \item{col_parent}{
-%%     ~~Describe \code{col_parent} here~~
+  Columna que contiene el nombre de los padres de los nodos y hojas.
 }
   \item{col_weight}{
-%%     ~~Describe \code{col_weight} here~~
+  Columna que contiene los pesos del árbol.
 }
   \item{col_func}{
-%%     ~~Describe \code{col_func} here~~
+  Columna que contiene el nombre de las funciones de los nodos y hojas. 
+}
+  \item{color_node}{
+  Color que se asigna al nodo. 
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+La función \code{write_tree} retorna un archivo \code{graphml} que contiene la estructura del árbol, 
+con nodos y hojas, del modelo de evaluación.
 }
 \references{
-%% ~put references to the literature/web site here ~
+GraphML Primer:
+http://graphml.graphdrawing.org/primer/graphml-primer.html
 }
 \author{
-%%  ~~who you are~~
+Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar.
 }
 \note{
 %%  ~~further notes~~
@@ -57,14 +56,50 @@ write_tree( file, tree, col_id, col_nom, col_parent, col_weight, col_func )
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+ \code{\link{load_tree}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+options( stringsAsFactors = FALSE )
 
-## The function is currently defined as
+# Nombre de indicadores
+nomb_indic<-data.frame(cod=1:4, 
+                       nom0=c('PROYECTO INSTITUCIONAL', 'SEGUIMIENTO IMPLEMENTADO',
+                              'PROYECTOS DE VINCULACION', 'ACTIVIDADES DE EXTENSION Y DIVULGACION'),
+                       nom1=c('Proyecto institucional', 'Seguimiento implementado', 
+                              'Proyectos de vinculación', 'Actividades de extensión y divulgación'),
+                       nomfun=c('proyecto_institucional', 'seguimiento_implementado', 
+                                'proyectos_vinculacion', 'actividades_extension_divulgacion'),
+                       tip=c('CUALITATIVA', 'CUALITATIVA', 'CUANTITATIVA', 'CUANTITATIVA'))
+
+# Leyendo pesos del modelo
+weights<-read_weights( 'example/weights.xls', 1:5 )
+
+nomind<-subset( nomb_indic, select = c(cod,nom1,nomfun,tip) )
+colnames(nomind)<-c( "cod", "nombre", "nomfun", "tip" )
+weights<-merge( weights, nomind, by.x='nom', by.y='nomfun', all.x = TRUE )
+
+index_file<-data.frame( nomb_indic[,c(1,4)], weight = weights$weight )
+
+# Funcion load_tree
+file<-'example/arbol.xls'
+col_id<-1
+col_weight<-3
+col_func<-2
+
+tree_data<-load_tree( file, index_file, col_id, col_weight, col_func )
+
+# Funcion write_tree
+col_id<-1
+col_cod<-2
+col_nom<-4
+col_parent<-6
+col_weight<-3
+col_func<-5
+tree<-tree_data
+color_node<-'deepskyblue'
+file<-'example/tree.graphml'
+
+write_tree( file, tree, col_id, col_cod, col_nom, col_parent, col_weight, col_func, color_node )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
