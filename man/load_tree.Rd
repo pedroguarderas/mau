@@ -13,7 +13,8 @@ load_tree(file, indexfile, col_id, cold_weight, col_func)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{file}{
-  Path donde se encuentra el árbol en formato xlsx.
+  Archivo \code{xls/xlsx} donde se encuentra la información del árbol de decisión,  generado por Logical 
+  Decisions.
 }
   \item{indexfile}{
   Data frame que contiene los pesos del árbol.
@@ -73,7 +74,7 @@ weights<-merge( weights, nomind, by.x='nom', by.y='nomfun', all.x = TRUE )
 
 index_file<-data.frame( nomb_indic[,c(1,4)], weight = weights$weight )
 
-# Funcion load_tree
+# Función load_tree
 file<-'example/arbol.xls'
 col_id<-1
 col_weight<-3

@@ -80,7 +80,7 @@ weights<-merge( weights, nomind, by.x='nom', by.y='nomfun', all.x = TRUE )
 
 index_file<-data.frame( nomb_indic[,c(1,4)], weight = weights$weight )
 
-# Funcion load_tree
+# Función load_tree
 file<-'example/arbol.xls'
 col_id<-1
 col_weight<-3
@@ -88,7 +88,7 @@ col_func<-2
 
 tree_data<-load_tree( file, index_file, col_id, col_weight, col_func )
 
-# Funcion write_tree
+# Función write_tree
 col_id<-1
 col_cod<-2
 col_nom<-4

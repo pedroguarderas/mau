@@ -32,6 +32,7 @@ Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edi
 }
 
 \seealso{
+\code{\link{read_weights}}, \code{\link{eval_index}}
 }
 \examples{
 # Utilice el archivo funciones_utilidad.txt

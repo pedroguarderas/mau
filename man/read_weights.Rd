@@ -13,7 +13,7 @@ read_weights(file, cols, encoding = "latin1")
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{file}{
-  Archivo xls/xslx de entrada que contiene los pesos de Logical Decisions, se debe indicar la path.
+  Archivo \code{xls/xslx} de entrada que contiene los pesos de Logical Decisions, se debe indicar la path.
 }
   \item{cols}{
   Número de columnas a leerse.
