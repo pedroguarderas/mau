@@ -6,7 +6,8 @@ monthsbet
 }
 \description{
 %Cálculo de meses entre dos fechas dadas presentes en columnas de un data.frame
-Permite calcular el número de meses que han transcurrido entre dos fechas dadas presentes en columnas de un data frame, donde la fecha final es mayor a la fecha inicial.
+Función que permite calcular el número de meses que han transcurrido entre dos fechas dadas presentes 
+en columnas de un data frame, donde la fecha final es mayor a la fecha inicial.
 }
 \usage{
 monthsbet(X, cols)
