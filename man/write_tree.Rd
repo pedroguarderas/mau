@@ -100,6 +100,10 @@ color_node<-'deepskyblue'
 file<-'example/tree.graphml'
 
 write_tree( file, tree, col_id, col_cod, col_nom, col_parent, col_weight, col_func, color_node )
+
+# Lectura y gráfico del árbol
+tree<-read.graph( 'example/tree.graphml', format = 'graphml' )
+tkplot( tree, vertex.size = 10 )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
