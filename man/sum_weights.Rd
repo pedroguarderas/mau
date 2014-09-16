@@ -32,7 +32,7 @@ ramas internas del árbol de decisión.
 Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar.
 }
 \note{
-Para utilizar las funciones correctamente, se las debe utilizar en orden:  1.\code{\code{sum_weights}}, 
+Para utilizar las funciones correctamente, se las debe utilizar en orden:  1.\code{\link{sum_weights}}, 
 2.\code{\link{divide_weights}}, 3.\code{\link{index_weights}}.
 }
 
