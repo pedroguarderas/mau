@@ -41,7 +41,7 @@ correct_char<-defmacro( data, cols, case = TRUE, expr = {
 })
 
 #___________________________________________________________________________________________________
-# Correción de caracteres
+# Corrección de caracteres 2
 correct_char2<-function( data, cols, chr = NULL, rep = NULL ) {
   out<-data[,cols]
   
