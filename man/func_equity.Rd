@@ -1,14 +1,14 @@
-\name{comp_func}
-\alias{comp_func}
+\name{func_equity}
+\alias{func_equity}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-comp_func
+func_equity
 }
 \description{
 Mide complejidad de la función de decisión dada
 }
 \usage{
-comp_func(f, n, a)
+func_equity(f, n, D, I)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -18,7 +18,10 @@ comp_func(f, n, a)
   \item{n}{
   Cantidad de números aleatorios a emplearse en la simulación
 }
-  \item{a}{
+  \item{D}{
+  Dominio de la función
+}
+  \item{I}{
   Intervalo para la evaluación
 }
 }

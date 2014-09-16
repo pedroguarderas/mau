@@ -10,10 +10,14 @@ sim_eval<-defmacro( N = 1, W, S, F, p, expr = {
 
 #___________________________________________________________________________________________________
 # Evalúa la complejidad de una función 
-comp_func<-function( f, n, a ) {
-  x<-sort( runif( n ) )
+func_equity<-function( f, n, D, I ) {
+  x<-sort( runif( n,  D[1], D[2] ) )
   y<-sapply( x, FUN = f )
-  check<-y >= a[1] & y <= a[2]
-  X<-x[ check ]  
-  return( list( sum( check ) / n, X ) )
+  
+  equity<-NULL
+  for ( i in 2:length(I) ) {
+    equity<-c( equity, sum( y >= I[i-1] & y < I[i] ) / n )
+  }
+  
+  return( equity )
 }
