@@ -9,7 +9,7 @@ sim_eval<-defmacro( N = 1, W, S, F, p, expr = {
 })
 
 #___________________________________________________________________________________________________
-# Evalúa la complejidad de una función 
+# Evalúa la equitatividad de una función 
 func_equity<-function( f, n, D, I ) {
   x<-sort( runif( n,  D[1], D[2] ) )
   y<-sapply( x, FUN = f )

@@ -5,7 +5,7 @@
 func_equity
 }
 \description{
-Mide complejidad de la función de decisión dada
+Mide la equitatividad de la función de utilidad
 }
 \usage{
 func_equity(f, n, D, I)
