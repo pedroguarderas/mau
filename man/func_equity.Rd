@@ -5,7 +5,7 @@
 func_equity
 }
 \description{
-Mide la equitatividad de la función de utilidad
+Mide la equidad de la función de utilidad
 }
 \usage{
 func_equity(f, n, D, I)
