@@ -1,6 +1,5 @@
 \name{correct_char2}
 \alias{correct_char2}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Corrección de caracteres 2
 }
@@ -18,39 +17,32 @@ correct_char2(data = data.frame,
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{data}{
-%%     ~~Describe \code{data} here~~
-Data frame que contiene el texto a modificar.
+  Data frame que contiene el texto a modificar.
 }
   \item{cols}{
-%%     ~~Describe \code{cols} here~~
-Número de columna que contiene el texto a modificar.
+  Número de columna que contiene el texto a modificar.
 }
   \item{chr}{
-%%     ~~Describe \code{chr} here~~
+  Vector nulo de almacenamiento de caracteres por corregir.
 }
   \item{rep}{
-%%     ~~Describe \code{rep} here~~
+  Vector nulo de almacenamiento de caracteres de reemplazo.
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
 Los pronombres, preposiciones comunes, caracteres especiales, espacios a reemplazar y/o eliminar son:
- ' y/o ', ' las ', ' el ', ' para ', ' o ', ' en ', ' del ', ' de ', ' la ', ' a ', 
-            ' por ', ' y ', '/', " ( )*", ' ', 'á', 'é', 'í', 'ó', 'ú', '-', '\\(', '\\)', '( )$', 
-            '_(_)*'
+' y/o ', ' las ', ' el ', ' para ', ' o ', ' en ', ' del ', ' de ', ' la ', ' a ', ' por ', ' y ', 
+'/', " ( )*", ' ', 'á', 'é', 'í', 'ó', 'ú', '-', '\\(', '\\)', '( )$', '_(_)*'.
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+La función \code{correct_char2} retorna el data frame modificado de acuerdo a la columna y opción 
+seleccionada.
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar
+Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar.
 }
 \note{
 %%  ~~further notes~~
@@ -59,14 +51,15 @@ Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edi
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+
+\code{\link{owngsub}}, \code{\link{correct_char}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+tst<-data.frame(a=c('HÚàn', 'Marìa','juLIO Pér', 'Stevén'), b=1:4)
+cols<-1
 
-## The function is currently defined as
+correct_char2(tst, 1)
+tst[,1]<-correct_char2(tst,1)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
