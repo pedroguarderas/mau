@@ -1,11 +1,11 @@
 \name{sum_weights}
 \alias{sum_weights}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 sum_weights
 }
 \description{
-Función para asignar pesos a las ramas internas dados los pesos en las raíces
+Función para asignar pesos a las ramas internas, del árbol de decisión en formato \code{graphml}, 
+dados los pesos en las raíces.
 }
 \usage{
 sum_weight(tree)
@@ -13,40 +13,40 @@ sum_weight(tree)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{tree}{
-%%     ~~Describe \code{tree} here~~
+  Data frame que contiene la estructura del árbol, con nodos y hojas, del modelo de evaluación en 
+  formato \code{graphml}.
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+La función \code{sum_weights} establece los pesos en las ramas internas del árbol de decisión, dado 
+los pesos en las raíces, mediante la suma de sus pesos.
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+La función \code{sum_weights} retorna un objeto de tipo \code{igraph} que contiene los pesos en las 
+ramas internas del árbol de decisión.
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar.
 }
 \note{
-%%  ~~further notes~~
+Para utilizar las funciones correctamente, se las debe utilizar en orden:  1.\code{\code{sum_weights}}, 
+2.\code{\link{divide_weights}}, 3.\code{\link{index_weights}}.
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+ \code{\link{load_tree}}, \code{\link{write_tree}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+# Lectura del archivo 'graphml'
+tree<-read.graph( 'example/tree.graphml', format = 'graphml' )
 
-## The function is currently defined as
+# Asignación de pesos
+tree<-sum_weights( tree )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
