@@ -1,11 +1,10 @@
 \name{index_weights}
 \alias{index_weights}
-%- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 index_weights
 }
 \description{
-Extrae valor de indicadores a partir de un árbol con pesos relativos
+Función para extraer el valor de los indicadores a partir de un árbol de decisión con pesos relativos.
 }
 \usage{
 index_weights(tree)
@@ -13,40 +12,46 @@ index_weights(tree)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{tree}{
-%%     ~~Describe \code{tree} here~~
+  Data frame que contiene la estructura del árbol, con nodos y hojas, del modelo de evaluación en 
+  formato \code{graphml}.
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+La función \code{index_weights} establece el valor de los indicadores a partir de los pesos relativos 
+del árbol de decisión, 
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+La función \code{index_weights} retorna un data frame que contiene el valor de los indicadores del modelo 
+de decisión.
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-Pedro Guarderas
+Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar.
 }
 \note{
-%%  ~~further notes~~
+Para utilizar las funciones correctamente, se las debe utilizar en orden:  1.\code{\code{sum_weights}}, 
+2.\code{\link{divide_weights}}, 3.\code{\link{index_weights}}.
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+ \code{\link{load_tree}}, \code{\link{write_tree}}, \code{\link{sum_weights}}, \code{\link{sum_weights}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+# Lectura del archivo 'graphml'
+tree<-read.graph( 'example/tree.graphml', format = 'graphml' )
 
-## The function is currently defined as
+# Asignación de pesos
+tree<-sum_weights( tree )
+
+# Reasignación de pesos
+tree<-divide_weights( tree )
+
+# Extracción de indicadores
+new_weights<-index_weights( tree )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
