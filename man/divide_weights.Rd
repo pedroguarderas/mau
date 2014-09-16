@@ -5,51 +5,53 @@
 divide_weights
 }
 \description{
-Reasigna pesos
+Función para reasignar los pesos a las raíces, del árbol de decisión en formato \code{graphml}, 
+dados los pesos en las ramas.
 }
 \usage{
-divide_weights(tree, leafs)
+divide_weights( tree )
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{tree}{
-%%     ~~Describe \code{tree} here~~
-}
-  \item{leafs}{
-%%     ~~Describe \code{leafs} here~~
+  Data frame que contiene la estructura del árbol, con nodos y hojas, del modelo de evaluación en 
+  formato \code{graphml}.
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+La función \code{divide_weights} reestablece los pesos en las raíces del árbol de decisión, 
+dado los pesos en las ramas, mediante la división entre los pesos de las raíces y la correspondiente 
+rama.
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+La función \code{divide_weights} retorna un objeto de tipo \code{igraph} que contiene los pesos en las 
+ramas internas del árbol de decisión.
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-Pedro Guarderas
+Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar.
 }
 \note{
-%%  ~~further notes~~
+Para utilizar las funciones correctamente, se las debe utilizar en orden:  1.\code{\code{sum_weights}}, 
+2.\code{\link{divide_weights}}, 3.\code{\link{index_weights}}.
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+ \code{\link{load_tree}}, \code{\link{write_tree}}, \code{\link{sum_weights}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+# Lectura del archivo 'graphml'
+tree<-read.graph( 'example/tree.graphml', format = 'graphml' )
 
-## The function is currently defined as
+# Asignación de pesos
+tree<-sum_weights( tree )
+
+# Reasignación de pesos
+tree<-divide_weights( tree )
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
