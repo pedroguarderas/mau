@@ -5,8 +5,8 @@
 func_equity
 }
 \description{
-Mide la equidad de las funciones de utilidad, mediante simulaciones con una distribución normal, del 
-modelo de evaluación. 
+Mide la equidad de las funciones de utilidad, mediante simulaciones que siguen una distribución normal, 
+del modelo de evaluación. 
 }
 \usage{
 func_equity(f, n, D, I)
@@ -27,7 +27,7 @@ func_equity(f, n, D, I)
 }
 }
 \details{
-La función \code{func_equity} evalúa las simulaciones de una distribución normal en el intervalo 
+La función \code{func_equity} evalúa las simulaciones que siguen una distribución normal en el intervalo 
 especificado de acuerdo a las funciones de utilidad del modelo
 }
 \value{
