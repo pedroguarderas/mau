@@ -18,7 +18,7 @@ index_weights(tree)
 }
 \details{
 La función \code{index_weights} establece el valor de los indicadores a partir de los pesos relativos 
-del árbol de decisión, 
+del árbol de decisión.
 }
 \value{
 La función \code{index_weights} retorna un data frame que contiene el valor de los indicadores del modelo 

@@ -50,14 +50,10 @@ Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edi
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-
-# Carga de la funcion AHPmatrix
-source('R/ahpmatrix.R')
-
 m1<-matrix( 1:20, 5, 5 )
 m1[ lower.tri( m1 ) ]<-0
-ahp<-AHPmatrix(m1)
 
+ahp<-AHPmatrix(m1)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
