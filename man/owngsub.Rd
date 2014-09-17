@@ -2,10 +2,10 @@
 \alias{owngsub}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Función para remplazo de caracteres
+owngsub
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Función para reemplazo de un argumento modelo por otro, dentro de un vector de caracteres.
 }
 \usage{
 owngsub(x, pattern, replacement)
@@ -13,30 +13,28 @@ owngsub(x, pattern, replacement)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-%%     ~~Describe \code{x} here~~
+  Vector de caracteres que contiene las coincidencias buscadas.
 }
   \item{pattern}{
-%%     ~~Describe \code{pattern} here~~
+  Cadena de caracteres que contiene el argumento de coincidencia definida por el usuario.
 }
   \item{replacement}{
-%%     ~~Describe \code{replacement} here~~
+  Cadena de caracteres reemplazo para el argumento \code{pattern} definido.
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
-}
+La función \code{owngsub} utiliza la función \code{gsub} para la búsqueda de coincidencias y reemplazo
+de argumentos.
+} 
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+La función \code{owngsub} retorna un vector de los elementos sustituidos de \code{x}, del mismo 
+tamaño y los mismos atributos; los elementos no sustituidos retornan sin cambios. 
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-Julio Andrade, Daniel Lagos, Andrés Lopez, Pedro Guarderas, Edison Salazar
+Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar.
 }
 \note{
 %%  ~~further notes~~
@@ -45,16 +43,20 @@ Julio Andrade, Daniel Lagos, Andrés Lopez, Pedro Guarderas, Edison Salazar
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+ \code{\link{correct_char}},  \code{\link{correct_char2}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+data<-c('Dire chlet','MÀry', 'Jhon', 'Sálly')
+data1<-data.frame(id=1:4, nom=c('Dire chlet','MÀry', 'Jhon', 'Sálly'))
 
-## The function is currently defined as
-function (x, pattern, replacement) 
-gsub(pattern, replacement, x)
+# Uso en un vector
+owngsub( data, pattern = c("re "), replacement = c("ri") )
+owngsub( data, pattern = c('ho'), replacement = c('oh') )
+data<-owngsub( data, pattern = c("re "), replacement = c("ri") )
+data<-owngsub( data, pattern = "[Á|À]|[á|à]", replacement = "a" ) 
+
+# Uso en todas las filas del data frame
+data1<-apply(data1, 2, FUN=owngsub, pattern = "[Á|À]|[á|à]", replacement = "a")
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
