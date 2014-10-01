@@ -2,10 +2,10 @@
 \alias{verifica_issn}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-Función para verificar ISSN
+verifica_issn
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Función para verificar la validez del código ISSN de las publicaciones científicas.
 }
 \usage{
 verifica_issn(x)
@@ -13,24 +13,22 @@ verifica_issn(x)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{x}{
-%%     ~~Describe \code{x} here~~
+  Código ISSN de 8 caracteres, en formato \code{character}.
 }
 }
 \details{
-%%  ~~ If necessary, more details than the description above ~~
+La función \code{verifica_issn} comprueba la validez del código ISSN de las publicaciones científicas.
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+La función \code{read_weights} retorna un objeto de tipo \code{logical} TRUE o FALSE, indicando si se
+cumple o no la validez del código ISSN, respectivamente.
 }
 \references{
-%% ~put references to the literature/web site here ~
+International Standard Serial Number
+\link{http://en.wikipedia.org/wiki/International_Standard_Serial_Number}
 }
 \author{
-%%  ~~who you are~~
+Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar.
 }
 \note{
 %%  ~~further notes~~
@@ -42,11 +40,17 @@ verifica_issn(x)
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+# Códigos ISSN
+a<-'1553571X'
+b<-'13602276'
+c<-'03785958'
+d<-'13907867'
 
-## The function is currently defined as
+# Uso de la función
+verifica_issn(a)
+verifica_issn(b)
+verifica_issn(c)
+verifica_issn(d)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
