@@ -20,7 +20,7 @@ verifica_issn(x)
 La función \code{verifica_issn} comprueba la validez del código ISSN de las publicaciones científicas.
 }
 \value{
-La función \code{read_weights} retorna un objeto de tipo \code{logical} TRUE o FALSE, indicando si se
+La función \code{verifica_issn} retorna un objeto de tipo \code{logical} TRUE o FALSE, indicando si se
 cumple o no la validez del código ISSN, respectivamente.
 }
 \references{
