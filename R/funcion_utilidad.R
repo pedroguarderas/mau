@@ -27,6 +27,13 @@ read_utility_functions<-function( file, script, nr, skip = 5 ) {
     }
   }
   funs<-subset( funs, complete.cases( funs ) )
+  funs$min<-as.numeric( funs$min )
+  funs$max<-as.numeric( funs$max )
+  funs$nivel<-as.numeric( funs$nivel )
+  funs$val<-as.numeric( funs$val )
+  funs$a<-as.numeric( funs$a )
+  funs$b<-as.numeric( funs$b )
+  funs$c<-as.numeric( funs$c )
   funs<-funs[ order( funs$nom, funs$min ), ]
   rownames( funs )<-NULL
   
