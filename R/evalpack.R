@@ -29,3 +29,6 @@ source( 'R/loadtree.R' )
 # Modelo AHP
 source( 'R/ahpmatrix.R' )
 
+#___________________________________________________________________________________________________
+# Análisis de sensitividad
+source( 'R/sensitivity.R' )
