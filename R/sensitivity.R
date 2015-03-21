@@ -42,4 +42,33 @@ plotanvar1<-function( VAR, ylim ) {
 
   return( plt_var )
 }
+
+plotsim<-function( S ) {
+  sim<-S
+  sim<-sim[ order( sim$S1 ), ]
+  sim$cod<-factor( sim$cod, levels = sim$cod )
+  sim<-melt( data = sim, id = 'cod' )
+  colnames(sim)<-c( 'cod', 'sim', 'val' )
+  sim$sim<-as.numeric( sim$sim )
+  gamma<-colors()[ grep( 'blue', colors() ) ]
+  colores<-rep( sample( gamma, N+1, replace = TRUE ), each = 15 )
+  
+  sim_plot<-ggplot( sim ) + 
+    aes( x = cod, y = val ) +
+    geom_line( aes( group = sim, colour = sim), size = 0.1 ) +
+    scale_fill_manual( values = colores, name='', labels = ''  ) +
+    geom_boxplot( notch = FALSE, show_guide = FALSE, fill = 'gold', 
+                  alpha = 0.4, outlier.colour = 'darkred' ) +
+    ylab( 'Valoración' ) +
+    xlab( 'Institutos' ) +
+    theme_minimal() +
+    #scale_x_discrete( labels = institutos$imp_nom[ institutos$cod == S$cod ]  ) + 
+    scale_y_continuous( breaks = seq( 0, 1, 0.05 ),
+                        labels = format( seq( 0, 1, 0.05 ), digits = 2 ),
+                        limits = c( 0, 1 ) ) +
+    theme( legend.position = "none" ) +
+    ggtitle( "Simulación Valoraciones" )
+
+  return( sim_plot )
+}
   
