@@ -1,7 +1,9 @@
 #___________________________________________________________________________________________________
 # Carga de librerías necesarias para evalpack
 library(gtools)
+library(ggplot2)
 library(igraph)
+library(reshape2)
 library(stringr)
 library(xlsx)
 
