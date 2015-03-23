@@ -2,7 +2,8 @@
 # Macro para simular evaluaciones
 sim_eval<-defmacro( N = 1, W, S, F, p, expr = {
   alpha<-100 * p
-  W<-cbind( p, t( rdirichlet( n = N, alpha ) ) )
+  W<-cbind( p, t( rdirichlet( n = N-1, alpha ) ) )
+  colnames( W )<-paste( 'W', 1:N, sep = '' )
   S<-as.matrix( F[ , 2:ncol(F) ] ) %*% W  
   colnames( S )<-paste( 'S', 1:ncol(S), sep = '' )
   S<-data.frame( cod = F[,1], S )
