@@ -26,10 +26,10 @@ plotanvar1<-function( VAR, ylim ) {
   idx<-idx[ord]
   var$index<-factor( var$index, levels = idx )
   
-  plt_var<-ggplot( data = var ) +
+  plt_var<-ggplot() +
     ylab("Sensitividad") +
     xlab("Indicador") +
-    geom_boxplot( aes( index, value ), colour = 'blue4', fill = 'dodgerblue4', alpha = 0.7,
+    geom_boxplot( aes( index, value ), data = var, colour = 'blue4', fill = 'dodgerblue4', alpha = 0.7,
                   show_guide = TRUE, outlier.size = 3, outlier.colour = 'red4', outlier.shape = 4 ) +
     ggtitle("Análisis de Sensitividad") +
     theme_minimal() +
@@ -45,8 +45,10 @@ plotanvar1<-function( VAR, ylim ) {
 
 plotsim<-function( S ) {
   sim<-S
-  sim<-sim[ order( sim$S1 ), ]
-  sim$cod<-factor( sim$cod, levels = sim$cod )
+  sim_first<-subset( S, select = c( cod, S1 ) )
+  ord<-order(apply(sim[,2:ncol(sim)],1,FUN=median))
+  sim_first$cod<-factor( sim_first$cod, levels = sim$cod[ord] )
+  sim$cod<-factor( sim$cod, levels = sim$cod[ord] )
   sim<-melt( data = sim, id = 'cod' )
   colnames(sim)<-c( 'cod', 'sim', 'val' )
   sim$sim<-as.numeric( sim$sim )
@@ -59,6 +61,7 @@ plotsim<-function( S ) {
     scale_fill_manual( values = colores, name='', labels = ''  ) +
     geom_boxplot( notch = FALSE, show_guide = FALSE, fill = 'gold', 
                   alpha = 0.4, outlier.colour = 'darkred' ) +
+    geom_point( aes( x = cod, y = S1 ), data = sim_first, colour = 'orange', size = 5  ) +
     ylab( 'Valoración' ) +
     xlab( 'Institutos' ) +
     theme_minimal() +
