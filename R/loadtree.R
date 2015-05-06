@@ -21,6 +21,24 @@ load_tree<-function( file, indexfile, col_id, cold_weight, col_func ) {
   return( graph )
 }
 
+load_tree1<-function( file, indexfile, sheet, cols, rows, cols_index ) {
+  graph<-read.xlsx( file = file, sheetIndex = sheet, startRow = rows[1], endRow = rows[2],
+                    colIndex = cols, colClasses = c('integer','character', 'integer' ) )
+  colnames( graph )<-c('cod','nom','parent')
+  graph<-merge( graph, subset( graph, select = c('cod','nom') ),
+                by.x = 'parent', by.y = 'cod', all.x = TRUE )
+  graph<-data.frame( id = paste( 'n', 0:( nrow(graph) - 1), sep = '' ), graph )
+  colnames( graph )<-c( 'id', 'cod_parent', 'cod', 'nom', 'parent' )
+  graph<-data.frame( graph, correct_char2( graph, 4 ) )
+  colnames( graph )<-c( 'id', 'cod_parent', 'cod', 'nom', 'parent', 'function' )
+  
+  graph<-merge( graph, indexfile[,cols_index], by = 'cod', all.x = TRUE  )
+  graph<-data.frame( id = graph[,2], graph[,-2] )
+  graph<-graph[ order( graph[,1] ), ]
+  rownames( graph )<-NULL
+  return( graph )
+}
+
 #___________________________________________________________________________________________________
 # Función para escribir estructura de árbol en formato graphml
 write_tree<-function( file, tree, col_id, col_cod, col_nom, col_parent, col_weight, col_func, 
