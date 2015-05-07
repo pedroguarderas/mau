@@ -39,3 +39,7 @@ source( 'R/sensitivity.R' )
 # Análisis de saltos
 source( 'R/analisis_salto.R' )
 
+#___________________________________________________________________________________________________
+# Evaluación de criterios y subcriterios
+source( 'R/eval_criteria.R' )
+
