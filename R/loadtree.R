@@ -24,17 +24,17 @@ load_tree<-function( file, indexfile, col_id, cold_weight, col_func ) {
 load_tree1<-function( file, indexfile, sheet, cols, rows, cols_index ) {
   graph<-read.xlsx( file = file, sheetIndex = sheet, startRow = rows[1], endRow = rows[2],
                     colIndex = cols, colClasses = c('integer','character', 'integer' ) )
-  colnames( graph )<-c('cod','nom','parent')
-  graph<-merge( graph, subset( graph, select = c('cod','nom') ),
-                by.x = 'parent', by.y = 'cod', all.x = TRUE )
-  graph<-data.frame( id = paste( 'n', 0:( nrow(graph) - 1), sep = '' ), graph )
-  colnames( graph )<-c( 'id', 'cod_parent', 'cod', 'nom', 'parent' )
-  graph<-data.frame( graph, correct_char2( graph, 4 ) )
-  colnames( graph )<-c( 'id', 'cod_parent', 'cod', 'nom', 'parent', 'function' )
+  colnames( graph )<-c('id','nom','parent','cod')
+  graph<-merge( graph, subset( graph, select = c('id','nom') ),
+                by.x = 'parent', by.y = 'id', all.x = TRUE )
+  colnames( graph )<-c( 'id_parent', 'id', 'nom', 'cod', 'parent' )
   
-  graph<-merge( graph, indexfile[,cols_index], by = 'cod', all.x = TRUE  )
-  graph<-data.frame( id = graph[,2], graph[,-2] )
-  graph<-graph[ order( graph[,1] ), ]
+  index<-indexfile
+  colnames( index )<-c('cod','function','weight')
+  graph<-merge( graph, index, by = 'cod', all.x = TRUE  )
+  graph<-graph[ ,c( 'id', 'id_parent', 'cod', 'nom', 'parent', 'function', 'weight' ) ]
+  graph<-graph[ order( graph$id ), ]
+  graph$id<-paste( 'n', graph$id, sep = '' )
   rownames( graph )<-NULL
   return( graph )
 }
