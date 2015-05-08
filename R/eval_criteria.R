@@ -1,9 +1,14 @@
 #___________________________________________________________________________________________________
 # Función para evaluación de criterios y subcriterios
 
-eval_criteria<-function( tree, weights, utilidades, rescale = FALSE ) {
+eval_criteria<-function( tree, weights, utilidades, rescale = FALSE, indexto = TRUE ) {
   model<-data.frame( cod = utilidades$cod )
-  criteria<-which( V(tree)$leaf == 0 )
+  if ( indexto ) {
+    criteria<-1:length(V(tree)$leaf)
+  } else {
+    criteria<-which( V(tree)$leaf == 0 )
+  }
+  
   index<-which( V(tree)$leaf == 1 )
   
   for ( i in criteria ) { # i<-criteria[2]
