@@ -1,7 +1,7 @@
 #___________________________________________________________________________________________________
 # Función para evaluación de criterios y subcriterios
 
-eval_criteria<-function( tree, weights, utilidades, rescale = FALSE, indexto = TRUE ) {
+eval_criteria<-function( tree, weights, utilidades, rescale = FALSE, indexto = TRUE, idcolname = TRUE ) {
   model<-data.frame( cod = utilidades$cod )
   if ( indexto ) {
     criteria<-1:length(V(tree)$leaf)
@@ -22,7 +22,12 @@ eval_criteria<-function( tree, weights, utilidades, rescale = FALSE, indexto = T
     } else {
       model<-cbind( model, val %*% w )
     }
-    colnames( model )[ncol(model)]<-V(tree)[i]$name
+    if ( idcolname ) {
+      colnames( model )[ncol(model)]<-V(tree)[i]$id
+    } else {
+      colnames( model )[ncol(model)]<-V(tree)[i]$name
+    }
+    
   }
   return( model )
 }
