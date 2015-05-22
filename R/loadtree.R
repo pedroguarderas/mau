@@ -178,16 +178,24 @@ sum_weights<-function( tree ) {
 }
 
 divide_weights<-function( tree ) {
-  w<-V(tree)$weight
-  for ( i in 1:length( w ) ) { # i<-leaves[1]
+  noleaves<-which( V(tree)$leaf == 0 )
+  leaves<-which( V(tree)$leaf == 1 )
+  for ( i in 1:length( V(tree) ) ) { # i<-leaves[9]
     parent<-unlist( neighborhood( tree, 1, V(tree)[i], mode = 'in' ) )
     parent<-parent[ parent != i ]
+    childs<-unlist( neighborhood( tree, 100, V(tree)[i], mode = 'out' ) )
+    childs<-childs[ childs %in% leaves ]
     if ( length( parent ) == 1 ) {
-      V( tree )[i]$rweight<-w[i] / w[parent]
+      pchilds<-unlist( neighborhood( tree, 100, V(tree)[parent], mode = 'out' ) )
+      pchilds<-pchilds[ pchilds %in% leaves ]
+      V( tree )[i]$rweight<-sum( V(tree)[childs]$weight ) / sum( V(tree)[pchilds]$weight )
+    } else if ( length( parent ) == 0 ) {
+      V( tree )[i]$rweight<-1.0
     }
   }
   return( tree )
 }
+
 
 #___________________________________________________________________________________________________
 # Extrae valor de indicadores a partir de un árbol con pesos relativos
