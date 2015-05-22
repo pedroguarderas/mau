@@ -66,6 +66,7 @@ write_tree<-function( file, tree, col_id, col_cod, col_nom, col_parent, col_weig
     <default>1.0</default>
   </key>
   <key id=\"f\" for=\"node\" attr.name=\"function\" attr.type=\"string\"/>
+  <key id=\"d\" for=\"node\" attr.name=\"deep\" attr.type=\"double\"/>
 
 <graph id=\"G\" edgedefault=\"directed\">
 "
@@ -86,6 +87,7 @@ write_tree<-function( file, tree, col_id, col_cod, col_nom, col_parent, col_weig
                                                     1, 0 ), "</data>\n",
                     "\t\t<data key=\"f\">", ifelse( !is.na( tree[i,col_weight] ), 
                                                     tree[i,col_func], ''), "</data>\n",
+                   "\t\t<data key=\"d\">", "", "</data>\n",
                     "\t</node>\n", sep = '' )
       edge<-paste( "\t<edge id=\"e", j, "\" ", "directed=\"true\" ", "source=\"", 
                    tree[ tree[,col_nom] == tree[i,col_parent], col_id ],
@@ -101,6 +103,7 @@ write_tree<-function( file, tree, col_id, col_cod, col_nom, col_parent, col_weig
                  "\t\t<data key=\"rw\">", "", "</data>\n",
                  "\t\t<data key=\"lf\">", 0, "</data>\n",
                  "\t\t<data key=\"f\">", "", "</data>\n",
+                 "\t\t<data key=\"d\">", "", "</data>\n",
                  "\t</node>\n", sep = '' )
     }
     nodes<-paste( nodes, node, sep = '' )
@@ -134,6 +137,7 @@ save_tree<-function( tree, file ) {
     <default>1.0</default>
   </key>
   <key id=\"f\" for=\"node\" attr.name=\"function\" attr.type=\"string\"/>
+  <key id=\"d\" for=\"node\" attr.name=\"deep\" attr.type=\"double\"/>
 
 <graph id=\"G\" edgedefault=\"directed\">
 "
@@ -147,6 +151,7 @@ save_tree<-function( tree, file ) {
                  "\t\t<data key=\"rw\">", V(tree)$rweight[i], "</data>\n",
                  "\t\t<data key=\"lf\">", V(tree)$leaf[i], "</data>\n",
                  "\t\t<data key=\"f\">", V(tree)$'function'[i], "</data>\n",
+                 "\t\t<data key=\"d\">", V(tree)$deep[i], "</data>\n",
                  "\t</node>\n", sep = '' )
     nodes<-paste( nodes, node, sep = '' )
   }
@@ -193,6 +198,30 @@ divide_weights<-function( tree ) {
       V( tree )[i]$rweight<-1.0
     }
   }
+  return( tree )
+}
+
+deep_compute<-function( tree ) {
+  
+  nodes<-which( V(tree)$leaf == 0 )
+  for( i in nodes ) {
+    parent<-unlist( neighborhood( tree, 1, V(tree)[i], mode = 'in' ) )
+    parent<-parent[ !( parent %in% i ) ]
+    if ( length( parent ) == 0 ) {
+      break
+    }
+  }
+  
+  parent<-i
+  deep<-0
+  while ( length(parent) > 0 ) {
+    V(tree)[parent]$deep<-deep  
+    deep<-deep + 1
+    childs<-unique( unlist( neighborhood( tree, 1, V(tree)[parent], mode = 'out' ) ) )
+    childs<-childs[ !( childs %in% parent ) ]
+    parent<-childs
+  }
+  
   return( tree )
 }
 
