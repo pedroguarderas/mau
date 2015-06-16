@@ -2,7 +2,7 @@
 # Función para corregir caracteres
 
 #___________________________________________________________________________________________________
-owngsub<-function( x, pattern, replacement ) gsub( pattern, replacement, x )
+owngsub<-function( x, pattern, replacement ) str_trim( gsub( pattern, replacement, x ) )
 
 #___________________________________________________________________________________________________
 # Macro para corrección de caracteres, diseñada para eliminar espacios, vocales con tíldes y colocar
