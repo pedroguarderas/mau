@@ -11,7 +11,12 @@ read_utility_functions<-function( file, script, nr, skip = 5 ) {
                     skip = skip, nrows = nr, allowEscapes = FALSE, dec = '.', fill = TRUE )
   
   funs<-funs[ ,!( 1:ncol(funs) %in% c(3,5,8) ) ]
-  funs<-data.frame( funs, fun = correct_char2( funs, 1 ) )
+  chr<-c( '[.]', ' y/o ', ' las ', ' el ', ' para ', ' o ', ' en ', ' del ', ' de ', ' la ', ' a ', 
+            ' por ', ' y ', '/', " ( )*", ' ', 'á', 'é', 'í', 'ó', 'ú', '-', '\\(', '\\)', '( )$', 
+            '_(_)*' )
+  rep<-c( ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '_', ' ', '_', 'a', 'e', 
+          'i', 'o', 'u', '_', '', '', '', '_' )
+  funs<-data.frame( funs, fun = correct_char2( funs, 1, chr, rep ) )
   
   colnames(funs)<-c('nom','min','max','nivel','val','a','b','c','fun')
   
@@ -123,7 +128,7 @@ eval_index<-function( index, names, indexsub, colcod = 1, colpos, colfun, coltip
 
   for ( i in 1:nrow( names ) ) { # i<-2
     # Se verifica si la función ha sido definida
-    if ( names[ i, coltip ] == 'CUANTITATIVA' ) {
+    if ( names[ i, coltip ] == 'CUANTITATIVA' | names[ i, coltip ] == 'CUANTITATIVO'  ) {
       if ( names[ i, colfun ] %in% ls( envir = envir ) ) {
         col<-paste( indexsub, names[ i, colpos ], sep = '' )
         data<-cbind( data, sapply( index[ , col ], FUN = names[ i, colfun ] ) )
