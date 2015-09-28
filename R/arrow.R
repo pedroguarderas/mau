@@ -26,3 +26,8 @@ ArrowDiscrepancy<-function( U ) {
   return( A )
 }
 
+# n<-ncol( utilidades_medicina )
+# r<-S$S1
+# a<-ArrowEquity( U, r )
+# A<-ArrowDiscrepancy( U )
+
