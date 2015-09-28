@@ -19,7 +19,7 @@ ArrowDiscrepancy<-function( U ) {
   A<-data.frame()
   for ( i in 1:m ) {
     A<-rbind( A, apply( U[,2:n], 1, 
-                        FUN = function( x, y, n ) return( sum( x >= y ) / (n-1) ), U[i,2:n], n ) )
+                        FUN = function( x, y, n ) return( sum( x >= y ) / n ), U[i,2:n], n-1 ) )
   }
   names( A )<-U[,1]
   rownames( A )<-U[,1]
