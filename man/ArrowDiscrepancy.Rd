@@ -1,7 +1,7 @@
 \name{ArrowDiscrepancy}
 \alias{ArrowDiscrepancy}
 %- Also NEED an '\alias' for EACH other topic documented here.
-\title{
+\title{ArrowDiscrepancy
 %%  ~~function to do ... ~~
 }
 \description{
