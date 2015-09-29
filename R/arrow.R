@@ -1,5 +1,4 @@
-
-
+#___________________________________________________________________________________________________
 ArrowEquity<-function( U, r ) {
   n<-ncol(U)
   m<-nrow(U)
@@ -13,6 +12,8 @@ ArrowEquity<-function( U, r ) {
   return( a )
 }
 
+
+#___________________________________________________________________________________________________
 ArrowDiscrepancy<-function( U ) {
   n<-ncol(U)
   m<-nrow(U)
@@ -25,9 +26,3 @@ ArrowDiscrepancy<-function( U ) {
   rownames( A )<-U[,1]
   return( A )
 }
-
-# n<-ncol( utilidades_medicina )
-# r<-S$S1
-# a<-ArrowEquity( U, r )
-# A<-ArrowDiscrepancy( U )
-

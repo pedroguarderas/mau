@@ -43,3 +43,6 @@ source( 'R/analisis_salto.R' )
 # Evaluación de criterios y subcriterios
 source( 'R/eval_criteria.R' )
 
+#___________________________________________________________________________________________________
+# Funciones para análisis basado en la teoría de imposibilidad de Arrow
+source( 'R/arrow.R )
