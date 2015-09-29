@@ -5,32 +5,33 @@
 %%  ~~function to do ... ~~
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+  Función que calcula una discrepancia entre las utilidades de un individuo evaluado con respecto a 
+  otros individuos en una matriz "U" (La primera columna de U corresponde al código que identifica a 
+  cada individuo evaluado, las restantes corresponden a las utilidades por indicador del modelo de 
+  evaluación).
 }
 \usage{
 ArrowDiscrepancy(U)
 }
-%- maybe also 'usage' for other objects documented here.
+%- maybe also 'usage' fo
 \arguments{
   \item{U}{
-%%     ~~Describe \code{U} here~~
+  Matriz de utilidades.
 }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+ La función \code{ArrowDiscrepancy} retorna el siguiente objeto:
+
+  \item{A}{Matriz comparativa de discrepancias porcentuales de la matriz utilidad U.}
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar.
 }
 \note{
 %%  ~~further notes~~
@@ -42,24 +43,15 @@ ArrowDiscrepancy(U)
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (U) 
-{
-    n <- ncol(U)
-    m <- nrow(U)
-    A <- data.frame()
-    for (i in 1:m) {
-        A <- rbind(A, apply(U[, 2:n], 1, FUN = function(x, y, 
-            n) return(sum(x >= y)/n), U[i, 2:n], n - 1))
-    }
-    names(A) <- U[, 1]
-    rownames(A) <- U[, 1]
-    return(A)
-  }
+ # Matriz de utilidades
+ utilidades<-data.frame(cod=c('A', 'B', 'C', 'D'), 
+                  ind1=c(0.4428345, 0.454545, 0.6, 1),
+                  ind2=c(0.7, 0.65, 0.231, 0.5), 
+                  ind3=c(0, 0.2696746, 0.6751261, 0.7401660),
+                  ind4=c(0.2797259, 0.2981198, 1, 0.1952864))
+ 
+ # Matriz de discrepancias
+ ArrowDiscrepancy(utilidades)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
