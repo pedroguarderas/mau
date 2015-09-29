@@ -45,4 +45,4 @@ source( 'R/eval_criteria.R' )
 
 #___________________________________________________________________________________________________
 # Funciones para análisis basado en la teoría de imposibilidad de Arrow
-source( 'R/arrow.R )
+source( 'R/arrow.R' )
