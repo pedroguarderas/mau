@@ -20,7 +20,7 @@ analisis_salto(S = stop("S not supplied"))
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-La función \code{analisis_salto} un Array que contiene los saltos de posición por simulación.
+La función \code{analisis_salto} regresa un Array que contiene los saltos de posición por simulación.
 }
 \references{
 %% ~put references to the literature/web site here ~
