@@ -50,7 +50,7 @@ colnames(S)<-c('cod','S1','S2','S3')
 #Matriz de saltos
 D<-analisis_salto( S )
 
-plotsaltos()
+plotsaltos(D)
 
 }
 
