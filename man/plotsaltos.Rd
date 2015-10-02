@@ -5,7 +5,8 @@
 plotsaltos
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+ Función que actua sobre la matriz de saltos generada por \code{\link{analisis_salto}} y genera
+ un plot donde se puede apreciar los saltos que realiza por cada simulación.
 }
 \usage{
 plotsaltos(D)
@@ -13,24 +14,20 @@ plotsaltos(D)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{D}{
-%%     ~~Describe \code{D} here~~
+   Matriz de simulaciones de individuos evaluados.
 }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+ Genera un boxplot.
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar
 }
 \note{
 %%  ~~further notes~~
@@ -39,16 +36,21 @@ plotsaltos(D)
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+ \code{\link{analisis_salto}}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+# Matriz de simulaciones
+S <- data.frame(cbind(c('A','B','C'),
+                      c(0.7556,0.86783,0.7300),
+                      c(0.72952,0.83592,0.7488),
+                      c(0.895,0.856,0.758)))
 
-## The function is currently defined as
+colnames(S)<-c('cod','S1','S2','S3')
+
+#Matriz de saltos
+D<-analisis_salto( S )
+
+plotsaltos()
+
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
-%\keyword{ ~kwd1 }
-%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+
