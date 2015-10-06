@@ -5,7 +5,7 @@
 analisis_salto
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+ Función que actua sobre una matriz "S" de simulaciones generada por \code{\link{sim_eval}}, y analiza los saltos de posición de los individuos evaluados con respectro a la simulación inicial (S1). 
 }
 \usage{
 analisis_salto(S = stop("S not supplied"))
@@ -13,24 +13,20 @@ analisis_salto(S = stop("S not supplied"))
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{S}{
-%%     ~~Describe \code{S} here~~
+  Matriz de simulaciones para un conjunto de individuos.
 }
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+La función \code{analisis_salto} regresa un Array que contiene los saltos de posición por simulación.
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar
 }
 \note{
 %%  ~~further notes~~
@@ -39,14 +35,18 @@ analisis_salto(S = stop("S not supplied"))
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+ \code{plot_saltos}
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
+#Matriz de simulaciones:
+S <- data.frame(cbind(c('A','B','C'),
+                      c(0.7556,0.86783,0.7300),
+                      c(0.72952,0.83592,0.7488),
+                      c(0.895,0.856,0.758)))
 
-## The function is currently defined as
+colnames(S)<-c('cod','S1','S2','S3')
+
+analisis_salto( S )
 
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
