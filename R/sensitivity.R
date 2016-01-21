@@ -43,7 +43,7 @@ plotanvar1<-function( VAR, ylim ) {
   return( plt_var )
 }
 
-plotsim<-function( S ) {
+plotsim<-function( S, xlab = 'IES' ) {
   sim<-S
   sim_first<-subset( S, select = c( cod, S1 ) )
   sim_first$E<-paste( formatC( 100 * sim_first$S1, digits = 2, format = 'f', decimal.mark = ',' ), "%", sep = '' )
@@ -65,7 +65,7 @@ plotsim<-function( S ) {
     geom_point( aes( x = cod, y = S1 ), data = sim_first, colour = 'orange', size = 5  ) +
     geom_text( aes( x = cod, y = S1 + 0.05, label = E ), data = sim_first, colour = 'black', size = 5  ) +
     ylab( 'Valoración' ) +
-    xlab( 'Institutos' ) +
+    xlab( xlab ) +
     theme_minimal() +
     #scale_x_discrete( labels = institutos$imp_nom[ institutos$cod == S$cod ]  ) + 
     scale_y_continuous( breaks = seq( 0, 1, 0.05 ),
