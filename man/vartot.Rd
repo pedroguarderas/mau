@@ -2,7 +2,7 @@
 \alias{vartot}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+vartot
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
@@ -45,18 +45,8 @@ vartot(u, w)
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (u, w) 
-{
-    s <- sum(w)
-    return(s * sum(w * u * u) - sum(u * w)^2)
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+%\keyword{ ~kwd1 }
+%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line

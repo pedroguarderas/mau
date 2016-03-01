@@ -2,7 +2,7 @@
 \alias{sens.weight.model}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+sens.weight.model
 }
 \description{
 %%  ~~ A concise (1-5 lines) description of what the function does. ~~
@@ -45,30 +45,8 @@ sens.weight.model(utilidades, weights)
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-##---- Should be DIRECTLY executable !! ----
-##-- ==>  Define data, use random,
-##--	or do  help(data=index)  for the standard data sets.
-
-## The function is currently defined as
-function (utilidades, weights) 
-{
-    n <- ncol(utilidades)
-    m <- nrow(utilidades)
-    V <- NULL
-    for (i in 1:m) {
-        s <- vari(utilidades[i, 2:n], weights)/vartot(utilidades[i, 
-            2:n], weights)
-        V <- rbind(V, data.table(cod = utilidades[i, 1], s))
-    }
-    setnames(V, 1:n, names(utilidades))
-    V <- melt(data = V, id.vars = "cod")
-    setnames(V, 1:3, c("cod", "ind", "sens"))
-    V[, `:=`(ind, as.numeric(gsub("eva_", "", ind)))]
-    V <- V[with(V, order(ind, cod)), ]
-    return(V)
-  }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
-\keyword{ ~kwd1 }
-\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
+%\keyword{ ~kwd1 }
+%\keyword{ ~kwd2 }% __ONLY ONE__ keyword per line
