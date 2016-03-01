@@ -24,7 +24,9 @@ sim_eval_constraint<-defmacro( N = 1, W, S, F, p, pc, expr = {
   S<-as.matrix( F[ , 2:ncol(F) ] ) %*% W  
   colnames( S )<-paste( 'S', 1:ncol(S), sep = '' )
   S<-data.frame( cod = F[,1], S )
+  rm( i, alpha )
 })
+
 
 #___________________________________________________________________________________________________
 # Evalúa la equidad de una función 
