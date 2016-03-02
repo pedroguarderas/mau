@@ -7,4 +7,4 @@ Author: Felipe Aguirre, Julio Andrade, Pedro Guarderas, Daniel Lagos, Andres Lop
 Maintainer: CEAACES <info@ceaaces.gob.ec>
 Description: Paquete que contiene un conjunto de rutinas para generar modelos de decision.
 License: LGPL-3
-Depends: R (>= 3.0), gtools, stringr, xlsx, igraph
+Depends: R (>= 3.0), data.table, gtools, stringr, xlsx, igraph
