@@ -11,31 +11,29 @@ vari<-function( u, w ) {
 sens.weight.model<-function( utilidades, weights ) {
   n<-ncol( utilidades )
   m<-nrow( utilidades )
-  V<-NULL
-  W<-NULL
-  U<-as.matrix( utilidades[,2:n] )
-  U<-U %*% weights
+  
+  URS<-NULL
+  
+  UG<-as.matrix( utilidades[,2:n] )
+  UG<-UG %*% weights
+  
+  ind<-as.numeric( gsub( 'eva_', '', names( utilidades[,2:n] ) ) )
   for ( i in 1:m ) {
-    s<-vari( utilidades[i,2:n], weights ) / vartot( utilidades[i,2:n], weights ) 
-    u<-( utilidades[i,2:n] * weights ) / U[i]
-    V<-rbind( V, data.table( cod = utilidades[i,1], s ) ) 
-    W<-rbind( W, data.table( cod = utilidades[i,1], u ) ) 
+    s<-as.numeric( vari( utilidades[i,2:n], weights ) / vartot( utilidades[i,2:n], weights ) )
+    u<-as.numeric( ( utilidades[i,2:n] * weights ) )
+    r<-as.numeric( u / UG[i] )
+    
+    URS<-rbind( URS, data.table( cod = utilidades[i,1], ind = ind, u = u, r = r, s = s ) ) 
+
   }
-  setnames( V, 1:n, names( utilidades ) )
-  setnames( W, 1:n, names( utilidades ) )
-  V<-melt( data = V, id.vars = 'cod' )
-  W<-melt( data = W, id.vars = 'cod' )
-  setnames( V, 1:3, c( 'cod', 'ind', 'sens' ) )
-  setnames( W, 1:3, c( 'cod', 'ind', 'sens' ) )
-  V$ind<-as.numeric( gsub( 'eva_', '', V$ind ) )
-  W$ind<-as.numeric( gsub( 'eva_', '', W$ind ) )
-  V<-V[ with( V, order( ind, cod ) ), ]
-  W<-W[ with( W, order( ind, cod ) ), ]
-  return( list( S = W, SP = V ) )
+  URS<-URS[ with( URS, order( ind, cod ) ), ]
+
+  return( list( URS = URS, UG = UG ) )
 }
 
-plot.sens.weight<-function( V, indicadores.nombres, xlab, title, size.text = 8 ) {
+plot.sens.weight<-function( V, col, indicadores.nombres, xlab, title, size.text = 8, palette = "YlGn" ) {
   S<-copy( V )
+  setnames( S, col, 'sens' )
   parplot<-S[ , list( q25 = quantile( sens, probs = 0.25 )[[1]],
                       med = median( sens ),
                       q75 = quantile( sens, probs = 0.75 )[[1]],
@@ -57,10 +55,10 @@ plot.sens.weight<-function( V, indicadores.nombres, xlab, title, size.text = 8 )
   ylabs<-paste( formatC( 100 * seq( 0, MAX, length.out = 16 ), digits = 1, 
                          format = 'f', decimal.mark = ',' ), "%", sep = '' )
   
-  getPalette<-colorRampPalette( brewer.pal( 9, "YlGn" ) )
+  getPalette<-colorRampPalette( brewer.pal( 9, palette ) )
   
   sim_plot<-ggplot( S ) + aes( x = ind, y = sens, fill = ind ) +
-    geom_boxplot( notch = FALSE, show_guide = FALSE, colour = "#003333",
+    geom_boxplot( notch = FALSE, show.legend = FALSE, colour = "#003333",
                   alpha = 0.8, outlier.colour = "#558899", outlier.size = 2 ) +
     xlab( xlab ) +
     ylab( 'Sensitividad' ) +
@@ -81,7 +79,7 @@ plot.sens.weight<-function( V, indicadores.nombres, xlab, title, size.text = 8 )
            panel.grid.minor.y = element_blank(),
            title = element_text( family = 'Times', colour = 'black', size = size.text,  ),
            axis.ticks.length = unit( 0.15, "cm" ),
-           axis.ticks.margin = unit( 0.1, "cm" ),
+#            axis.ticks.margin = unit( 0.1, "cm" ),
            axis.text.x = element_text( family = 'Times', colour = 'black', size = size.text ), 
            axis.title.x = element_blank(),
            axis.text.y = element_text( family = 'Times', colour = 'black', size = size.text ), 
