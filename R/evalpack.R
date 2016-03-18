@@ -49,3 +49,7 @@ source( 'R/eval_criteria.R' )
 #___________________________________________________________________________________________________
 # Funciones para análisis basado en la teoría de imposibilidad de Arrow
 source( 'R/arrow.R' )
+
+#___________________________________________________________________________________________________
+# Función que evalua el modelo criterios y subcriterios a partir de utilidades y árbol
+source( 'R/modelo_tabla.R' )
