@@ -5,15 +5,16 @@
 %%  ~~function to do ... ~~
 }
 \description{
-%%  ~~ A concise (1-5 lines) description of what the function does. ~~
+Función que cálcula el valor de utilidad de los criterios y subcriterios de un modelo MAUT a partir 
+de un árbol tree.graphml y las utilidades correspondientes a los indicadores del modelo.
 }
 \usage{
 modelo_tabla(tree, utilidades)
 }
-%- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{tree}{
-%%     ~~Describe \code{tree} here~~
+ Un data.frame utilidades que contiene las utilidades de para las diferentes alternativas de modelo
+ MAUT y el árbol del formato .graphml.
 }
   \item{utilidades}{
 %%     ~~Describe \code{utilidades} here~~
@@ -23,17 +24,14 @@ modelo_tabla(tree, utilidades)
 %%  ~~ If necessary, more details than the description above ~~
 }
 \value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
+La función \code{modelo_tabla} donde retorna un data.frame llamado modelo_tabla que contiene las
+utilidades de los criterios y subcriterios del modelo MAUT. 
 }
 \references{
 %% ~put references to the literature/web site here ~
 }
 \author{
-%%  ~~who you are~~
+   Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar.
 }
 \note{
 %%  ~~further notes~~
