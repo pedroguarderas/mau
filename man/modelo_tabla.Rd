@@ -2,7 +2,7 @@
 \alias{modelo_tabla}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
-%%  ~~function to do ... ~~
+ modelo_tabla
 }
 \description{
 Función que cálcula el valor de utilidad de los criterios y subcriterios de un modelo MAUT a partir 
