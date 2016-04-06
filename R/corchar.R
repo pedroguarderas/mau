@@ -63,3 +63,35 @@ correct_char2<-function( data, cols, chr = NULL, rep = NULL ) {
   out<-data.frame(out)
   return( out )
 }
+
+correct_char3<-function( x, case = 1 ) {
+  char<-c( '[Á|À]', '[É|È]', '[Í|Ì]', '[Ó|Ò]', '[Ú|Ù]', '[á|à]', '[é|è]', '[í|ì]', '[ó|ò]', 
+           '[ú|ù]', "\"", ' ( )*' )
+  rep<-c( 'A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u', '', ' ' )
+  y<-x
+  y<-str_trim( y )
+  for ( i in 1:length(char) ) {
+    y<-gsub( char[i], rep[i], y )  
+  }
+  
+  if ( case == 1 ) {
+    y<-toupper( y )
+  } else if ( case == 2 ) {
+    y<-tolower( y )
+  }
+  return( y )
+}
+
+correct_cdla<-function( x ) {
+  char<-c( '[Á|À]', '[É|È]', '[Í|Ì]', '[Ó|Ò]', '[Ú|Ù]', '[á|à]', '[é|è]', '[í|ì]', '[ó|ò]', 
+           '[ú|ù]', "[a-z,A-Z]", "'", "\"", ' ( )*' )
+  rep<-c( 'A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u', '', '', '', ' ' )
+  y<-x
+  y<-str_trim( y )
+  y<-tolower(y)
+  for ( i in 1:length(char) ) {
+    y<-gsub( char[i], rep[i], y )  
+  }
+  
+  return( y )
+}
