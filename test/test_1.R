@@ -12,7 +12,7 @@ dificultad<-dificultad.examen( calificacion )
 habilidad<-habilidad.examen( calificacion )
 cronbach<-cronbach.alpha( calificacion )
 
-N<-10
+N<-30
 Rasch<-NULL
 lim<-c( -5, 5 )
 for ( i in 1:N ) {
