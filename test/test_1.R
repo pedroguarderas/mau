@@ -14,13 +14,13 @@ cronbach<-cronbach.alpha( calificacion )
 
 N<-10
 Rasch<-NULL
-lim<-c( -8, 8 )
+lim<-c( -5, 5 )
 for ( i in 1:N ) {
   rasch<-rasch.model( calificacion, method = 'BFGS', itnmax = 1e4, lim = lim )$solution
   Rasch<-rbind( Rasch, rasch )
 }
 
-lim<-c(-100,100)
+lim<-c(-10,10)
 for( i in 1:N ) {
   Z<-as.numeric( Rasch[i,1:(n+m)] )
   if ( i == 1 ) {
@@ -33,3 +33,6 @@ MedRasch<-apply( Rasch[,1:(n+m)], 2, FUN = median, na.rm = TRUE )
 MeanRasch<-apply( Rasch[,1:(n+m)], 2, FUN = mean, na.rm = TRUE )
 points( MedRasch, cex = 1.5, pch = 16, col = 'red' )
 points( MeanRasch, cex = 1.5, pch = 16, col = 'darkgreen' )
+
+apply(Rasch[,1:m],1,FUN = sum)
+apply(Rasch[,(m+1):(m+n)],1,FUN = sum)
