@@ -1,5 +1,6 @@
 #___________________________________________________________________________________________________
 library(evalpack)
+library(optimx)
 library(nloptr)
 
 n<-1000
@@ -22,29 +23,34 @@ for ( i in 1:N ) {
   Rasch[[i]]<-rasch
 }
 
-lim<-c(-60,60)
-for( i in 1:N ) {
-  Z<-as.numeric( Rasch[[i]]$solution )
+lim<-c(-1.5,1)
+R<-NULL
+for( i in 1:length(Rasch) ) {
+  Z<-as.numeric( Rasch[[i]][1:(n+m)] )
+  R<-rbind(R,Z)
+}
+MedRasch<-apply( R, 2, FUN = median, na.rm = TRUE )
+MeanRasch<-apply( R, 2, FUN = mean, na.rm = TRUE )
+ord<-order(MedRasch)
+for( i in 1:length(Rasch) ) {
   if ( i == 1 ) {
-    plot( Z, cex = 0.5, pch = 16, ylim = lim )
+    plot( R[i,ord], cex = 0.5, pch = 16, ylim = lim )
   } else {
-    points( Z, cex = 0.5, pch = 16 )
+    points( R[i,ord], cex = 0.5, pch = 16 )
   }
 }
-MedRasch<-apply( Rasch[,1:(n+m)], 2, FUN = median, na.rm = TRUE )
-MeanRasch<-apply( Rasch[,1:(n+m)], 2, FUN = mean, na.rm = TRUE )
-points( MedRasch, cex = 1.5, pch = 16, col = 'red' )
-points( MeanRasch, cex = 1.5, pch = 16, col = 'darkgreen' )
+points( MedRasch[ord], cex = 0.5, pch = 16, col = 'red' )
+points( MeanRasch[ord], cex = 0.5, pch = 16, col = 'darkgreen' )
 
-apply(Rasch[,1:n],1,FUN = sum)
-apply(Rasch[,(n+1):(n+m)],1,FUN = sum)
-
-sum( x[1:n] )
-sum( x[(n+1):(n+m)] )
-
-lapply( Rasch, FUN = function(x) x$iteration )
-rasch$iterations
-
-as.numeric( Opt[1,1:(n+m)] ) - x
-plot( sort( x ), pch = 16, cex = 0.5 )
-points( sort( as.numeric( Opt[1,1:(n+m)] ) ), pch = 16, cex = 0.5, col = 'red3' )
+# apply(Rasch[,1:n],1,FUN = sum)
+# apply(Rasch[,(n+1):(n+m)],1,FUN = sum)
+# 
+# sum( x[1:n] )
+# sum( x[(n+1):(n+m)] )
+# 
+# which.max(unlist(lapply( Rasch, FUN = function(x) x['value'] )))
+# rasch$iterations
+# 
+# as.numeric( Opt[1,1:(n+m)] ) - x
+# plot( sort( x ), pch = 16, cex = 0.5 )
+# points( sort( as.numeric( Opt[1,1:(n+m)] ) ), pch = 16, cex = 0.5, col = 'red3' )

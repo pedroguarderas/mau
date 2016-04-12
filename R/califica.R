@@ -12,7 +12,8 @@ califica.examen<-function( examen, respuesta, id.var, corresp = NULL ) {
     c.resp<-corresp[,2]
   }
   calf<-data.frame( id.var = calf, 
-                    t( apply( examen, 1, FUN = function(x) as.numeric( x[c.exam] == respuesta[c.resp] ) ) ) )
+                    t( apply( examen, 1, 
+                              FUN = function(x) as.numeric( x[c.exam] == respuesta[c.resp] ) ) ) )
   rownames( calf )<-NULL
   return( calf )
 }
@@ -95,33 +96,33 @@ rasch.model<-function( calificacion, method = 'BFGS', itnmax = 1e3, lim = c( -8,
 #   LogLike<-function( x ) {
 #     return( list( "objective" = -loglike(x), "gradient" = -gloglike(x) ) )
 #   }
+
 #   Constraint<-function( x ) {
 #     G<-cbind( c( rep( 1, n ), rep( 0, m ) ), c( rep( 0, n ), rep( 1, m ) ) )
 #     return( list( "constraints" = c( sum( x[I] ), sum( x[J] ) ), 
 #                   "jacobian" = G ) )
 #   }
-#   
+  
 #   local_opts <- list( "algorithm" = "NLOPT_LD_MMA",
 #                       "xtol_rel" = 1.0e-7 )
 #   opts <- list( "algorithm" = "NLOPT_LD_AUGLAG",
 #                 "xtol_rel" = 1.0e-7,
 #                 "maxeval" = itnmax,
 #                 "local_opts" = local_opts )
-#   
+  
 #   Opt<-nloptr( x0 = x0,
 #                eval_f = LogLike,
 #                eval_g_eq = Constraint,
 #                opts = opts )
 
-#   x<-runif( n+m, lim[1], lim[2] )
+#   Opt<-runif( n+m, lim[1], lim[2] )
 #   for ( i in 1:100 ) {
-#     H<-hloglike(x)
-#     x0<-x
-#     x<-x - solve( H + 1e-10, gloglike(x) )
+#     x0<-Opt
+#     Opt<-Opt - solve( hloglike(Opt) + 1e-10, gloglike(Opt) )
 #     print( paste( 'it: ', i, 
 #                 ', err.rel: ', 
-#                 formatC( sqrt( sum( (x-x0)*(x-x0) ) ), format = 'f', digits = 20 ),
-#                 ', val: ', formatC( loglike(x), format = 'f', digits = 20 ), 
+#                 formatC( sqrt( sum( (Opt-x0)*(Opt-x0) ) ), format = 'f', digits = 20 ),
+#                 ', val: ', formatC( loglike(Opt), format = 'f', digits = 20 ), 
 #                 sep = '' ) )
 #   }
   
