@@ -43,6 +43,57 @@ habilidad.examen<-function( calificacion ) {
 }
 
 #___________________________________________________________________________________________________
+# Calificación lista de exámenes
+calificacion.examenes<-function( examenes ) {
+  calificacion<-list()
+  for ( i in 1:length(examenes) ) {
+    calf<-califica.examen( examenes[[i]]$examen, examenes[[i]]$respuesta, 'codigo' )
+    calificacion[[i]]<-list( carrera = examenes[[i]]$carrera,
+                             forma = examenes[[i]]$forma,
+                             preguntas = examenes[[i]]$preguntas,
+                             calificacion = calf,
+                             dificultad = dificultad.examen( calf ),
+                             habilidad = habilidad.examen( calf ) )
+  }
+  rm( i, calf )
+  
+  return( calificacion )
+}
+
+#___________________________________________________________________________________________________
+# Agrupación
+agrupa<-function( x, grupos ) {
+  return( min( which( grupos >= x ) ) - 1 )
+}
+
+#___________________________________________________________________________________________________
+# Análisis de distractores
+distractores.analisis<-function( examenes, calificacion, grupos ) {
+  distractores<-list()
+  for ( i in 1:length( examenes ) ) {
+    distract<-merge( examenes[[i]]$examen, calificacion[[i]]$habilidad, by = 'codigo' )
+    distract<-melt( distract, id.vars = c( 'codigo', 'habilidad' ) )
+    distract$habilidad<-distract$habilidad / calificacion[[1]]$preguntas
+    distract$grupo<-sapply( distract$habilidad, FUN = agrupa, grupos )
+    distract$N<-1
+    distract<-aggregate( distract[c("N")], 
+                         by = list( pregunta = distract$variable, 
+                                    grupo = distract$grupo, 
+                                    respuesta = distract$value ), 
+                         FUN = sum, na.rm = TRUE )
+    distract<-distract[ with( distract, order( pregunta, grupo, respuesta ) ), ]
+    distract$P<-distract$N / nrow( examenes[[i]]$examen )
+    rownames(distract)<-NULL
+    distractores[[i]]<-list( carrera = examenes[[i]]$carrera,
+                             forma = examenes[[i]]$forma,
+                             preguntas = examenes[[i]]$preguntas,
+                             distractor = distract )
+  }
+  
+  return( distractores )
+}
+
+#___________________________________________________________________________________________________
 # Cronbach's alpha
 cronbach.alpha<-function( calificacion ) {
   n<-ncol( calificacion )
