@@ -179,3 +179,20 @@ rasch.model<-function( calificacion, method = 'BFGS', itnmax = 1e3, lim = c( -8,
   
   return( Opt )
 }
+
+#___________________________________________________________________________________________________
+rasch.analisis<-function( calificacion, method, itnmax, lim ) {
+  rasch<-list()
+  for ( i in 1:length( calificacion ) ) {
+    opt<-rasch.model( calificacion[[i]]$calificacion, method = method, itnmax = itnmax, lim = lim )
+    n<-nrow( calificacion[[i]]$calificacion )
+    m<-n+calificacion[[i]]$preguntas
+    rasch[[i]]<-list( carrera = calificacion[[i]]$carrera,
+                      forma = calificacion[[i]]$forma,
+                      belta = opt[1,1:n], 
+                      delta = opt[1,(n+1):m],
+                      info = opt[1,(m+1):ncol(opt)] )                         
+  }
+  rm( i, n, m)
+  return( rasch )
+}
