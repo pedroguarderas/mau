@@ -181,6 +181,7 @@ rasch.model<-function( calificacion, method = 'BFGS', itnmax = 1e3, lim = c( -8,
 }
 
 #___________________________________________________________________________________________________
+# Rasch análisis para una lista de examenes
 rasch.analisis<-function( calificacion, method, itnmax, lim ) {
   rasch<-list()
   for ( i in 1:length( calificacion ) ) {
@@ -189,10 +190,42 @@ rasch.analisis<-function( calificacion, method, itnmax, lim ) {
     m<-n+calificacion[[i]]$preguntas
     rasch[[i]]<-list( carrera = calificacion[[i]]$carrera,
                       forma = calificacion[[i]]$forma,
-                      belta = opt[1,1:n], 
+                      beta = opt[1,1:n], 
                       delta = opt[1,(n+1):m],
                       info = opt[1,(m+1):ncol(opt)] )                         
   }
   rm( i, n, m)
   return( rasch )
 }
+
+#___________________________________________________________________________________________________
+# Rasch análisis de estrés
+rasch.analisis.estres<-function( calificacion, N, method, itnmax, lim ) {
+  
+  rasch<-list()
+  
+  for ( i in 1:length( calificacion ) ) {
+    n<-nrow( calificacion[[i]]$calificacion )
+    m<-n+calificacion[[i]]$preguntas
+    
+    beta<-NULL
+    delta<-NULL
+    info<-NULL
+    for ( j in 1:N ) {
+      opt<-rasch.model( calificacion[[i]]$calificacion, 
+                        method = method, itnmax = itnmax, lim = lim )
+      beta<-rbind( beta, opt[1,1:n] )
+      delta<-rbind( delta, opt[1,(n+1):m] )
+      info<-rbind( info, opt[1,(m+1):ncol(opt)] )
+    }
+    rasch[[i]]<-list( carrera = calificacion[[i]]$carrera,
+                      forma = calificacion[[i]]$forma,
+                      N = N,
+                      beta = beta, 
+                      delta = delta,
+                      info = info )                         
+  }
+  rm( i, n, m )
+  return( rasch )
+}
+
