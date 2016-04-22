@@ -18,6 +18,12 @@ califica.examen<-function( examen, respuesta, vars, corresp = NULL ) {
 }
 
 #___________________________________________________________________________________________________
+# Rasch logit
+rasch.logit<-function( b, d ) {
+  return( exp( b - d ) / ( 1 + exp( b - d ) ) ) 
+}
+
+#___________________________________________________________________________________________________
 # Dificultad
 dificultad.examen<-function( calificacion, cols ) {
   n<-ncol( calificacion )
