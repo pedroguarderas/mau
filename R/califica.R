@@ -254,3 +254,25 @@ rasch.analisis.estres<-function( calificacion, N, method = 'BFGS',
   return( rasch )
 }
 
+#___________________________________________________________________________________________________
+# Función que calcula la discriminación de cada ítem 
+
+discriminacion.examen<-function(calificacion, cols, percent, K){
+  
+  D<-calificacion[[K]]$calificacion
+  D<-D[,col]
+
+  D$puntaje<-rowSums(D)
+  D<-D[order(D$puntaje),]
+
+  l<-round(percent*length(col),0)
+  m<-length(col)-l
+  x1<-D[1:l,]
+  x2<-D[m:length(col),]
+  
+  discriminacion<-NULL
+  for(i in 1:130){
+  discriminacion<-rbind(discriminacion, 
+                  ( colSums(x1)[i]-colSums(x2)[i] )/  max( colSums(x1)[i],colSums(x2)[i] ))  }
+  return( discriminacion )
+}
