@@ -42,7 +42,7 @@ habilidad.examen<-function( calificacion, cols, id ) {
   m<-nrow( calificacion )
   habilidad<-data.frame( rowSums( calificacion[,cols] ) )
   habilidad<-data.frame( calificacion[,id], habilidad )
-  names( habilidad )<-c( names(calificacion)[1], 'habilidad' )
+  names( habilidad )<-c( names(calificacion)[id], 'habilidad' )
   rownames( habilidad )<-NULL
   return( habilidad )
 }
@@ -256,23 +256,40 @@ rasch.analisis.estres<-function( calificacion, N, method = 'BFGS',
 
 #___________________________________________________________________________________________________
 # Función que calcula la discriminación de cada ítem 
-
-discriminacion.examen<-function(calificacion, cols, percent, K){
+discriminacion.examen<-function( calificacion, porcentaje ){
   
-  D<-calificacion[[K]]$calificacion
-  D<-D[,col]
-
-  D$puntaje<-rowSums(D)
-  D<-D[order(D$puntaje),]
-
-  l<-round(percent*length(col),0)
-  m<-length(col)-l
-  x1<-D[1:l,]
-  x2<-D[m:length(col),]
-  
-  discriminacion<-NULL
-  for(i in 1:length(col)){
-  discriminacion<-rbind(discriminacion, 
-                  ( colSums(x1)[i]-colSums(x2)[i] )/  max( colSums(x1)[i],colSums(x2)[i] ))  }
+  discriminacion<-list()
+  for ( i in 1:length( calificacion ) ) {
+    
+    q<-t( apply( porcentaje[[i]], 1, FUN = function( x ) {
+      q<-unlist( quantile( calificacion[[i]]$habilidad$habilidad, probs = x ) )
+      return(q)
+    } ) )
+    q<-as.data.frame( q )
+    names(q)<-c('inf','sup')
+               
+    id<-names( calificacion[[i]]$habilidad )[1]
+    d<-merge( calificacion[[i]]$calificacion, calificacion[[i]]$habilidad, by = id )
+    
+    cols<-calificacion[[i]]$respuestas
+    preguntas<-calificacion[[i]]$preguntas
+    
+    DD<-NULL
+    for ( j in 1:preguntas ) {
+      GS<-sum( d[ d$habilidad > q[j,'sup'], cols[j] ] )
+      GI<-sum( d[ d$habilidad <= q[j,'inf'], cols[j] ] )
+      D<-( GS - GI ) / max( GS, GI )
+      D<-data.frame( pregunta = j, GI = GI, GS = GS, discriminacion = D )
+      DD<-rbind( DD, D )
+    }
+    rm( GS, GI, j )
+    
+    discriminacion[[i]]<-list( carrera = calificacion[[i]]$carrera,
+                               forma = calificacion[[i]]$forma, 
+                               preguntas = calificacion[[i]]$preguntas,
+                               porcentaje = porcentaje[[i]],
+                               discriminacion = DD )
+  }
+  rm( i )
   return( discriminacion )
 }
