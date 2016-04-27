@@ -271,7 +271,7 @@ discriminacion.examen<-function(calificacion, cols, percent, K){
   x2<-D[m:length(col),]
   
   discriminacion<-NULL
-  for(i in 1:130){
+  for(i in 1:length(col)){
   discriminacion<-rbind(discriminacion, 
                   ( colSums(x1)[i]-colSums(x2)[i] )/  max( colSums(x1)[i],colSums(x2)[i] ))  }
   return( discriminacion )
