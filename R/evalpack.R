@@ -11,6 +11,8 @@ library(reshape2)
 library(RColorBrewer)
 library(stringr)
 library(xlsx)
+library(plotrix)
+library(grid)
 
 #___________________________________________________________________________________________________
 # Funciones para corregir caracteres
@@ -55,3 +57,9 @@ source( 'R/arrow.R' )
 #___________________________________________________________________________________________________
 # Función que evalua el modelo criterios y subcriterios a partir de utilidades y árbol
 source( 'R/modelo_tabla.R' )
+
+#___________________________________________________________________________________________________
+# Funciones para graficos
+
+source( 'R/evalgraphs.R' )
+
