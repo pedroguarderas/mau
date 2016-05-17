@@ -233,16 +233,23 @@ rasch.analisis.estres<-function( calificacion, N, method = 'BFGS',
     n<-nrow( calificacion[[i]]$calificacion )
     m<-n+calificacion[[i]]$preguntas
     
+    nom<-names( calificacion[[i]]$calificacion )[ calificacion[[i]]$id ]
+    beta.cod<-data.frame( codigo = calificacion[[i]]$calificacion[ ,calificacion[[i]]$id ] )
+    delta.cod<-data.frame( pregunta = 1:calificacion[[i]]$preguntas )
     beta<-NULL
     delta<-NULL
     info<-NULL
     for ( j in 1:N ) {
       opt<-rasch.model( calificacion[[i]], 
                         method = method, itnmax = itnmax, lim = lim, version, epsilon )
-      beta<-rbind( beta, opt[1,1:n] )
-      delta<-rbind( delta, opt[1,(n+1):m] )
+      beta<-rbind( beta, data.frame( beta.cod, simulacion = rep( j, n ), beta = t( opt[1,1:n] ) ) )
+      delta<-rbind( delta, data.frame( delta.cod, simulacion = rep( j, m-n), delta = t( opt[1,(n+1):m] ) ) )
       info<-rbind( info, opt[1,(m+1):ncol(opt)] )
     }
+    names( beta )<-c( nom, 'simulacion', 'beta' )
+    names( delta )<-c( 'pregunta', 'simulacion', 'delta' )
+    rownames( beta )<-NULL
+    rownames( delta )<-NULL
     rasch[[i]]<-list( carrera = calificacion[[i]]$carrera,
                       forma = calificacion[[i]]$forma,
                       N = N,
@@ -250,7 +257,7 @@ rasch.analisis.estres<-function( calificacion, N, method = 'BFGS',
                       delta = delta,
                       info = info )                         
   }
-  rm( i, n, m )
+  rm( i, j, n, m )
   return( rasch )
 }
 
