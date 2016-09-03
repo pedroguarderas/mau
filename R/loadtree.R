@@ -4,7 +4,7 @@
 
 #___________________________________________________________________________________________________
 # Función para leer árboles de decisión producidos por Logical Decision
-load_tree<-function( file, indexfile, col_id, cold_weight, col_func ) {
+load_tree1<-function( file, indexfile, col_id, cold_weight, col_func ) {
   graph<-read.xlsx( file = file, sheetIndex = 1, startRow = 5, endRow = 79,
                     colIndex = c(1,2,5), colClasses = c('character','character' ) )
   graph<-graph[,c(2,3,1)]
@@ -21,7 +21,7 @@ load_tree<-function( file, indexfile, col_id, cold_weight, col_func ) {
   return( graph )
 }
 
-load_tree1<-function( file, index_file, sheet, cols, rows, cols_index ) {
+load_tree<-function( file, index_file, sheet, cols, rows, cols_index ) {
   graph<-read.xlsx( file = file, sheetIndex = sheet, startRow = rows[1], endRow = rows[2],
                     colIndex = cols, colClasses = c('integer','character', 'integer', 'integer' ) )
   colnames( graph )<-c('id','nom','parent','cod')
@@ -34,10 +34,52 @@ load_tree1<-function( file, index_file, sheet, cols, rows, cols_index ) {
   graph<-merge( graph, index, by = 'cod', all.x = TRUE  )
   graph<-graph[ ,c( 'id', 'id_parent', 'cod', 'nom', 'parent', 'function', 'weight' ) ]
   graph<-graph[ order( graph$id ), ]
-  graph$id<-paste( 'n', graph$id, sep = '' )
+  
   rm( sheet, cols, rows, cols_index )
   rownames( graph )<-NULL
   return( graph )
+}
+
+#___________________________________________________________________________________________________
+make.decision.tree<-function( tree.data ) {
+  tree<-make_empty_graph( directed = TRUE )
+  for ( i in 1:nrow( tree.data ) ) { # i<-1
+    A<-list()
+    if ( is.na( tree.data$cod[i] ) ) {
+      A<-list( 'id' = tree.data$id[i],
+               'codigo' = 0,
+               'name' = tree.data$nom[i],
+               'color' = 'dodgerblue1',
+               'weight' = tree.data$weight[i],
+               'rweight' = 0.0,
+               'leaf' = 0,
+               'function' = '',
+               'deep' = 0,
+               'size' = 21 )
+    } else {
+      A<-list( 'id' = tree.data$id[i],
+               'codigo' = tree.data$cod[i],
+               'name' = tree.data$nom[i],
+               'color' = 'orange',
+               'weight' = tree.data$weight[i],
+               'rweight' = 0.0,
+               'leaf' = 1,
+               'function' = tree.data$'function'[i],
+               'deep' = 0,
+               'size' = 20 )
+      
+    }
+    tree<-tree %>% add_vertices( 1, attr = A )  
+    if ( tree.data$id[i] != tree.data$id_parent[i] & !is.na( tree.data$id_parent[i] ) ) {
+      tree<-tree %>% add_edges( c( tree.data$parent[i], tree.data$nom[i] ), color = "black" )
+    }
+  }
+
+  tree<-sum_weights( tree ) # pesos absolutos
+  tree<-divide_weights( tree ) #pesos relativos
+  tree<-deep_compute( tree )
+  
+  return( tree )
 }
 
 #___________________________________________________________________________________________________
@@ -160,8 +202,8 @@ save_tree<-function( tree, file ) {
   edges<-NULL
   for( i in 1:length( E(tree)$id ) ) {
     edge<-paste( "\t<edge id=\"e", i, "\" ", "directed=\"true\" ", 
-                 "source=\"", V(tree)[ get.edge(tree,i)[1] ]$id, 
-                 "\" target=\"", V(tree)[ get.edge(tree,i)[2] ]$id, "\"/>\n", sep = '' )
+                 "source=\"", V(tree)[ ends(tree,i)[1] ]$id, 
+                 "\" target=\"", V(tree)[ ends(tree,i)[2] ]$id, "\"/>\n", sep = '' )
     edges<-paste( edges, edge, sep = '' )
   }
   
@@ -176,7 +218,7 @@ sum_weights<-function( tree ) {
   noleaves<-which( V(tree)$leaf == 0 )
   leaves<-which( V(tree)$leaf == 1 )
   for ( i in noleaves ) { # i<-leaves[1]
-    childs<-unlist( neighborhood( tree, 100, V(tree)[i], mode = 'out' ) )
+    childs<-unlist( ego( tree, 100, V(tree)[i], mode = 'out' ) )
     childs<-childs[ childs %in% leaves ]
     V( tree )[i]$weight<-sum( V( tree )[ childs ]$weight )
   }
@@ -187,12 +229,12 @@ divide_weights<-function( tree ) {
   noleaves<-which( V(tree)$leaf == 0 )
   leaves<-which( V(tree)$leaf == 1 )
   for ( i in 1:length( V(tree) ) ) { # i<-leaves[9]
-    parent<-unlist( neighborhood( tree, 1, V(tree)[i], mode = 'in' ) )
+    parent<-unlist( ego( tree, 1, V(tree)[i], mode = 'in' ) )
     parent<-parent[ parent != i ]
     childs<-unlist( neighborhood( tree, 100, V(tree)[i], mode = 'out' ) )
     childs<-childs[ childs %in% leaves ]
     if ( length( parent ) == 1 ) {
-      pchilds<-unlist( neighborhood( tree, 100, V(tree)[parent], mode = 'out' ) )
+      pchilds<-unlist( ego( tree, 100, V(tree)[parent], mode = 'out' ) )
       pchilds<-pchilds[ pchilds %in% leaves ]
       V( tree )[i]$rweight<-sum( V(tree)[childs]$weight ) / sum( V(tree)[pchilds]$weight )
     } else if ( length( parent ) == 0 ) {
@@ -206,7 +248,7 @@ deep_compute<-function( tree ) {
   
   nodes<-which( V(tree)$leaf == 0 )
   for( i in nodes ) {
-    parent<-unlist( neighborhood( tree, 1, V(tree)[i], mode = 'in' ) )
+    parent<-unlist( ego( tree, 1, V(tree)[i], mode = 'in' ) )
     parent<-parent[ !( parent %in% i ) ]
     if ( length( parent ) == 0 ) {
       break

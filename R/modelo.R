@@ -19,13 +19,11 @@ modelo.calcula.tree<-function( tree, tipo ) {
 }
 
 #___________________________________________________________________________________________________
-modelo.calcula<-function( file, 
+modelo.calcula<-function( tree, 
                           utilidades,
                           pesos,
-                          tipo = c('RAIZ','CRITERIO', 'SUBCRITERIO', 'UTILIDAD'), 
-                          format = 'graphml' ) {
+                          tipo = c('RAIZ','CRITERIO', 'SUBCRITERIO', 'UTILIDAD') ) {
   
-  tree<-read.graph( file, format = format )
   tabla_objetivos<-modelo.calcula.tree( tree, tipo )
   
   modelo<-eval_criteria( tree, pesos, utilidades, FALSE, TRUE, TRUE )
