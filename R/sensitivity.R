@@ -44,6 +44,7 @@ plotanvar1<-function( VAR, ylim ) {
 }
 
 plotsim<-function( S, xlab = 'IES' ) {
+  N<-ncol( S ) - 1
   sim<-S
   sim_first<-subset( S, select = c( cod, S1 ) )
   sim_first$E<-paste( formatC( 100 * sim_first$S1, digits = 2, format = 'f', decimal.mark = ',' ), "%", sep = '' )
@@ -60,7 +61,7 @@ plotsim<-function( S, xlab = 'IES' ) {
     aes( x = cod, y = val ) +
     geom_line( aes( group = sim, colour = sim), size = 0.1 ) +
     scale_fill_manual( values = colores, name='', labels = ''  ) +
-    geom_boxplot( notch = FALSE, show_guide = FALSE, fill = 'gold', 
+    geom_boxplot( notch = FALSE, show.legend = FALSE, fill = 'gold', 
                   alpha = 0.4, outlier.colour = 'darkred' ) +
     geom_point( aes( x = cod, y = S1 ), data = sim_first, colour = 'orange', size = 5  ) +
     geom_text( aes( x = cod, y = S1 + 0.05, label = E ), data = sim_first, colour = 'black', size = 5  ) +
