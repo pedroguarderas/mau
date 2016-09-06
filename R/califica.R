@@ -204,6 +204,45 @@ rasch.model<-function( calificacion, method = 'BFGS', itnmax = 1e3, lim = c( -1,
 }
 
 #___________________________________________________________________________________________________
+rasch.disc.model<-function( calificacion, method = 'BFGS', itnmax = 1e3, lim = c( -1, 1 ), 
+                            version = 1, epsilon = 10e-5 ) {
+  h<-calificacion$habilidad$habilidad
+  d<-calificacion$dificultad$dificultad
+  X<-as.matrix( calificacion$calificacion[,calificacion$respuestas] )
+  n<-length( h )
+  m<-length( d )
+  
+  I<-1:m                     #Índice para alpha (m) (x[I])
+  J<-(m+1):(2*m)             #Índice para delta (m) (x[J])
+  K<-(2*m+1):(n+2*m)         #Índice para beta  (n) (x[K])
+  
+  loglike <- function( x ) {
+    L <- sum( x[I] %*% t( X ) %*% x[K] ) - sum( x[I] * x[J] * d ) - 
+      sum( log( 1 + exp( x[I] %x% x[K] - rep( x[I] * x[J], times = 1, each = n ) ) ) )
+    return( L )
+  }
+  
+  gloglike<-function( x ) {
+    dL <- c( sapply( 1:m, FUN = function( i ) sum( X[,i] * x[K] ) ) - d * x[J] -
+               sapply( 1:m, FUN = function( i ) sum( ( x[K] - x[i] ) /( 1 + exp( -x[i] * ( x[K] - x[i+m] ) ) ) ) ),
+             -d * x[I] + 
+               sapply( 1:m, FUN = function( i ) sum( x[i] / ( 1 + exp( -x[i] * ( x[K] - x[i+m] ) ) ) ) ),
+             sapply( 1:n, FUN = function( j ) sum( X[j,] * x[I] ) ) - 
+               sapply( 1:n, FUN = function( j ) sum( x[J] / ( 1 + exp( -x[J] * ( x[j] - x[J+m] ) ) ) ) ) )
+    
+    return( dL )
+  }
+  
+  Opt<-NULL
+  x0<-runif( n+2*m, lim[1], lim[2] )
+  Opt<-optimx( par = x0, fn = loglike, gr = gloglike, 
+               method = method, hessian = FALSE, itnmax = itnmax,
+               control = list( save.failures = TRUE, trace = 0, maximize = TRUE ) )
+
+  return( Opt )
+}
+
+#___________________________________________________________________________________________________
 # Rasch análisis para una lista de examenes
 rasch.analisis<-function( calificacion, method, itnmax, lim, version = 1, epsilon = 10e-5 ) {
   rasch<-list()
