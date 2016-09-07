@@ -269,7 +269,7 @@ rasch.analisis<-function( calificacion, method, itnmax, lim, version = 1, epsilo
 #___________________________________________________________________________________________________
 # Rasch análisis de estrés
 rasch.analisis.estres<-function( calificacion, N, method = 'BFGS', 
-                                 itnmax, lim, version = 1, epsilon = 10e-5 ) {
+                                 maxit, lim, version = 1, epsilon = 10e-5 ) {
   
   rasch<-list()
   
@@ -285,7 +285,7 @@ rasch.analisis.estres<-function( calificacion, N, method = 'BFGS',
     info<-NULL
     for ( j in 1:N ) {
       opt<-rasch.model( calificacion[[i]], 
-                        method = method, itnmax = itnmax, lim = lim, version, epsilon )
+                        method = method, itnmax = maxit, lim = lim, version, epsilon )
       beta<-rbind( beta, data.frame( beta.cod, simulacion = rep( j, n ), beta = t( opt[1,1:n] ) ) )
       delta<-rbind( delta, data.frame( delta.cod, simulacion = rep( j, m-n), delta = t( opt[1,(n+1):m] ) ) )
       info<-rbind( info, opt[1,(m+1):ncol(opt)] )
