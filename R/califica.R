@@ -204,7 +204,7 @@ rasch.model<-function( calificacion, method = 'BFGS', itnmax = 1e3, lim = c( -1,
 }
 
 #___________________________________________________________________________________________________
-rasch.disc.model<-function( calificacion, par, method = 1, maxit = 1e3, lim = c( -1, 1 ), 
+rasch.disc.model<-function( calificacion, par, method = 1, maxit = 1e3, 
                             epsilon = 10e-5 ) {
   h<-calificacion$habilidad$habilidad
   d<-calificacion$dificultad$dificultad
