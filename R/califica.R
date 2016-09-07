@@ -211,13 +211,13 @@ rasch.disc.model<-function( calificacion, par, method = 1, maxit = 1e3,
   X<-as.matrix( calificacion$calificacion[,calificacion$respuestas] )
   n<-length( h )
   m<-length( d )
-  
+
   I<-1:m                     #Índice para alpha (m) (x[I])
   J<-(m+1):(2*m)             #Índice para delta (m) (x[J])
   K<-(2*m+1):(n+2*m)         #Índice para beta  (n) (x[K])
   
   loglike <- function( x ) {
-    L <- sum( x[I] %*% t( X ) %*% x[K] ) - sum( x[I] * x[J] * d ) - 
+    L <- x[I] %*% t( X ) %*% x[K] - sum( x[I] * x[J] * d ) - 
       sum( log( 1 + exp( x[I] %x% x[K] - rep( x[I] * x[J], times = 1, each = n ) ) ) )
     return( L )
   }
