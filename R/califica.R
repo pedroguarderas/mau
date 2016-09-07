@@ -204,8 +204,8 @@ rasch.model<-function( calificacion, method = 'BFGS', itnmax = 1e3, lim = c( -1,
 }
 
 #___________________________________________________________________________________________________
-rasch.disc.model<-function( calificacion, method = 'BFGS', itnmax = 1e3, lim = c( -1, 1 ), 
-                            version = 1, epsilon = 10e-5 ) {
+rasch.disc.model<-function( calificacion, method = 1, maxit = 1e3, lim = c( -1, 1 ), 
+                            epsilon = 10e-5 ) {
   h<-calificacion$habilidad$habilidad
   d<-calificacion$dificultad$dificultad
   X<-as.matrix( calificacion$calificacion[,calificacion$respuestas] )
@@ -234,10 +234,17 @@ rasch.disc.model<-function( calificacion, method = 'BFGS', itnmax = 1e3, lim = c
   }
   
   Opt<-NULL
-  x0<-runif( n+2*m, lim[1], lim[2] )
-  Opt<-optimx( par = x0, fn = loglike, gr = gloglike, 
-               method = method, hessian = FALSE, itnmax = itnmax,
-               control = list( save.failures = TRUE, trace = 0, maximize = TRUE ) )
+  # x0<-runif( n+2*m, lim[1], lim[2] )
+  x0<-rep( 1, n + 2*m )
+  # Opt<-optimx( par = x0, fn = loglike, gr = gloglike, 
+  #              method = method, hessian = FALSE, itnmax = itnmax,
+  #              control = list( save.failures = TRUE, trace = 0, maximize = TRUE ) )
+  
+  # Opt<-BBoptim( par = x0, fn = loglike, gr = gloglike, method = method, 
+                # control = list( maxit = maxit, eps = epsilon, maximize = TRUE ) )
+  
+  Opt<-spg( par = x0, fn = loglike, gr = gloglike, method = method, 
+            control = list( maxit = maxit, eps = epsilon, maximize = TRUE ) )
 
   return( Opt )
 }
