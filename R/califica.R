@@ -28,7 +28,7 @@ rasch.logit<-function( b, d ) {
 dificultad.examen<-function( calificacion, cols ) {
   n<-ncol( calificacion )
   m<-nrow( calificacion )
-  dificultad<-data.frame( colSums( calificacion[,cols] ) )
+  dificultad<-data.frame( colSums( calificacion[,cols], na.rm = TRUE ) )
   dificultad<-data.frame( item = names( calificacion )[cols], dificultad )
   names( dificultad )<-c( 'item', 'dificultad' )
   rownames( dificultad )<-NULL
@@ -40,7 +40,7 @@ dificultad.examen<-function( calificacion, cols ) {
 habilidad.examen<-function( calificacion, cols, id ) {
   n<-ncol( calificacion )
   m<-nrow( calificacion )
-  habilidad<-data.frame( rowSums( calificacion[,cols] ) )
+  habilidad<-data.frame( rowSums( calificacion[,cols], na.rm = TRUE ) )
   habilidad<-data.frame( calificacion[,id], habilidad )
   names( habilidad )<-c( names(calificacion)[id], 'habilidad' )
   rownames( habilidad )<-NULL
@@ -77,7 +77,7 @@ calificacion.examenes<-function( examenes ) {
 #___________________________________________________________________________________________________
 # Agrupación
 agrupa<-function( x, grupos ) {
-  return( min( which( grupos >= x ) ) - 1 )
+  return( min( which( grupos >= x ) ) )
 }
 
 #___________________________________________________________________________________________________
@@ -87,6 +87,7 @@ distractores.analisis<-function( examenes, calificacion, grupos ) {
   for ( i in 1:length( examenes ) ) {
     id<-names( examenes[[i]]$examen )[examenes[[i]]$id]
     vars<-names( examenes[[i]]$examen )[examenes[[i]]$vars]
+    
     distract<-merge( examenes[[i]]$examen, calificacion[[i]]$habilidad, 
                      by.x = id,
                      by.y = names( calificacion[[i]]$habilidad )[1] )
@@ -94,13 +95,15 @@ distractores.analisis<-function( examenes, calificacion, grupos ) {
     distract$habilidad<-distract$habilidad / calificacion[[1]]$preguntas
     distract$grupo<-sapply( distract$habilidad, FUN = agrupa, grupos )
     distract$N<-1
-    distract<-aggregate( distract[c("N")], 
-                         by = list( pregunta = distract$variable, 
-                                    grupo = distract$grupo, 
-                                    respuesta = distract$value ), 
-                         FUN = sum, na.rm = TRUE )
+    setnames( distract, c( 'variable', 'value' ), c( 'pregunta', 'respuesta' ) )
+    distract.group<-aggregate( N ~ pregunta + grupo, distract, 
+                               FUN = sum, na.action = na.pass )
+    setnames( distract.group, 'N', 'NG')
+    distract<-aggregate( N ~ pregunta + grupo + respuesta, distract, 
+                         FUN = sum, na.action = na.pass )
+    distract<-merge( distract, distract.group, by = c( 'pregunta', 'grupo' ) )
     distract<-distract[ with( distract, order( pregunta, grupo, respuesta ) ), ]
-    distract$P<-distract$N / nrow( examenes[[i]]$examen )
+    distract$P<-distract$N / distract$NG
     rownames(distract)<-NULL
     distractores[[i]]<-list( carrera = examenes[[i]]$carrera,
                              forma = examenes[[i]]$forma,
