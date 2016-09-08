@@ -227,7 +227,7 @@ rasch.disc.model<-function( calificacion, par, method = 1, maxit = 1e3,
              sapply( 1:m, FUN = function( i ) sum( ( x[K] - x[i+m] ) /( 1 + exp( -x[i] * ( x[K] - x[i+m] ) ) ) ) ),
              -d * x[I] + 
              sapply( 1:m, FUN = function( i ) sum( x[i] / ( 1 + exp( -x[i] * ( x[K] - x[i+m] ) ) ) ) ),
-             sapply( K, FUN = function( j ) sum( X[j,] * x[I] ) ) - 
+             sapply( 1:n, FUN = function( j ) sum( X[j,] * x[I] ) ) - 
              sapply( K, FUN = function( j ) sum( x[I] / ( 1 + exp( -x[I] * ( x[j] - x[J] ) ) ) ) ) )
     
     return( dL )
