@@ -120,7 +120,7 @@ cronbach.alpha<-function( calificacion, cols ) {
   n<-ncol( calificacion )
   K<-n-1
   vars<-apply( calificacion[,cols], 2, FUN = var, na.rm = TRUE )
-  tot.var<-var( rowSums( calificacion[,cols] ) )
+  tot.var<-var( rowSums( calificacion[,cols], na.rm = TRUE ) )
   alpha<-K * ( 1 - sum( vars ) / tot.var ) / ( K - 1 )
   list( alpha = alpha, K = K, vars = vars, tot.var = tot.var )
 }
