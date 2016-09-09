@@ -212,6 +212,7 @@ rasch.disc.model<-function( calificacion, par, method = 1, maxit = 1e3,
   h<-calificacion$habilidad$habilidad
   d<-calificacion$dificultad$dificultad
   X<-as.matrix( calificacion$calificacion[,calificacion$respuestas] )
+  X<-apply( X, c(1,2), FUN = function( x ) ifelse( is.na(x), 0, x ) )
   n<-length( h )
   m<-length( d )
 
