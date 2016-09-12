@@ -24,6 +24,12 @@ rasch.logit<-function( b, d ) {
 }
 
 #___________________________________________________________________________________________________
+# Rasch logit discriminante
+rasch.logit.disc<-function( b, a, d ) {
+  return( exp( a * ( b - d ) ) / ( 1 + exp( a * ( b - d ) ) ) ) 
+}
+
+#___________________________________________________________________________________________________
 # Dificultad
 dificultad.examen<-function( calificacion, cols ) {
   n<-ncol( calificacion )
