@@ -23,10 +23,18 @@ rasch.logit<-function( b, d ) {
   return( exp( b - d ) / ( 1 + exp( b - d ) ) ) 
 }
 
+rasch.info<-function( b, d ) {
+  return( exp( b - d ) / ( ( 1 + exp( b - d ) )^2 ) ) 
+}
+
 #___________________________________________________________________________________________________
 # Rasch logit discriminante
 rasch.logit.disc<-function( b, a, d ) {
   return( exp( a * ( b - d ) ) / ( 1 + exp( a * ( b - d ) ) ) ) 
+}
+
+rasch.disc.info<-function( b, a, d ) {
+  return( ( a^2 ) * exp( a * ( b - d ) ) / ( ( 1 + exp( a * ( b - d ) ) )^2 ) ) 
 }
 
 #___________________________________________________________________________________________________
@@ -226,33 +234,34 @@ rasch.disc.model<-function( calificacion, par, method = 1, maxit = 1e3,
   J<-(m+1):(2*m)             #Índice para delta (m) (x[J])
   K<-(2*m+1):(n+2*m)         #Índice para beta  (n) (x[K])
   
-  loglike <- function( x ) {
-    L <- x[I] %*% t( X ) %*% x[K] - sum( x[I] * x[J] * d ) - 
+  # Functions for Rasch discriminant model
+  rasch.disc.loglike <- function( x ) {
+    L <- as.numeric( x[I] %*% t( X ) %*% x[K] ) - sum( x[I] * x[J] * d ) - 
       sum( log( 1 + exp( x[I] %x% x[K] - rep( x[I] * x[J], times = 1, each = n ) ) ) )
     return( L )
   }
   
-  gloglike<-function( x ) {
+  rasch.disc.gloglike<-function( x ) {
     dL <- c( sapply( 1:m, FUN = function( i ) sum( X[,i] * x[K] ) ) - d * x[J] -
-             sapply( 1:m, FUN = function( i ) sum( ( x[K] - x[i+m] ) /( 1 + exp( -x[i] * ( x[K] - x[i+m] ) ) ) ) ),
+               sapply( 1:m, FUN = function( i ) sum( ( x[K] - x[i+m] ) /( 1 + exp( -x[i] * ( x[K] - x[i+m] ) ) ) ) ),
              -d * x[I] + 
-             sapply( 1:m, FUN = function( i ) sum( x[i] / ( 1 + exp( -x[i] * ( x[K] - x[i+m] ) ) ) ) ),
+               sapply( 1:m, FUN = function( i ) sum( x[i] / ( 1 + exp( -x[i] * ( x[K] - x[i+m] ) ) ) ) ),
              sapply( 1:n, FUN = function( j ) sum( X[j,] * x[I] ) ) - 
-             sapply( K, FUN = function( j ) sum( x[I] / ( 1 + exp( -x[I] * ( x[j] - x[J] ) ) ) ) ) )
+               sapply( K, FUN = function( j ) sum( x[I] / ( 1 + exp( -x[I] * ( x[j] - x[J] ) ) ) ) ) )
     
     return( dL )
   }
   
   Opt<-NULL
-  # Opt<-optimx( par = x0, fn = loglike, gr = gloglike, 
-  #              method = method, hessian = FALSE, itnmax = itnmax,
-  #              control = list( save.failures = TRUE, trace = 0, maximize = TRUE ) )
+  Opt<-optimx( par = par, fn = rasch.disc.loglike, gr = rasch.disc.gloglike,
+               method = method, hessian = FALSE, itnmax = maxit,
+               control = list( save.failures = TRUE, trace = 0, maximize = TRUE ) )
   
   # Opt<-BBoptim( par = x0, fn = loglike, gr = gloglike, method = method, 
                 # control = list( maxit = maxit, eps = epsilon, maximize = TRUE ) )
   
-  Opt<-spg( par = par, fn = loglike, gr = gloglike, method = method, 
-            control = list( maxit = maxit, eps = epsilon, maximize = TRUE ) )
+  # Opt<-spg( par = par, fn = rasch.disc.loglike, gr = rasch.disc.gloglike, method = method, 
+  #           control = list( maxit = maxit, eps = epsilon, maximize = TRUE ) )
 
   return( Opt )
 }
@@ -266,6 +275,7 @@ rasch.analisis<-function( calificacion, method, itnmax, lim, version = 1, epsilo
                       lim = lim, version, epsilon )
     n<-nrow( calificacion[[i]]$calificacion )
     m<-n+calificacion[[i]]$preguntas
+    
     rasch[[i]]<-list( carrera = calificacion[[i]]$carrera,
                       forma = calificacion[[i]]$forma,
                       beta = opt[1,1:n], 
@@ -274,6 +284,31 @@ rasch.analisis<-function( calificacion, method, itnmax, lim, version = 1, epsilo
   }
   rm( i, n, m)
   return( rasch )
+}
+
+#___________________________________________________________________________________________________
+# Discriminant rasch analysis
+rasch.disc.analisis<-function( calificacion, method, maxit, epsilon = 10e-5 ) {
+  rasch.disc<-list()
+  for ( i in 1:length( calificacion ) ) {
+    n<-length( calificacion[[i]]$habilidad$habilidad )
+    m<-length( calificacion[[i]]$dificultad$dificultad )
+    
+    par<-c( runif( m, 0.99, 1.1 ), 
+            (-1) ^ rbinom( n + m, 1, 0.5 ) * runif( n + m, 0.99, 1.1 ) )
+    
+    opt<-rasch.disc.model( calificacion = calificacion[[i]],
+                                       par = par, method = method, maxit = maxit, epsilon = epsilon )
+    
+    rasch.disc[[i]]<-list( carrera = calificacion[[i]]$carrera,
+                           forma = calificacion[[i]]$forma,
+                           alpha = opt[1,1:m], 
+                           delta = opt[1,(m+1):(2*m)],
+                           beta = opt[1,(2*m+1):(n+2*m)],
+                           info = opt[1,(n+2*m):ncol(opt) ] )   
+
+  }
+  return( rasch.disc )
 }
 
 #___________________________________________________________________________________________________
