@@ -389,3 +389,28 @@ discriminacion.examen<-function( calificacion, porcentaje ){
   rm( i )
   return( discriminacion )
 }
+
+#___________________________________________________________________________________________________
+# Correlación de punto biserial
+corr.punto.biserial<-function( calificacion ) {
+  punto.biserial<-list()
+  for ( i in 1:length( calificacion ) ) {
+    P<-calificacion[[i]]$preguntas
+    N<-nrow( calificacion[[i]]$calificacion )
+    pbis<-NULL
+    for ( k in 1:P ) {
+      ux<-mean( calificacion[[i]]$habilidad$habilidad / P )
+      j<-calificacion[[i]]$respuestas[k]
+      K<-which( calificacion[[i]]$calificacion[,j] == 1 )
+      u<-mean( calificacion[[i]]$habilidad$habilidad[ K ] / P )
+      s<-sd( calificacion[[i]]$habilidad$habilidad / P )
+      p<-calificacion[[i]]$dificultad$dificultad[k] / N
+      q<-1 - p
+      pbis<-c( pbis, ( u - ux ) * sqrt( p / q ) / s )
+    }
+    punto.biserial[[i]]<-list( carrera = calificacion[[i]]$carrera,
+                               forma = calificacion[[i]]$forma,
+                               corr.pbis = data.table( id = 1:P, pbis = pbis ) )
+  }
+  return( punto.biserial )
+}
