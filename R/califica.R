@@ -365,8 +365,8 @@ discriminacion.examen<-function( calificacion, porcentaje ){
       p<-as.numeric( porcentaje[[i]][j,] )
       H<-calificacion[[i]]$habilidad$habilidad
       q<-unlist( quantile( H, probs = p ) )
-      IS<-( H >= q[1] )
-      II<-( H <= q[2] )
+      IS<-( H >= q[2] )
+      II<-( H <= q[1] )
       NS<-sum( IS, na.rm = TRUE )
       NI<-sum( II, na.rm = TRUE )
       GS<-sum( calificacion[[i]]$calificacion[ IS,J[j] ], na.rm = TRUE )
