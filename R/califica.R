@@ -414,3 +414,51 @@ corr.punto.biserial<-function( calificacion ) {
   }
   return( punto.biserial )
 }
+
+#___________________________________________________________________________________________________
+rasch.infit.outfit<-function( calificacion, rasch.disc ) {
+  rasch.in.out<-list()
+  for ( i in 1:length( calificacion ) ) {
+    
+    N<-nrow( calificacion[[i]]$calificacion )
+    M<-calificacion[[i]]$preguntas
+    J<-calificacion[[i]]$respuestas
+    a<-rasch.disc[[i]]$alpha
+    b<-rasch.disc[[i]]$beta
+    d<-rasch.disc[[i]]$delta
+    
+    outfit<-NULL
+    infit<-NULL
+    sdoutfit<-NULL
+    sdinfit<-NULL
+    tout<-NULL
+    tinf<-NULL
+    
+    for ( j in 1:M ) {
+      p<-sapply( b[1,], rasch.logit.disc, a = a[1,j], d = d[1,j] )
+      x<-calificacion[[i]]$calificacion[,J[j]]
+      x[ is.na( x ) ]<-0
+      
+      w<-p * ( 1 - p )
+      U<-( x - p )^2
+      
+      out<-sum( U / w, na.rm = TRUE ) / N
+      inf<-sum( U, na.rm = TRUE ) / sum( w, na.rm = TRUE )
+      
+      sdout<-sqrt( sum( 1 / w, na.rm = TRUE ) - 4 * N ) / N
+      sdinf<-sqrt( sum( w, na.rm = TRUE ) - 4 * sum( w^2, na.rm = TRUE ) ) / sum( w, na.rm = TRUE )
+      
+      outfit<-c( outfit, out )
+      infit<-c( infit, inf )
+      
+      sdoutfit<-c( sdoutfit, sdout )
+      sdinfit<-c( sdinfit, sdinf )
+      
+      tout<-c( tout, ( out^(1/3) - 1 ) * ( 3 / sdout ) + sdout / 3)
+      tinf<-c( tinf, ( inf^(1/3) - 1 ) * ( 3 / sdinf ) + sdinf / 3 )
+    }
+    rasch.in.out[[i]]<-data.frame( outfit = outfit, sdoutfit = sdoutfit, tout = tout,
+                                   infit = infit, sdinfit = sdinfit, tinf = tinf )
+  }
+  return( rasch.in.out )
+}
