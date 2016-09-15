@@ -357,33 +357,28 @@ discriminacion.examen<-function( calificacion, porcentaje ){
   discriminacion<-list()
   for ( i in 1:length( calificacion ) ) {
     
-    q<-t( apply( porcentaje[[i]], 1, FUN = function( x ) {
-      q<-unlist( quantile( calificacion[[i]]$habilidad$habilidad, probs = x ) )
-      return(q)
-    } ) )
-    q<-as.data.frame( q )
-    names(q)<-c('inf','sup')
-               
-    id<-names( calificacion[[i]]$habilidad )[1]
-    d<-merge( calificacion[[i]]$calificacion, calificacion[[i]]$habilidad, by = id )
-    
-    cols<-calificacion[[i]]$respuestas
-    preguntas<-calificacion[[i]]$preguntas
+    J<-calificacion[[i]]$respuestas
+    M<-calificacion[[i]]$preguntas
     
     DD<-NULL
-    for ( j in 1:preguntas ) {
-      GS<-sum( d[ d$habilidad > q[j,'sup'], cols[j] ] )
-      GI<-sum( d[ d$habilidad <= q[j,'inf'], cols[j] ] )
-      D<-( GS - GI ) / max( GS, GI )
-      D<-data.frame( pregunta = j, GI = GI, GS = GS, discriminacion = D )
+    for ( j in 1:M ) {
+      p<-as.numeric( porcentaje[[i]][j,] )
+      H<-calificacion[[i]]$habilidad$habilidad
+      q<-unlist( quantile( H, probs = p ) )
+      IS<-( H >= q[1] )
+      II<-( H <= q[2] )
+      NS<-sum( IS, na.rm = TRUE )
+      NI<-sum( II, na.rm = TRUE )
+      GS<-sum( calificacion[[i]]$calificacion[ IS,J[j] ], na.rm = TRUE )
+      GI<-sum( calificacion[[i]]$calificacion[ II,J[j] ], na.rm = TRUE )
+      ID<-GS / NS - GI / NI
+      D<-data.frame( reactivo = j, NI = NI, GI = GI, NS = NS, GS = GS, ID = ID )
       DD<-rbind( DD, D )
     }
-    rm( GS, GI, j )
     
     discriminacion[[i]]<-list( carrera = calificacion[[i]]$carrera,
                                forma = calificacion[[i]]$forma, 
                                preguntas = calificacion[[i]]$preguntas,
-                               porcentaje = porcentaje[[i]],
                                discriminacion = DD )
   }
   rm( i )
