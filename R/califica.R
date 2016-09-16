@@ -492,5 +492,3 @@ rasch.ECIXz<-function( calificacion, rasch.disc ) {
   }
   return( rasch.ECI )
 }
-
-rasch.ECI<-rasch.ECIXz( calificacion, rasch.disc )
