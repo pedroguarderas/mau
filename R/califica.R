@@ -405,7 +405,7 @@ corr.punto.biserial<-function( calificacion ) {
     }
     punto.biserial[[i]]<-list( carrera = calificacion[[i]]$carrera,
                                forma = calificacion[[i]]$forma,
-                               corr.pbis = data.table( id = 1:P, pbis = pbis ) )
+                               corr.pbis = data.table( reactivo = 1:P, pbis = pbis ) )
   }
   return( punto.biserial )
 }
@@ -452,7 +452,7 @@ rasch.infit.outfit<-function( calificacion, rasch.disc ) {
       tout<-c( tout, ( out^(1/3) - 1 ) * ( 3 / sdout ) + sdout / 3)
       tinf<-c( tinf, ( inf^(1/3) - 1 ) * ( 3 / sdinf ) + sdinf / 3 )
     }
-    rasch.in.out[[i]]<-data.frame( outfit = outfit, sdoutfit = sdoutfit, tout = tout,
+    rasch.in.out[[i]]<-data.frame( reactivo = 1:M, outfit = outfit, sdoutfit = sdoutfit, tout = tout,
                                    infit = infit, sdinfit = sdinfit, tinf = tinf )
   }
   return( rasch.in.out )
