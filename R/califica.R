@@ -79,6 +79,7 @@ calificacion.examenes<-function( examenes ) {
                              vars = examenes[[i]]$vars,
                              id = examenes[[i]]$id,
                              respuestas = examenes[[i]]$corresp[[1]],
+                             banco = examenes[[i]]$banco,
                              calificacion = calf,
                              dificultad = dificultad,
                              habilidad = habilidad )
@@ -122,6 +123,7 @@ distractores.analisis<-function( examenes, calificacion, grupos ) {
     distractores[[i]]<-list( carrera = examenes[[i]]$carrera,
                              forma = examenes[[i]]$forma,
                              preguntas = examenes[[i]]$preguntas,
+                             banco = examenes[[i]]$banco,
                              distractor = distract )
   }
   
@@ -278,6 +280,7 @@ rasch.analisis<-function( calificacion, method, itnmax, lim, version = 1, epsilo
     
     rasch[[i]]<-list( carrera = calificacion[[i]]$carrera,
                       forma = calificacion[[i]]$forma,
+                      banco = calificacion[[i]]$banco,
                       beta = opt[1,1:n], 
                       delta = opt[1,(n+1):m],
                       info = opt[1,(m+1):ncol(opt)] )                         
@@ -302,6 +305,7 @@ rasch.disc.analisis<-function( calificacion, method, maxit, epsilon = 10e-5 ) {
     
     rasch.disc[[i]]<-list( carrera = calificacion[[i]]$carrera,
                            forma = calificacion[[i]]$forma,
+                           banco = calificacion[[i]]$banco,
                            alpha = opt[1,1:m], 
                            delta = opt[1,(m+1):(2*m)],
                            beta = opt[1,(2*m+1):(n+2*m)],
@@ -341,6 +345,7 @@ rasch.analisis.estres<-function( calificacion, N, method = 'BFGS',
     rownames( delta )<-NULL
     rasch[[i]]<-list( carrera = calificacion[[i]]$carrera,
                       forma = calificacion[[i]]$forma,
+                      banco = calificacion[[i]]$banco,
                       N = N,
                       beta = beta, 
                       delta = delta,
@@ -379,6 +384,7 @@ discriminacion.examen<-function( calificacion, porcentaje ){
     discriminacion[[i]]<-list( carrera = calificacion[[i]]$carrera,
                                forma = calificacion[[i]]$forma, 
                                preguntas = calificacion[[i]]$preguntas,
+                               banco = calificacion[[i]]$banco,
                                discriminacion = DD )
   }
   rm( i )
@@ -405,6 +411,7 @@ corr.punto.biserial<-function( calificacion ) {
     }
     punto.biserial[[i]]<-list( carrera = calificacion[[i]]$carrera,
                                forma = calificacion[[i]]$forma,
+                               banco = calificacion[[i]]$banco,
                                corr.pbis = data.table( reactivo = 1:P, pbis = pbis ) )
   }
   return( punto.biserial )
@@ -452,7 +459,8 @@ rasch.infit.outfit<-function( calificacion, rasch.disc ) {
       tout<-c( tout, ( out^(1/3) - 1 ) * ( 3 / sdout ) + sdout / 3)
       tinf<-c( tinf, ( inf^(1/3) - 1 ) * ( 3 / sdinf ) + sdinf / 3 )
     }
-    rasch.in.out[[i]]<-data.frame( reactivo = 1:M, outfit = outfit, sdoutfit = sdoutfit, tout = tout,
+    rasch.in.out[[i]]<-data.frame( reactivo = 1:M, banco = calificacion[[i]]$banco,
+                                   outfit = outfit, sdoutfit = sdoutfit, tout = tout,
                                    infit = infit, sdinfit = sdinfit, tinf = tinf )
   }
   return( rasch.in.out )
