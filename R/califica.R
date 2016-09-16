@@ -456,7 +456,7 @@ rasch.infit.outfit<-function( calificacion, rasch.disc ) {
       sdoutfit<-c( sdoutfit, sdout )
       sdinfit<-c( sdinfit, sdinf )
       
-      tout<-c( tout, ( out^(1/3) - 1 ) * ( 3 / sdout ) + sdout / 3)
+      tout<-c( tout, ( out^(1/3) - 1 ) * ( 3 / sdout ) + sdout / 3 )
       tinf<-c( tinf, ( inf^(1/3) - 1 ) * ( 3 / sdinf ) + sdinf / 3 )
     }
     rasch.in.out[[i]]<-data.frame( reactivo = 1:M, banco = calificacion[[i]]$banco,
@@ -464,4 +464,39 @@ rasch.infit.outfit<-function( calificacion, rasch.disc ) {
                                    infit = infit, sdinfit = sdinfit, tinf = tinf )
   }
   return( rasch.in.out )
+}
+
+#___________________________________________________________________________________________________
+rasch.ECIXz<-function( calificacion, rasch.disc ) {
+  rasch.ECI<-list()
+  for ( i in 1:length( calificacion ) ) {
+    N<-nrow( calificacion[[i]]$calificacion )
+    M<-calificacion[[i]]$preguntas
+    J<-calificacion[[i]]$respuestas
+    a<-rasch.disc[[i]]$alpha
+    b<-rasch.disc[[i]]$beta
+    d<-rasch.disc[[i]]$delta
+    
+    ECI2z<-NULL
+    ECI4z<-NULL
+    
+    e2<-NULL
+    e4<-NULL
+    
+    for ( j in 1:M ) {
+      p<-sapply( b[1,], rasch.logit.disc, a = a[1,j], d = d[1,j] )
+      x<-calificacion[[i]]$calificacion[,J[j]]
+      x[ is.na( x ) ]<-0
+      
+      G<-( 1/M )*sum( p )
+      uG<-( 1/N )*sum( G )
+      uP<-( 1/N )*sum( p )
+      Q<-1-p
+      
+      ECI2z[j]<-sum( ( p - x ) * ( G - uG ) ) / ( sum( p*Q*( G-uG )^2 ) )^(1/2)
+      ECI4z[j]<-sum( ( p - x ) * ( p - uP ) ) / ( sum( p*Q*( G-uP )^2 ) )^(1/2)
+    }
+    rasch.ECI[[i]]<-data.frame( reactivo = 1:M, ECI2z = ECI2z, ECI4z = ECI4z )
+  }
+  return( rasch.ECI )
 }
