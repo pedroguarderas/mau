@@ -208,13 +208,13 @@ rasch.model<-function( calificacion, beta.fix = TRUE,
                control = list( save.failures = TRUE, trace = 0, maximize = TRUE ) )
   
   if ( beta.fix ) {
-    Opt<-list( delta = Opt[1,1:n],
+    Opt<-list( delta = as.numeric( Opt[1,1:n] ),
                beta = beta,
                info = Opt[1,(n+1):ncol(Opt) ] )
   } else {
-    Opt<-list( delta = opt[1,1:n],
-               beta = opt[1,(n+1):(n+m)],
-               info = opt[1,(n+m+1):ncol(Opt) ] )
+    Opt<-list( delta = as.numeric( Opt[1,1:n] ),
+               beta = as.numeric( Opt[1,(n+1):(n+m)] ),
+               info = Opt[1,(n+m+1):ncol(Opt) ] )
   }
   return( Opt )
 }
@@ -306,15 +306,15 @@ rasch.disc.model<-function( calificacion, beta.fix = TRUE, method = 'BFGS', maxi
                control = list( save.failures = TRUE, trace = 0, maximize = TRUE ) )
   
   if ( beta.fix ) {
-    Opt<-list( alpha = Opt[1,1:n], 
-               delta = Opt[1,(n+1):(2*n)],
+    Opt<-list( alpha = as.numeric( Opt[1,1:n] ), 
+               delta = as.numeric( Opt[1,(n+1):(2*n)] ),
                beta = beta,
                info = Opt[1,(2*n+1):ncol(Opt) ] )
   } else {
-    Opt<-list( alpha = opt[1,1:n], 
-               delta = opt[1,(n+1):(2*n)],
-               beta = opt[1,(2*n+1):(m+2*n)],
-               info = opt[1,(m+2*n+1):ncol(opt) ] )
+    Opt<-list( alpha = as.numeric( Opt[1,1:n] ), 
+               delta = as.numeric( Opt[1,(n+1):(2*n)] ),
+               beta = as.numeric( Opt[1,(2*n+1):(m+2*n)] ),
+               info = Opt[1,(m+2*n+1):ncol(Opt) ] )
   }
 
   return( Opt )
