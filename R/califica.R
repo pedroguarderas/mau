@@ -175,14 +175,14 @@ rasch.model<-function( calificacion, beta.fix = TRUE,
   I<-1:n
   J<-(n+1):(m+n)
   
-  hz<-NULL
+  beta<-NULL
   loglike<-NULL
   gloglike<-NULL
   x0<-NULL
   if ( beta.fix ) {
-    hz<-( h - mean( h ) ) / sd( h )
-    loglike<-funtion( x ) return( rasch.loglike( hz, x, h, d ) )
-    gloglike<-funtion( x ) return( rasch.gloglike( hz, x, h, d ) )
+    beta<-( h - mean( h ) ) / sd( h )
+    loglike<-funtion( x ) return( rasch.loglike( beta, x, h, d ) )
+    gloglike<-funtion( x ) return( rasch.gloglike( beta, x, h, d ) )
     x0<-runif( n, lim[1], lim[2] )
   } else {
     loglike<-funtion( x ) return( rasch.loglike( x[J], x[I] ) )
