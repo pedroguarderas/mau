@@ -242,40 +242,38 @@ rasch.analisis<-function( calificacion, beta.fix = TRUE, method = 'BFGS', itnmax
 
 #___________________________________________________________________________________________________
 # Rasch discriminant model
-rasch.disc.loglike<-function( alpha, delta, beta, X ) {
+rasch.disc.loglike<-function( alpha, delta, beta, dificultad, X ) {
   n<-length( beta )
-  L <- as.numeric( alpha %*% t( X ) %*% beta ) - sum( alpha * delta * d ) - 
+  L <- as.numeric( alpha %*% t( X ) %*% beta ) - sum( alpha * delta * dificultad ) - 
     sum( log( 1 + exp( alpha %x% beta - rep( alpha * delta, times = 1, each = n ) ) ) )
   return( L )
 }
 
-rasch.disc.gloglike<-function( alpha, delta, beta, X ) {
+rasch.disc.gloglike<-function( alpha, delta, beta, dificultad, X ) {
   n<-length( alpha )
   m<-length( beta )
-  G<-c( sapply( 1:n, FUN = function( i ) sum( X[,i] * beta ) ) - d * delta -
-          sapply( 1:n, FUN = function( i ) sum( ( beta - delta[i] ) /( 1 + exp( -alpha[i] * ( beta - delta[i] ) ) ) ) ),
-        -d * alpha + 
-          sapply( 1:n, FUN = function( i ) sum( alpha[i] / ( 1 + exp( -alpha[i] * ( beta - delta[i] ) ) ) ) ),
-          sapply( 1:m, FUN = function( j ) sum( X[j,] * alpha ) ) - 
-          sapply( 1:m, FUN = function( j ) sum( alpha / ( 1 + exp( -alpha * ( beta[j] - delta ) ) ) ) ) )
+  G<-c( sapply( 1:n, FUN = function( i ) sum( X[,i] * beta ) ) - dificultad * delta -
+        sapply( 1:n, FUN = function( i ) sum( ( beta - delta[i] ) /( 1 + exp( -alpha[i] * ( beta - delta[i] ) ) ) ) ),
+        -dificultad * alpha + 
+        sapply( 1:n, FUN = function( i ) sum( alpha[i] / ( 1 + exp( -alpha[i] * ( beta - delta[i] ) ) ) ) ),
+        sapply( 1:m, FUN = function( j ) sum( X[j,] * alpha ) ) - 
+        sapply( 1:m, FUN = function( j ) sum( alpha / ( 1 + exp( -alpha * ( beta[j] - delta ) ) ) ) ) )
   
   return( G )
 }
 
-rasch.disc.gloglike.beta.fix<-function( alpha, delta, beta, X ) {
+rasch.disc.gloglike.beta.fix<-function( alpha, delta, beta, dificultad, X ) {
   n<-length( alpha )
   m<-length( beta )
-  G<-c( sapply( 1:n, FUN = function( i ) sum( X[,i] * beta ) ) - d * alpha -
-          sapply( 1:n, FUN = function( i ) sum( ( beta - delta[i] ) /( 1 + exp( -alpha[i] * ( beta - delta[i] ) ) ) ) ),
-        -d * alpha + 
-          sapply( 1:n, FUN = function( i ) sum( alpha[i] / ( 1 + exp( -alpha[i] * ( beta - delta[i] ) ) ) ) ) )
+  G<-c( sapply( 1:n, FUN = function( i ) sum( X[,i] * beta ) ) - dificultad * delta -
+        sapply( 1:n, FUN = function( i ) sum( ( beta - delta[i] ) /( 1 + exp( -alpha[i] * ( beta - delta[i] ) ) ) ) ),
+        -dificultad * alpha + 
+        sapply( 1:n, FUN = function( i ) sum( alpha[i] / ( 1 + exp( -alpha[i] * ( beta - delta[i] ) ) ) ) ) )
   
   return( G )
 }
 
-
-rasch.disc.model<-function( calificacion, par, beta.fix = TRUE,
-                            method = 1, maxit = 1e3, epsilon = 10e-5 ) {
+rasch.disc.model<-function( calificacion, beta.fix = TRUE, method = 'BFGS', maxit = 1e3, epsilon = 10e-5 ) {
   h<-calificacion$habilidad$habilidad
   d<-calificacion$dificultad$dificultad
   X<-as.matrix( calificacion$calificacion[,calificacion$respuestas] )
@@ -290,15 +288,16 @@ rasch.disc.model<-function( calificacion, par, beta.fix = TRUE,
   beta<-NULL
   loglike<-NULL
   gloglike<-NULL
-  x0<-par
+  x0<-NULL
   if ( beta.fix ) {
     beta<-( h - mean( h ) ) / sd( h )
-    loglike<-function( x ) return( rasch.disc.loglike( x[I], x[J], beta, X ) )
-    gloglike<-function( x ) return( rasch.disc.gloglike.beta.fix( x[I], x[J], beta, X ) )
-    x0<-par[1:(2*n)]
+    loglike<-function( x ) return( rasch.disc.loglike( x[I], x[J], beta, d, X ) )
+    gloglike<-function( x ) return( rasch.disc.gloglike.beta.fix( x[I], x[J], beta, d, X ) )
+    x0<-runif( 2 * n, -1, 1 )
   } else {
-    loglike<-function( x ) return( rasch.disc.loglike( x[I], x[J], x[K], X ) )
-    gloglike<-function( x ) return( rasch.disc.gloglike( x[I], x[J], x[K], X ) )
+    loglike<-function( x ) return( rasch.disc.loglike( x[I], x[J], x[K], d, X ) )
+    gloglike<-function( x ) return( rasch.disc.gloglike( x[I], x[J], x[K], d, X ) )
+    x0<-runif( m + 2 * n, -1, 1 )
   }
   
   Opt<-NULL
@@ -326,14 +325,11 @@ rasch.disc.model<-function( calificacion, par, beta.fix = TRUE,
 rasch.disc.analisis<-function( calificacion, beta.fix = TRUE, method = 'BFGS', maxit = 500, epsilon = 10e-4 ) {
   rasch.disc<-list()
   for ( i in 1:length( calificacion ) ) {
-    n<-length( calificacion[[i]]$habilidad$habilidad )
-    m<-length( calificacion[[i]]$dificultad$dificultad )
-    
-    par<-c( runif( m, 0.99, 1.1 ), 
-            (-1) ^ rbinom( n + m, 1, 0.5 ) * runif( n + m, 0.99, 1.1 ) )
-    
+    m<-length( calificacion[[i]]$habilidad$habilidad )
+    n<-length( calificacion[[i]]$dificultad$dificultad )
+
     opt<-rasch.disc.model( calificacion = calificacion[[i]], beta.fix = beta.fix,
-                           par = par, method = method, maxit = maxit, epsilon = epsilon )
+                           method = method, maxit = maxit, epsilon = epsilon )
     
     rasch.disc[[i]]<-list( carrera = calificacion[[i]]$carrera,
                            forma = calificacion[[i]]$forma,
