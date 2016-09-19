@@ -143,137 +143,76 @@ cronbach.alpha<-function( calificacion, cols ) {
 
 #___________________________________________________________________________________________________
 # Rasch's model
-rasch.model<-function( calificacion, method = 'BFGS', itnmax = 1e3, lim = c( -1, 1 ), 
-                       version = 1, epsilon = 10e-5 ) {
-  hab<-calificacion$habilidad$habilidad
-  dif<-calificacion$dificultad$dificultad
-  n<-length( hab )
-  m<-length( dif )
-  y<-c( hab, -dif )
-  I<-1:n
-  J<-(n+1):(n+m)
-  
-  loglike<-function( x ) {
-    L<-sum( x * y ) - sum( log( 1 + exp( x[I] ) %x% exp( -x[J] ) ) )
-    return( L )
-  }
-  
-  gloglike<-function( x ) {
-    E<-c( exp( x[I] ), exp( -x[J] ) )
-    G<-y + c( -sapply( 1:n, FUN = function(i) sum( E[i] * E[J] / ( 1 + E[i] * E[J] ) ) ), 
-               sapply( (n+1):(n+m), FUN = function(j) sum( E[j] * E[I] / ( 1 + E[j] * E[I] ) ) ) )
-    return( G )
-  }
-  
-  hloglike<-function( x ) {
-    E<-c( exp( x[I] ), exp( -x[J] ) )
-    H<-matrix( 0, n+m, n+m )
-    diag( H )<-  c( -sapply( 1:n, FUN = function(i) sum( E[i] * E[J] / ( 1 + E[i] * E[J] )^2 ) ), 
-                     sapply( (n+1):(n+m), FUN = function(j) sum( E[j] * E[I] / ( 1 + E[j] * E[I] )^2 ) ) )
-    H[I,J]<- E[I] %o% E[J] / ( ( 1 + E[I] %o% E[J] )^2 )
-    H[J,I]<-t( H[I,J] )
-    return( H )
-  }
-  
-  Opt<-NULL
-  if ( version == 1 ) {
-    x0<-runif( n+m, lim[1], lim[2] )
-    Opt<-optimx( par = x0, fn = loglike, gr = gloglike, 
-                 method = method, hessian = FALSE, itnmax = itnmax,
-                 control = list( save.failures = TRUE, trace = 0, maximize = TRUE ) )
-  
-  } else if ( version == 2 ) {
-    x<-runif( n+m, lim[1], lim[2] )
-    x0<-x
-    e<-Inf
-    i<-1
-    while ( i <= itnmax & e > epsilon ) {
-      x0<-x
-      x<-x - solve( hloglike(x), gloglike(x) )
-      e<-sqrt( sum( ( x - x0 ) * ( x - x0 ) ) ) / sqrt( sum( x0 * x0 ) )
-      i<-i+1
-    }
-    Opt<-data.frame( t(x), i, loglike( x ), e )
-    names( Opt )<-c( paste( 'X', 1:(n+m), sep = '' ), 'iter', 'val', 'rel.error' )
-  }
-  
-  #   LogLike<-function( x ) {
-  #     return( list( "objective" = -loglike(x), "gradient" = -gloglike(x) ) )
-  #   }
-  
-  #   Constraint<-function( x ) {
-  #     G<-cbind( c( rep( 1, n ), rep( 0, m ) ), c( rep( 0, n ), rep( 1, m ) ) )
-  #     return( list( "constraints" = c( sum( x[I] ), sum( x[J] ) ), 
-  #                   "jacobian" = G ) )
-  #   }
-  
-  #   local_opts <- list( "algorithm" = "NLOPT_LD_MMA",
-  #                       "xtol_rel" = 1.0e-7 )
-  #   opts <- list( "algorithm" = "NLOPT_LD_AUGLAG",
-  #                 "xtol_rel" = 1.0e-7,
-  #                 "maxeval" = itnmax,
-  #                 "local_opts" = local_opts )
-  
-  #   Opt<-nloptr( x0 = x0,
-  #                eval_f = LogLike,
-  #                eval_g_eq = Constraint,
-  #                opts = opts )
-  
-  return( Opt )
+rasch.loglike<-function( beta, delta, habilidad, dificultad ) {
+  L<-sum( beta * habilidad ) - sum( delta * dificultad ) - sum( log( 1 + exp( beta ) %x% exp( -alpha ) ) )
+  return( L )
 }
 
-#___________________________________________________________________________________________________
-rasch.disc.model<-function( calificacion, par, method = 1, maxit = 1e3, 
-                            epsilon = 10e-5 ) {
+rasch.gloglike<-function( beta, delta ) {
+  E<-c( exp( beta ), exp( -delta ) )
+  G<-y + c( -sapply( 1:n, FUN = function(i) sum( E[i] * E[J] / ( 1 + E[i] * E[J] ) ) ), 
+            sapply( (n+1):(n+m), FUN = function(j) sum( E[j] * E[I] / ( 1 + E[j] * E[I] ) ) ) )
+  return( G )
+}
+
+rasch.hloglike<-function( beta, delta ) {
+  E<-c( exp( beta ), exp( -delta ) )
+  H<-matrix( 0, n+m, n+m )
+  diag( H )<-  c( -sapply( 1:n, FUN = function(i) sum( E[i] * E[J] / ( 1 + E[i] * E[J] )^2 ) ), 
+                  sapply( (n+1):(n+m), FUN = function(j) sum( E[j] * E[I] / ( 1 + E[j] * E[I] )^2 ) ) )
+  H[I,J]<- E[I] %o% E[J] / ( ( 1 + E[I] %o% E[J] )^2 )
+  H[J,I]<-t( H[I,J] )
+  return( H )
+}
+
+rasch.model<-function( calificacion, beta.fix = TRUE, 
+                       method = 'BFGS', itnmax = 1e3, lim = c( -1, 1 ), version = 1, epsilon = 10e-5 ) {
   h<-calificacion$habilidad$habilidad
   d<-calificacion$dificultad$dificultad
-  X<-as.matrix( calificacion$calificacion[,calificacion$respuestas] )
-  X<-apply( X, c(1,2), FUN = function( x ) ifelse( is.na(x), 0, x ) )
-  n<-length( h )
-  m<-length( d )
+  m<-length( h )
+  n<-length( d )
+  
+  I<-1:n
+  J<-(n+1):(m+n)
+  
+  hz<-NULL
+  loglike<-NULL
+  gloglike<-NULL
+  x0<-NULL
+  if ( beta.fix ) {
+    hz<-( h - mean( h ) ) / sd( h )
+    loglike<-funtion( x ) return( rasch.loglike( hz, x, h, d ) )
+    gloglike<-funtion( x ) return( rasch.gloglike( hz, x, h, d ) )
+    x0<-runif( n, lim[1], lim[2] )
+  } else {
+    loglike<-funtion( x ) return( rasch.loglike( x[J], x[I] ) )
+    gloglike<-funtion( x ) return( rasch.gloglike( x[J], x[I] ) )
+    x0<-runif( m + n, lim[1], lim[2] )
+  }
 
-  I<-1:m                     #Índice para alpha (m) (x[I])
-  J<-(m+1):(2*m)             #Índice para delta (m) (x[J])
-  K<-(2*m+1):(n+2*m)         #Índice para beta  (n) (x[K])
-  
-  # Functions for Rasch discriminant model
-  rasch.disc.loglike <- function( x ) {
-    L <- as.numeric( x[I] %*% t( X ) %*% x[K] ) - sum( x[I] * x[J] * d ) - 
-      sum( log( 1 + exp( x[I] %x% x[K] - rep( x[I] * x[J], times = 1, each = n ) ) ) )
-    return( L )
-  }
-  
-  rasch.disc.gloglike<-function( x ) {
-    dL <- c( sapply( 1:m, FUN = function( i ) sum( X[,i] * x[K] ) ) - d * x[J] -
-               sapply( 1:m, FUN = function( i ) sum( ( x[K] - x[i+m] ) /( 1 + exp( -x[i] * ( x[K] - x[i+m] ) ) ) ) ),
-             -d * x[I] + 
-               sapply( 1:m, FUN = function( i ) sum( x[i] / ( 1 + exp( -x[i] * ( x[K] - x[i+m] ) ) ) ) ),
-             sapply( 1:n, FUN = function( j ) sum( X[j,] * x[I] ) ) - 
-               sapply( K, FUN = function( j ) sum( x[I] / ( 1 + exp( -x[I] * ( x[j] - x[J] ) ) ) ) ) )
-    
-    return( dL )
-  }
-  
   Opt<-NULL
-  Opt<-optimx( par = par, fn = rasch.disc.loglike, gr = rasch.disc.gloglike,
-               method = method, hessian = FALSE, itnmax = maxit,
+  Opt<-optimx( par = x0, fn = loglike, gr = gloglike, 
+               method = method, hessian = FALSE, itnmax = itnmax,
                control = list( save.failures = TRUE, trace = 0, maximize = TRUE ) )
   
-  # Opt<-BBoptim( par = x0, fn = loglike, gr = gloglike, method = method, 
-                # control = list( maxit = maxit, eps = epsilon, maximize = TRUE ) )
-  
-  # Opt<-spg( par = par, fn = rasch.disc.loglike, gr = rasch.disc.gloglike, method = method, 
-  #           control = list( maxit = maxit, eps = epsilon, maximize = TRUE ) )
-
+  if ( beta.fix ) {
+    Opt<-list( delta = Opt[1,1:n],
+               beta = beta,
+               info = Opt[1,(n+1):ncol(Opt) ] )
+  } else {
+    Opt<-list( delta = opt[1,1:n],
+               beta = opt[1,(n+1):(n+m)],
+               info = opt[1,(n+m+1):ncol(Opt) ] )
+  }
   return( Opt )
 }
 
 #___________________________________________________________________________________________________
 # Rasch análisis para una lista de examenes
-rasch.analisis<-function( calificacion, method, itnmax, lim, version = 1, epsilon = 10e-5 ) {
+rasch.analisis<-function( calificacion, beta.fix = TRUE, method = 'BFGS', itnmax = 500, lim, version = 1, epsilon = 10e-4 ) {
   rasch<-list()
   for ( i in 1:length( calificacion ) ) {
-    opt<-rasch.model( calificacion[[i]], method = method, itnmax = itnmax, 
+    opt<-rasch.model( calificacion[[i]], beta.fix = beta.fix, method = method, itnmax = itnmax, 
                       lim = lim, version, epsilon )
     n<-nrow( calificacion[[i]]$calificacion )
     m<-n+calificacion[[i]]$preguntas
@@ -281,17 +220,85 @@ rasch.analisis<-function( calificacion, method, itnmax, lim, version = 1, epsilo
     rasch[[i]]<-list( carrera = calificacion[[i]]$carrera,
                       forma = calificacion[[i]]$forma,
                       banco = calificacion[[i]]$banco,
-                      beta = opt[1,1:n], 
-                      delta = opt[1,(n+1):m],
-                      info = opt[1,(m+1):ncol(opt)] )                         
+                      beta = opt$beta, 
+                      delta = opt$delta,
+                      info = opt$info )                         
   }
   rm( i, n, m)
   return( rasch )
 }
 
 #___________________________________________________________________________________________________
+# Rasch discriminant model
+rasch.disc.loglike<-function( alpha, delta, beta, X ) {
+  n<-length( beta )
+  L <- as.numeric( alpha %*% t( X ) %*% beta ) - sum( alpha * delta * d ) - 
+    sum( log( 1 + exp( alpha %x% beta - rep( alpha * delta, times = 1, each = n ) ) ) )
+  return( L )
+}
+
+rasch.disc.gloglike<-function( alpha, delta, beta, X ) {
+  n<-length( alpha )
+  m<-length( beta )
+  g<-c( sapply( 1:n, FUN = function( i ) sum( X[,i] * beta ) ) - d * beta -
+          sapply( 1:n, FUN = function( i ) sum( ( beta - delta[i] ) /( 1 + exp( -alpha[i] * ( beta - delta[i] ) ) ) ) ),
+        -d * alpha + sapply( 1:n, FUN = function( i ) sum( alpha[i] / ( 1 + exp( -alpha[i] * ( beta - delta[i] ) ) ) ) ),
+        sapply( 1:m, FUN = function( j ) sum( X[j,] * alpha ) ) - 
+          sapply( 1:m, FUN = function( j ) sum( alpha / ( 1 + exp( -alpha * ( beta[j] - delta ) ) ) ) ) )
+  
+  return( g )
+}
+
+rasch.disc.model<-function( calificacion, par, beta.fix = TRUE,
+                            method = 1, maxit = 1e3, epsilon = 10e-5 ) {
+  h<-calificacion$habilidad$habilidad
+  d<-calificacion$dificultad$dificultad
+  X<-as.matrix( calificacion$calificacion[,calificacion$respuestas] )
+  X<-apply( X, c(1,2), FUN = function( x ) ifelse( is.na(x), 0, x ) )
+  m<-length( h )
+  n<-length( d )
+
+  I<-1:n                     #Índice para alpha (m) (x[I])
+  J<-(n+1):(2*n)             #Índice para delta (m) (x[J])
+  K<-(2*n+1):(m+2*n)         #Índice para beta  (n) (x[K])
+  
+  beta<-NULL
+  loglike<-NULL
+  gloglike<-NULL
+  x0<-par
+  if ( beta.fix ) {
+    beta<-( h - mean( h ) ) / sd( h )
+    loglike<-funtion( x ) return( rasch.disc.loglike( x[I], x[J], beta, X ) )
+    gloglike<-funtion( x ) return( rasch.disc.gloglike( x[I], x[J], beta, X ) )
+    x0<-par[1:(2*m)]
+  } else {
+    loglike<-funtion( x ) return( rasch.disc.loglike( x[I], x[J], x[K], X ) )
+    gloglike<-funtion( x ) return( rasch.disc.gloglike( x[I], x[J], x[K], X ) )
+  }
+  
+  Opt<-NULL
+  Opt<-optimx( par = x0, fn = loglike, gr = gloglike,
+               method = method, hessian = FALSE, itnmax = maxit,
+               control = list( save.failures = TRUE, trace = 0, maximize = TRUE ) )
+  
+  if ( beta.fix ) {
+    Opt<-list( alpha = Opt[1,1:n], 
+               delta = Opt[1,(n+1):(2*n)],
+               beta = beta,
+               info = Opt[1,(2*n+1):ncol(Opt) ] )
+  } else {
+    Opt<-list( alpha = opt[1,1:n], 
+               delta = opt[1,(n+1):(2*n)],
+               beta = opt[1,(2*n+1):(m+2*n)],
+               info = opt[1,(m+2*n+1):ncol(opt) ] )
+  }
+
+  return( Opt )
+}
+
+#___________________________________________________________________________________________________
 # Discriminant rasch analysis
-rasch.disc.analisis<-function( calificacion, method, maxit, epsilon = 10e-5 ) {
+rasch.disc.analisis<-function( calificacion, beta.fix = TRUE, method = 'BFGS', maxit = 500, epsilon = 10e-4 ) {
   rasch.disc<-list()
   for ( i in 1:length( calificacion ) ) {
     n<-length( calificacion[[i]]$habilidad$habilidad )
@@ -300,16 +307,16 @@ rasch.disc.analisis<-function( calificacion, method, maxit, epsilon = 10e-5 ) {
     par<-c( runif( m, 0.99, 1.1 ), 
             (-1) ^ rbinom( n + m, 1, 0.5 ) * runif( n + m, 0.99, 1.1 ) )
     
-    opt<-rasch.disc.model( calificacion = calificacion[[i]],
-                                       par = par, method = method, maxit = maxit, epsilon = epsilon )
+    opt<-rasch.disc.model( calificacion = calificacion[[i]], beta.fix = beta.fix,
+                           par = par, method = method, maxit = maxit, epsilon = epsilon )
     
     rasch.disc[[i]]<-list( carrera = calificacion[[i]]$carrera,
                            forma = calificacion[[i]]$forma,
                            banco = calificacion[[i]]$banco,
-                           alpha = opt[1,1:m], 
-                           delta = opt[1,(m+1):(2*m)],
-                           beta = opt[1,(2*m+1):(n+2*m)],
-                           info = opt[1,(n+2*m):ncol(opt) ] )   
+                           alpha = opt$alpha, 
+                           delta = opt$delta,
+                           beta = opt$beta,
+                           info = opt$info )   
 
   }
   return( rasch.disc )
