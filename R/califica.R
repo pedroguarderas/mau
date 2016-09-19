@@ -465,7 +465,7 @@ rasch.infit.outfit<-function( calificacion, rasch.disc ) {
     tinf<-NULL
     
     for ( j in 1:M ) {
-      p<-sapply( b[1,], rasch.logit.disc, a = a[1,j], d = d[1,j] )
+      p<-sapply( b, rasch.logit.disc, a = a, d = d )
       x<-calificacion[[i]]$calificacion[,J[j]]
       x[ is.na( x ) ]<-0
       
