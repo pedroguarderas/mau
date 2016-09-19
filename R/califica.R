@@ -181,12 +181,12 @@ rasch.model<-function( calificacion, beta.fix = TRUE,
   x0<-NULL
   if ( beta.fix ) {
     beta<-( h - mean( h ) ) / sd( h )
-    loglike<-funtion( x ) return( rasch.loglike( beta, x, h, d ) )
-    gloglike<-funtion( x ) return( rasch.gloglike( beta, x, h, d ) )
+    loglike<-function( x ) return( rasch.loglike( beta, x, h, d ) )
+    gloglike<-function( x ) return( rasch.gloglike( beta, x, h, d ) )
     x0<-runif( n, lim[1], lim[2] )
   } else {
-    loglike<-funtion( x ) return( rasch.loglike( x[J], x[I] ) )
-    gloglike<-funtion( x ) return( rasch.gloglike( x[J], x[I] ) )
+    loglike<-function( x ) return( rasch.loglike( x[J], x[I] ) )
+    gloglike<-function( x ) return( rasch.gloglike( x[J], x[I] ) )
     x0<-runif( m + n, lim[1], lim[2] )
   }
 
@@ -268,12 +268,12 @@ rasch.disc.model<-function( calificacion, par, beta.fix = TRUE,
   x0<-par
   if ( beta.fix ) {
     beta<-( h - mean( h ) ) / sd( h )
-    loglike<-funtion( x ) return( rasch.disc.loglike( x[I], x[J], beta, X ) )
-    gloglike<-funtion( x ) return( rasch.disc.gloglike( x[I], x[J], beta, X ) )
+    loglike<-function( x ) return( rasch.disc.loglike( x[I], x[J], beta, X ) )
+    gloglike<-function( x ) return( rasch.disc.gloglike( x[I], x[J], beta, X ) )
     x0<-par[1:(2*m)]
   } else {
-    loglike<-funtion( x ) return( rasch.disc.loglike( x[I], x[J], x[K], X ) )
-    gloglike<-funtion( x ) return( rasch.disc.gloglike( x[I], x[J], x[K], X ) )
+    loglike<-function( x ) return( rasch.disc.loglike( x[I], x[J], x[K], X ) )
+    gloglike<-function( x ) return( rasch.disc.gloglike( x[I], x[J], x[K], X ) )
   }
   
   Opt<-NULL
