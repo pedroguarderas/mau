@@ -185,8 +185,8 @@ rasch.model<-function( calificacion, beta.fix = TRUE,
     gloglike<-function( x ) return( rasch.gloglike( beta, x, h, d ) )
     x0<-runif( n, lim[1], lim[2] )
   } else {
-    loglike<-function( x ) return( rasch.loglike( x[J], x[I] ) )
-    gloglike<-function( x ) return( rasch.gloglike( x[J], x[I] ) )
+    loglike<-function( x ) return( rasch.loglike( x[J], x[I], h, d ) )
+    gloglike<-function( x ) return( rasch.gloglike( x[J], x[I], h, d ) )
     x0<-runif( m + n, lim[1], lim[2] )
   }
 
