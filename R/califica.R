@@ -144,26 +144,38 @@ cronbach.alpha<-function( calificacion, cols ) {
 #___________________________________________________________________________________________________
 # Rasch's model
 rasch.loglike<-function( beta, delta, habilidad, dificultad ) {
-  L<-sum( beta * habilidad ) - sum( delta * dificultad ) - sum( log( 1 + exp( beta ) %x% exp( -alpha ) ) )
+  L<-sum( beta * habilidad ) - sum( delta * dificultad ) - sum( log( 1 + exp( beta ) %x% exp( -delta ) ) )
   return( L )
 }
 
 rasch.gloglike<-function( beta, delta, habilidad, dificultad ) {
-  E<-c( exp( beta ), exp( -delta ) )
-  G<-c( habilidad, -dificultad ) + c( -sapply( 1:n, FUN = function(i) sum( E[i] * E[J] / ( 1 + E[i] * E[J] ) ) ), 
-            sapply( (n+1):(n+m), FUN = function(j) sum( E[j] * E[I] / ( 1 + E[j] * E[I] ) ) ) )
+  m<-length( beta )
+  n<-length( delta )
+  Eb<-exp( beta )
+  Ed<-exp( -delta )
+  G<-c( -dificultad, habilidad ) + 
+    c( sapply( 1:n, FUN = function(j) sum( Ed[j] * Eb / ( 1 + Ed[j] * Eb ) ) ),
+       -sapply( 1:m, FUN = function(i) sum( Eb[i] * Ed / ( 1 + Eb[i] * Ed ) ) ) )
   return( G )
 }
 
-rasch.hloglike<-function( beta, delta ) {
-  E<-c( exp( beta ), exp( -delta ) )
-  H<-matrix( 0, n+m, n+m )
-  diag( H )<-  c( -sapply( 1:n, FUN = function(i) sum( E[i] * E[J] / ( 1 + E[i] * E[J] )^2 ) ), 
-                  sapply( (n+1):(n+m), FUN = function(j) sum( E[j] * E[I] / ( 1 + E[j] * E[I] )^2 ) ) )
-  H[I,J]<- E[I] %o% E[J] / ( ( 1 + E[I] %o% E[J] )^2 )
-  H[J,I]<-t( H[I,J] )
-  return( H )
+rasch.gloglike.beta.fix<-function( delta, beta, habilidad, dificultad ) {
+  n<-length( delta )
+  Eb<-exp( beta )
+  Ed<-exp( -delta )
+  G<-( -dificultad ) + sapply( 1:n, FUN = function(j) sum( Ed[j] * Eb / ( 1 + Ed[j] * Eb ) ) )
+  return( G )
 }
+
+# rasch.hloglike<-function( beta, delta ) {
+#   E<-c( exp( beta ), exp( -delta ) )
+#   H<-matrix( 0, n+m, n+m )
+#   diag( H )<-  c( -sapply( 1:n, FUN = function(i) sum( E[i] * E[J] / ( 1 + E[i] * E[J] )^2 ) ), 
+#                   sapply( (n+1):(n+m), FUN = function(j) sum( E[j] * E[I] / ( 1 + E[j] * E[I] )^2 ) ) )
+#   H[I,J]<- E[I] %o% E[J] / ( ( 1 + E[I] %o% E[J] )^2 )
+#   H[J,I]<-t( H[I,J] )
+#   return( H )
+# }
 
 rasch.model<-function( calificacion, beta.fix = TRUE, 
                        method = 'BFGS', itnmax = 1e3, lim = c( -1, 1 ), version = 1, epsilon = 10e-5 ) {
@@ -182,7 +194,7 @@ rasch.model<-function( calificacion, beta.fix = TRUE,
   if ( beta.fix ) {
     beta<-( h - mean( h ) ) / sd( h )
     loglike<-function( x ) return( rasch.loglike( beta, x, h, d ) )
-    gloglike<-function( x ) return( rasch.gloglike( beta, x, h, d ) )
+    gloglike<-function( x ) return( rasch.gloglike.beta.fix( x, beta, h, d ) )
     x0<-runif( n, lim[1], lim[2] )
   } else {
     loglike<-function( x ) return( rasch.loglike( x[J], x[I], h, d ) )
@@ -240,14 +252,27 @@ rasch.disc.loglike<-function( alpha, delta, beta, X ) {
 rasch.disc.gloglike<-function( alpha, delta, beta, X ) {
   n<-length( alpha )
   m<-length( beta )
-  g<-c( sapply( 1:n, FUN = function( i ) sum( X[,i] * beta ) ) - d * beta -
+  G<-c( sapply( 1:n, FUN = function( i ) sum( X[,i] * beta ) ) - d * delta -
           sapply( 1:n, FUN = function( i ) sum( ( beta - delta[i] ) /( 1 + exp( -alpha[i] * ( beta - delta[i] ) ) ) ) ),
-        -d * alpha + sapply( 1:n, FUN = function( i ) sum( alpha[i] / ( 1 + exp( -alpha[i] * ( beta - delta[i] ) ) ) ) ),
-        sapply( 1:m, FUN = function( j ) sum( X[j,] * alpha ) ) - 
+        -d * alpha + 
+          sapply( 1:n, FUN = function( i ) sum( alpha[i] / ( 1 + exp( -alpha[i] * ( beta - delta[i] ) ) ) ) ),
+          sapply( 1:m, FUN = function( j ) sum( X[j,] * alpha ) ) - 
           sapply( 1:m, FUN = function( j ) sum( alpha / ( 1 + exp( -alpha * ( beta[j] - delta ) ) ) ) ) )
   
-  return( g )
+  return( G )
 }
+
+rasch.disc.gloglike.beta.fix<-function( alpha, delta, beta, X ) {
+  n<-length( alpha )
+  m<-length( beta )
+  G<-c( sapply( 1:n, FUN = function( i ) sum( X[,i] * beta ) ) - d * alpha -
+          sapply( 1:n, FUN = function( i ) sum( ( beta - delta[i] ) /( 1 + exp( -alpha[i] * ( beta - delta[i] ) ) ) ) ),
+        -d * alpha + 
+          sapply( 1:n, FUN = function( i ) sum( alpha[i] / ( 1 + exp( -alpha[i] * ( beta - delta[i] ) ) ) ) ) )
+  
+  return( G )
+}
+
 
 rasch.disc.model<-function( calificacion, par, beta.fix = TRUE,
                             method = 1, maxit = 1e3, epsilon = 10e-5 ) {
@@ -269,8 +294,8 @@ rasch.disc.model<-function( calificacion, par, beta.fix = TRUE,
   if ( beta.fix ) {
     beta<-( h - mean( h ) ) / sd( h )
     loglike<-function( x ) return( rasch.disc.loglike( x[I], x[J], beta, X ) )
-    gloglike<-function( x ) return( rasch.disc.gloglike( x[I], x[J], beta, X ) )
-    x0<-par[1:(2*m)]
+    gloglike<-function( x ) return( rasch.disc.gloglike.beta.fix( x[I], x[J], beta, X ) )
+    x0<-par[1:(2*n)]
   } else {
     loglike<-function( x ) return( rasch.disc.loglike( x[I], x[J], x[K], X ) )
     gloglike<-function( x ) return( rasch.disc.gloglike( x[I], x[J], x[K], X ) )
