@@ -148,9 +148,9 @@ rasch.loglike<-function( beta, delta, habilidad, dificultad ) {
   return( L )
 }
 
-rasch.gloglike<-function( beta, delta ) {
+rasch.gloglike<-function( beta, delta, habilidad, dificultad ) {
   E<-c( exp( beta ), exp( -delta ) )
-  G<-y + c( -sapply( 1:n, FUN = function(i) sum( E[i] * E[J] / ( 1 + E[i] * E[J] ) ) ), 
+  G<-c( habilidad, -dificultad ) + c( -sapply( 1:n, FUN = function(i) sum( E[i] * E[J] / ( 1 + E[i] * E[J] ) ) ), 
             sapply( (n+1):(n+m), FUN = function(j) sum( E[j] * E[I] / ( 1 + E[j] * E[I] ) ) ) )
   return( G )
 }
