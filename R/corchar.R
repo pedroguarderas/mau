@@ -64,22 +64,23 @@ correct_char2<-function( data, cols, chr = NULL, rep = NULL ) {
   return( out )
 }
 
-correct_char3<-function( x, case = 1 ) {
-  char<-c( '[Á|À]', '[É|È]', '[Í|Ì]', '[Ó|Ò]', '[Ú|Ù]', '[á|à]', '[é|è]', '[í|ì]', '[ó|ò]', 
-           '[ú|ù]', "\"", ' ( )*' )
-  rep<-c( 'A', 'E', 'I', 'O', 'U', 'a', 'e', 'i', 'o', 'u', '', ' ' )
-  y<-x
-  y<-str_trim( y )
-  for ( i in 1:length(char) ) {
-    y<-gsub( char[i], rep[i], y )  
-  }
+make.function.name<-function( x ) {
+  out<-x
   
-  if ( case == 1 ) {
-    y<-toupper( y )
-  } else if ( case == 2 ) {
-    y<-tolower( y )
+  chr<-c( ' y/o ', ' las ', ' el ', ' para ', ' o ', ' en ', ' del ', ' de ', ' la ', ' a ', 
+          ' por ', ' y ', '/', " ( )*", ' ', 'á', 'é', 'í', 'ó', 'ú', '-', '\\(', '\\)', '( )$', 
+          '_(_)*' )
+  rep<-c( ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '_', ' ', '_', 
+          'a', 'e', 'i', 'o', 'u', '_', '', '', '', '_' )
+  
+  out<-sapply( out, FUN = tolower )
+  out<-sapply( out, FUN = str_trim )
+  for ( i in 1:length( chr ) ) {
+      out<-apply( as.data.frame( out ), c(1,2), FUN = owngsub, pattern = chr[i], replacement = rep[i] )     
   }
-  return( y )
+  out<-sapply( out, FUN = str_trim )
+  
+  return( out )
 }
 
 correct_cdla<-function( x ) {
