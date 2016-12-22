@@ -15,7 +15,7 @@ library(stringr)
 library(xlsx)
 library(plotrix)
 library(grid)
-require(tcltk)
+library(tcltk)
 
 # Funciones para corregir caracteres ---------------------------------------------------------------
 source( 'R/corchar.R' )
