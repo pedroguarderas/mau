@@ -40,9 +40,29 @@ correct_char<-defmacro( data, cols, case = TRUE, expr = {
   data[,cols]<-data.frame( apply( as.data.frame( data[,cols] ), c(1,2), FUN = str_trim ))
 })
 
-#___________________________________________________________________________________________________
-# Corrección de caracteres 2
-correct_char2<-function( data, cols, chr = NULL, rep = NULL ) {
+# Standarize strings -------------------------------------------------------------------------------
+#' @title Standarize strings
+#' @description Función para corrección de caracteres, está diseñada para eliminar y/o reemplazar 
+#' pronombres, preposiciones comunes, caracteres especiales, espacios.
+#' @param data Data frame que contiene el texto a modificar.
+#' @param cols Número de columna que contiene el texto a modificar.
+#' @param chr Vector nulo de almacenamiento de caracteres por corregir.
+#' @param rep Vector nulo de almacenamiento de caracteres de reemplazo.
+#' @return Returns data table with definition of utility functions by range
+#' @details Los pronombres, preposiciones comunes, caracteres especiales, espacios a 
+#' reemplazar y/o eliminar son:  y/o ', ' las ', ' el ', ' para ', ' o ', ' en ', ' del ', ' de ', 
+#' ' la ', ' a ', ' por ', ' y ', '/', " ( )*", ' ', 'á', 'é', 'í', 'ó', 'ú', '-', '\\(', '\\)', 
+#' '( )$', '_(_)*'.
+#' @author Julio Andrade, Pedro Guarderas, Andrés Lopez
+#' @seealso \code{\link{owngsub}}, \code{\link{correct_char}}
+#' @examples
+#' tst<-data.frame(a=c('HÚàn', 'Marìa','juLIO Pér', 'Stevén'), b=1:4)
+#' cols<-1
+#' correct_char2(tst, 1)
+#' tst[,1]<-correct_char2(tst,1)
+#' 
+#' @export
+Stand.String<-function( data, cols, chr = NULL, rep = NULL ) {
   out<-data[,cols]
   
   if ( length( chr ) == 0 || length( rep ) == 0 ) {

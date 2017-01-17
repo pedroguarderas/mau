@@ -1,6 +1,4 @@
-#___________________________________________________________________________________________________
-# Carga de librerías necesarias para evalpack
-library(BB)
+# Loading libraries for mau package ----------------------------------------------------------------
 library(data.table)
 library(dplyr)
 library(ggplot2)
@@ -11,7 +9,7 @@ library(igraph)
 library(nleqslv)
 library(nloptr)
 library(optimx)
-library(plotrix)
+# library(plotrix)
 library(RColorBrewer)
 library(reshape2)
 library(stringr)
@@ -21,7 +19,8 @@ library(xlsx)
 source( 'R/corchar.R' )
 
 # Función para leer funciones de utilidad que provienen del Logical Decision -----------------------
-source( 'R/funcion_utilidad.R' )
+source( 'R/Read.Utilities.R' )
+source( 'R/Eval.Utilities.R' )
 
 # Incluyendo simulaciones --------------------------------------------------------------------------
 source( 'R/simulacion.R' )

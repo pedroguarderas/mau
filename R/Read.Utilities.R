@@ -1,14 +1,27 @@
-#___________________________________________________________________________________________________
-# Script para construir funciones en R a partir de funciones de utilidad definidas en Logical
-# Decisions
 
-#___________________________________________________________________________________________________
-# Función diseñada para leer funciones de utilidad
-read_utility_functions<-function( file, script, nr, skip = 5 ) {
+# Builds utility functions from definition standard ------------------------------------------------
+#' @title Read utilities
+#' @description Builds utility functions from definition standard
+#' @param file standarized file with definitions
+#' @param script output script where the utility functions are defined automatically
+#' @param lines number lines to read in \code{file}
+#' @param skip to read the \code{file} it had to \code{skip} a given number of lines 
+#' @return Returns data table with definition of utility functions by range
+#' @details Details
+#' @author Pedro Guarderas, Andrés Lopez
+#' @seealso \code{\link{read_weights}}, \code{\link{eval_index}}
+#' @examples
+#' file<-'example/funciones_utilidad.txt'
+#' sheet<-'example/funciones_utilidad.R'
+#' nr<-15
+#' skip<-5
+#' 
+#' @export
+Read.Utilities<-function( file, script, lines, skip = 5 ) {
   options( stringsAsFactors = FALSE )
   
   funs<-read.table( file, header = FALSE, sep = '\t', quote = NULL, encoding = 'latin1', 
-                    skip = skip, nrows = nr, allowEscapes = FALSE, dec = '.', fill = TRUE )
+                    skip = skip, nrows = lines, allowEscapes = FALSE, dec = '.', fill = TRUE )
   
   funs<-funs[ ,!( 1:ncol(funs) %in% c(3,5,8) ) ]
   chr<-c( '[.]', ' y/o ', ' las ', ' el ', ' para ', ' o ', ' en ', ' del ', ' de ', ' la ', ' a ', 
@@ -16,9 +29,9 @@ read_utility_functions<-function( file, script, nr, skip = 5 ) {
             '_(_)*' )
   rep<-c( ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '_', ' ', '_', 'a', 'e', 
           'i', 'o', 'u', '_', '', '', '', '_' )
-  funs<-data.frame( funs, fun = correct_char2( funs, 1, chr, rep ) )
+  funs<-data.frame( funs, fun = Stand.String( funs, 1, chr, rep ) )
   
-  colnames(funs)<-c('nom','min','max','nivel','val','a','b','c','fun')
+  colnames( funs )<-c( 'nom','min','max','nivel','val','a','b','c','fun' )
   
   nom<-funs$nom[1]
   nomf<-funs$fun[1]
@@ -104,42 +117,5 @@ read_utility_functions<-function( file, script, nr, skip = 5 ) {
   return( funs )
 }
 
-#___________________________________________________________________________________________________
-# Función para leer pesos del modelo
-read_weights<-function( file, cols, encoding = 'latin1' ) {
-  weights<-read.xlsx( file = file, sheetIndex = 1, colIndex = cols, 
-                      startRow = 1, endRow = 2 )
-  weights<-t( weights[ 2:ncol( weights ) ] )
-  weights<-data.frame( nom = rownames( weights ), weight = weights[,1] )
-  rownames( weights )<-NULL
-  weights$nom<-gsub( '\\.(\\.)*', ' ', weights$nom )
-  weights$nom<-correct_char2( weights, 1 )$out
-  weights$nom<-gsub( '_indicador', '', weights$nom )
-  return( weights )
-}
 
 
-#___________________________________________________________________________________________________
-# Función para evaluar indicadores con funciones de utilidad
-eval_index<-function( index, names, indexsub, colcod = 1, colpos, colfun, coltip, 
-                      envir = .GlobalEnv ) {
-  
-  data<-data.frame( cod = index[ ,colcod ] )
-
-  for ( i in 1:nrow( names ) ) { # i<-2
-    # Se verifica si la función ha sido definida
-    if ( names[ i, coltip ] == 'CUANTITATIVA' | names[ i, coltip ] == 'CUANTITATIVO'  ) {
-      if ( names[ i, colfun ] %in% ls( envir = envir ) ) {
-        col<-paste( indexsub, names[ i, colpos ], sep = '' )
-        data<-cbind( data, sapply( index[ , col ], FUN = names[ i, colfun ] ) )
-        colnames( data )[ ncol(data) ]<-paste( 'eva_', names[ i, colpos ], sep = '' )
-      }
-    } else {
-      col<-paste( indexsub, names[ i, colpos ], sep = '' )
-      data<-cbind( data, index[ , col ] )
-      colnames( data )[ ncol(data) ]<-paste( 'eva_', names[ i, colpos ], sep = '' )
-    }
-  }
-  rm( i, col )
-  return( data )
-}
