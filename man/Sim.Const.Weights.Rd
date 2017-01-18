@@ -42,6 +42,6 @@ S<-Sim.Const.Weights( n, utilities, alpha, constraints )
 Pedro Guarderas
 }
 \seealso{
-\code{\link{read_weights}}, \code{\link{eval_index}}
+\code{\link{Eval.Utilities}}
 }
 

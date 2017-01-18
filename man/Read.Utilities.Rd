@@ -4,7 +4,7 @@
 \alias{Read.Utilities}
 \title{Read utilities}
 \usage{
-Read.Utilities(file, script, lines, skip = 5)
+Read.Utilities(file, script, lines, skip = 2, encoding = "utf-8")
 }
 \arguments{
 \item{file}{standarized file with definitions}
@@ -25,11 +25,12 @@ Builds utility functions from definition standard
 Details
 }
 \examples{
-file<-'example/funciones_utilidad.txt'
-sheet<-'example/funciones_utilidad.R'
-nr<-15
-skip<-5
-
+file<-'utilities.txt'
+script<-'utilities.R'
+lines<-17
+skip<-2
+encoding<-'utf-8'
+functions<-Read.Utilities( file, script, lines, skip, encoding )
 }
 \author{
 Pedro Guarderas, Andrés Lopez

@@ -4,8 +4,9 @@ Title: Decision models with multiatribute utility theory
 Version: 1.0
 Date: 2013-12-17
 Author: 
-    Felipe Aguirre, Julio Andrade, Pedro Guarderas, Daniel Lagos, Andres Lopez, Nelson Recalde, 
-    Edison Salazar.
+    Felipe Aguirre, Julio Andrade, Pedro Guarderas, 
+    Daniel Lagos, Andres Lopez, 
+    Nelson Recalde, Edison Salazar.
 Maintainer: Pedro Guarderas <pedro.felipe.guarderas@gmail.com>
 Description: 
     Package for the evaluation of decision models employing the multiatribute utility 

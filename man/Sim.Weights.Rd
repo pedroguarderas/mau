@@ -38,6 +38,6 @@ S<-Sim.Weights( n, utilities, alpha )
 Pedro Guarderas
 }
 \seealso{
-\code{\link{read_weights}}, \code{\link{eval_index}}
+\code{\link{Eval.Utilities}}
 }
 

@@ -11,25 +11,22 @@
 #' @author Pedro Guarderas, Andrés Lopez
 #' @seealso \code{\link{read_weights}}, \code{\link{eval_index}}
 #' @examples
-#' file<-'example/funciones_utilidad.txt'
-#' sheet<-'example/funciones_utilidad.R'
-#' nr<-15
-#' skip<-5
-#' 
+#' file<-'utilities.txt'
+#' script<-'utilities.R'
+#' lines<-17
+#' skip<-2
+#' encoding<-'utf-8'
+#' functions<-Read.Utilities( file, script, lines, skip, encoding )
 #' @export
-Read.Utilities<-function( file, script, lines, skip = 5 ) {
-  options( stringsAsFactors = FALSE )
-  
-  funs<-read.table( file, header = FALSE, sep = '\t', quote = NULL, encoding = 'latin1', 
-                    skip = skip, nrows = lines, allowEscapes = FALSE, dec = '.', fill = TRUE )
+Read.Utilities<-function( file, script, lines, skip = 2, encoding = 'utf-8' ) {
+
+  funs<-read.table( file, header = FALSE, sep = '\t', quote = NULL, encoding = encoding, 
+                    skip = skip, nrows = lines, allowEscapes = FALSE, dec = '.', fill = TRUE,
+                    stringsAsFactors = FALSE )
   
   funs<-funs[ ,!( 1:ncol(funs) %in% c(3,5,8) ) ]
-  chr<-c( '[.]', ' y/o ', ' las ', ' el ', ' para ', ' o ', ' en ', ' del ', ' de ', ' la ', ' a ', 
-            ' por ', ' y ', '/', " ( )*", ' ', 'á', 'é', 'í', 'ó', 'ú', '-', '\\(', '\\)', '( )$', 
-            '_(_)*' )
-  rep<-c( ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '_', ' ', '_', 'a', 'e', 
-          'i', 'o', 'u', '_', '', '', '', '_' )
-  funs<-data.frame( funs, fun = Stand.String( funs, 1, chr, rep ) )
+
+  funs<-data.frame( funs, fun = sapply( funs[,1], FUN = Stand.String ) )
   
   colnames( funs )<-c( 'nom','min','max','nivel','val','a','b','c','fun' )
   
@@ -95,7 +92,7 @@ Read.Utilities<-function( file, script, lines, skip = 5 ) {
         }
         f<-paste( f, '\n\tf<-max(0.0,f)', sep = '' )
         f<-paste( f, '\n\tf<-min(1.0,f)', sep = '' )
-        f<-paste( f, '\n\treturn(f)\n}', sep = '' )
+        f<-paste( f, '\n\treturn(f)\n}\n', sep = '' )
         write( f, file = script, append = TRUE )
       }
     } else {
@@ -116,6 +113,3 @@ Read.Utilities<-function( file, script, lines, skip = 5 ) {
   rm(i,j,f)
   return( funs )
 }
-
-
-

@@ -10,7 +10,7 @@ library(stringr)
 library(xlsx)
 
 # Funciones para corregir caracteres ---------------------------------------------------------------
-source( 'R/corchar.R' )
+source( 'R/Stand.String.R' )
 
 # Función para leer funciones de utilidad que provienen del Logical Decision -----------------------
 source( 'R/Read.Utilities.R' )

@@ -9,7 +9,7 @@
 #' @return List with data.frames \{simulation, weights\} with total utilities and simulated weights
 #' @details Details
 #' @author Pedro Guarderas
-#' @seealso \code{\link{read_weights}}, \code{\link{eval_index}}
+#' @seealso \code{\link{Eval.Utilities}}
 #' @examples
 #' N<-10
 #' utilities<-data.table( id = 1:N, 
@@ -47,7 +47,7 @@ Sim.Weights<-function( n, utilities, alpha ) {
 #' @return List with data.frames \{simulation, weights\} with total utilities and simulated weights
 #' @details Details
 #' @author Pedro Guarderas
-#' @seealso \code{\link{read_weights}}, \code{\link{eval_index}}
+#' @seealso \code{\link{Eval.Utilities}}
 #' @examples
 #' N<-10
 #' utilities<-data.table( id = 1:N, 

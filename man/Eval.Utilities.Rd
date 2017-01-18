@@ -4,67 +4,50 @@
 \alias{Eval.Utilities}
 \title{Evaluate utilities}
 \usage{
-Eval.Utilities(index, names, indexsub, colcod = 1, colpos, colfun, coltip,
-  envir = .GlobalEnv)
+Eval.Utilities(index, columns, functions)
 }
 \arguments{
-\item{index}{data of indexes}
+\item{index}{data.table of indexes}
 
-\item{names}{data with name of indexes}
+\item{columns}{columns with indexes where the utilities will be computed}
 
-\item{indexsub}{prefijo del nombre de las columnas de los indicadores.}
-
-\item{colcod}{columna de inicio del data frame \code{index} definido previamente.}
-
-\item{colpos}{columna de inicio del data frame \code{names} definido previamente.}
-
-\item{colfun}{columna que indica el nombre interno de las funciones de utilidad.}
-
-\item{coltip}{columna que indica el tipo de variable de los indicadores, cualitativos o 
-cuantitativos.}
-
-\item{envir}{entorno de trabajo global, definido con las funciones de utilidad.}
+\item{functions}{vector of characters with name of functions}
 }
 \value{
-La función \code{eval_index} retorna un data frame que contiene los resultados de los 
-indicadores al ser evaluados por las funciones de utilidad definidas.
+data.table with utilities
 }
 \description{
-Evaluaction of utilities for a data.frame of indexes
+Evaluaction of utilities for a data.table of indexes
 }
 \details{
 Details
 }
 \examples{
-# Indicadores
-indic<-data.frame(cod=c('A', 'B', 'C', 'D'), 
-                  i1=c(0.3428570, 1, 1, 1),
-                  i2=c(0.5, 0.5, 1, 0.5), 
-                  i3=c(0, 0.2696746, 0.6751261, 0.7401660),
-                  i4=c(0.2797259, 0.2981198, 1, 0.1952864))
-colnames(indic)
+# Index
+index<-data.table( cod = c( 'A', 'B', 'C', 'D' ), 
+                   i1 = c( 0.3428570, 1, 1, 1 ),
+                   i2 = c( 0.5, 0.5, 1, 0.5 ), 
+                   i3 = c( 0.5, 1.0, 0.75, 0.25 ),
+                   i4 = c( 0, 0.2696746, 0.6751261, 0.7401660 ),
+                   i5 = c( 0.2797259, 0.2981198, 1, 0.1952864 ) )
 
-# Nombre de indicadores
-nomb_indic<-data.frame(cod=1:4, 
-                    nom0=c('PROYECTO INSTITUCIONAL', 'SEGUIMIENTO IMPLEMENTADO',
-                           'PROYECTOS DE VINCULACION', 'ACTIVIDADES DE EXTENSION Y DIVULGACION'),
-                    nom1=c('Proyecto institucional', 'Seguimiento implementado', 
-                           'Proyectos de vinculación', 'Actividades de extensión y divulgación'),
-                    nomfun=c('proyecto_institucional', 'seguimiento_implementado', 
-                             'proyectos_vinculacion', 'actividades_extension_divulgacion'),
-                    tip=c('CUALITATIVA', 'CUALITATIVA', 'CUANTITATIVA', 'CUANTITATIVA'))
+# Index name
+columns<-c( 2, 3, 5, 6 )
+functions<-sapply( c( 'Project', 'Self implementation', 'External and local relations', 
+                      'Scope of capabilities' ),
+                   FUN = Stand.String )
+names( functions )<-NULL
 
-# Script R con las funciones de utilidad.
-source('example/funciones_utilidad.R')
-
-# Uso de la funcion eval_index
-indic_eval<-Eval.Utilities( index = indic, names = nomb_indic, indexsub = 'i',
-                     colcod = 1, colpos = 1, colfun = 4, coltip = 5 )
+# Loading utilities
+source( 'utilities.R' )
+ 
+# Evaluation of utilities
+utilities<-Eval.Utilities( index, columns, functions )
 }
 \author{
-Julio Andrade, Pedro Guarderas, Daniel Lagos, Andrés López, Paúl Recalde, Edison Salazar
+Pedro Guarderas, Andrés Lopez
 }
 \seealso{
-\code{\link{read_weights}}, \code{\link{eval_index}}
+\code{\link{Read.Utilities}}, \code{\link{Stand.String}}
 }
 
