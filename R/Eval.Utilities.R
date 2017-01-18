@@ -1,4 +1,3 @@
-# Función para evaluar indicadores con funciones de utilidad
 
 # Evaluate utility functions -----------------------------------------------------------------------
 #' @title Evaluate utilities

@@ -1,4 +1,18 @@
-#___________________________________________________________________________________________________
+
+# Compute decision model for tree ------------------------------------------------------------------
+#' @title Compute decision model for tree
+#' @description The decision tree for the model base in MAUT has nodes with associated utilities, 
+#' this function compute all the internal nodes utilities.
+#' @param tree inicial tree struture with utilities in its leafs
+#' @param tipo the different names for the levels in the tree, the most common names are: ROOT, 
+#' CRITERIA, SUBCRITERIA, UTILITY
+#' @return Returns data table with definition of utility functions by range
+#' @details Details
+#' @author Pedro Guarderas, Andrés Lopez
+#' @seealso \code{\link{read_weights}}, \code{\link{eval_index}}
+#' @examples
+#' x<-2
+#' @export
 modelo.calcula.tree<-function( tree, tipo ) {
   
   tabla_objetivos<-data.frame( variable = V(tree)[ V(tree)$leaf == 1 ]$id, 

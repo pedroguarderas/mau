@@ -2,4 +2,7 @@
 
 export(Eval.Utilities)
 export(Read.Utilities)
+export(Sim.Const.Weights)
+export(Sim.Weights)
 export(Stand.String)
+export(modelo.calcula.tree)

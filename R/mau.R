@@ -1,15 +1,9 @@
 # Loading libraries for mau package ----------------------------------------------------------------
 library(data.table)
-library(dplyr)
+library(gtools)
 library(ggplot2)
 library(grid)
-library(gtools)
-library(gWidgets2tcltk)
 library(igraph)
-library(nleqslv)
-library(nloptr)
-library(optimx)
-# library(plotrix)
 library(RColorBrewer)
 library(reshape2)
 library(stringr)
@@ -23,16 +17,12 @@ source( 'R/Read.Utilities.R' )
 source( 'R/Eval.Utilities.R' )
 
 # Incluyendo simulaciones --------------------------------------------------------------------------
-source( 'R/simulacion.R' )
-
-# Porcentaje fechas --------------------------------------------------------------------------------
-source( 'R/dates.R' )
+source( 'R/Simulate.Weights.R' )
 
 # Carga árbol Logical Decisions --------------------------------------------------------------------
-source( 'R/loadtree.R' )
-
-# Modelo AHP ---------------------------------------------------------------------------------------
-source( 'R/ahpmatrix.R' )
+source( 'R/Read.Tree.R' )
+source( 'R/Make.Tree.R' )
+source( 'R/Write.Tree.R' )
 
 # Análisis de sensitividad -------------------------------------------------------------------------
 source( 'R/sensitivity.R' )
@@ -44,7 +34,7 @@ source( 'R/analisis_salto.R' )
 source( 'R/eval_criteria.R' )
 
 # Funciones para análisis basado en la teoría de imposibilidad de Arrow ----------------------------
-source( 'R/arrow.R' )
+# source( 'R/arrow.R' )
 
 # Función que evalua el modelo criterios y subcriterios a partir de utilidades y árbol -------------
 source( 'R/modelo_tabla.R' )
@@ -55,5 +45,3 @@ source( 'R/evalgraphs.R' )
 # Spider plot --------------------------------------------------------------------------------------
 source( 'R/spider_plot.R' )
 
-# Obetner password ---------------------------------------------------------------------------------
-source( 'R/getpassword.R' )
