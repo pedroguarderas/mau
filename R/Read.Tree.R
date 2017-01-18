@@ -1,7 +1,22 @@
-#___________________________________________________________________________________________________
-# Script diseñado para carga arboles de decisión y exportarlos a formato graphml
 
+# Read decision tree -------------------------------------------------------------------------------
+#' @title Evaluate utilities
+#' @description Read decision tree for MAUT model
+#' @param file file
+#' @param index_file index
+#' @param sheet sheet
+#' @param cols cols
+#' @param rows rows
+#' @param cols_index cols_index
+#' @return data.table with utilities
+#' @details Details
+#' @author Pedro Guarderas, Andrés Lopez
+#' @seealso \code{\link{Read.Utilities}}, \code{\link{Make.Decision.Tree}}
+#' @examples
+#' Read.Tree( file, index_file, sheet, cols, rows, cols_index )
+#' @export
 Read.Tree<-function( file, index_file, sheet, cols, rows, cols_index ) {
+  
   graph<-read.xlsx( file = file, sheetIndex = sheet, startRow = rows[1], endRow = rows[2],
                     colIndex = cols, colClasses = c('integer','character', 'integer', 'integer' ) )
   colnames( graph )<-c('id','nom','parent','cod')

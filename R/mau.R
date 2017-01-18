@@ -25,7 +25,7 @@ source( 'R/Make.Tree.R' )
 source( 'R/Write.Tree.R' )
 
 # Análisis de sensitividad -------------------------------------------------------------------------
-source( 'R/sensitivity.R' )
+source( 'R/Weight.Sensitivity.R' )
 
 # Análisis de saltos -------------------------------------------------------------------------------
 source( 'R/analisis_salto.R' )

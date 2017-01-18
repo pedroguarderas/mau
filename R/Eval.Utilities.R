@@ -48,6 +48,9 @@ Eval.Utilities<-function( index, columns, functions ) {
       eval( E )
     }
   }
+  
+  setnames( utilities, 1:ncol( utilities ), 
+            c( names( utilities )[1], paste( 'u', 1:( ncol(utilities) - 1 ), sep = '' ) ) )
 
   return( utilities )
 }

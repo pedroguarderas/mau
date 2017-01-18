@@ -1,4 +1,16 @@
-#___________________________________________________________________________________________________
+
+# Create decision tree -----------------------------------------------------------------------------
+#' @title Evaluate utilities
+#' @description Create decision tree for MAUT models exporting to igraph struture
+#' @param tree.data tree
+#' @return igraph structure
+#' @details Details
+#' @author Pedro Guarderas, Andrés Lopez
+#' @seealso \code{\link{Read.Tree}}
+#' @examples
+#' x<-1
+#' Make.Decision.Tree( tree.data )
+#' @export
 Make.Decision.Tree<-function( tree.data ) {
   tree<-make_empty_graph( directed = TRUE )
   for ( i in 1:nrow( tree.data ) ) { # i<-1

@@ -8,22 +8,34 @@ vari<-function( u, w ) {
   return( w * ( s - w ) * u * u )
 }
 
-sens.weight.model<-function( utilidades, weights ) {
-  n<-ncol( utilidades )
-  m<-nrow( utilidades )
+# Sensitivity to weight ----------------------------------------------------------------------------
+#' @title Sensitivity to weight
+#' @description Create decision tree for MAUT models exporting to igraph struture
+#' @param utilities utilities
+#' @param weights weights
+#' @return var
+#' @details Details
+#' @author Pedro Guarderas, Andrés Lopez
+#' @seealso \code{\link{Eval.Utilities}}
+#' @examples
+#' Weight.Sensitivity( utilidades, weights )
+#' @export
+Weight.Sensitivity<-function( utilities, weights ) {
+  n<-ncol( utilities )
+  m<-nrow( utilities )
   
   URS<-NULL
   
-  UG<-as.matrix( utilidades[,2:n] )
+  UG<-as.matrix( utilities[,2:n] )
   UG<-UG %*% weights
   
-  ind<-as.numeric( gsub( 'eva_', '', names( utilidades[,2:n] ) ) )
+  ind<-as.numeric( gsub( 'eva_', '', names( utilities[,2:n] ) ) )
   for ( i in 1:m ) {
-    s<-as.numeric( vari( utilidades[i,2:n], weights ) / vartot( utilidades[i,2:n], weights ) )
-    u<-as.numeric( ( utilidades[i,2:n] * weights ) )
+    s<-as.numeric( vari( utilities[i,2:n], weights ) / vartot( utilities[i,2:n], weights ) )
+    u<-as.numeric( ( utilities[i,2:n] * weights ) )
     r<-as.numeric( u / UG[i] )
     
-    URS<-rbind( URS, data.table( cod = utilidades[i,1], ind = ind, u = u, r = r, s = s ) ) 
+    URS<-rbind( URS, data.table( cod = utilities[i,1], ind = ind, u = u, r = r, s = s ) ) 
 
   }
   URS<-URS[ with( URS, order( ind, cod ) ), ]
@@ -31,6 +43,7 @@ sens.weight.model<-function( utilidades, weights ) {
   return( list( URS = URS, UG = UG ) )
 }
 
+#---------------------------------------------------------------------------------------------------
 plot.sens.weight<-function( V, col, indicadores.nombres, xlab, title, size.text = 8, palette = "YlGn" ) {
   S<-copy( V )
   setnames( S, col, 'sens' )

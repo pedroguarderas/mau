@@ -9,8 +9,8 @@ Author:
     Nelson Recalde, Edison Salazar.
 Maintainer: Pedro Guarderas <pedro.felipe.guarderas@gmail.com>
 Description: 
-    Package for the evaluation of decision models employing the multiatribute utility 
-    theory
+    Package for the evaluation of decision models 
+    employing multiatribute utility theory
 License: LGPL-3
 Depends:
     R (>= 3.0),
