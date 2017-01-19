@@ -1,18 +1,54 @@
-#___________________________________________________________________________________________________
-# Spider plot
-library(ggplot2)
 
-# Hay veces que está función falla numéricamente, hay que mejorarla
-# Falla al volverse singular la matriz que se invierte
-find.radius<-function( r, tl, tk, t ) {
-  M<-matrix( c( r * ( cos( tl ) - cos( tk ) ), -cos( t ),
-                r * ( sin( tl ) - sin( tk ) ), -sin( t ) ), 2, 2, byrow = TRUE )
-  b<-c( -r * cos( tk ), -r * sin( tk ) )
-  return( solve( M, b )[2] )
-}
-
-#___________________________________________________________________________________________________
-spider.plot<-function( data, # Datos con los valores a plotear, data.frame 
+# Spider plot --------------------------------------------------------------------------------------
+#' @title Spider plot
+#' @description Spider plot
+#' @param data Datos con los valores a plotear, data.frame 
+#' @param data.label label
+#' @param data.fill fill
+#' @param data.color color
+#' @param data.linetype linetype
+#' @param data.alpha alpha
+#' @param data.size size
+#' @param data.label.color label.color
+#' @param data.label.size label.size
+#' @param group Columna de data por la cual se agrupan los datos
+#' @param criteria Columna con los criterios de evaluación, debe ser 
+#' @param valor Columna con los valores de los polígonos
+#' @param title Título para el plot
+#' @param title.color Color del título
+#' @param title.size Tamaño del título
+#' @param label.size Tamaño de etiquetas
+#' @param label.color Color de etiquetas
+#' @param label.angle Ángulo de etiqueas
+#' @param label.position Posición de etiqueas
+#' @param theta Giro del plot
+#' @param grid Malla para los radios, vector numérico con valores únicos
+#' @param grid.color Color del grid
+#' @param grid.radius.color Color de los radios del grid
+#' @param grid.linetype Tipo de línea del grid
+#' @param grid.size Tamaño de la línea
+#' @param grid.radius.linetype Tipo de línea de los radios del grid
+#' @param grid.radius.size Tamaño de línea de los radios
+#' @param axis Eje para ubicarse en el grid
+#' @param axis.label Etiquetas del eje
+#' @param axis.color Color del eje
+#' @param axis.size Tamaño del eje
+#' @param axis.linetype Tipo del eje
+#' @param axis.angle Ángulo del eje
+#' @param axis.label.color Color para labels
+#' @param axis.label.size Tamaño del texto del eje
+#' @param axis.label.displace Desplazamiento de los labels con respecto al eje
+#' @param axis.label.angle Ángulo de labels
+#' @param legend.position position for the legend
+#' @param legend.size legend size
+#' @param legend.text.color legend text color
+#' @param plot.margin Márgenes del plot
+#' @return data.table with utilities
+#' @details Details
+#' @author Pedro Guarderas, Andrés Lopez
+#' @seealso \code{\link{Eval.Utilities}}
+#' @export
+Spider.Plot<-function( data, # Datos con los valores a plotear, data.frame 
                        data.label,
                        data.fill,
                        data.color,
@@ -54,6 +90,15 @@ spider.plot<-function( data, # Datos con los valores a plotear, data.frame
                        legend.text.color,
                        plot.margin # Márgenes del plot
                        ) {
+  
+  # Hay veces que está función falla numéricamente, hay que mejorarla
+  # Falla al volverse singular la matriz que se invierte
+  find.radius<-function( r, tl, tk, t ) {
+    M<-matrix( c( r * ( cos( tl ) - cos( tk ) ), -cos( t ),
+                  r * ( sin( tl ) - sin( tk ) ), -sin( t ) ), 2, 2, byrow = TRUE )
+    b<-c( -r * cos( tk ), -r * sin( tk ) )
+    return( solve( M, b )[2] )
+  }
   
   Grp<-deparse( substitute( group ) )
   Cri<-deparse( substitute( criteria ) )
@@ -162,5 +207,5 @@ spider.plot<-function( data, # Datos con los valores a plotear, data.frame
                 legend.title = element_blank() )
   
   return( p )
-  
+
 }

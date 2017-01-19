@@ -44,5 +44,5 @@ source( 'R/modelo_tabla.R' )
 source( 'R/evalgraphs.R' )
 
 # Spider plot --------------------------------------------------------------------------------------
-source( 'R/spider_plot.R' )
+source( 'R/Spider.Plot.R' )
 
