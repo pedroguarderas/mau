@@ -47,6 +47,8 @@
 #' @details Details
 #' @author Pedro Guarderas, Andrés Lopez
 #' @seealso \code{\link{Eval.Utilities}}
+#' @import ggplot2
+#' @import RColorBrewer
 #' @export
 Spider.Plot<-function( data, # Datos con los valores a plotear, data.frame 
                        data.label,

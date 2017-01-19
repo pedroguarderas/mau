@@ -14,6 +14,7 @@
 #' @seealso \code{\link{Read.Utilities}}, \code{\link{Make.Decision.Tree}}
 #' @examples
 #' Read.Tree( file, index_file, sheet, cols, rows, cols_index )
+#' @importFrom xlsx read.xlsx
 #' @export
 Read.Tree<-function( file, index_file, sheet, cols, rows, cols_index ) {
   

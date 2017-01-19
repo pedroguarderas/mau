@@ -15,7 +15,8 @@
 #'       'ju%LIÖ a Pérs', '(S)tev\nén\t los cat%$' )
 #' y<-sapply( x, FUN = Stand.String )
 #' names( y )<-NULL
-#' @import  data.table
+#' @import data.table
+#' @import stringr
 #' @export
 Stand.String<-function( x, chr = NULL, rep = NULL ) {
   y<-NULL

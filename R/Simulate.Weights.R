@@ -10,6 +10,7 @@
 #' @details Details
 #' @author Pedro Guarderas
 #' @seealso \code{\link{Eval.Utilities}}
+#' @importFrom  gtools rdirichlet
 #' @examples
 #' N<-10
 #' utilities<-data.table( id = 1:N, 
@@ -60,6 +61,7 @@ Sim.Weights<-function( n, utilities, alpha ) {
 #' constraints<-list( list( c(1,2), 0.7 ), 
 #'                    list( c(3,4), 0.3 ) )
 #' S<-Sim.Const.Weights( n, utilities, alpha, constraints )
+#' @importFrom  gtools rdirichlet
 #' @export
 Sim.Const.Weights<-function( n, utilities, alpha, constraints ) {
 
