@@ -4,8 +4,8 @@
 \alias{Export.Decision.Tree}
 \title{Compute decision model for tree}
 \usage{
-Export.Decision.Tree(tree, utilities, weights, types = c("RAIZ", "CRITERIO",
-  "SUBCRITERIO", "UTILIDAD"))
+Export.Decision.Tree(tree, utilities, weights, types = c("root", "criteria",
+  "subcriteria", "utility"))
 }
 \arguments{
 \item{tree}{inicial tree struture with utilities in its leafs}

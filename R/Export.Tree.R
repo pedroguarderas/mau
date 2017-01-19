@@ -39,8 +39,8 @@ Export.From.Tree<-function( tree, tipo ) {
 #' @param tree inicial tree struture with utilities in its leafs
 #' @param utilities inicial tree struture with utilities in its leafs
 #' @param weights weights
-#' @param types the different names for the levels in the tree, the most common names are: ROOT, 
-#' CRITERIA, SUBCRITERIA, UTILITY
+#' @param types the different names for the levels in the tree, the most common names are: 'root',
+#' 'criteria', 'subcriteria', 'utility'
 #' @return data.table with with decision model computed
 #' @details Details
 #' @author Pedro Guarderas, Andrés Lopez
@@ -51,15 +51,15 @@ Export.From.Tree<-function( tree, tipo ) {
 Export.Decision.Tree<-function( tree, 
                                 utilities,
                                 weights,
-                                types = c('RAIZ','CRITERIO', 'SUBCRITERIO', 'UTILIDAD') ) {
+                                types = c('root','criteria', 'subcriteria', 'utility') ) {
   
   Obj<-modelo.calcula.tree( tree, types )
   
-  modelo<-eval_criteria( tree, weights, utilities, FALSE, TRUE, TRUE )
-  modelo.resc<-eval_criteria( tree, weights, utilities, TRUE, TRUE, TRUE )
+  model<-eval_criteria( tree, weights, utilities, FALSE, TRUE, TRUE )
+  model.resc<-eval_criteria( tree, weights, utilities, TRUE, TRUE, TRUE )
   
-  MT<-melt( modelo, id.vars = 'cod' )
-  MTR<-melt( modelo.resc, id.vars = 'cod' )
+  MT<-melt( model, id.vars = 'cod' )
+  MTR<-melt( model.resc, id.vars = 'cod' )
   names( MTR )<-c('cod','variable','val_res')
   MT<-merge( MT, MTR, by = c('cod','variable') )
   MT<-merge( MT, Obj, by.x = 'variable', by.y = 'variable' )

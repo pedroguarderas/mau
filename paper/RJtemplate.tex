@@ -1,6 +1,6 @@
 % !TeX root = RJwrapper.tex
 % !TeX root = RJwrapper.tex
-\title{Evalpack, package for multi-attribute decision models.}
+\title{MAU, decision models with multiatribute utility theory}
 \author{by J. Andrade, P. Guarderas, D. Lagos, A. López, P. Recalde y E. Salazar }
 
 \maketitle
@@ -14,23 +14,13 @@ decision model fitted to exact requirements. For the particular case of the deci
 inside the CEAACES \footnote{Consejo de Evaluación, Acreditación y Aseguramiento de la Calidad de la
 Educación Superior} in Ecuador, we have developed the \textit{\textbf{evalpack}} package for
 decision models.
-
-
-% Macro para simular evaluaciones\\
-% Calcula una matrix para AHP\checkmark\\
-% Mide complejidad de la función de decisión dada\\
-% Macro para leer funciones del Logical Decision\checkmark\\
-% Función para leer funciones de utilidad de Logical Decision\checkmark\\
-% Función para leer pesos de un modelo Logical Decision\\
-% Función para evaluar los indicadores\checkmark\\
-% Corrección de caracteres \checkmark\\
-% Función para reemplazo de caracteres\checkmark\\
-% Cálculo de meses entre dos fechas dadas presentes en columnas de un data.frame\checkmark\\
 }
 
 %---------------------------------------------------------------------------------------------------
 \section{Introduction}
 %Introductory section which may include references in parentheses
+
+
 Los procesos de evaluación de Institutos de Educación Superior ({\it IES}) que incluyen a Institutos
 Técnicos Superiores, Institutos de Arte, Conservatorios, Universidades y Escuelas Politécnicas del
 Ecuador llevados a cabo por el \textit{\textbf{CEAACES}} se fundamentan en un modelo de decisión
@@ -82,7 +72,9 @@ variables que son ponderadas en función del tiempo.\\
 
 
 %---------------------------------------------------------------------------------------------------
-\section{Multi-criteria decision models}
+\section{Decision models based in MAUT}
+
+
 En los modelos de decisión multicriterio el número de criterios corresponde a sus dimensiones,
 los descriptores son las funciones que permiten representar numéricamente a cada uno de los
 indicadores y el conjunto de valores que pueden tomar los indicadores se denominan alternativas. Los
@@ -179,23 +171,36 @@ Entre las capacidades de \textit{\textbf{evalpack}} tenemos:
 
 %---------------------------------------------------------------------------------------------------
 \section{Ranking simulation}
-Ranking simulation
-\[ S = F W \]
-Where $F\in[0,1]^{p\times m}$ is the utility matrix, where for $k\in\{1,\ldots p\}$ and
-$l\in\{1,\ldots m\}$
-\[ F = [F_{kl}] := [f_l(x_k)] \]
-$W\in[0,1]^{m\times n}$ is the matrix of simulated weights
-\[ \sum_{i=1}^m W_{ij} = 1 \quad \forall j\in\{1,\ldots,n\}\]
-de tal forma que cada columna $W_{\bullet j} = (W_{1j},W_{2j},\ldots,W_{mj})^T\rightsquigarrow
-Dir(\alpha_1,\ldots,\alpha_m)$ mediante una
-y $S\in[0,1]^{p\times n}$ es la simulación resultante
-% \begin{figure}[htbp]
-%   \centering
-%    \includegraphics[scale=0.4]{simulacion.pdf}
-%   \caption{Ejemplo simulación}
-%   \label{figure:sim}
-% \end{figure}
+The selection of weights for a MAUT model could be unclear, for some decision models there is not a 
+well established consensus to decide which criteria, subcriteria or even index is more 
+relevant than another and by consequence the main utility, which is a function of weights, could 
+considered as unsatisfactory and in particular unstable.
 
+In many cases, to deal with this indecisive problem, is through a consensus about the nature of 
+the best MAUT model and propose that such a model with unknown weights is near, in some sense, to 
+a similar model with selected weights beforehand. Under such consensus the possible satisfactory 
+weights could be obtained with a simulation algorithm.
+
+The \texttt{mau} package implements an algorithm based in a simulation with Dirichlet distributions,
+because random variable following this distribution could concentrated around a given vector and 
+satisfy the addition constraint for the weights. A matrix with $W\in[0,1]^{n\times p}$ of random 
+weights stored by column is simulated, and every column 
+$W_{\bullet k} = (W_{1k},W_{2k},\ldots,W_{nk})^T\rightsquigarrow Dir(\alpha)$
+with $\alpha\in \mathbb{R}_+^n$ the concentration parameter of weights selected a priori.
+
+For the matrix of specific utilities $U\in[0,1]^{m\times n}$ is given by
+\begin{equation}
+ U = [U_{ij}] := [u_j(x_{ij})]
+\end{equation}
+where for $i\in\{1,\ldots m\}$ and $j\in\{1,\ldots n\}$.
+
+The main utilities computed with $U$ and the simulated weights $W$ are obtained by a simple 
+matrix multiplication
+\begin{equation}
+u = U W
+\end{equation}
+every coordinate $u_{ik}$ of the matrix $u\in[0,1]^{m\times p}$ represents the simulation of the 
+main utility given by the simulation of weights $W_{\bullet k}$, for the entity $i$. 
 
 %---------------------------------------------------------------------------------------------------
 \section{Sensitivity Analysis}
@@ -298,8 +303,6 @@ f_j(x_j) ) \right\}
  
 \end{algorithm}
 
-
-
 %---------------------------------------------------------------------------------------------------
 \section{Results}
 %This section may contain a figure such as Figure~\ref{figure:rlogo}.
@@ -329,38 +332,15 @@ and information on how to prepare your article for submission, see the
 %---------------------------------------------------------------------------------------------------
 \newpage
 \bibliography{RJreferences}
-\address{J. Andrade\\
-  CEAACES\\
-  Calle Germán Alemán E11 – 32 y Javier Arauz\\
-  Ecuador}
-\email{jandrade@ceaaces.gob.ec}
-
 \address{P. Guarderas\\
-  CEAACES\\
-  Calle Germán Alemán E11 – 32 y Javier Arauz\\
-  Ecuador}
+  Risko\\
+  VELEZ y VELEZ Enterprise Risk Management S.A.\\
+  Avenida 12 de Octubre E10-80 y Lizardo García\\
+  Quito-Ecuador}
 \email{pguarderas@ceaaces.gob.ec}
-
-\address{D. Lagos\\
-  CEAACES\\
-  Calle Germán Alemán E11 – 32 y Javier Arauz\\
-  Ecuador}
-\email{dlagos@ceaaces.gob.ec}
 
 \address{A. López\\
   CEAACES\\
   Calle Germán Alemán E11 – 32 y Javier Arauz\\
-  Ecuador}
+  Quito-Ecuador}
 \email{alopez@ceaaces.gob.ec}
-
-\address{P. Recalde\\
-  CEAACES\\
-  Calle Germán Alemán E11 – 32 y Javier Arauz\\
-  Ecuador}
-\email{nrecalde@ceaaces.gob.ec}
-
-\address{E. Salazar\\
-  CEAACES\\
-  Calle Germán Alemán E11 – 32 y Javier Arauz\\
-  Ecuador}
-\email{esalazar@ceaaces.gob.ec}
