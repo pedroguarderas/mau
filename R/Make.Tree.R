@@ -1,58 +1,5 @@
 
-# Create decision tree -----------------------------------------------------------------------------
-#' @title Evaluate utilities
-#' @description Create decision tree for MAUT models exporting to igraph struture
-#' @param tree.data tree
-#' @return igraph structure
-#' @details Details
-#' @author Pedro Guarderas, Andrés Lopez
-#' @seealso \code{\link{Read.Tree}}
-#' @examples
-#' x<-1
-#' Make.Decision.Tree( tree.data )
-#' @export
-Make.Decision.Tree<-function( tree.data ) {
-  tree<-make_empty_graph( directed = TRUE )
-  for ( i in 1:nrow( tree.data ) ) { # i<-1
-    A<-list()
-    if ( is.na( tree.data$cod[i] ) ) {
-      A<-list( 'id' = tree.data$id[i],
-               'codigo' = 0,
-               'name' = tree.data$nom[i],
-               'color' = 'dodgerblue1',
-               'weight' = tree.data$weight[i],
-               'rweight' = 0.0,
-               'leaf' = 0,
-               'function' = '',
-               'deep' = 0,
-               'size' = 21 )
-    } else {
-      A<-list( 'id' = tree.data$id[i],
-               'codigo' = tree.data$cod[i],
-               'name' = tree.data$nom[i],
-               'color' = 'orange',
-               'weight' = tree.data$weight[i],
-               'rweight' = 0.0,
-               'leaf' = 1,
-               'function' = tree.data$'function'[i],
-               'deep' = 0,
-               'size' = 20 )
-      
-    }
-    tree<-tree %>% add_vertices( 1, attr = A )  
-    if ( tree.data$id[i] != tree.data$id_parent[i] & !is.na( tree.data$id_parent[i] ) ) {
-      tree<-tree %>% add_edges( c( tree.data$parent[i], tree.data$nom[i] ), color = "black" )
-    }
-  }
-  
-  tree<-sum_weights( tree ) # pesos absolutos
-  tree<-divide_weights( tree ) #pesos relativos
-  tree<-deep_compute( tree )
-  
-  return( tree )
-}
-
-#___________________________________________________________________________________________________
+#---------------------------------------------------------------------------------------------------
 # Función para asignar pesos a las ramas internas dados los pesos en las raíces
 sum_weights<-function( tree ) {
   noleaves<-which( V(tree)$leaf == 0 )
@@ -65,6 +12,7 @@ sum_weights<-function( tree ) {
   return( tree )
 }
 
+#---------------------------------------------------------------------------------------------------
 divide_weights<-function( tree ) {
   noleaves<-which( V(tree)$leaf == 0 )
   leaves<-which( V(tree)$leaf == 1 )
@@ -84,6 +32,7 @@ divide_weights<-function( tree ) {
   return( tree )
 }
 
+#---------------------------------------------------------------------------------------------------
 deep_compute<-function( tree ) {
   
   nodes<-which( V(tree)$leaf == 0 )
@@ -108,8 +57,61 @@ deep_compute<-function( tree ) {
   return( tree )
 }
 
-#___________________________________________________________________________________________________
-# Extrae valor de indicadores a partir de un árbol con pesos relativos
+# Create decision tree -----------------------------------------------------------------------------
+#' @title Evaluate utilities
+#' @description Create decision tree for MAUT models exporting to igraph struture
+#' @param tree.data tree
+#' @return igraph structure
+#' @details Details
+#' @author Pedro Guarderas, Andrés Lopez
+#' @seealso \code{\link{Read.Tree}}
+#' @examples
+#' tree.data<-Read.Tree( 'example/tree.xls', 1, 1:5, c(1,8) )
+#' tree<-Make.Decision.Tree( tree.data )
+#' plot(tree)
+#' @export
+Make.Decision.Tree<-function( tree.data ) {
+  tree<-make_empty_graph( directed = TRUE )
+  for ( i in 1:nrow( tree.data ) ) { # i<-1
+    A<-list()
+    if ( is.na( tree.data$cod[i] ) ) {
+      A<-list( 'id' = tree.data$id[i],
+               'code' = 0,
+               'name' = tree.data$name[i],
+               'color' = 'dodgerblue1',
+               'weight' = tree.data$weight[i],
+               'rweight' = 0.0,
+               'leaf' = 0,
+               'function' = '',
+               'deep' = 0,
+               'size' = 21 )
+    } else {
+      A<-list( 'id' = tree.data$id[i],
+               'code' = tree.data$cod[i],
+               'name' = tree.data$name[i],
+               'color' = 'orange',
+               'weight' = tree.data$weight[i],
+               'rweight' = 0.0,
+               'leaf' = 1,
+               'function' = tree.data$funct[i],
+               'deep' = 0,
+               'size' = 20 )
+      
+    }
+    tree<-tree %>% add_vertices( 1, attr = A )  
+    if ( tree.data$id[i] != tree.data$parent[i] & !is.na( tree.data$parent[i] ) ) {
+      tree<-tree %>% add_edges( c( tree.data$name.parent[i], tree.data$name[i] ), color = "black" )
+    }
+  }
+  
+  tree<-sum_weights( tree ) # pesos absolutos
+  tree<-divide_weights( tree ) #pesos relativos
+  tree<-deep_compute( tree )
+  
+  return( tree )
+}
+
+# Extrae valor de indicadores a partir de un árbol con pesos relativos -----------------------------
 index_weights<-function( tree ) {
   leaves<-which( V(tree)$leaf == 1 )
   weights<-data.frame()

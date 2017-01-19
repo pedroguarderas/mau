@@ -19,8 +19,9 @@ Create decision tree for MAUT models exporting to igraph struture
 Details
 }
 \examples{
-x<-1
-Make.Decision.Tree( tree.data )
+tree.data<-Read.Tree( 'example/tree.xls', 1, 1:5, c(1,8) )
+tree<-Make.Decision.Tree( tree.data )
+plot(tree)
 }
 \author{
 Pedro Guarderas, Andrés Lopez

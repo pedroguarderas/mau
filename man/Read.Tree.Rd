@@ -4,18 +4,18 @@
 \alias{Read.Tree}
 \title{Evaluate utilities}
 \usage{
-Read.Tree(file, index_file, sheet, cols, rows, cols_index)
+Read.Tree(file, sheetIndex, cols, rows)
 }
 \arguments{
 \item{file}{file}
 
-\item{index_file}{index}
-
-\item{sheet}{sheet}
-
 \item{cols}{cols}
 
 \item{rows}{rows}
+
+\item{index_file}{index}
+
+\item{sheet}{sheet}
 
 \item{cols_index}{cols_index}
 }
