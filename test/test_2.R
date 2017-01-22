@@ -17,7 +17,7 @@ data.size<-rep( 0.7, m )
 data.label.color<-'black'
 data.label.size<-15
 
-# Parámetros para el plot
+# Spider plot parameters
 title<-'Spider'
 title.color<-'red3'
 title.size<-20
