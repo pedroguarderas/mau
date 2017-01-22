@@ -1,8 +1,4 @@
-#___________________________________________________________________________________________________
-library(evalpack)
-
-#___________________________________________________________________________________________________
-# Preparando datos
+# Preparing data -----------------------------------------------------------------------------------
 n<-10
 m<-7
 cols<-sample( colors()[ grepl('(red|blue|olive|darkgree)', colors() ) ], m, replace = TRUE )
@@ -59,7 +55,7 @@ legend.text.color<-'black'
 plot.margin<-unit( c( 1.0, 1.0, 1.0, 1.0 ),"cm")
 
 
-p<-spider.plot( data,
+p<-Spider.Plot( data,
                 data.label,
                 data.fill,
                 data.color,
