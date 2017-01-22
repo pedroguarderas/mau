@@ -82,8 +82,10 @@ Compute.Model<-function( tree,
     
     u[ , id := V(tree)[i]$id ]
     u[ , code := ifelse( V(tree)[i]$code == 0, NA, V(tree)[i]$code ) ]
+    u[ , weight := V(tree)[i]$weight ]
+    u[ , rweight := V(tree)[i]$rweight ]
     u[ , name := V(tree)[i]$name ]
-    u<-u[ , list( id, name, code, cod, utility, rutility ) ]
+    u<-u[ , list( id, name, code, cod, utility, rutility, weight, rweight ) ]
     model<-rbind( model, u )
     
   }
