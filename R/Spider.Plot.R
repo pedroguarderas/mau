@@ -46,7 +46,6 @@
 #' @return data.table with utilities
 #' @details Details
 #' @author Pedro Guarderas, Andrés Lopez
-#' @seealso \code{\link{Eval.Utilities}}
 #' @examples
 #' # Preparing data
 #' n<-10

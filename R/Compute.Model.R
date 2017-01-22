@@ -7,7 +7,8 @@
 #' @return data.table with with decision model computed
 #' @details Details
 #' @author Pedro Guarderas, Andrés Lopez
-#' @seealso \code{\link{read_weights}}, \code{\link{eval_index}}
+#' @seealso \code{\link{Stand.String}}, \code{\link{Read.Utilities}}, \code{\link{Eval.Utilities}},
+#' \code{\link{Read.Tree}}, \code{\link{Make.Decision.Tree}}.
 #' @examples
 #' # Index
 #' index<-data.table( cod = c( 'A', 'B', 'C', 'D' ), 
