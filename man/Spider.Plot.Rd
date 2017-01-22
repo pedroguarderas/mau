@@ -105,11 +105,7 @@ Spider plot
 \details{
 Details
 }
-\author{
-Pedro Guarderas, Andrés Lopez
-}
-\seealso{
-\code{\link{Eval.Utilities}}
+\examples{
 # Preparing data
 n<-10
 m<-7
@@ -150,7 +146,7 @@ grid.radius.linetype<-'solid'
 grid.radius.size<-0.5
 
 axis<-grid # Same as grid
-axis.label<-paste( 100 * axis, '%', sep = '' )
+axis.label<-paste( 100 * axis, '\%', sep = '' )
 axis.color<-'black'
 axis.size<-0.7
 axis.linetype<-'solid'
@@ -210,5 +206,11 @@ p<-Spider.Plot( data,
                 plot.margin )
 
 plot(p)
+}
+\author{
+Pedro Guarderas, Andrés Lopez
+}
+\seealso{
+\code{\link{Eval.Utilities}}
 }
 

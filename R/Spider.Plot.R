@@ -47,6 +47,7 @@
 #' @details Details
 #' @author Pedro Guarderas, Andrés Lopez
 #' @seealso \code{\link{Eval.Utilities}}
+#' @examples
 #' # Preparing data
 #' n<-10
 #' m<-7
