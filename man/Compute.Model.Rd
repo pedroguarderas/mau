@@ -66,6 +66,7 @@ model<-Compute.Model( tree, utilities, weights )
 Pedro Guarderas, Andrés Lopez
 }
 \seealso{
-\code{\link{read_weights}}, \code{\link{eval_index}}
+\code{\link{Stand.String}}, \code{\link{Read.Utilities}}, \code{\link{Eval.Utilities}},
+\code{\link{Read.Tree}}, \code{\link{Make.Decision.Tree}}.
 }
 

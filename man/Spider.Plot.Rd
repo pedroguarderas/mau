@@ -210,7 +210,4 @@ plot(p)
 \author{
 Pedro Guarderas, Andrés Lopez
 }
-\seealso{
-\code{\link{Eval.Utilities}}
-}
 
