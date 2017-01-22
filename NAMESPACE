@@ -2,8 +2,6 @@
 
 export(Compute.Model)
 export(Eval.Utilities)
-export(Export.Decision.Tree)
-export(Export.From.Tree)
 export(Make.Decision.Tree)
 export(Read.Tree)
 export(Read.Utilities)
