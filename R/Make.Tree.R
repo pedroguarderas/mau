@@ -66,7 +66,11 @@ deep_compute<-function( tree ) {
 #' @author Pedro Guarderas, Andrés Lopez
 #' @seealso \code{\link{Read.Tree}}
 #' @examples
-#' tree.data<-Read.Tree( 'example/tree.xls', 1, 1:5, c(1,8) )
+#' file<-'example/tree.xls'
+#' sheetIndex<-1
+#' cols<-1:5
+#' rows<-c(1,8)
+#' tree.data<-Read.Tree( file, sheetIndex, cols, rows )
 #' tree<-Make.Decision.Tree( tree.data )
 #' plot(tree)
 #' @export

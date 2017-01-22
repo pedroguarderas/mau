@@ -13,7 +13,11 @@
 #' @author Pedro Guarderas, Andrés Lopez
 #' @seealso \code{\link{Read.Utilities}}, \code{\link{Make.Decision.Tree}}
 #' @examples
-#' Read.Tree( file, index_file, sheet, cols, rows, cols_index )
+#' file<-'example/tree.xls'
+#' sheetIndex<-1
+#' cols<-1:5
+#' rows<-c(1,8)
+#' tree.data<-Read.Tree( file, sheetIndex, cols, rows )
 #' @importFrom xlsx read.xlsx
 #' @export
 Read.Tree<-function( file, 

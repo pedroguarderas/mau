@@ -29,7 +29,11 @@ Read decision tree for MAUT model
 Details
 }
 \examples{
-Read.Tree( file, index_file, sheet, cols, rows, cols_index )
+file<-'example/tree.xls'
+sheetIndex<-1
+cols<-1:5
+rows<-c(1,8)
+tree.data<-Read.Tree( file, sheetIndex, cols, rows )
 }
 \author{
 Pedro Guarderas, Andrés Lopez

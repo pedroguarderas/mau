@@ -9,7 +9,7 @@
 #' @return Returns data table with definition of utility functions by range
 #' @details Details
 #' @author Pedro Guarderas, Andrés Lopez
-#' @seealso \code{\link{read_weights}}, \code{\link{eval_index}}
+#' @seealso \code{\link{Stand.String}}
 #' @examples
 #' file<-'utilities.txt'
 #' script<-'utilities.R'
@@ -22,13 +22,13 @@ Read.Utilities<-function( file, script, lines, skip = 2, encoding = 'utf-8' ) {
 
   funs<-read.table( file, header = FALSE, sep = '\t', quote = NULL, encoding = encoding, 
                     skip = skip, nrows = lines, allowEscapes = FALSE, dec = '.', fill = TRUE,
+                    colClasses = c( 'character', 'numeric', 'numeric', 'numeric', 'numeric', 
+                                    'numeric'),
                     stringsAsFactors = FALSE )
-  
-  funs<-funs[ ,!( 1:ncol(funs) %in% c(3,5,8) ) ]
 
-  funs<-data.frame( funs, fun = sapply( funs[,1], FUN = Stand.String ) )
+  funs<-data.frame( funs, fun = sapply( funs[,1], FUN = Stand.String ), stringsAsFactors = FALSE )
   
-  colnames( funs )<-c( 'nom','min','max','nivel','val','a','b','c','fun' )
+  colnames( funs )<-c( 'nom','min','max', 'a','b','c','fun' )
   
   nom<-funs$nom[1]
   nomf<-funs$fun[1]
@@ -42,13 +42,6 @@ Read.Utilities<-function( file, script, lines, skip = 2, encoding = 'utf-8' ) {
     }
   }
   funs<-subset( funs, complete.cases( funs ) )
-  funs$min<-as.numeric( funs$min )
-  funs$max<-as.numeric( funs$max )
-  funs$nivel<-as.numeric( funs$nivel )
-  funs$val<-as.numeric( funs$val )
-  funs$a<-as.numeric( funs$a )
-  funs$b<-as.numeric( funs$b )
-  funs$c<-as.numeric( funs$c )
   funs<-funs[ order( funs$nom, funs$min ), ]
   rownames( funs )<-NULL
   

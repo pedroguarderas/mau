@@ -18,16 +18,24 @@
 #'                    i4 = c( 0, 0.2696746, 0.6751261, 0.7401660 ),
 #'                    i5 = c( 0.2797259, 0.2981198, 1, 0.1952864 ) )
 #' 
-#' # Index name
+#' # Loading utilities
+#' file<-'utilities.txt'
+#' script<-'utilities.R'
+#' lines<-17
+#' skip<-2
+#' encoding<-'utf-8'
+#' functions<-Read.Utilities( file, script, lines, skip, encoding )
+#' source( 'utilities.R' )
+#'
+#' # Index positions
 #' columns<-c( 2, 3, 5, 6 )
+#' 
+#' # Associated names of functions
 #' functions<-sapply( c( 'Project', 'Self implementation', 'External and local relations', 
 #'                       'Scope of capabilities' ),
 #'                    FUN = Stand.String )
 #' names( functions )<-NULL
 #' 
-#' # Loading utilities
-#' source( 'utilities.R' )
-#'  
 #' # Evaluation of utilities
 #' utilities<-Eval.Utilities( index, columns, functions )
 #' @export

@@ -36,6 +36,6 @@ functions<-Read.Utilities( file, script, lines, skip, encoding )
 Pedro Guarderas, Andrés Lopez
 }
 \seealso{
-\code{\link{read_weights}}, \code{\link{eval_index}}
+\code{\link{Stand.String}}
 }
 
