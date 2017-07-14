@@ -11,13 +11,11 @@
 #' \code{\link{Read.Tree}}, \code{\link{Make.Decision.Tree}}.
 #' @examples
 #' # Index
-#' index<-data.table( cod = c( 'A', 'B', 'C', 'D' ), 
-#'                    i1 = c( 0.3428570, 1, 1, 1 ),
-#'                    i2 = c( 0.5, 0.5, 1, 0.5 ), 
-#'                    i3 = c( 0.5, 1.0, 0.75, 0.25 ),
-#'                    i4 = c( 0, 0.2696746, 0.6751261, 0.7401660 ),
-#'                    i5 = c( 0.2797259, 0.2981198, 1, 0.1952864 ) )
-#' 
+#' index<-data.table( cod = paste( 'A', 1:10, sep = '' ), 
+#'                    i1 = c( 0.3428570, 1, 1, 1, 1, 0.2, 0.7, 0.5, 0.11, 0.8 ),
+#'                    i2 = c( 0.5, 0.5, 1, 0.5, 0.3, 0.1, 0.4, 0.13, 1, 0.74 ), 
+#'                    i3 = c( 0.5, 1.0, 0.75, 0.25, 0.1, 0.38, 0.57, 0.97, 0.3, 0.76 ),
+#'                    i4 = c( 0, 0.2696746, 0.6751261, 0.7401660, 0.84, 0.85, 0.74, 0.65, 0.37, 0.92 ) )
 #' # Loading utilities
 #' file<-'example/utilities.txt'
 #' script<-'utilities.R'
@@ -50,6 +48,14 @@
 #' # Compute the decision model
 #' weights<-tree.data[ !is.na( weight ) ]$weight
 #' model<-Compute.Model( tree, utilities, weights )
+#' 
+#' n<-200
+#' alpha<-c( 0.2, 0.5, 0.1, 0.2 )
+#' constraints<-list( list( c(1,2), 0.7 ), 
+#'                    list( c(3,4), 0.3 ) )
+#' S<-Sim.Const.Weights( n, utilities, alpha, constraints )
+#' plot.S<-Plot.Simulation.Weight( S$simulation, title = 'Simulations', xlab = 'ID', ylab = 'Utility' ) 
+#' plot( plot.S )
 #' @importFrom igraph V
 #' @import data.table
 #' @export
