@@ -37,6 +37,8 @@ alpha<-c( 0.2, 0.5, 0.1, 0.2 )
 constraints<-list( list( c(1,2), 0.7 ), 
                    list( c(3,4), 0.3 ) )
 S<-Sim.Const.Weights( n, utilities, alpha, constraints )
+plot.S<-Plot.Simulation.Weight( S, title = 'Simulations', xlab = 'ID', ylab = 'Utility' ) 
+plot( plot.S )
 }
 \author{
 Pedro Guarderas
