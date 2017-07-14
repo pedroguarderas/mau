@@ -3,6 +3,7 @@
 export(Compute.Model)
 export(Eval.Utilities)
 export(Make.Decision.Tree)
+export(Plot.Simulation.Weight)
 export(Read.Tree)
 export(Read.Utilities)
 export(Sim.Const.Weights)
