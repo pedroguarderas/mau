@@ -1,4 +1,3 @@
-
 # Read decision tree -------------------------------------------------------------------------------
 #' @title Evaluate utilities
 #' @description Read decision tree for MAUT model
