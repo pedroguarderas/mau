@@ -1,6 +1,5 @@
-
-#---------------------------------------------------------------------------------------------------
-# Función para asignar pesos a las ramas internas dados los pesos en las raíces
+# Sum weights --------------------------------------------------------------------------------------
+# This function assign weights to the interal nodes of the decision tree
 sum_weights<-function( tree ) {
   noleaves<-which( V(tree)$leaf == 0 )
   leaves<-which( V(tree)$leaf == 1 )
@@ -12,7 +11,7 @@ sum_weights<-function( tree ) {
   return( tree )
 }
 
-#---------------------------------------------------------------------------------------------------
+# Compute relative weights -------------------------------------------------------------------------
 divide_weights<-function( tree ) {
   noleaves<-which( V(tree)$leaf == 0 )
   leaves<-which( V(tree)$leaf == 1 )
@@ -32,7 +31,7 @@ divide_weights<-function( tree ) {
   return( tree )
 }
 
-#---------------------------------------------------------------------------------------------------
+# Assign deep identifier ---------------------------------------------------------------------------
 deep_compute<-function( tree ) {
   
   nodes<-which( V(tree)$leaf == 0 )
@@ -46,7 +45,7 @@ deep_compute<-function( tree ) {
   
   parent<-i
   deep<-0
-  while ( length(parent) > 0 ) {
+  while ( length( parent ) > 0 ) {
     V(tree)[parent]$deep<-deep  
     deep<-deep + 1
     childs<-unique( unlist( neighborhood( tree, 1, V(tree)[parent], mode = 'out' ) ) )
@@ -108,14 +107,16 @@ Make.Decision.Tree<-function( tree.data ) {
     }
   }
   
-  tree<-sum_weights( tree ) # pesos absolutos
-  tree<-divide_weights( tree ) #pesos relativos
+  tree<-sum_weights( tree ) # weights
+  tree<-divide_weights( tree ) # relative weights
   tree<-deep_compute( tree )
   
   return( tree )
 }
 
-# Extrae valor de indicadores a partir de un árbol con pesos relativos -----------------------------
+# Get index values ---------------------------------------------------------------------------------
+# Given a decision tree only with relative weights, this functions can extract the weights of
+# indexes
 index_weights<-function( tree ) {
   leaves<-which( V(tree)$leaf == 1 )
   weights<-data.frame()
