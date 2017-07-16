@@ -1,19 +1,23 @@
-# Simulation of constrained weights ----------------------------------------------------------------
-#' @title Simulation of constrained weights
-#' @description Simulation of weight following a Dirichlet distribution with a concentration 
-#' parameter and satisfying sum constraints.
-#' @param S simulation
-#' @param title title for plot
-#' @param xlab label x-axis
-#' @param ylab label y-axis
-#' @param box.col box color
-#' @param box.outlier.col box outlier color
-#' @param lines.cols spectrum of colors for simulations
-#' @param utility.col color for utility value
-#' @param utility.point.col color for point utility value
-#' @param text.col text color
-#' @return ggplot object of simulation
-#' @details Details
+# Plot decision MAUT model -------------------------------------------------------------------------
+#' @title Plot decision MAUT model with weights simulations
+#' @description Plot the decision modelo considering the weights simulated with a Dirichlet 
+#' distributions, every simulation is plotted with lines and in addition a box plot is included
+#' to account the behavior of every global utility.
+#' @param S first element of the simulation list produced by the function 
+#' \code{\link{Sim.Weights}}, \code{\link{Sim.Const.Weights}}.
+#' @param title text for the title plot
+#' @param xlab text for x-axis label
+#' @param ylab text for y-axis label
+#' @param box.col color for the boxes
+#' @param box.outlier.col color for the outlier points representing the extreme observations in the
+#' boxplot
+#' @param lines.cols the spectrum of colors for the simulation is selected randomly from a base 
+#' color
+#' @param utility.col the main utility value is also plotted with this specific color
+#' @param utility.point.col the line of main utilities is plotted with points represented with this
+#' color
+#' @param text.col color for the text values plotted for each utility
+#' @return ggplot object with the plot
 #' @author Pedro Guarderas
 #' @seealso \code{\link{Sim.Const.Weights}} \code{\link{Sim.Weights}}
 #' @import ggplot2
