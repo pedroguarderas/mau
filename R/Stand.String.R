@@ -1,4 +1,3 @@
-
 # Standarize strings -------------------------------------------------------------------------------
 #' @title Standarize strings
 #' @description Función para corrección de caracteres, está diseñada para eliminar y/o reemplazar 

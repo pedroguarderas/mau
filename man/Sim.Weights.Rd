@@ -34,10 +34,9 @@ n<-100
 alpha<-c( 0.2, 0.5, 0.1, 0.2 )
 S<-Sim.Weights( n, utilities, alpha )
 }
-\author{
-Pedro Guarderas
-}
 \seealso{
 \code{\link{Eval.Utilities}}
 }
-
+\author{
+Pedro Guarderas
+}

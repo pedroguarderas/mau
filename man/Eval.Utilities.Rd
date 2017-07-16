@@ -41,7 +41,7 @@ functions<-Read.Utilities( file, script, lines, skip, encoding )
 source( 'utilities.R' )
 
 # Index positions
-columns<-c( 2, 3, 5, 6 )
+columns<-c( 2, 3, 4, 5 )
 
 # Associated names of functions
 functions<-sapply( c( 'Project', 'Self implementation', 'External and local relations', 
@@ -52,10 +52,9 @@ names( functions )<-NULL
 # Evaluation of utilities
 utilities<-Eval.Utilities( index, columns, functions )
 }
-\author{
-Pedro Guarderas, Andrés Lopez
-}
 \seealso{
 \code{\link{Read.Utilities}}, \code{\link{Stand.String}}
 }
-
+\author{
+Pedro Guarderas, Andrés Lopez
+}

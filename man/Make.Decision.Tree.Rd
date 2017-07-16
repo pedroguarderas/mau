@@ -27,10 +27,9 @@ tree.data<-Read.Tree( file, sheetIndex, cols, rows )
 tree<-Make.Decision.Tree( tree.data )
 plot(tree)
 }
-\author{
-Pedro Guarderas, Andrés Lopez
-}
 \seealso{
 \code{\link{Read.Tree}}
 }
-
+\author{
+Pedro Guarderas, Andrés Lopez
+}

@@ -23,10 +23,10 @@ Details
 \examples{
 # Index
 index<-data.table( cod = paste( 'A', 1:10, sep = '' ), 
-                   i1 = c( 0.3428570, 1, 1, 1, 1, 0.2, 0.7, 0.5, 0.11, 0.8 ),
+                   i1 = c( 0.34, 1, 1, 1, 1, 0.2, 0.7, 0.5, 0.11, 0.8 ),
                    i2 = c( 0.5, 0.5, 1, 0.5, 0.3, 0.1, 0.4, 0.13, 1, 0.74 ), 
                    i3 = c( 0.5, 1.0, 0.75, 0.25, 0.1, 0.38, 0.57, 0.97, 0.3, 0.76 ),
-                   i4 = c( 0, 0.2696746, 0.6751261, 0.7401660, 0.84, 0.85, 0.74, 0.65, 0.37, 0.92 ) )
+                   i4 = c( 0, 0.26, 0.67, 0.74, 0.84, 0.85, 0.74, 0.65, 0.37, 0.92 ) )
 # Loading utilities
 file<-'example/utilities.txt'
 script<-'utilities.R'
@@ -49,11 +49,11 @@ names( functions )<-NULL
 utilities<-Eval.Utilities( index, columns, functions )
 
 # Make tree
-file<-'example/tree.xls'
+file<-'example/tree.csv'
 sheetIndex<-1
 cols<-1:5
 rows<-c(1,8)
-tree.data<-Read.Tree( file, sheetIndex, cols, rows )
+tree.data<-Read.Tree( file, skip = 0, nrow = 8 )
 tree<-Make.Decision.Tree( tree.data )
 
 # Compute the decision model
@@ -68,11 +68,10 @@ S<-Sim.Const.Weights( n, utilities, alpha, constraints )
 plot.S<-Plot.Simulation.Weight( S$simulation, title = 'Simulations', xlab = 'ID', ylab = 'Utility' ) 
 plot( plot.S )
 }
-\author{
-Pedro Guarderas, Andrés Lopez
-}
 \seealso{
 \code{\link{Stand.String}}, \code{\link{Read.Utilities}}, \code{\link{Eval.Utilities}},
 \code{\link{Read.Tree}}, \code{\link{Make.Decision.Tree}}.
 }
-
+\author{
+Pedro Guarderas, Andrés Lopez
+}

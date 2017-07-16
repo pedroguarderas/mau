@@ -2,32 +2,24 @@
 #' @title Evaluate utilities
 #' @description Read decision tree for MAUT model
 #' @param file file
-#' @param index_file index
-#' @param sheet sheet
-#' @param cols cols
-#' @param rows rows
-#' @param cols_index cols_index
+#' @param skip index
+#' @param nrows rows
 #' @return data.table with utilities
 #' @details Details
 #' @author Pedro Guarderas, Andrés Lopez
 #' @seealso \code{\link{Read.Utilities}}, \code{\link{Make.Decision.Tree}}
 #' @examples
-#' file<-'example/tree.xls'
+#' file<-'example/tree.csv'
 #' sheetIndex<-1
 #' cols<-1:5
 #' rows<-c(1,8)
 #' tree.data<-Read.Tree( file, sheetIndex, cols, rows )
-#' @importFrom xlsx read.xlsx
 #' @export
 Read.Tree<-function( file, 
-                     sheetIndex, 
-                     cols, 
-                     rows ) {
+                     skip, 
+                     nrows ) {
   
-  graph<-read.xlsx( file, sheetIndex, 
-                    startRow = rows[1], 
-                    endRow = rows[2],
-                    colIndex = cols, 
+  graph<-read.csv( file, header = TRUE, sep = ",", quote = "\"'", skip = skip, nrows = nrows,
                     colClasses = c('integer','character', 'integer', 'integer', 'numeric' ),
                     stringsAsFactors = FALSE )
   

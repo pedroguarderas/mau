@@ -34,4 +34,3 @@ names( y )<-NULL
 \author{
 Julio Andrade, Pedro Guarderas, Andrés Lopez
 }
-

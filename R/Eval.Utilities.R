@@ -1,4 +1,3 @@
-
 # Evaluate utility functions -----------------------------------------------------------------------
 #' @title Evaluate utilities
 #' @description Evaluaction of utilities for a data.table of indexes

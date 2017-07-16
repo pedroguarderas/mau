@@ -40,10 +40,9 @@ S<-Sim.Const.Weights( n, utilities, alpha, constraints )
 plot.S<-Plot.Simulation.Weight( S, title = 'Simulations', xlab = 'ID', ylab = 'Utility' ) 
 plot( plot.S )
 }
-\author{
-Pedro Guarderas
-}
 \seealso{
 \code{\link{Eval.Utilities}}
 }
-
+\author{
+Pedro Guarderas
+}

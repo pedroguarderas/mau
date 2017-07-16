@@ -1,4 +1,3 @@
-
 # Simulation of weights ----------------------------------------------------------------------------
 #' @title Simulation of weights
 #' @description Simulation of weight following a Dirichlet distribution with a concentration 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/Plot.Simulation.Weight.R
 \name{Plot.Simulation.Weight}
 \alias{Plot.Simulation.Weight}
-\title{Simulation of constrained weights}
+\title{Plot decision MAUT model with weights simulations}
 \usage{
 Plot.Simulation.Weight(S, title = "Simulations", xlab = "ID",
   ylab = "Utility", lines.cols = "blue", box.col = "gold",
@@ -10,40 +10,41 @@ Plot.Simulation.Weight(S, title = "Simulations", xlab = "ID",
   utility.point.col = "darkgreen", text.col = "black")
 }
 \arguments{
-\item{S}{simulation}
+\item{S}{first element of the simulation list produced by the function 
+\code{\link{Sim.Weights}}, \code{\link{Sim.Const.Weights}}.}
 
-\item{title}{title for plot}
+\item{title}{text for the title plot}
 
-\item{xlab}{label x-axis}
+\item{xlab}{text for x-axis label}
 
-\item{ylab}{label y-axis}
+\item{ylab}{text for y-axis label}
 
-\item{lines.cols}{spectrum of colors for simulations}
+\item{lines.cols}{the spectrum of colors for the simulation is selected randomly from a base 
+color}
 
-\item{box.col}{box color}
+\item{box.col}{color for the boxes}
 
-\item{box.outlier.col}{box outlier color}
+\item{box.outlier.col}{color for the outlier points representing the extreme observations in the
+boxplot}
 
-\item{utility.col}{color for utility value}
+\item{utility.col}{the main utility value is also plotted with this specific color}
 
-\item{utility.point.col}{color for point utility value}
+\item{utility.point.col}{the line of main utilities is plotted with points represented with this
+color}
 
-\item{text.col}{text color}
+\item{text.col}{color for the text values plotted for each utility}
 }
 \value{
-ggplot object of simulation
+ggplot object with the plot
 }
 \description{
-Simulation of weight following a Dirichlet distribution with a concentration 
-parameter and satisfying sum constraints.
-}
-\details{
-Details
-}
-\author{
-Pedro Guarderas
+Plot the decision modelo considering the weights simulated with a Dirichlet 
+distributions, every simulation is plotted with lines and in addition a box plot is included
+to account the behavior of every global utility.
 }
 \seealso{
 \code{\link{Sim.Const.Weights}} \code{\link{Sim.Weights}}
 }
-
+\author{
+Pedro Guarderas
+}

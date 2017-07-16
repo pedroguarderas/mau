@@ -15,6 +15,6 @@ Depends:
     data.table,
     gtools,
     stringr,
-    xlsx,
-    igraph
-RoxygenNote: 5.0.1
+    igraph,
+    RColorBrewer
+RoxygenNote: 6.0.1

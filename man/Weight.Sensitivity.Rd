@@ -23,10 +23,9 @@ Details
 \examples{
 Weight.Sensitivity( utilidades, weights )
 }
-\author{
-Pedro Guarderas, Andrés Lopez
-}
 \seealso{
 \code{\link{Eval.Utilities}}
 }
-
+\author{
+Pedro Guarderas, Andrés Lopez
+}

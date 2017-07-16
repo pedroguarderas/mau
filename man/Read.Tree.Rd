@@ -4,20 +4,14 @@
 \alias{Read.Tree}
 \title{Evaluate utilities}
 \usage{
-Read.Tree(file, sheetIndex, cols, rows)
+Read.Tree(file, skip, nrows)
 }
 \arguments{
 \item{file}{file}
 
-\item{cols}{cols}
+\item{skip}{index}
 
-\item{rows}{rows}
-
-\item{index_file}{index}
-
-\item{sheet}{sheet}
-
-\item{cols_index}{cols_index}
+\item{nrows}{rows}
 }
 \value{
 data.table with utilities
@@ -29,16 +23,15 @@ Read decision tree for MAUT model
 Details
 }
 \examples{
-file<-'example/tree.xls'
+file<-'example/tree.csv'
 sheetIndex<-1
 cols<-1:5
 rows<-c(1,8)
 tree.data<-Read.Tree( file, sheetIndex, cols, rows )
 }
-\author{
-Pedro Guarderas, Andrés Lopez
-}
 \seealso{
 \code{\link{Read.Utilities}}, \code{\link{Make.Decision.Tree}}
 }
-
+\author{
+Pedro Guarderas, Andrés Lopez
+}
