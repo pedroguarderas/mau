@@ -24,7 +24,10 @@ Returns data table with definition of utility functions by range
 Builds utility functions from definition standard
 }
 \details{
-Details
+The baisc MAUT models are built with functions of constant absolute risk aversion, 
+this functions could be defined with simple parameters, only is necessary a function name and
+the domain of definition of every function and more important is necesary no more than three
+coeficients for the function definition.
 }
 \examples{
 library( data.table )

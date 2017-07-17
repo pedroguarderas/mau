@@ -7,10 +7,9 @@ Date: 2014-03-23
 Author: Felipe Aguirre, Julio Andrade, Pedro Guarderas, Daniel Lagos,
     Andres Lopez, Nelson Recalde, Edison Salazar.
 Maintainer: Pedro Guarderas <pedro.felipe.guarderas@gmail.com>
-Description: The mau package is created to build and test decision models based in Multi Attribute Utility
-  Theory (MAUT). With this package you can automatically evaluate utilities over a data.table of
-  indexes. Also, MAUT decision models are based in decision trees that could evaluated at every
-  level with mau and graph objects created with help of the igraph package.
+Description: Build and test decision models based in Multi Attribute Utility Theory (MAUT). 
+  Automatically evaluation of utilities over a data.table of indexes, computation of internal 
+  criteria for the decision tree, interactions with the igraph packages.
 License: LGPL-3
 URL:https://github.com/pedroguarderas/mau
 Depends: R (>= 3.0)

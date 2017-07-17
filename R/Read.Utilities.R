@@ -7,7 +7,10 @@
 #' @param skip to read the \code{file} it had to \code{skip} a given number of lines 
 #' @param encoding file encoding
 #' @return Returns data table with definition of utility functions by range
-#' @details Details
+#' @details The baisc MAUT models are built with functions of constant absolute risk aversion, 
+#' this functions could be defined with simple parameters, only is necessary a function name and
+#' the domain of definition of every function and more important is necesary no more than three
+#' coeficients for the function definition.
 #' @author Pedro Guarderas, Andrés Lopez
 #' @seealso \code{\link{Stand.String}}
 #' @examples

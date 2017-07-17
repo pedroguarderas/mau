@@ -6,6 +6,8 @@
 #' @details Details
 #' @author Pedro Guarderas, Andrés Lopez
 #' @seealso \code{\link{Read.Tree}}
+#' @details With the tree information loaded by the \code{\link{Read.Tree}} the decision tree
+#' could be represented like an igraph object.
 #' @examples
 #' library( data.table )
 #' library( igraph )

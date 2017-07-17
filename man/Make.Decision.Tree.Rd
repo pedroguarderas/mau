@@ -17,6 +17,9 @@ Create decision tree for MAUT models exporting to an igraph object
 }
 \details{
 Details
+
+With the tree information loaded by the \code{\link{Read.Tree}} the decision tree
+could be represented like an igraph object.
 }
 \examples{
 library( data.table )

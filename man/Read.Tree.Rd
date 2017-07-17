@@ -19,9 +19,6 @@ data.table with utilities
 \description{
 The tree structure for the MAUT is extracted from a file with a given format.
 }
-\details{
-Details
-}
 \examples{
 library( data.table )
 library( igraph )

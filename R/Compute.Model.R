@@ -7,10 +7,10 @@
 #' @param utilities data.table with ordered columns containing the values of utilities
 #' @param weights decision model weights
 #' @return data.table with with decision model computed
-#' @details Details
+#' @details The whole decision model can be computed a any level an represented in a table format.
 #' @author Pedro Guarderas, Andrés Lopez
 #' @seealso \code{\link{Stand.String}}, \code{\link{Read.Utilities}}, \code{\link{Eval.Utilities}},
-#' \code{\link{Read.Tree}}, \code{\link{Make.Decision.Tree}}.
+#' \code{\link{Read.Tree}}, \code{\link{Make.Decision.Tree}}, \code{\link{Sim.Const.Weights}}.
 #' @examples
 #' # Index
 #' library( data.table )

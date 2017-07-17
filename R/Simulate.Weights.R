@@ -6,7 +6,8 @@
 #' @param utilities utility dataframe, first column is the identifier
 #' @param alpha concentration parameter for the Dirichlet distribution
 #' @return List with data.frames \{simulation, weights\} with total utilities and simulated weights
-#' @details Details
+#' @details Taking advantage of the Dirichlet distribution properties the weights could be 
+#' simulated with a concentration arround given weights.
 #' @author Pedro Guarderas
 #' @seealso \code{\link{Eval.Utilities}}
 #' @importFrom gtools rdirichlet
@@ -47,7 +48,9 @@ Sim.Weights<-function( n, utilities, alpha ) {
 #' @param alpha concentration parameter for the Dirichlet distribution
 #' @param constraints list of sum constraints
 #' @return List with data.frames \{simulation, weights\} with total utilities and simulated weights
-#' @details Details
+#' @details Employing the properties of the Dirichlet distribution, weights could be simulated 
+#' with a given concentration, additionally this simulation can be carry out by subsets of weights
+#' only to meet specific constraints.
 #' @author Pedro Guarderas
 #' @seealso \code{\link{Eval.Utilities}}
 #' @examples

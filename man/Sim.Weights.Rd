@@ -21,7 +21,8 @@ Simulation of weight following a Dirichlet distribution with a concentration
 parameter. The concentration parameter is given a tentative weights.
 }
 \details{
-Details
+Taking advantage of the Dirichlet distribution properties the weights could be 
+simulated with a concentration arround given weights.
 }
 \examples{
 library( data.table )

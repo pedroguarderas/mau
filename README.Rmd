@@ -14,8 +14,7 @@ knitr::opts_chunk$set(
 
 The **mau** package is created to build and test decision models based in Multi Attribute Utility
 Theory (MAUT). With this package you can automatically evaluate utilities over a data.table of
-indexes. Also, MAUT decision models are based in decision trees that could evaluated at every
-level with **mau** and graph objects created with help of the igraph library.
+indexes. The criteria of the decision tree could evaluated and easily computed.
 
 ## Installation
 To instal **mau** you can proceed in the following way making use of the devtools library

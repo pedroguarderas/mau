@@ -5,7 +5,6 @@
 #' @param skip starting row for read
 #' @param nrows number of rows to be readed
 #' @return data.table with utilities
-#' @details Details
 #' @author Pedro Guarderas, Andrés Lopez
 #' @seealso \code{\link{Read.Utilities}}, \code{\link{Make.Decision.Tree}}
 #' @examples

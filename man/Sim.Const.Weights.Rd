@@ -24,7 +24,9 @@ parameter. The concentration parameter is given a tentative weights additionally
 partial sums of weights are introduced by a list ordered structure.
 }
 \details{
-Details
+Employing the properties of the Dirichlet distribution, weights could be simulated 
+with a given concentration, additionally this simulation can be carry out by subsets of weights
+only to meet specific constraints.
 }
 \examples{
 library( data.table )

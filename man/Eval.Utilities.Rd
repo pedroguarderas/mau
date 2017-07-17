@@ -21,7 +21,9 @@ Evaluaction of utilities for a data.table of indexes, the utilities functions ar
 computed over every index represented by each column of the input table.
 }
 \details{
-Details
+The baisc MAUT models are built with functions of constant absolute risk aversion, 
+this functions could be defined with simple parameters, \code{\link{Read.Utilities}} could 
+interpret a basic text file with and standarized definition for every utility function.
 }
 \examples{
 # Index

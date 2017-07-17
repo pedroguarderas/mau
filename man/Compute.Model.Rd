@@ -21,7 +21,7 @@ Evaluation of decision tree nodes. All the MAUT model is computed at every level
 the utilities are computed considering the given weights.
 }
 \details{
-Details
+The whole decision model can be computed a any level an represented in a table format.
 }
 \examples{
 # Index
@@ -84,6 +84,6 @@ Pedro Guarderas, Andrés Lopez
 }
 \seealso{
 \code{\link{Stand.String}}, \code{\link{Read.Utilities}}, \code{\link{Eval.Utilities}},
-\code{\link{Read.Tree}}, \code{\link{Make.Decision.Tree}}.
+\code{\link{Read.Tree}}, \code{\link{Make.Decision.Tree}}, \code{\link{Sim.Const.Weights}}.
 }
 
