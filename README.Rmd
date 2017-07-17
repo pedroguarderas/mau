@@ -23,7 +23,7 @@ $u(x_1,\ldots,x_n) = \sum_{i=1,\ldots,n}\, w_i\, u_i( x_i )$.
 
 With **mau** the maut model can be computed easily for any utility functions. In addition, the 
 utility functions could be defined considering the constant risk aversion criteria sujested by 
-Arrow, those functions are only of two kinds $u(x) = a x + b$ or $u(x) = a e^{bx} + c$.
+Arrow, those functions are only of two kinds $u(x) = a \cdot x + b$ or $u(x) = a \cdot e^{b \cdot x} + c$.
 
 ## Installation
 To instal **mau** you can proceed in the following way making use of the devtools library
