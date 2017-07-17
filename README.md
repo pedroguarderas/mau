@@ -3,9 +3,7 @@
 With **mau** you can build and test decision models based in Multi Attribute Utility Theory (MAUT). With this package you can automatically evaluate utilities over a data.table of indexes. The criteria of the decision tree could evaluated and easily computed.
 
 The MAUT models defined with aid of utility functions *u*<sub>1</sub>, …, *u*<sub>*n*</sub> and indexes represented simmilarly by *x*<sub>1</sub>, …, *x*<sub>*n*</sub> and obtain the final utility given by
-$$
-u(x\_1,\\ldots,x\_n) = \\sum\_{i=1}^{n}{u\_i( x\_i )}
-$$
+$$u(x\_1,\\ldots,x\_n) = \\sum\_{i=1}^{n} u\_i( x\_i )$$
 
 Installation
 ------------

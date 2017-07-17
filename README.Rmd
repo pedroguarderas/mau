@@ -18,9 +18,7 @@ indexes. The criteria of the decision tree could evaluated and easily computed.
 
 The MAUT models defined with aid of utility functions $u_1,\ldots,u_n$ and indexes represented 
 simmilarly by $x_1,\ldots,x_n$ and obtain the final utility given by
-\[
-u(x_1,\ldots,x_n) = \sum_{i=1}^{n}{u_i( x_i )}
-\]
+$$u(x_1,\ldots,x_n) = \sum_{i=1}^{n} u_i( x_i )$$
 
 ## Installation
 To instal **mau** you can proceed in the following way making use of the devtools library
