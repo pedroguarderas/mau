@@ -21,9 +21,10 @@ indexes $x_1,\ldots,x_n$ and those utilities are aggregated considering addition
 $w_1,\ldots,w_n$, the whole final utility is given by the addition 
 $u(x_1,\ldots,x_n) = \sum_{i=1,\ldots,n}\, w_i\, u_i( x_i )$.
 
-With **mau** the maut model can be computed easily for any utility functions. In addition, the 
-utility functions could be defined considering the constant risk aversion criteria sujested by 
-Arrow, those functions are only of two kinds $u(x) = a \cdot x + b$ or $u(x) = a \cdot e^{b \cdot x} + c$.
+With **mau** the decision model can be computed easily for any type of single valueted utility 
+function. In addition, the utility functions could be defined considering the constant risk 
+aversion criteria sujested by Arrow, those functions are only of two 
+kinds $u(x) = a \cdot x + b$ or $u(x) = a \cdot e^{b \cdot x} + c$.
 
 ## Installation
 To instal **mau** you can proceed in the following way making use of the devtools library
