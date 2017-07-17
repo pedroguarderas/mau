@@ -1,7 +1,7 @@
 Package: mau
 Type: Package
 Title: Decision models with multiatribute utility theory
-Version: 1.0
+Version: 0.1
 Date: 2013-12-17
 Author: Felipe Aguirre, Julio Andrade, Pedro Guarderas, Daniel Lagos,
     Andres Lopez, Nelson Recalde, Edison Salazar.
