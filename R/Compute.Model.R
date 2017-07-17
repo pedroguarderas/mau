@@ -57,6 +57,7 @@
 #' weights<-tree.data[ !is.na( weight ) ]$weight
 #' model<-Compute.Model( tree, utilities, weights )
 #' 
+#' # Simulation of weights
 #' n<-200
 #' alpha<-c( 0.2, 0.5, 0.1, 0.2 )
 #' constraints<-list( list( c(1,2), 0.7 ), 
