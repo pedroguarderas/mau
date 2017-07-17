@@ -14,96 +14,93 @@ Spider.Plot(data, data.label, data.fill, data.color, data.linetype, data.alpha,
   legend.text.color, plot.margin)
 }
 \arguments{
-\item{data}{Datos con los valores a plotear, data.frame}
+\item{data}{data.table with the utilities of a decision model}
 
-\item{data.label}{label}
+\item{data.label}{data label}
 
-\item{data.fill}{fill}
+\item{data.fill}{data fill color}
 
-\item{data.color}{color}
+\item{data.color}{data color}
 
-\item{data.linetype}{linetype}
+\item{data.linetype}{line type for data}
 
-\item{data.alpha}{alpha}
+\item{data.alpha}{alpha scale for data}
 
-\item{data.size}{size}
+\item{data.size}{line size for data}
 
-\item{data.label.color}{label.color}
+\item{data.label.color}{label color for data}
 
-\item{data.label.size}{label.size}
+\item{data.label.size}{label size for data}
 
-\item{group}{Columna de data por la cual se agrupan los datos}
+\item{group}{name for the column of groups}
 
-\item{criteria}{Columna con los criterios de evaluación, debe ser}
+\item{criteria}{column name for criteria}
 
-\item{valor}{Columna con los valores de los polígonos}
+\item{valor}{column name for utilities}
 
-\item{title}{Título para el plot}
+\item{title}{plot title}
 
-\item{title.color}{Color del título}
+\item{title.color}{plot title color}
 
-\item{title.size}{Tamaño del título}
+\item{title.size}{plot title size}
 
-\item{label.size}{Tamaño de etiquetas}
+\item{label.size}{labels size}
 
-\item{label.color}{Color de etiquetas}
+\item{label.color}{labels color}
 
-\item{label.angle}{Ángulo de etiqueas}
+\item{label.angle}{labels angle}
 
-\item{label.position}{Posición de etiqueas}
+\item{label.position}{labels position}
 
-\item{theta}{Giro del plot}
+\item{theta}{plot rotation angle}
 
-\item{grid}{Malla para los radios, vector numérico con valores únicos}
+\item{grid}{grid for plot}
 
-\item{grid.color}{Color del grid}
+\item{grid.color}{grid color}
 
-\item{grid.radius.color}{Color de los radios del grid}
+\item{grid.radius.color}{grid radius color}
 
-\item{grid.linetype}{Tipo de línea del grid}
+\item{grid.linetype}{grid line type}
 
-\item{grid.size}{Tamaño de la línea}
+\item{grid.size}{grid line size}
 
-\item{grid.radius.linetype}{Tipo de línea de los radios del grid}
+\item{grid.radius.linetype}{grid radius line type}
 
-\item{grid.radius.size}{Tamaño de línea de los radios}
+\item{grid.radius.size}{grid radius line size}
 
-\item{axis}{Eje para ubicarse en el grid}
+\item{axis}{axis}
 
-\item{axis.label}{Etiquetas del eje}
+\item{axis.label}{axis label}
 
-\item{axis.color}{Color del eje}
+\item{axis.color}{axis color}
 
-\item{axis.size}{Tamaño del eje}
+\item{axis.size}{axis size}
 
-\item{axis.linetype}{Tipo del eje}
+\item{axis.linetype}{axis line type}
 
-\item{axis.angle}{Ángulo del eje}
+\item{axis.angle}{axis angle}
 
-\item{axis.label.color}{Color para labels}
+\item{axis.label.color}{axis label color}
 
-\item{axis.label.size}{Tamaño del texto del eje}
+\item{axis.label.size}{axis label size}
 
-\item{axis.label.displace}{Desplazamiento de los labels con respecto al eje}
+\item{axis.label.displace}{axis label displacement}
 
-\item{axis.label.angle}{Ángulo de labels}
+\item{axis.label.angle}{axis label angel}
 
-\item{legend.position}{position for the legend}
+\item{legend.position}{label position}
 
 \item{legend.size}{legend size}
 
 \item{legend.text.color}{legend text color}
 
-\item{plot.margin}{Márgenes del plot}
+\item{plot.margin}{plot margin}
 }
 \value{
-data.table with utilities
+ggplot2 object with the spider plot
 }
 \description{
-Spider plot
-}
-\details{
-Details
+Generates an spider plot for a decision model
 }
 \examples{
 # Preparing data
@@ -210,3 +207,4 @@ plot(p)
 \author{
 Pedro Guarderas, Andrés Lopez
 }
+

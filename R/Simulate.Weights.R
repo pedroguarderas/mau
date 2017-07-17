@@ -1,7 +1,7 @@
 # Simulation of weights ----------------------------------------------------------------------------
 #' @title Simulation of weights
 #' @description Simulation of weight following a Dirichlet distribution with a concentration 
-#' parameter
+#' parameter. The concentration parameter is given a tentative weights.
 #' @param n number of simulations
 #' @param utilities utility dataframe, first column is the identifier
 #' @param alpha concentration parameter for the Dirichlet distribution
@@ -9,7 +9,7 @@
 #' @details Details
 #' @author Pedro Guarderas
 #' @seealso \code{\link{Eval.Utilities}}
-#' @importFrom  gtools rdirichlet
+#' @importFrom gtools rdirichlet
 #' @examples
 #' N<-10
 #' utilities<-data.table( id = 1:N, 
@@ -39,7 +39,8 @@ Sim.Weights<-function( n, utilities, alpha ) {
 # Simulation of constrained weights ----------------------------------------------------------------
 #' @title Simulation of constrained weights
 #' @description Simulation of weight following a Dirichlet distribution with a concentration 
-#' parameter and satisfying sum constraints.
+#' parameter. The concentration parameter is given a tentative weights additionally constraints over
+#' partial sums of weights are introduced by a list ordered structure.
 #' @param n number of simulations
 #' @param utilities utility dataframe, first column is the identifier
 #' @param alpha concentration parameter for the Dirichlet distribution
@@ -63,7 +64,7 @@ Sim.Weights<-function( n, utilities, alpha ) {
 #' plot.S<-Plot.Simulation.Weight( S$simulation, title = 'Simulations', 
 #'                                 xlab = 'ID', ylab = 'Utility' ) 
 #' plot( plot.S )
-#' @importFrom  gtools rdirichlet
+#' @importFrom gtools rdirichlet
 #' @export
 Sim.Const.Weights<-function( n, utilities, alpha, constraints ) {
 

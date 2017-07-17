@@ -20,7 +20,8 @@ List with data.frames \{simulation, weights\} with total utilities and simulated
 }
 \description{
 Simulation of weight following a Dirichlet distribution with a concentration 
-parameter and satisfying sum constraints.
+parameter. The concentration parameter is given a tentative weights additionally constraints over
+partial sums of weights are introduced by a list ordered structure.
 }
 \details{
 Details
@@ -41,9 +42,10 @@ plot.S<-Plot.Simulation.Weight( S$simulation, title = 'Simulations',
                                 xlab = 'ID', ylab = 'Utility' ) 
 plot( plot.S )
 }
-\seealso{
-\code{\link{Eval.Utilities}}
-}
 \author{
 Pedro Guarderas
 }
+\seealso{
+\code{\link{Eval.Utilities}}
+}
+

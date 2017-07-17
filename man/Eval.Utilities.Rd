@@ -17,7 +17,8 @@ Eval.Utilities(index, columns, functions)
 data.table with utilities
 }
 \description{
-Evaluaction of utilities for a data.table of indexes
+Evaluaction of utilities for a data.table of indexes, the utilities functions are 
+computed over every index represented by each column of the input table.
 }
 \details{
 Details
@@ -52,9 +53,10 @@ names( functions )<-NULL
 # Evaluation of utilities
 utilities<-Eval.Utilities( index, columns, functions )
 }
-\seealso{
-\code{\link{Read.Utilities}}, \code{\link{Stand.String}}
-}
 \author{
 Pedro Guarderas, Andrés Lopez
 }
+\seealso{
+\code{\link{Read.Utilities}}, \code{\link{Stand.String}}
+}
+

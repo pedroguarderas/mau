@@ -1,7 +1,8 @@
 
 # Evaluation of decision tree nodes ----------------------------------------------------------------
 #' @title Evaluation of decision tree nodes
-#' @description Evaluation of decision tree nodes
+#' @description Evaluation of decision tree nodes. All the MAUT model is computed at every level 
+#' the utilities are computed considering the given weights.
 #' @param tree inicial tree struture with utilities in its leafs
 #' @param utilities data.table with ordered columns containing the values of utilities
 #' @param weights decision model weights
@@ -58,8 +59,8 @@
 #' plot.S<-Plot.Simulation.Weight( S$simulation, title = 'Simulations', 
 #'                                 xlab = 'ID', ylab = 'Utility' ) 
 #' plot( plot.S )
-#' @importFrom igraph V
 #' @import data.table
+#' @importFrom igraph make_empty_graph add_vertices add_edges V neighborhood %>%
 #' @importFrom stats complete.cases median quantile
 #' @export
 Compute.Model<-function( tree, 

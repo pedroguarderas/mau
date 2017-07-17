@@ -1,6 +1,7 @@
 # Evaluate utility functions -----------------------------------------------------------------------
 #' @title Evaluate utilities
-#' @description Evaluaction of utilities for a data.table of indexes
+#' @description Evaluaction of utilities for a data.table of indexes, the utilities functions are 
+#' computed over every index represented by each column of the input table.
 #' @param index data.table of indexes
 #' @param columns columns with indexes where the utilities will be computed
 #' @param functions vector of characters with name of functions

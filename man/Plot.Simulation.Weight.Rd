@@ -42,9 +42,10 @@ Plot the decision modelo considering the weights simulated with a Dirichlet
 distributions, every simulation is plotted with lines and in addition a box plot is included
 to account the behavior of every global utility.
 }
-\seealso{
-\code{\link{Sim.Const.Weights}} \code{\link{Sim.Weights}}
-}
 \author{
 Pedro Guarderas
 }
+\seealso{
+\code{\link{Sim.Const.Weights}} \code{\link{Sim.Weights}}
+}
+

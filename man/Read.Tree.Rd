@@ -7,17 +7,17 @@
 Read.Tree(file, skip, nrows)
 }
 \arguments{
-\item{file}{file}
+\item{file}{input file}
 
-\item{skip}{index}
+\item{skip}{starting row for read}
 
-\item{nrows}{rows}
+\item{nrows}{number of rows to be readed}
 }
 \value{
 data.table with utilities
 }
 \description{
-Read decision tree for MAUT model
+The tree structure for the MAUT is extracted from a file with a given format.
 }
 \details{
 Details
@@ -27,9 +27,10 @@ file<-system.file("extdata", "tree.csv", package = "mau" )
 sheetIndex<-1
 tree.data<-Read.Tree( file, skip = 0, nrows = 8 )
 }
-\seealso{
-\code{\link{Read.Utilities}}, \code{\link{Make.Decision.Tree}}
-}
 \author{
 Pedro Guarderas, Andrés Lopez
 }
+\seealso{
+\code{\link{Read.Utilities}}, \code{\link{Make.Decision.Tree}}
+}
+

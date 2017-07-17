@@ -20,7 +20,7 @@
 #' @return ggplot object with the plot
 #' @author Pedro Guarderas
 #' @seealso \code{\link{Sim.Const.Weights}} \code{\link{Sim.Weights}}
-#' @import ggplot2
+#' @importFrom ggplot2 %+% ggplot geom_line scale_colour_manual geom_boxplot geom_point geom_text xlab ylab theme_minimal scale_y_continuous theme ggtitle
 #' @importFrom grDevices colorRampPalette colors
 #' @export
 Plot.Simulation.Weight<-function( S, title = 'Simulations', xlab = 'ID', ylab = 'Utility',

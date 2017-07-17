@@ -1,50 +1,48 @@
-
 # Spider plot --------------------------------------------------------------------------------------
 #' @title Spider plot
-#' @description Spider plot
-#' @param data Datos con los valores a plotear, data.frame 
-#' @param data.label label
-#' @param data.fill fill
-#' @param data.color color
-#' @param data.linetype linetype
-#' @param data.alpha alpha
-#' @param data.size size
-#' @param data.label.color label.color
-#' @param data.label.size label.size
-#' @param group Columna de data por la cual se agrupan los datos
-#' @param criteria Columna con los criterios de evaluación, debe ser 
-#' @param valor Columna con los valores de los polígonos
-#' @param title Título para el plot
-#' @param title.color Color del título
-#' @param title.size Tamaño del título
-#' @param label.size Tamaño de etiquetas
-#' @param label.color Color de etiquetas
-#' @param label.angle Ángulo de etiqueas
-#' @param label.position Posición de etiqueas
-#' @param theta Giro del plot
-#' @param grid Malla para los radios, vector numérico con valores únicos
-#' @param grid.color Color del grid
-#' @param grid.radius.color Color de los radios del grid
-#' @param grid.linetype Tipo de línea del grid
-#' @param grid.size Tamaño de la línea
-#' @param grid.radius.linetype Tipo de línea de los radios del grid
-#' @param grid.radius.size Tamaño de línea de los radios
-#' @param axis Eje para ubicarse en el grid
-#' @param axis.label Etiquetas del eje
-#' @param axis.color Color del eje
-#' @param axis.size Tamaño del eje
-#' @param axis.linetype Tipo del eje
-#' @param axis.angle Ángulo del eje
-#' @param axis.label.color Color para labels
-#' @param axis.label.size Tamaño del texto del eje
-#' @param axis.label.displace Desplazamiento de los labels con respecto al eje
-#' @param axis.label.angle Ángulo de labels
-#' @param legend.position position for the legend
+#' @description Generates an spider plot for a decision model
+#' @param data data.table with the utilities of a decision model
+#' @param data.label data label
+#' @param data.fill data fill color
+#' @param data.color data color
+#' @param data.linetype line type for data
+#' @param data.alpha alpha scale for data
+#' @param data.size line size for data
+#' @param data.label.color label color for data
+#' @param data.label.size label size for data
+#' @param group name for the column of groups
+#' @param criteria column name for criteria
+#' @param valor column name for utilities
+#' @param title plot title
+#' @param title.color plot title color
+#' @param title.size plot title size
+#' @param label.size labels size
+#' @param label.color labels color
+#' @param label.angle labels angle
+#' @param label.position labels position
+#' @param theta plot rotation angle
+#' @param grid grid for plot
+#' @param grid.color grid color
+#' @param grid.radius.color grid radius color
+#' @param grid.linetype grid line type
+#' @param grid.size grid line size
+#' @param grid.radius.linetype grid radius line type
+#' @param grid.radius.size grid radius line size
+#' @param axis axis
+#' @param axis.label axis label
+#' @param axis.color axis color
+#' @param axis.size axis size
+#' @param axis.linetype axis line type
+#' @param axis.angle axis angle
+#' @param axis.label.color axis label color
+#' @param axis.label.size axis label size
+#' @param axis.label.displace axis label displacement
+#' @param axis.label.angle axis label angel
+#' @param legend.position label position
 #' @param legend.size legend size
 #' @param legend.text.color legend text color
-#' @param plot.margin Márgenes del plot
-#' @return data.table with utilities
-#' @details Details
+#' @param plot.margin plot margin
+#' @return ggplot2 object with the spider plot
 #' @author Pedro Guarderas, Andrés Lopez
 #' @examples
 #' # Preparing data
@@ -147,7 +145,8 @@
 #'                 plot.margin )
 #' 
 #' plot(p)
-#' @import ggplot2
+#' @importFrom ggplot2 aes geom_polygon geom_segment geom_text scale_fill_manual ggplot theme element_text element_blank
+#' @importFrom ggplot2 scale_color_manual scale_linetype_manual scale_alpha_manual scale_size_manual
 #' @import RColorBrewer
 #' @export
 Spider.Plot<-function( data, # Datos con los valores a plotear, data.frame 

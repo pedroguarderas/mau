@@ -3,12 +3,11 @@ Type: Package
 Title: Decision models with multiatribute utility theory
 Version: 1.0
 Date: 2013-12-17
-Author: 
-    Felipe Aguirre, Julio Andrade, Pedro Guarderas, Daniel Lagos, 
+Author: Felipe Aguirre, Julio Andrade, Pedro Guarderas, Daniel Lagos,
     Andres Lopez, Nelson Recalde, Edison Salazar.
 Maintainer: Pedro Guarderas <pedro.felipe.guarderas@gmail.com>
-Description: 
-    Package for the evaluation of decision models employing multiatribute utility theory
+Description: Package for the evaluation of decision models employing
+    multiatribute utility theory
 License: LGPL-3
 Depends:
     R (>= 3.0),
@@ -18,4 +17,4 @@ Depends:
     igraph,
     RColorBrewer,
     ggplot2
-RoxygenNote: 6.0.1
+RoxygenNote: 5.0.1

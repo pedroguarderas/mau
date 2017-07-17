@@ -1,19 +1,17 @@
 # Standarize strings -------------------------------------------------------------------------------
 #' @title Standarize strings
-#' @description Función para corrección de caracteres, está diseñada para eliminar y/o reemplazar 
-#' pronombres, preposiciones comunes, caracteres especiales, espacios.
+#' @description Function to correct and standarize names, designed to eliminate special characters,
+#' spaces and other prepositions.
 #' @param x text to be standarized
-#' @param chr Vector nulo de almacenamiento de caracteres por corregir.
-#' @param rep Vector nulo de almacenamiento de caracteres de reemplazo.
+#' @param chr character vector of replace characters
+#' @param rep character vector of replacement characters
 #' @return Returns data table with definition of utility functions by range
-#' @details Los pronombres, preposiciones comunes, caracteres especiales y espacios.
 #' @author Julio Andrade, Pedro Guarderas, Andrés Lopez
 #' @examples
 #' x<-c( 'H?Úàn with C@1_ad1', "M¡a/¬°r&ìa} *_the#-rot",
 #'       'ju%LIÖ a Pérs', '(S)tev\nén\t los cat%$' )
 #' y<-sapply( x, FUN = Stand.String )
 #' names( y )<-NULL
-#' @import data.table
 #' @importFrom stringr str_trim
 #' @export
 Stand.String<-function( x, chr = NULL, rep = NULL ) {

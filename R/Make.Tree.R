@@ -69,7 +69,7 @@ deep_compute<-function( tree ) {
 #' tree.data<-Read.Tree( file, skip = 0, nrows = 8 )
 #' tree<-Make.Decision.Tree( tree.data )
 #' plot(tree)
-#' @import igraph
+#' @importFrom igraph make_empty_graph add_vertices add_edges V neighborhood %>%
 #' @export
 Make.Decision.Tree<-function( tree.data ) {
   tree<-make_empty_graph( directed = TRUE )

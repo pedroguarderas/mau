@@ -1,9 +1,9 @@
 # Read decision tree -------------------------------------------------------------------------------
 #' @title Evaluate utilities
-#' @description Read decision tree for MAUT model
-#' @param file file
-#' @param skip index
-#' @param nrows rows
+#' @description The tree structure for the MAUT is extracted from a file with a given format.
+#' @param file input file
+#' @param skip starting row for read
+#' @param nrows number of rows to be readed
 #' @return data.table with utilities
 #' @details Details
 #' @author Pedro Guarderas, Andrés Lopez
@@ -12,6 +12,8 @@
 #' file<-system.file("extdata", "tree.csv", package = "mau" )
 #' sheetIndex<-1
 #' tree.data<-Read.Tree( file, skip = 0, nrows = 8 )
+#' @importFrom utils read.csv
+#' @importFrom data.table setnames as.data.table
 #' @export
 Read.Tree<-function( file, 
                      skip, 

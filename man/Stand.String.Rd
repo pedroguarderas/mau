@@ -9,19 +9,16 @@ Stand.String(x, chr = NULL, rep = NULL)
 \arguments{
 \item{x}{text to be standarized}
 
-\item{chr}{Vector nulo de almacenamiento de caracteres por corregir.}
+\item{chr}{character vector of replace characters}
 
-\item{rep}{Vector nulo de almacenamiento de caracteres de reemplazo.}
+\item{rep}{character vector of replacement characters}
 }
 \value{
 Returns data table with definition of utility functions by range
 }
 \description{
-Función para corrección de caracteres, está diseñada para eliminar y/o reemplazar 
-pronombres, preposiciones comunes, caracteres especiales, espacios.
-}
-\details{
-Los pronombres, preposiciones comunes, caracteres especiales y espacios.
+Function to correct and standarize names, designed to eliminate special characters,
+spaces and other prepositions.
 }
 \examples{
 x<-c( 'H?Úàn with C@1_ad1', "M¡a/¬°r&ìa} *_the#-rot",
@@ -32,3 +29,4 @@ names( y )<-NULL
 \author{
 Julio Andrade, Pedro Guarderas, Andrés Lopez
 }
+

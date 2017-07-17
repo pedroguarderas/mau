@@ -17,7 +17,8 @@ Compute.Model(tree, utilities, weights)
 data.table with with decision model computed
 }
 \description{
-Evaluation of decision tree nodes
+Evaluation of decision tree nodes. All the MAUT model is computed at every level 
+the utilities are computed considering the given weights.
 }
 \details{
 Details
@@ -71,10 +72,11 @@ plot.S<-Plot.Simulation.Weight( S$simulation, title = 'Simulations',
                                 xlab = 'ID', ylab = 'Utility' ) 
 plot( plot.S )
 }
+\author{
+Pedro Guarderas, Andrés Lopez
+}
 \seealso{
 \code{\link{Stand.String}}, \code{\link{Read.Utilities}}, \code{\link{Eval.Utilities}},
 \code{\link{Read.Tree}}, \code{\link{Make.Decision.Tree}}.
 }
-\author{
-Pedro Guarderas, Andrés Lopez
-}
+
