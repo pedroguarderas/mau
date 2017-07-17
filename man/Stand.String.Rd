@@ -7,13 +7,11 @@
 Stand.String(x, chr = NULL, rep = NULL)
 }
 \arguments{
+\item{x}{text to be standarized}
+
 \item{chr}{Vector nulo de almacenamiento de caracteres por corregir.}
 
 \item{rep}{Vector nulo de almacenamiento de caracteres de reemplazo.}
-
-\item{data}{Data frame que contiene el texto a modificar.}
-
-\item{cols}{Número de columna que contiene el texto a modificar.}
 }
 \value{
 Returns data table with definition of utility functions by range

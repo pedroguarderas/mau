@@ -9,11 +9,9 @@
 #' @author Pedro Guarderas, Andrés Lopez
 #' @seealso \code{\link{Read.Utilities}}, \code{\link{Make.Decision.Tree}}
 #' @examples
-#' file<-'example/tree.csv'
+#' file<-system.file("extdata", "tree.csv", package = "mau" )
 #' sheetIndex<-1
-#' cols<-1:5
-#' rows<-c(1,8)
-#' tree.data<-Read.Tree( file, sheetIndex, cols, rows )
+#' tree.data<-Read.Tree( file, skip = 0, nrows = 8 )
 #' @export
 Read.Tree<-function( file, 
                      skip, 

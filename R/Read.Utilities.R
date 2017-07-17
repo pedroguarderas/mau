@@ -1,4 +1,3 @@
-
 # Builds utility functions from definition standard ------------------------------------------------
 #' @title Read utilities
 #' @description Builds utility functions from definition standard
@@ -6,24 +5,25 @@
 #' @param script output script where the utility functions are defined automatically
 #' @param lines number lines to read in \code{file}
 #' @param skip to read the \code{file} it had to \code{skip} a given number of lines 
+#' @param encoding file encoding
 #' @return Returns data table with definition of utility functions by range
 #' @details Details
 #' @author Pedro Guarderas, Andrés Lopez
 #' @seealso \code{\link{Stand.String}}
 #' @examples
-#' file<-'utilities.txt'
+#' file<-system.file("extdata", "utilities.txt", package = "mau" )
 #' script<-'utilities.R'
 #' lines<-17
 #' skip<-2
 #' encoding<-'utf-8'
 #' functions<-Read.Utilities( file, script, lines, skip, encoding )
+#' @importFrom utils read.csv read.table
 #' @export
 Read.Utilities<-function( file, script, lines, skip = 2, encoding = 'utf-8' ) {
 
   funs<-read.table( file, header = FALSE, sep = '\t', quote = NULL, encoding = encoding, 
                     skip = skip, nrows = lines, allowEscapes = FALSE, dec = '.', fill = TRUE,
-                    colClasses = c( 'character', 'numeric', 'numeric', 'numeric', 'numeric', 
-                                    'numeric'),
+                    colClasses = c( 'character', 'numeric', 'numeric', 'numeric', 'numeric', 'numeric' ),
                     stringsAsFactors = FALSE )
 
   funs<-data.frame( funs, fun = sapply( funs[,1], FUN = Stand.String ), stringsAsFactors = FALSE )

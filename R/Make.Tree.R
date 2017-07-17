@@ -65,13 +65,11 @@ deep_compute<-function( tree ) {
 #' @author Pedro Guarderas, Andrés Lopez
 #' @seealso \code{\link{Read.Tree}}
 #' @examples
-#' file<-'example/tree.xls'
-#' sheetIndex<-1
-#' cols<-1:5
-#' rows<-c(1,8)
-#' tree.data<-Read.Tree( file, sheetIndex, cols, rows )
+#' file<-system.file("extdata", "tree.csv", package = "mau" )
+#' tree.data<-Read.Tree( file, skip = 0, nrows = 8 )
 #' tree<-Make.Decision.Tree( tree.data )
 #' plot(tree)
+#' @import igraph
 #' @export
 Make.Decision.Tree<-function( tree.data ) {
   tree<-make_empty_graph( directed = TRUE )

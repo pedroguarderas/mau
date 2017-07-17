@@ -16,5 +16,6 @@ Depends:
     gtools,
     stringr,
     igraph,
-    RColorBrewer
+    RColorBrewer,
+    ggplot2
 RoxygenNote: 6.0.1

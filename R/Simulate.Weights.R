@@ -43,7 +43,7 @@ Sim.Weights<-function( n, utilities, alpha ) {
 #' @param n number of simulations
 #' @param utilities utility dataframe, first column is the identifier
 #' @param alpha concentration parameter for the Dirichlet distribution
-#' @param constrains list of sum constraints
+#' @param constraints list of sum constraints
 #' @return List with data.frames \{simulation, weights\} with total utilities and simulated weights
 #' @details Details
 #' @author Pedro Guarderas
@@ -60,7 +60,8 @@ Sim.Weights<-function( n, utilities, alpha ) {
 #' constraints<-list( list( c(1,2), 0.7 ), 
 #'                    list( c(3,4), 0.3 ) )
 #' S<-Sim.Const.Weights( n, utilities, alpha, constraints )
-#' plot.S<-Plot.Simulation.Weight( S, title = 'Simulations', xlab = 'ID', ylab = 'Utility' ) 
+#' plot.S<-Plot.Simulation.Weight( S$simulation, title = 'Simulations', 
+#'                                 xlab = 'ID', ylab = 'Utility' ) 
 #' plot( plot.S )
 #' @importFrom  gtools rdirichlet
 #' @export

@@ -2,8 +2,7 @@
 #' @title Standarize strings
 #' @description Función para corrección de caracteres, está diseñada para eliminar y/o reemplazar 
 #' pronombres, preposiciones comunes, caracteres especiales, espacios.
-#' @param data Data frame que contiene el texto a modificar.
-#' @param cols Número de columna que contiene el texto a modificar.
+#' @param x text to be standarized
 #' @param chr Vector nulo de almacenamiento de caracteres por corregir.
 #' @param rep Vector nulo de almacenamiento de caracteres de reemplazo.
 #' @return Returns data table with definition of utility functions by range
@@ -15,7 +14,7 @@
 #' y<-sapply( x, FUN = Stand.String )
 #' names( y )<-NULL
 #' @import data.table
-#' @import stringr
+#' @importFrom stringr str_trim
 #' @export
 Stand.String<-function( x, chr = NULL, rep = NULL ) {
   y<-NULL

@@ -14,6 +14,8 @@ Read.Utilities(file, script, lines, skip = 2, encoding = "utf-8")
 \item{lines}{number lines to read in \code{file}}
 
 \item{skip}{to read the \code{file} it had to \code{skip} a given number of lines}
+
+\item{encoding}{file encoding}
 }
 \value{
 Returns data table with definition of utility functions by range
@@ -25,7 +27,7 @@ Builds utility functions from definition standard
 Details
 }
 \examples{
-file<-'utilities.txt'
+file<-system.file("extdata", "utilities.txt", package = "mau" )
 script<-'utilities.R'
 lines<-17
 skip<-2

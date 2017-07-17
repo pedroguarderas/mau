@@ -32,7 +32,7 @@ index<-data.table( cod = c( 'A', 'B', 'C', 'D' ),
                    i5 = c( 0.2797259, 0.2981198, 1, 0.1952864 ) )
 
 # Loading utilities
-file<-'utilities.txt'
+file<-system.file("extdata", "utilities.txt", package = "mau" )
 script<-'utilities.R'
 lines<-17
 skip<-2

@@ -21,6 +21,7 @@
 #' @author Pedro Guarderas
 #' @seealso \code{\link{Sim.Const.Weights}} \code{\link{Sim.Weights}}
 #' @import ggplot2
+#' @importFrom grDevices colorRampPalette colors
 #' @export
 Plot.Simulation.Weight<-function( S, title = 'Simulations', xlab = 'ID', ylab = 'Utility',
                                   lines.cols = 'blue', box.col = 'gold', box.outlier.col = 'darkred', 

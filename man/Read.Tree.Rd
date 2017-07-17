@@ -23,11 +23,9 @@ Read decision tree for MAUT model
 Details
 }
 \examples{
-file<-'example/tree.csv'
+file<-system.file("extdata", "tree.csv", package = "mau" )
 sheetIndex<-1
-cols<-1:5
-rows<-c(1,8)
-tree.data<-Read.Tree( file, sheetIndex, cols, rows )
+tree.data<-Read.Tree( file, skip = 0, nrows = 8 )
 }
 \seealso{
 \code{\link{Read.Utilities}}, \code{\link{Make.Decision.Tree}}
