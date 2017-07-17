@@ -1,13 +1,15 @@
 Package: mau
 Type: Package
 Title: Decision models with Multi Attribute Utility Theory
-Version: 0.1
+Version: 0.1.0
+Encoding: UTF-8
 Date: 2014-03-23
 Author: Felipe Aguirre, Julio Andrade, Pedro Guarderas, Daniel Lagos,
     Andres Lopez, Nelson Recalde, Edison Salazar.
 Maintainer: Pedro Guarderas <pedro.felipe.guarderas@gmail.com>
-Description: Package for the evaluation of decision models employing
-  Multi Attribute Utility Theory (MAUT)
+Description: Package for the evaluation of decision models employing Multi Attribute Utility 
+  Theory (MAUT). This package implements evaluation methos for MAUT models and simulation method
+  based Dirichlet distribution simulations.
 License: LGPL-3
 URL:https://github.com/pedroguarderas/mau
 Depends: R (>= 3.0)

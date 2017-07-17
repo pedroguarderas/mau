@@ -1,61 +1,3 @@
-# Sum weights --------------------------------------------------------------------------------------
-# This function assign weights to the interal nodes of the decision tree
-sum_weights<-function( tree ) {
-  noleaves<-which( V(tree)$leaf == 0 )
-  leaves<-which( V(tree)$leaf == 1 )
-  for ( i in noleaves ) { # i<-leaves[1]
-    childs<-unlist( ego( tree, 100, V(tree)[i], mode = 'out' ) )
-    childs<-childs[ childs %in% leaves ]
-    V( tree )[i]$weight<-sum( V( tree )[ childs ]$weight )
-  }
-  return( tree )
-}
-
-# Compute relative weights -------------------------------------------------------------------------
-divide_weights<-function( tree ) {
-  noleaves<-which( V(tree)$leaf == 0 )
-  leaves<-which( V(tree)$leaf == 1 )
-  for ( i in 1:length( V(tree) ) ) { # i<-leaves[9]
-    parent<-unlist( ego( tree, 1, V(tree)[i], mode = 'in' ) )
-    parent<-parent[ parent != i ]
-    childs<-unlist( neighborhood( tree, 100, V(tree)[i], mode = 'out' ) )
-    childs<-childs[ childs %in% leaves ]
-    if ( length( parent ) == 1 ) {
-      pchilds<-unlist( ego( tree, 100, V(tree)[parent], mode = 'out' ) )
-      pchilds<-pchilds[ pchilds %in% leaves ]
-      V( tree )[i]$rweight<-sum( V(tree)[childs]$weight ) / sum( V(tree)[pchilds]$weight )
-    } else if ( length( parent ) == 0 ) {
-      V( tree )[i]$rweight<-1.0
-    }
-  }
-  return( tree )
-}
-
-# Assign deep identifier ---------------------------------------------------------------------------
-deep_compute<-function( tree ) {
-  
-  nodes<-which( V(tree)$leaf == 0 )
-  for( i in nodes ) {
-    parent<-unlist( ego( tree, 1, V(tree)[i], mode = 'in' ) )
-    parent<-parent[ !( parent %in% i ) ]
-    if ( length( parent ) == 0 ) {
-      break
-    }
-  }
-  
-  parent<-i
-  deep<-0
-  while ( length( parent ) > 0 ) {
-    V(tree)[parent]$deep<-deep  
-    deep<-deep + 1
-    childs<-unique( unlist( neighborhood( tree, 1, V(tree)[parent], mode = 'out' ) ) )
-    childs<-childs[ !( childs %in% parent ) ]
-    parent<-childs
-  }
-  
-  return( tree )
-}
-
 # Create decision tree -----------------------------------------------------------------------------
 #' @title Evaluate utilities
 #' @description Create decision tree for MAUT models exporting to an igraph object
@@ -74,6 +16,65 @@ deep_compute<-function( tree ) {
 #' @importFrom igraph make_empty_graph add_vertices add_edges V neighborhood %>%
 #' @export
 Make.Decision.Tree<-function( tree.data ) {
+  
+# Sum weights --------------------------------------------------------------------------------------
+  # This function assign weights to the interal nodes of the decision tree
+  sum_weights<-function( tree ) {
+    noleaves<-which( V(tree)$leaf == 0 )
+    leaves<-which( V(tree)$leaf == 1 )
+    for ( i in noleaves ) { # i<-leaves[1]
+      childs<-unlist( ego( tree, 100, V(tree)[i], mode = 'out' ) )
+      childs<-childs[ childs %in% leaves ]
+      V( tree )[i]$weight<-sum( V( tree )[ childs ]$weight )
+    }
+    return( tree )
+  }
+  
+# Compute relative weights -------------------------------------------------------------------------
+  divide_weights<-function( tree ) {
+    noleaves<-which( V(tree)$leaf == 0 )
+    leaves<-which( V(tree)$leaf == 1 )
+    for ( i in 1:length( V(tree) ) ) { # i<-leaves[9]
+      parent<-unlist( ego( tree, 1, V(tree)[i], mode = 'in' ) )
+      parent<-parent[ parent != i ]
+      childs<-unlist( neighborhood( tree, 100, V(tree)[i], mode = 'out' ) )
+      childs<-childs[ childs %in% leaves ]
+      if ( length( parent ) == 1 ) {
+        pchilds<-unlist( ego( tree, 100, V(tree)[parent], mode = 'out' ) )
+        pchilds<-pchilds[ pchilds %in% leaves ]
+        V( tree )[i]$rweight<-sum( V(tree)[childs]$weight ) / sum( V(tree)[pchilds]$weight )
+      } else if ( length( parent ) == 0 ) {
+        V( tree )[i]$rweight<-1.0
+      }
+    }
+    return( tree )
+  }
+  
+# Assign deep identifier ---------------------------------------------------------------------------
+  deep_compute<-function( tree ) {
+    
+    nodes<-which( V(tree)$leaf == 0 )
+    for( i in nodes ) {
+      parent<-unlist( ego( tree, 1, V(tree)[i], mode = 'in' ) )
+      parent<-parent[ !( parent %in% i ) ]
+      if ( length( parent ) == 0 ) {
+        break
+      }
+    }
+    
+    parent<-i
+    deep<-0
+    while ( length( parent ) > 0 ) {
+      V(tree)[parent]$deep<-deep  
+      deep<-deep + 1
+      childs<-unique( unlist( neighborhood( tree, 1, V(tree)[parent], mode = 'out' ) ) )
+      childs<-childs[ !( childs %in% parent ) ]
+      parent<-childs
+    }
+    
+    return( tree )
+  }
+  
   tree<-make_empty_graph( directed = TRUE )
   for ( i in 1:nrow( tree.data ) ) { # i<-1
     A<-list()

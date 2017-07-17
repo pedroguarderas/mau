@@ -18,15 +18,15 @@ Returns data table with definition of utility functions by range
 }
 \description{
 Function to correct and standarize names, designed to eliminate special characters,
-spaces and other prepositions.
+spaces and other characters.
 }
 \examples{
-library( data.table )
-library( stringr )
-x<-c( 'H?Úàn with C@1_ad1', "M¡a/¬°r&ìa} *_the#-rot",
-      'ju\%LIÖ a Pérs', '(S)tev\\nén\\t los cat\%$' )
-y<-sapply( x, FUN = Stand.String )
-names( y )<-NULL
+ x<-c( "H?\\u00da\\u00e0n with C@1_ad1", 
+       "M\\u00a1a/\\u00ac\\u00b0r&\\u00eca *_the#-rot", 
+       "ju\%LI\\u00d6 a P\\u00e9rs", 
+       "(S)tev\\n\\u00e9n\\t los cat\%$" )
+ y<-sapply( x, FUN = Stand.String )
+ names( y )<-NULL
 }
 \author{
 Julio Andrade, Pedro Guarderas, Andrés Lopez

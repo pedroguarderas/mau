@@ -35,7 +35,9 @@
 #' columns<-c( 2, 3, 4, 5 )
 #' 
 #' # Associated names of functions
-#' functions<-sapply( c( 'Project', 'Self implementation', 'External and local relations', 
+#' functions<-sapply( c( 'Project', 
+#'                       'Self implementation',
+#'                       'External and local relations', 
 #'                       'Scope of capabilities' ),
 #'                    FUN = Stand.String )
 #' names( functions )<-NULL

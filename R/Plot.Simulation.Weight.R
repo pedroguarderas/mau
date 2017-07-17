@@ -39,7 +39,7 @@ Plot.Simulation.Weight<-function( S, title = 'Simulations', xlab = 'ID', ylab = 
   sim_first[ , id := factor( id, levels = sim$id[ord] ) ]
   
   sim[ , id := factor( id, levels = sim$id[ord] ) ]
-  sim<-melt.data.table( data = sim, id = 'id' )
+  sim<-melt.data.table( data = sim, id.vars = 'id', measure.vars = names( sim )[2:ncol(sim)] )
   colnames(sim)<-c( 'id', 's', 'val' )
   
   sim[ , s := as.numeric( s ) ]

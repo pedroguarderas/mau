@@ -1,20 +1,20 @@
 # Standarize strings -------------------------------------------------------------------------------
 #' @title Standarize strings
 #' @description Function to correct and standarize names, designed to eliminate special characters,
-#' spaces and other prepositions.
+#' spaces and other characters.
 #' @param x text to be standarized
 #' @param chr character vector of replace characters
 #' @param rep character vector of replacement characters
 #' @return Returns data table with definition of utility functions by range
 #' @author Julio Andrade, Pedro Guarderas, Andrés Lopez
-#' @examples
-#' library( data.table )
-#' library( stringr )
-#' x<-c( 'H?Úàn with C@1_ad1', "M¡a/¬°r&ìa} *_the#-rot",
-#'       'ju%LIÖ a Pérs', '(S)tev\nén\t los cat%$' )
-#' y<-sapply( x, FUN = Stand.String )
-#' names( y )<-NULL
 #' @importFrom stringr str_trim
+#' @examples
+#'  x<-c( "H?\u00da\u00e0n with C@1_ad1", 
+#'        "M\u00a1a/\u00ac\u00b0r&\u00eca *_the#-rot", 
+#'        "ju%LI\u00d6 a P\u00e9rs", 
+#'        "(S)tev\n\u00e9n\t los cat%$" )
+#'  y<-sapply( x, FUN = Stand.String )
+#'  names( y )<-NULL
 #' @export
 Stand.String<-function( x, chr = NULL, rep = NULL ) {
   y<-NULL
@@ -25,7 +25,8 @@ Stand.String<-function( x, chr = NULL, rep = NULL ) {
                   'por', 'y' )
     conectors<-paste( '( )+', conectors, '( )+', sep = '' )
     chr<-c( '[.]', '-', '_', '[[:punct:]]', '[[:cntrl:]]',
-            '[á|ä|à]', '[é|ë|è]', '[í|ï|ì]', '[ó|ö|ò]', '[ú|ü|ù]',
+            "[\u00e1|\u00e4|\u00e0]", "[\u00e9|\u00eb|\u00e8]", "[\u00ed|\u00ef|\u00ec]", 
+            "[\u00f3|\u00f6|\u00f2]", "[\u00fa|\u00fc|\u00f9]",
             conectors,
             " ( )*", '( )+$', "^( )+", ' ', '_(_)*' )
     rep<-c( ' ', ' ', ' ', '', '',

@@ -148,7 +148,7 @@
 #' 
 #' plot(p)
 #' @importFrom ggplot2 aes geom_polygon geom_segment geom_text scale_fill_manual ggplot theme element_text element_blank
-#' @importFrom ggplot2 scale_color_manual scale_linetype_manual scale_alpha_manual scale_size_manual
+#' @importFrom ggplot2 scale_color_manual scale_linetype_manual scale_alpha_manual scale_size_manual guide_legend element_rect
 #' @import RColorBrewer
 #' @export
 Spider.Plot<-function( data, # Datos con los valores a plotear, data.frame 
