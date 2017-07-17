@@ -1,0 +1,8 @@
+id,name,parent,cod,weight
+1,Performance,,,
+2,Planing,1,,
+3,Capabilities,1,,
+4,Project,2,1,0.2
+5,Self implementation,2,2,0.5
+6,External and local relations,3,3,0.1
+7,Scope of capabilities,3,4,0.2
