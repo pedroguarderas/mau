@@ -2,8 +2,9 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 With **mau** you can build and test decision models based in Multi Attribute Utility Theory (MAUT). With this package you can automatically evaluate utilities over a data.table of indexes. The criteria of the decision tree could evaluated and easily computed.
 
-The MAUT models defined with aid of utility functions *u*<sub>1</sub>, …, *u*<sub>*n*</sub> and indexes represented simmilarly by *x*<sub>1</sub>, …, *x*<sub>*n*</sub> and obtain the final utility given by
-$$u(x\_1,\\ldots,x\_n) = \\sum\_{i=1}^{n} u\_i( x\_i )$$
+The MAUT models are defined with aid of utility functions *u*<sub>1</sub>, …, *u*<sub>*n*</sub> which are evaluated over indexes *x*<sub>1</sub>, …, *x*<sub>*n*</sub> and those utilities are aggregated considering additional weights *w*<sub>1</sub>, …, *w*<sub>*n*</sub>, the whole final utility is given by the addition *u*(*x*<sub>1</sub>, …, *x*<sub>*n*</sub>)=∑<sub>*i* = 1, …, *n*</sub> *w*<sub>*i*</sub> *u*<sub>*i*</sub>(*x*<sub>*i*</sub>).
+
+With **mau** the maut model can be computed easily for any utility functions. In addition, the utility functions could be defined considering the constant risk aversion criteria sujested by Arrow, those functions are only of two kinds *u*(*x*)=*a**x* + *b* or *u*(*x*)=*a**e*<sup>*b**x*</sup> + *c*.
 
 Installation
 ------------
