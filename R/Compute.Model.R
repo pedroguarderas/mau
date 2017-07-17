@@ -13,6 +13,10 @@
 #' \code{\link{Read.Tree}}, \code{\link{Make.Decision.Tree}}.
 #' @examples
 #' # Index
+#' library( data.table )
+#' library( igraph )
+#' library( ggplot2 )
+#' 
 #' index<-data.table( cod = paste( 'A', 1:10, sep = '' ), 
 #'                    i1 = c( 0.34, 1, 1, 1, 1, 0.2, 0.7, 0.5, 0.11, 0.8 ),
 #'                    i2 = c( 0.5, 0.5, 1, 0.5, 0.3, 0.1, 0.4, 0.13, 1, 0.74 ), 

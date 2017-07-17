@@ -23,6 +23,8 @@ The tree structure for the MAUT is extracted from a file with a given format.
 Details
 }
 \examples{
+library( data.table )
+library( igraph )
 file<-system.file("extdata", "tree.csv", package = "mau" )
 sheetIndex<-1
 tree.data<-Read.Tree( file, skip = 0, nrows = 8 )

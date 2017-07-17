@@ -25,6 +25,7 @@ Details
 }
 \examples{
 # Index
+library( data.table )
 index<-data.table( cod = c( 'A', 'B', 'C', 'D' ), 
                    i1 = c( 0.3428570, 1, 1, 1 ),
                    i2 = c( 0.5, 0.5, 1, 0.5 ), 

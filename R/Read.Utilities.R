@@ -11,6 +11,7 @@
 #' @author Pedro Guarderas, Andrés Lopez
 #' @seealso \code{\link{Stand.String}}
 #' @examples
+#' library( data.table )
 #' file<-system.file("extdata", "utilities.txt", package = "mau" )
 #' script<-'utilities.R'
 #' lines<-17

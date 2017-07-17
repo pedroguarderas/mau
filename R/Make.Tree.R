@@ -58,17 +58,19 @@ deep_compute<-function( tree ) {
 
 # Create decision tree -----------------------------------------------------------------------------
 #' @title Evaluate utilities
-#' @description Create decision tree for MAUT models exporting to igraph struture
-#' @param tree.data tree
-#' @return igraph structure
+#' @description Create decision tree for MAUT models exporting to an igraph object
+#' @param tree.data data.table with decision tree information
+#' @return igraph object
 #' @details Details
 #' @author Pedro Guarderas, Andrés Lopez
 #' @seealso \code{\link{Read.Tree}}
 #' @examples
+#' library( data.table )
+#' library( igraph )
 #' file<-system.file("extdata", "tree.csv", package = "mau" )
 #' tree.data<-Read.Tree( file, skip = 0, nrows = 8 )
 #' tree<-Make.Decision.Tree( tree.data )
-#' plot(tree)
+#' plot( tree )
 #' @importFrom igraph make_empty_graph add_vertices add_edges V neighborhood %>%
 #' @export
 Make.Decision.Tree<-function( tree.data ) {

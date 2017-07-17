@@ -3,6 +3,7 @@
 .RData
 *.pdf
 *.xlsx
+*.xls
 *.png
 *.jpg
 *.jpeg

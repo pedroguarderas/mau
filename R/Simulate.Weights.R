@@ -11,6 +11,7 @@
 #' @seealso \code{\link{Eval.Utilities}}
 #' @importFrom gtools rdirichlet
 #' @examples
+#' library( data.table )
 #' N<-10
 #' utilities<-data.table( id = 1:N, 
 #'                        u1 = runif( N, 0, 1 ), 
@@ -50,6 +51,7 @@ Sim.Weights<-function( n, utilities, alpha ) {
 #' @author Pedro Guarderas
 #' @seealso \code{\link{Eval.Utilities}}
 #' @examples
+#' library( data.table )
 #' N<-10
 #' utilities<-data.table( id = 1:N, 
 #'                        u1 = runif( N, 0, 1 ), 

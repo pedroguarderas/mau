@@ -46,6 +46,8 @@
 #' @author Pedro Guarderas, Andrés Lopez
 #' @examples
 #' # Preparing data
+#' library( data.table )
+#' library( ggplot2 )
 #' n<-10
 #' m<-7
 #' cols<-sample( colors()[ grepl('(red|blue|olive|darkgree)', colors() ) ], m, replace = TRUE )

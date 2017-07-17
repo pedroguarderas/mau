@@ -24,6 +24,7 @@ parameter. The concentration parameter is given a tentative weights.
 Details
 }
 \examples{
+library( data.table )
 N<-10
 utilities<-data.table( id = 1:N, 
                        u1 = runif( N, 0, 1 ), 

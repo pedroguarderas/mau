@@ -8,6 +8,8 @@
 #' @return Returns data table with definition of utility functions by range
 #' @author Julio Andrade, Pedro Guarderas, Andrés Lopez
 #' @examples
+#' library( data.table )
+#' library( stringr )
 #' x<-c( 'H?Úàn with C@1_ad1', "M¡a/¬°r&ìa} *_the#-rot",
 #'       'ju%LIÖ a Pérs', '(S)tev\nén\t los cat%$' )
 #' y<-sapply( x, FUN = Stand.String )

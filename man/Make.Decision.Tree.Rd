@@ -7,22 +7,24 @@
 Make.Decision.Tree(tree.data)
 }
 \arguments{
-\item{tree.data}{tree}
+\item{tree.data}{data.table with decision tree information}
 }
 \value{
-igraph structure
+igraph object
 }
 \description{
-Create decision tree for MAUT models exporting to igraph struture
+Create decision tree for MAUT models exporting to an igraph object
 }
 \details{
 Details
 }
 \examples{
+library( data.table )
+library( igraph )
 file<-system.file("extdata", "tree.csv", package = "mau" )
 tree.data<-Read.Tree( file, skip = 0, nrows = 8 )
 tree<-Make.Decision.Tree( tree.data )
-plot(tree)
+plot( tree )
 }
 \author{
 Pedro Guarderas, Andrés Lopez

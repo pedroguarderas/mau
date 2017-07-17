@@ -27,6 +27,7 @@ Builds utility functions from definition standard
 Details
 }
 \examples{
+library( data.table )
 file<-system.file("extdata", "utilities.txt", package = "mau" )
 script<-'utilities.R'
 lines<-17

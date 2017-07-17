@@ -27,6 +27,7 @@ partial sums of weights are introduced by a list ordered structure.
 Details
 }
 \examples{
+library( data.table )
 N<-10
 utilities<-data.table( id = 1:N, 
                        u1 = runif( N, 0, 1 ), 
