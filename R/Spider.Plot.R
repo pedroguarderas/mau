@@ -236,6 +236,7 @@ Spider.Plot<-function( data, # Datos con los valores a plotear, data.frame
   
   axis.break.position<-data.frame( axis.break.position, label = axis.label )
   
+  with( Data, {
   p<-ggplot( data = Data, aes( x = x, y = y ) ) 
   for ( i in 1:m ) {
     X<-data.frame( x = grid[i] * cos( t ), y = grid[i] * sin( t ) )
@@ -310,5 +311,6 @@ Spider.Plot<-function( data, # Datos con los valores a plotear, data.frame
                 legend.title = element_blank() )
   
   return( p )
+  })
 
 }

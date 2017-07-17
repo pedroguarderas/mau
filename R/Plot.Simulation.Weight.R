@@ -27,6 +27,7 @@ Plot.Simulation.Weight<-function( S, title = 'Simulations', xlab = 'ID', ylab = 
                                   lines.cols = 'blue', box.col = 'gold', box.outlier.col = 'darkred', 
                                   utility.col = 'darkgreen', utility.point.col = 'darkgreen',
                                   text.col = 'black' ) {
+  with( S, {
   sim<-copy( S )
   
   sim_first<-sim[ , c(1,2), with = FALSE ]
@@ -64,6 +65,7 @@ Plot.Simulation.Weight<-function( S, title = 'Simulations', xlab = 'ID', ylab = 
                         limits = c( 0, 1 ) ) +
     theme( legend.position = "none" ) +
     ggtitle( title )
-  
+
   return( sim_plot )
+  })
 }

@@ -34,12 +34,14 @@ Read.Tree<-function( file,
   
   setnames( graph, 1:6, c( 'parent', 'id', 'name', 'cod', 'weight', 'name.parent' ) )
   
+  with( graph, {
   graph[ !is.na( cod ), funct := name ]
   graph$funct<-sapply( graph$funct, FUN = Stand.String )
   
   graph<-graph[ , list( parent, id, name, cod, weight, name.parent, funct )  ]
   graph<-graph[ with( graph, order( id ) ) ]
   rownames( graph )<-NULL
-  
+
   return( graph )
+  })
 }

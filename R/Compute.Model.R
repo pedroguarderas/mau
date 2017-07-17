@@ -90,22 +90,23 @@ Compute.Model<-function( tree,
     RW<-W / sum( W )
     uname<-paste( 'u', code, sep = '' )
     
-    u<-utilities[ , list( utility = unlist( lapply( .SD * W, sum ) ),
-                          rutility = unlist( lapply( .SD * RW, sum ) ) ),
-                  by = cod, .SDcols = uname ]
-
-    u<-u[ , list( utility = sum( utility ),
-                  rutility = sum( rutility ) ), 
-          by = cod ]
-    
-    u[ , id := V(tree)[i]$id ]
-    u[ , code := ifelse( V(tree)[i]$code == 0, NA, V(tree)[i]$code ) ]
-    u[ , weight := V(tree)[i]$weight ]
-    u[ , rweight := V(tree)[i]$rweight ]
-    u[ , name := V(tree)[i]$name ]
-    u<-u[ , list( id, name, code, cod, utility, rutility, weight, rweight ) ]
-    model<-rbind( model, u )
-    
+    with( utilities, {
+      u<-utilities[ , list( utility = unlist( lapply( .SD * W, sum ) ),
+                            rutility = unlist( lapply( .SD * RW, sum ) ) ),
+                    by = cod, .SDcols = uname ]
+  
+      u<-u[ , list( utility = sum( utility ),
+                    rutility = sum( rutility ) ), 
+            by = cod ]
+      
+      u[ , id := V(tree)[i]$id ]
+      u[ , code := ifelse( V(tree)[i]$code == 0, NA, V(tree)[i]$code ) ]
+      u[ , weight := V(tree)[i]$weight ]
+      u[ , rweight := V(tree)[i]$rweight ]
+      u[ , name := V(tree)[i]$name ]
+      u<-u[ , list( id, name, code, cod, utility, rutility, weight, rweight ) ]
+      model<-rbind( model, u )
+    })
   }
   return( model )
 }

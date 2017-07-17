@@ -17,64 +17,6 @@
 #' @export
 Make.Decision.Tree<-function( tree.data ) {
   
-# Sum weights --------------------------------------------------------------------------------------
-  # This function assign weights to the interal nodes of the decision tree
-  sum_weights<-function( tree ) {
-    noleaves<-which( V(tree)$leaf == 0 )
-    leaves<-which( V(tree)$leaf == 1 )
-    for ( i in noleaves ) { # i<-leaves[1]
-      childs<-unlist( ego( tree, 100, V(tree)[i], mode = 'out' ) )
-      childs<-childs[ childs %in% leaves ]
-      V( tree )[i]$weight<-sum( V( tree )[ childs ]$weight )
-    }
-    return( tree )
-  }
-  
-# Compute relative weights -------------------------------------------------------------------------
-  divide_weights<-function( tree ) {
-    noleaves<-which( V(tree)$leaf == 0 )
-    leaves<-which( V(tree)$leaf == 1 )
-    for ( i in 1:length( V(tree) ) ) { # i<-leaves[9]
-      parent<-unlist( ego( tree, 1, V(tree)[i], mode = 'in' ) )
-      parent<-parent[ parent != i ]
-      childs<-unlist( neighborhood( tree, 100, V(tree)[i], mode = 'out' ) )
-      childs<-childs[ childs %in% leaves ]
-      if ( length( parent ) == 1 ) {
-        pchilds<-unlist( ego( tree, 100, V(tree)[parent], mode = 'out' ) )
-        pchilds<-pchilds[ pchilds %in% leaves ]
-        V( tree )[i]$rweight<-sum( V(tree)[childs]$weight ) / sum( V(tree)[pchilds]$weight )
-      } else if ( length( parent ) == 0 ) {
-        V( tree )[i]$rweight<-1.0
-      }
-    }
-    return( tree )
-  }
-  
-# Assign deep identifier ---------------------------------------------------------------------------
-  deep_compute<-function( tree ) {
-    
-    nodes<-which( V(tree)$leaf == 0 )
-    for( i in nodes ) {
-      parent<-unlist( ego( tree, 1, V(tree)[i], mode = 'in' ) )
-      parent<-parent[ !( parent %in% i ) ]
-      if ( length( parent ) == 0 ) {
-        break
-      }
-    }
-    
-    parent<-i
-    deep<-0
-    while ( length( parent ) > 0 ) {
-      V(tree)[parent]$deep<-deep  
-      deep<-deep + 1
-      childs<-unique( unlist( neighborhood( tree, 1, V(tree)[parent], mode = 'out' ) ) )
-      childs<-childs[ !( childs %in% parent ) ]
-      parent<-childs
-    }
-    
-    return( tree )
-  }
-  
   tree<-make_empty_graph( directed = TRUE )
   for ( i in 1:nrow( tree.data ) ) { # i<-1
     A<-list()
@@ -108,17 +50,118 @@ Make.Decision.Tree<-function( tree.data ) {
     }
   }
   
-  tree<-sum_weights( tree ) # weights
-  tree<-divide_weights( tree ) # relative weights
-  tree<-deep_compute( tree )
+  tree<-Sum.Weights( tree ) # weights
+  tree<-Divide.Weights( tree ) # relative weights
+  tree<-Deep.Compute( tree )
   
   return( tree )
 }
 
+# Sum weights --------------------------------------------------------------------------------------
+#' @title Sum weights for internal nodes
+#' @description The weights of the internal nodes has to be computed first is necessary to add each
+#' weights of the leaves.
+#' @param tree igraph object representing the tree
+#' @return igraph object updated
+#' @author Pedro Guarderas, Andrés Lopez
+#' @seealso \code{\link{Read.Tree}}
+#' @importFrom igraph V ego
+#' @export
+Sum.Weights<-function( tree ) {
+  with( tree, {
+  childs<-NULL
+  noleaves<-which( V(tree)$leaf == 0 )
+  leaves<-which( V(tree)$leaf == 1 )
+  
+  for ( i in noleaves ) { # i<-leaves[1]
+    childs<-unlist( ego( tree, 100, V(tree)[i], mode = 'out' ) )
+    childs<-childs[ childs %in% leaves ]
+    V( tree )[i]$weight<-sum( V( tree )[ childs ]$weight )
+  }
+  return( tree )
+  })
+}
+
+# Compute relative weights -------------------------------------------------------------------------
+#' @title Divide weights of internal nodes
+#' @description After the addition of weights for internal nodes the final weights have to be 
+#' computed dividing by the total weight of each parent.
+#' @param tree igraph object representing the tree
+#' @return igraph object updated
+#' @author Pedro Guarderas, Andrés Lopez
+#' @seealso \code{\link{Read.Tree}}
+#' @importFrom igraph V ego neighborhood
+#' @export
+Divide.Weights<-function( tree ) {
+  with( tree, {
+  noleaves<-which( V(tree)$leaf == 0 )
+  leaves<-which( V(tree)$leaf == 1 )
+  for ( i in 1:length( V(tree) ) ) { # i<-leaves[9]
+    parent<-unlist( ego( tree, 1, V(tree)[i], mode = 'in' ) )
+    parent<-parent[ parent != i ]
+    childs<-unlist( neighborhood( tree, 100, V(tree)[i], mode = 'out' ) )
+    childs<-childs[ childs %in% leaves ]
+    if ( length( parent ) == 1 ) {
+      pchilds<-unlist( ego( tree, 100, V(tree)[parent], mode = 'out' ) )
+      pchilds<-pchilds[ pchilds %in% leaves ]
+      V( tree )[i]$rweight<-sum( V(tree)[childs]$weight ) / sum( V(tree)[pchilds]$weight )
+    } else if ( length( parent ) == 0 ) {
+      V( tree )[i]$rweight<-1.0
+    }
+  }
+  return( tree )
+  })
+}
+
+# Assign deep identifier ---------------------------------------------------------------------------
+#' @title Compute the deep position of every node
+#' @description For the computation of the complete decision model is necessary to stablish the 
+#' deep position of every node.
+#' @param tree igraph object representing the tree
+#' @return igraph object updated
+#' @author Pedro Guarderas, Andrés Lopez
+#' @seealso \code{\link{Read.Tree}}
+#' @importFrom igraph V ego neighborhood
+#' @export
+Deep.Compute<-function( tree ) {
+  with( tree, {
+  parent<-NULL
+  childs<-NULL
+  nodes<-which( V(tree)$leaf == 0 )
+  for( i in nodes ) {
+    parent<-unlist( ego( tree, 1, V(tree)[i], mode = 'in' ) )
+    parent<-parent[ !( parent %in% i ) ]
+    if ( length( parent ) == 0 ) {
+      break
+    }
+  }
+  
+  parent<-i
+  deep<-0
+  while ( length( parent ) > 0 ) {
+    V(tree)[parent]$deep<-deep  
+    deep<-deep + 1
+    childs<-unique( unlist( neighborhood( tree, 1, V(tree)[parent], mode = 'out' ) ) )
+    childs<-childs[ !( childs %in% parent ) ]
+    parent<-childs
+  }
+  
+  return( tree )
+  })
+}
+
 # Get index values ---------------------------------------------------------------------------------
-# Given a decision tree only with relative weights, this functions can extract the weights of
-# indexes
-index_weights<-function( tree ) {
+#' @title Compute leaves weights
+#' @description The computation of weights could be determined in an inverse processes given the
+#' internal weights.
+#' @param tree igraph object representing the tree
+#' @return igraph object updated
+#' @author Pedro Guarderas, Andrés Lopez
+#' @seealso \code{\link{Read.Tree}}
+#' @importFrom igraph V ego neighborhood
+#' @export
+Index.Weights<-function( tree ) {
+  with( tree, {
   leaves<-which( V(tree)$leaf == 1 )
   weights<-data.frame()
   for ( i in leaves ) {
@@ -129,4 +172,5 @@ index_weights<-function( tree ) {
   weights<-weights[ order( weights$cod ), ]
   rownames( weights )<-NULL
   return( weights )
+  })
 }
