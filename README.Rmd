@@ -109,9 +109,6 @@ utilities<-Eval.Utilities( index, columns, functions )
 
 # Tree creation -----------------------------------------------------------------------------------
 file<-system.file("extdata", "tree.csv", package = "mau" )
-sheetIndex<-1
-cols<-1:5
-rows<-c(1,8)
 tree.data<-Read.Tree( file, skip = 0, nrow = 8 )
 tree<-Make.Decision.Tree( tree.data )
 

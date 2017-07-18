@@ -68,7 +68,7 @@ for ( i in 1:length( lines ) ) {
 Main example
 ------------
 
-In the sources below is developed a complete example of a MAUT model, the package **mau** is employed to load utilities defined in the file `utilities.txt`, automatically an script with utilies is built and saved in the local working directory, after that with `Eval.Utilities` every function is evaluated over the columns of the index table, the names for utilities were previously standarized with `Stand.String`. With another file `tree.csv` the decision tree associated to the MAUT model is built and every weight and relative weight assigned with the `Make.Decision.Tree` function, in addition the whole model with utilies of every criteria is obtained with `Compute.Model`. The simulation of constrained weights is made with `Sim.Const.Weights`, the result could be employed for a sensitivy test of the decision model regarding concentrated weights variation.
+In the sources below is developed a complete example of a MAUT model, the package **mau** is employed to load utilities defined in the file `utilities.txt`, automatically the script with utilies is built and saved in the local working directory, after that with `Eval.Utilities` every function is evaluated over the columns of the index table, the names for utilities were previously standarized with `Stand.String`. With another file `tree.csv` the decision tree associated to the MAUT model is built and every weight and relative weight assigned with the `Make.Decision.Tree` function, in addition the whole model with utilies of every criteria is obtained with `Compute.Model`. The simulation of constrained weights is made with `Sim.Const.Weights`, the result could be employed for a sensitivy test of the decision model regarding concentrated weights variation.
 
 ``` r
 # Loading packages --------------------------------------------------------------------------------
@@ -109,9 +109,6 @@ utilities<-Eval.Utilities( index, columns, functions )
 
 # Tree creation -----------------------------------------------------------------------------------
 file<-system.file("extdata", "tree.csv", package = "mau" )
-sheetIndex<-1
-cols<-1:5
-rows<-c(1,8)
 tree.data<-Read.Tree( file, skip = 0, nrow = 8 )
 tree<-Make.Decision.Tree( tree.data )
 
