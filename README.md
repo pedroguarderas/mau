@@ -3,11 +3,11 @@
 Introduction
 ------------
 
-With **mau** you can build and test decision models based in Multi Attribute Utility Theory (MAUT). With this package you can automatically evaluate utilities over a data.table of indexes. The criteria of the decision tree could evaluated and easily computed.
+The MAUT models are defined with aid of utility functions *u*<sub>1</sub>, …, *u*<sub>*n*</sub> which are evaluated over indexes *x*<sub>1</sub>, …, *x*<sub>*n*</sub> and those utilities are aggregated considering additional weights *w*<sub>1</sub>, …, *w*<sub>*n*</sub>, the whole final utility is given by the addition
 
-The MAUT models are defined with aid of utility functions *u*<sub>1</sub>, …, *u*<sub>*n*</sub> which are evaluated over indexes *x*<sub>1</sub>, …, *x*<sub>*n*</sub> and those utilities are aggregated considering additional weights *w*<sub>1</sub>, …, *w*<sub>*n*</sub>, the whole final utility is given by the addition *u*(*x*<sub>1</sub>, …, *x*<sub>*n*</sub>)=∑<sub>*i* = 1, …, *n*</sub> *w*<sub>*i*</sub> *u*<sub>*i*</sub>(*x*<sub>*i*</sub>).
+*u*(*x*<sub>1</sub>, …, *x*<sub>*n*</sub>)=∑<sub>1 ≤ *i* ≤ *n*</sub> *w*<sub>*i*</sub> *u*<sub>*i*</sub> (*x*<sub>*i*</sub>)
 
-With **mau** the decision model can be computed easily for any type of single valueted utility function. In addition, the utility functions could be defined considering the constant risk aversion criteria sujested by Arrow, those functions are only of two kinds *u*(*x*)=*a* ⋅ *x* + *b* or *u*(*x*)=*a* ⋅ *e*<sup>*b* ⋅ *x*</sup> + *c*.
+With **mau** you can build and test decision models based in Multi Attribute Utility Theory (MAUT). The utilities of any level of the decision model can be easily evaluated.
 
 Installation
 ------------
@@ -17,6 +17,52 @@ To instal **mau** you can proceed in the following way making use of the devtool
 ``` r
 library( devtools )
 install_github( "pedroguarderas/mau" )
+```
+
+Standard utility definition
+---------------------------
+
+The utility functions for a MAUT model could be defined in a practical format when the utilities are piecewise defined like constant risk adverse functions, in such case it is only necessary to define the parameters of the function for each part of the domain of definition. This is because the constant risk adversion functions are only of the following form *u*(*x*)=*a* ⋅ *x* + *b* or *u*(*x*)=*a* ⋅ *e*<sup>*b* ⋅ *x*</sup> + *c*. Then the format for the piecewise defintion of the utility is
+
+> Header
+>
+> Function name
+> min\_1 max\_1 a\_1 b\_1 c\_1
+> min\_2 max\_2 a\_2 b\_2 c\_2
+> min\_3 max\_3 a\_3 b\_3 c\_3
+> ...
+> Function name
+> min\_1 max\_1 a\_1 b\_1 c\_1
+> min\_2 max\_2 a\_2 b\_2 c\_2
+> min\_3 max\_3 a\_3 b\_3 c\_3
+> ...
+
+If *c*<sub>*i*</sub> is 0 then the utility is linear, otherwise is an exponential function. For example:
+
+``` r
+library( mau )
+file<-system.file("extdata", "utilities.txt", package = "mau" )
+lines<-readLines( file )
+for ( i in 1:length( lines ) ) { 
+  cat( lines[i], '\n' )
+}
+#> Utilities 
+#>  
+#> Project 
+#>  1   2   1.5 -0.5    0 
+#>  2   3   1.5 -0.5    0 
+#>  
+#> Self implementation 
+#>  1   2   1.5 -0.5    0 
+#>  2   3   1.5 -0.5    0 
+#>  
+#> External and local relations 
+#>  1   10  1   0   0 
+#>  0   1   0   1   0 
+#>  
+#> Scope of capabilities 
+#>  6   15  1   0   0 
+#>  0   6   1.225   -1.225  0.2824
 ```
 
 Main example

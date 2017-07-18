@@ -11,26 +11,52 @@ knitr::opts_chunk$set(
   fig.path = "README-"
 )
 ```
-## Introduction
-With **mau** you can build and test decision models based in Multi Attribute Utility
-Theory (MAUT). With this package you can automatically evaluate utilities over a data.table of
-indexes. The criteria of the decision tree could evaluated and easily computed.
 
+## Introduction
 The MAUT models are defined with aid of utility functions $u_1,\ldots,u_n$ which are evaluated over
 indexes $x_1,\ldots,x_n$ and those utilities are aggregated considering additional weights 
-$w_1,\ldots,w_n$, the whole final utility is given by the addition 
-$u(x_1,\ldots,x_n) = \sum_{i=1,\ldots,n}\, w_i\, u_i( x_i )$.
+$w_1,\ldots,w_n$, the whole final utility is given by the addition
 
-With **mau** the decision model can be computed easily for any type of single valueted utility 
-function. In addition, the utility functions could be defined considering the constant risk 
-aversion criteria sujested by Arrow, those functions are only of two 
-kinds $u(x) = a \cdot x + b$ or $u(x) = a \cdot e^{b \cdot x} + c$.
+\[u(x_1,\ldots,x_n) = \sum_{1\leq i \leq n}\, w_i\, u_i\ ( x_i )\]
+
+With **mau** you can build and test decision models based in Multi Attribute Utility
+Theory (MAUT). The utilities of any level of the decision model can be easily evaluated.
 
 ## Installation
 To instal **mau** you can proceed in the following way making use of the devtools library
 ```{r, eval=FALSE}
 library( devtools )
 install_github( "pedroguarderas/mau" )
+```
+
+## Standard utility definition
+The utility functions for a MAUT model could be defined in a practical format when the utilities
+are piecewise defined like constant risk adverse functions, in such case it is only necessary 
+to define the parameters of the function for each part of the domain of definition. This is because
+the constant risk adversion functions are only of the following form $u(x) = a \cdot x + b$ or 
+$u(x) = a \cdot e^{b \cdot x} + c$. Then the format for the piecewise defintion of the utility is    
+
+>Header  
+>  
+>Function name  
+>min_1 max_1 a_1 b_1 c_1  
+>min_2 max_2 a_2 b_2 c_2  
+>min_3 max_3 a_3 b_3 c_3  
+>...  
+>Function name  
+>min_1 max_1 a_1 b_1 c_1  
+>min_2 max_2 a_2 b_2 c_2  
+>min_3 max_3 a_3 b_3 c_3  
+>...  
+
+If $c_i$ is $0$ then the utility is linear, otherwise is an exponential function. For example:
+```{r, eval=TRUE}
+library( mau )
+file<-system.file("extdata", "utilities.txt", package = "mau" )
+lines<-readLines( file )
+for ( i in 1:length( lines ) ) { 
+  cat( lines[i], '\n' )
+}
 ```
 
 ## Main example
