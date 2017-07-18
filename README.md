@@ -24,18 +24,18 @@ Standard utility definition
 
 The utility functions for a MAUT model could be defined in a practical format when the utilities are piecewise defined like constant risk adverse functions, in such case it is only necessary to define the parameters of the function for each part of the domain of definition. This is because the constant risk adversion functions are only of the following form *u*(*x*)=*a* ⋅ *x* + *b* or *u*(*x*)=*a* ⋅ *e*<sup>*b* ⋅ *x*</sup> + *c*. Then the format for the piecewise defintion of the utility is
 
-> Header
+> Header  
 >
-> Function name
-> min\_1 max\_1 a\_1 b\_1 c\_1
-> min\_2 max\_2 a\_2 b\_2 c\_2
-> min\_3 max\_3 a\_3 b\_3 c\_3
-> ...
-> Function name
-> min\_1 max\_1 a\_1 b\_1 c\_1
-> min\_2 max\_2 a\_2 b\_2 c\_2
-> min\_3 max\_3 a\_3 b\_3 c\_3
-> ...
+> Function name  
+> min\_1 max\_1 a\_1 b\_1 c\_1  
+> min\_2 max\_2 a\_2 b\_2 c\_2  
+> min\_3 max\_3 a\_3 b\_3 c\_3  
+> ...  
+> Function name  
+> min\_1 max\_1 a\_1 b\_1 c\_1  
+> min\_2 max\_2 a\_2 b\_2 c\_2  
+> min\_3 max\_3 a\_3 b\_3 c\_3  
+> ...  
 
 If *c*<sub>*i*</sub> is 0 then the utility is linear, otherwise is an exponential function. For example:
 
