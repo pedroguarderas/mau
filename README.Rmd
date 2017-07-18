@@ -61,7 +61,7 @@ for ( i in 1:length( lines ) ) {
 
 ## Main example
 In the sources below is developed a complete example of a MAUT model, the package **mau** is 
-employed to load utilities defined in the file `utilities.txt`, automatically an script with 
+employed to load utilities defined in the file `utilities.txt`, automatically the script with 
 utilies is built and saved in the local working directory, after that with `Eval.Utilities` every 
 function is evaluated over the columns of the index table, the names for utilities were previously
 standarized with `Stand.String`. With another file `tree.csv` the decision tree associated to the

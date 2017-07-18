@@ -6,9 +6,9 @@
 #' @param columns columns with indexes where the utilities will be computed
 #' @param functions vector of characters with name of functions
 #' @return data.table with utilities
-#' @details The baisc MAUT models are built with functions of constant absolute risk aversion, 
+#' @details The basic MAUT models are built with functions of constant absolute risk aversion, 
 #' this functions could be defined with simple parameters, \code{\link{Read.Utilities}} could 
-#' interpret a basic text file with and standarized definition for every utility function.
+#' interpret a text file with a standarized definition for every utility function.
 #' @author Pedro Guarderas, Andrés Lopez
 #' @seealso \code{\link{Read.Utilities}}, \code{\link{Stand.String}}
 #' @examples
