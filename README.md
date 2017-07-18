@@ -3,7 +3,7 @@
 Introduction
 ------------
 
-The MAUT decision models are defined with aid of utility functions *u*<sub>1</sub>, …, *u*<sub>*n*</sub> which are evaluated over indexes *x*<sub>1</sub>, …, *x*<sub>*n*</sub> and those utilities are aggregated considering additional weights *w*<sub>1</sub>, …, *w*<sub>*n*</sub>, the whole final utility is given by the addition
+The MAUT decision models are defined with aid of utility functions *u*<sub>1</sub>, …, *u*<sub>*n*</sub> which are evaluated over indexes *x*<sub>1</sub>, …, *x*<sub>*n*</sub> and those utilities are aggregated considering additional weights *w*<sub>1</sub>, …, *w*<sub>*n*</sub>, the whole final utility is given by the sum
 
 *u*(*x*<sub>1</sub>, …, *x*<sub>*n*</sub>)=∑<sub>1 ≤ *i* ≤ *n*</sub> *w*<sub>*i*</sub> *u*<sub>*i*</sub> (*x*<sub>*i*</sub>)
 
