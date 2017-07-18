@@ -1,6 +1,6 @@
 # Read decision tree -------------------------------------------------------------------------------
 #' @title Evaluate utilities
-#' @description The tree structure for the MAUT is extracted from a file with a given format.
+#' @description Read a csv file where the decision tree is defined. 
 #' @param file input file
 #' @param skip starting row for read
 #' @param nrows number of rows to be readed
