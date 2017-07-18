@@ -29,7 +29,7 @@ library( devtools )
 install_github( "pedroguarderas/mau" )
 ```
 
-## Standard utility definition
+## Utility definition
 The utility functions for a MAUT model could be defined in a practical format when the utilities
 are piecewise defined like constant risk adverse functions, in such case it is only necessary 
 to define the parameters of the function for each part of the domain of definition. This is because
