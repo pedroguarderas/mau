@@ -21,21 +21,48 @@ Evaluaction of utilities for a data.table of indexes, the utilities functions ar
 computed over every index represented by each column of the input table.
 }
 \details{
-The basic MAUT models are built with functions of constant absolute risk aversion, 
-these functions could be defined with simple parameters, \code{\link{Read.Utilities}} could 
-interpret a text file with a standarized definition for every utility function.
+Every index has associated an utility function, inside \code{mau} is possible to employ
+any functions, the only special requeriment is that the utility has to be normalized, this means
+that the utility is bounded between 0 and 1.
+
+Also is possible to consider utilities with constant risk adversion CRA, in the sense of Arrow, 
+for such case there is only two types of functions u(x) = a x + b or u(x) = a e^bx + c, to 
+determine these functions, it is only necessary to specify the parameters a, b and c. For a
+decision model only elaborated with CRA utilities, \code{mau} could read a text file where
+every utility is piecewise defined.
+
+The format for the text file is:
+
+  [Header] \cr
+\cr
+  [Function name] \cr
+  [min1 max1 a1 b1 c1] \cr
+  [min2 max2 a2 b2 c2] \cr
+  [min3 max3 a3 b3 c3] \cr
+... \cr
+  [Function name] \cr
+  [min1 max1 a1 b1 c1] \cr
+  [min2 max2 a2 b2 c2] \cr
+  [min3 max3 a3 b3 c3] \cr
+... \cr
+
+If the coeficient c is non zero the function is interpreted as an exponential type.
 }
 \examples{
-# Index
+# Loading packages --------------------------------------------------------------------------------
+library( mau )
 library( data.table )
-index<-data.table( cod = c( 'A', 'B', 'C', 'D' ), 
-                   i1 = c( 0.3428570, 1, 1, 1 ),
-                   i2 = c( 0.5, 0.5, 1, 0.5 ), 
-                   i3 = c( 0.5, 1.0, 0.75, 0.25 ),
-                   i4 = c( 0, 0.2696746, 0.6751261, 0.7401660 ),
-                   i5 = c( 0.2797259, 0.2981198, 1, 0.1952864 ) )
+library( igraph )
+library( ggplot2 )
 
-# Loading utilities
+# Table of indexes --------------------------------------------------------------------------------
+index<-data.table( cod = paste( 'A', 1:10, sep = '' ), 
+                   i1 = c( 0.34, 1, 1, 1, 1, 0.2, 0.7, 0.5, 0.11, 0.8 ),
+                   i2 = c( 0.5, 0.5, 1, 0.5, 0.3, 0.1, 0.4, 0.13, 1, 0.74 ), 
+                   i3 = c( 0.5, 1.0, 0.75, 0.25, 0.1, 0.38, 0.57, 0.97, 0.3, 0.76 ),
+                   i4 = c( 0, 0.26, 0.67, 0.74, 0.84, 0.85, 0.74, 0.65, 0.37, 0.92 ) )
+
+# Loading utilities -------------------------------------------------------------------------------
 file<-system.file("extdata", "utilities.txt", package = "mau" )
 script<-'utilities.R'
 lines<-17
@@ -44,17 +71,20 @@ encoding<-'utf-8'
 functions<-Read.Utilities( file, script, lines, skip, encoding )
 source( 'utilities.R' )
 
-# Index positions
+# Index positions ---------------------------------------------------------------------------------
 columns<-c( 2, 3, 4, 5 )
 
-# Associated names of functions
-functions<-sapply( c( 'Project', 'Self implementation', 'External and local relations', 
+# Function names
+functions<-sapply( c( 'Project', 
+                      'Self implementation',
+                      'External and local relations', 
                       'Scope of capabilities' ),
                    FUN = Stand.String )
 names( functions )<-NULL
 
-# Evaluation of utilities
+# Evaluation of utilities -------------------------------------------------------------------------
 utilities<-Eval.Utilities( index, columns, functions )
+
 }
 \author{
 Pedro Guarderas, Andrés Lopez
