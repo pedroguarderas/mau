@@ -39,14 +39,14 @@ $u(x) = a \cdot e^{b \cdot x} + c$. Then the format for the piecewise defintion 
 >Header  
 >  
 >Function name  
->min_1 max_1 a_1 b_1 c_1  
->min_2 max_2 a_2 b_2 c_2  
->min_3 max_3 a_3 b_3 c_3  
+>min1 max1 a1 b1 c1  
+>min2 max2 a2 b2 c2  
+>min3 max3 a3 b3 c3  
 >...  
 >Function name  
->min_1 max_1 a_1 b_1 c_1  
->min_2 max_2 a_2 b_2 c_2  
->min_3 max_3 a_3 b_3 c_3  
+>min1 max1 a1 b1 c1  
+>min2 max2 a2 b2 c2  
+>min3 max3 a3 b3 c3  
 >...  
 
 If $c_i$ is $0$ then the utility is linear, otherwise is an exponential function. For example:
