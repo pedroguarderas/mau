@@ -14,14 +14,15 @@ Compute.Model(tree, utilities, weights)
 \item{weights}{decision model weights}
 }
 \value{
-data.table with with decision model computed
+data.table structure containing the utilities of the model for every level the decision
+tree
 }
 \description{
 Evaluation of decision tree nodes. All the MAUT model is computed at every level 
 the utilities are computed considering the given weights.
 }
 \details{
-The whole decision model can be computed a any level an represented in a table format.
+The whole decision model can be computed a any level and represented in a table format.
 }
 \examples{
 # Loading packages --------------------------------------------------------------------------------
@@ -79,11 +80,10 @@ plot.S<-Plot.Simulation.Weight( S$simulation, title = 'Simulations',
                                 xlab = 'ID', ylab = 'Utility' ) 
 plot( plot.S )
 }
-\author{
-Pedro Guarderas, Andrés Lopez
-}
 \seealso{
 \code{\link{Stand.String}}, \code{\link{Read.Utilities}}, \code{\link{Eval.Utilities}},
 \code{\link{Read.Tree}}, \code{\link{Make.Decision.Tree}}, \code{\link{Sim.Const.Weights}}.
 }
-
+\author{
+Pedro Guarderas, Andrés Lopez
+}

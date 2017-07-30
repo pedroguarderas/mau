@@ -17,11 +17,11 @@ Sim.Weights(n, utilities, alpha)
 List with data.frames \{simulation, weights\} with total utilities and simulated weights
 }
 \description{
-Simulation of weight following a Dirichlet distribution with a concentration 
-parameter. The concentration parameter is given a tentative weights.
+Simulation of weights employing the Dirichlet distribution. The concentration 
+parameters for the Dirichlet distributution are tentative weights.
 }
 \details{
-Taking advantage of the Dirichlet distribution properties the weights could be 
+Taking advantage of the Dirichlet distribution properties, the weights could be 
 simulated with a concentration arround given weights.
 }
 \examples{
@@ -36,10 +36,9 @@ n<-100
 alpha<-c( 0.2, 0.5, 0.1, 0.2 )
 S<-Sim.Weights( n, utilities, alpha )
 }
-\author{
-Pedro Guarderas
-}
 \seealso{
 \code{\link{Eval.Utilities}}
 }
-
+\author{
+Pedro Guarderas
+}

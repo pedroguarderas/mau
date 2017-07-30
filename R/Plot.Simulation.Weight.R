@@ -1,8 +1,8 @@
 # Plot decision MAUT model -------------------------------------------------------------------------
 #' @title Plot decision MAUT model with weights simulations
-#' @description Plot the decision modelo considering the weights simulated with a Dirichlet 
-#' distributions, every simulation is plotted with lines and in addition a box plot is included
-#' to account the behavior of every global utility.
+#' @description Spider plot for the decision model considering the weights simulated with a Dirichlet 
+#' distributions, every simulation is represented with lines, a box plot is included to account the 
+#' behavior of every global utility.
 #' @param S first element of the simulation list produced by the function 
 #' \code{\link{Sim.Weights}}, \code{\link{Sim.Const.Weights}}.
 #' @param title text for the title plot
@@ -20,7 +20,8 @@
 #' @return ggplot object with the plot
 #' @author Pedro Guarderas
 #' @seealso \code{\link{Sim.Const.Weights}} \code{\link{Sim.Weights}}
-#' @importFrom ggplot2 %+% ggplot geom_line scale_colour_manual geom_boxplot geom_point geom_text xlab ylab theme_minimal scale_y_continuous theme ggtitle
+#' @importFrom ggplot2 %+% ggplot geom_line scale_colour_manual geom_boxplot geom_point geom_text 
+#' xlab ylab theme_minimal scale_y_continuous theme ggtitle
 #' @importFrom grDevices colorRampPalette colors
 #' @export
 Plot.Simulation.Weight<-function( S, title = 'Simulations', xlab = 'ID', ylab = 'Utility',

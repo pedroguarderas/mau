@@ -31,4 +31,3 @@ spaces and other characters.
 \author{
 Julio Andrade, Pedro Guarderas, Andrés Lopez
 }
-

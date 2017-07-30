@@ -17,7 +17,7 @@ Read.Tree(file, skip, nrows)
 data.table with utilities
 }
 \description{
-The tree structure for the MAUT is extracted from a file with a given format.
+Read a csv file where the decision tree is defined.
 }
 \examples{
 library( data.table )
@@ -26,10 +26,9 @@ file<-system.file("extdata", "tree.csv", package = "mau" )
 sheetIndex<-1
 tree.data<-Read.Tree( file, skip = 0, nrows = 8 )
 }
-\author{
-Pedro Guarderas, Andrés Lopez
-}
 \seealso{
 \code{\link{Read.Utilities}}, \code{\link{Make.Decision.Tree}}
 }
-
+\author{
+Pedro Guarderas, Andrés Lopez
+}

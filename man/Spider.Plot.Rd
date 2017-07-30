@@ -209,4 +209,3 @@ plot(p)
 \author{
 Pedro Guarderas, Andrés Lopez
 }
-

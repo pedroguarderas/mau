@@ -38,14 +38,13 @@ color}
 ggplot object with the plot
 }
 \description{
-Plot the decision modelo considering the weights simulated with a Dirichlet 
-distributions, every simulation is plotted with lines and in addition a box plot is included
-to account the behavior of every global utility.
-}
-\author{
-Pedro Guarderas
+Spider plot for the decision model considering the weights simulated with a Dirichlet 
+distributions, every simulation is represented with lines, a box plot is included to account the 
+behavior of every global utility.
 }
 \seealso{
 \code{\link{Sim.Const.Weights}} \code{\link{Sim.Weights}}
 }
-
+\author{
+Pedro Guarderas
+}
