@@ -77,10 +77,11 @@ Compute.Model<-function( tree,
   
   model<-NULL
   
-  criteria<-1:length( V(tree)$leaf )
+  criteria<-1:length( V(tree) )
   
   index<-which( V(tree)$leaf == 1 )
   
+  with( utilities, {
   for ( i in criteria ) { # i<-criteria[1]
     
     nl<-unlist( neighborhood( tree, 100, V(tree)[i], mode = 'out' ) )
@@ -91,23 +92,23 @@ Compute.Model<-function( tree,
     RW<-W / sum( W )
     uname<-paste( 'u', code, sep = '' )
     
-    with( utilities, {
-      u<-utilities[ , list( utility = unlist( lapply( .SD * W, sum ) ),
-                            rutility = unlist( lapply( .SD * RW, sum ) ) ),
-                    by = cod, .SDcols = uname ]
-  
-      u<-u[ , list( utility = sum( utility ),
-                    rutility = sum( rutility ) ), 
-            by = cod ]
-      
-      u[ , id := V(tree)[i]$id ]
-      u[ , code := ifelse( V(tree)[i]$code == 0, NA, V(tree)[i]$code ) ]
-      u[ , weight := V(tree)[i]$weight ]
-      u[ , rweight := V(tree)[i]$rweight ]
-      u[ , name := V(tree)[i]$name ]
-      u<-u[ , list( id, name, code, cod, utility, rutility, weight, rweight ) ]
-      model<-rbind( model, u )
-    })
+    u<-utilities[ , list( utility = unlist( lapply( .SD * W, sum ) ),
+                          relative.utility = unlist( lapply( .SD * RW, sum ) ) ),
+                  by = cod, .SDcols = uname ]
+
+    u<-u[ , list( utility = sum( utility ),
+                  relative.utility = sum( relative.utility ) ), 
+          by = cod ]
+    
+    u[ , id := V(tree)[i]$id ]
+    u[ , index := ifelse( V(tree)[i]$code == 0, NA, V(tree)[i]$code ) ]
+    u[ , deep := V(tree)[i]$deep ]
+    u[ , weight := V(tree)[i]$weight ]
+    u[ , relative.weight := V(tree)[i]$rweight ]
+    u[ , name := V(tree)[i]$name ]
+    u<-u[ , list( id, name, cod, index, deep, utility, relative.utility, weight, relative.weight ) ]
+    model<-rbind( model, u )
   }
   return( model )
+  })
 }

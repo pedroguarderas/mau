@@ -86,9 +86,10 @@ names( functions )<-NULL
 utilities<-Eval.Utilities( index, columns, functions )
 
 }
-\seealso{
-\code{\link{Read.Utilities}}, \code{\link{Stand.String}}
-}
 \author{
 Pedro Guarderas, Andrés Lopez
 }
+\seealso{
+\code{\link{Read.Utilities}}, \code{\link{Stand.String}}
+}
+

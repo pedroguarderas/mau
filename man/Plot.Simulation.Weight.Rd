@@ -42,9 +42,10 @@ Spider plot for the decision model considering the weights simulated with a Diri
 distributions, every simulation is represented with lines, a box plot is included to account the 
 behavior of every global utility.
 }
-\seealso{
-\code{\link{Sim.Const.Weights}} \code{\link{Sim.Weights}}
-}
 \author{
 Pedro Guarderas
 }
+\seealso{
+\code{\link{Sim.Const.Weights}} \code{\link{Sim.Weights}}
+}
+

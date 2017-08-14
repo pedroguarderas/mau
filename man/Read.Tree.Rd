@@ -26,9 +26,10 @@ file<-system.file("extdata", "tree.csv", package = "mau" )
 sheetIndex<-1
 tree.data<-Read.Tree( file, skip = 0, nrows = 8 )
 }
-\seealso{
-\code{\link{Read.Utilities}}, \code{\link{Make.Decision.Tree}}
-}
 \author{
 Pedro Guarderas, Andrés Lopez
 }
+\seealso{
+\code{\link{Read.Utilities}}, \code{\link{Make.Decision.Tree}}
+}
+

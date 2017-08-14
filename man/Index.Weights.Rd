@@ -16,9 +16,10 @@ igraph object updated
 The computation of weights could be determined in an inverse processes given the
 internal weights.
 }
-\seealso{
-\code{\link{Read.Tree}}
-}
 \author{
 Pedro Guarderas, Andrés Lopez
 }
+\seealso{
+\code{\link{Read.Tree}}
+}
+

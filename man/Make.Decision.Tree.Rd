@@ -27,9 +27,10 @@ tree.data<-Read.Tree( file, skip = 0, nrows = 8 )
 tree<-Make.Decision.Tree( tree.data )
 plot( tree )
 }
-\seealso{
-\code{\link{Read.Tree}}
-}
 \author{
 Pedro Guarderas, Andrés Lopez
 }
+\seealso{
+\code{\link{Read.Tree}}
+}
+

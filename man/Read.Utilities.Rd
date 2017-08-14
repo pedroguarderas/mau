@@ -38,9 +38,10 @@ skip<-2
 encoding<-'utf-8'
 functions<-Read.Utilities( file, script, lines, skip, encoding )
 }
-\seealso{
-\code{\link{Stand.String}}
-}
 \author{
 Pedro Guarderas, Andrés Lopez
 }
+\seealso{
+\code{\link{Stand.String}}
+}
+

@@ -16,9 +16,10 @@ igraph object updated
 For the computation of the complete decision model is necessary to stablish the 
 deep position of every node.
 }
-\seealso{
-\code{\link{Read.Tree}}
-}
 \author{
 Pedro Guarderas, Andrés Lopez
 }
+\seealso{
+\code{\link{Read.Tree}}
+}
+
