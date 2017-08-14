@@ -76,6 +76,7 @@
 #' xlab ylab theme_minimal scale_y_continuous theme ggtitle
 #' @export
 Bar.Plot<-function( model, deep, colors, title, xlab, ylab ) {
+  with( list( model, deep, colors, title, xlab, ylab ), {
   Deep<-deep
   M<-model[ deep == Deep ]
   m<-M[ , list( u = sum( utility ) ), by = cod ]
@@ -101,4 +102,5 @@ Bar.Plot<-function( model, deep, colors, title, xlab, ylab ) {
     ggtitle( title )
   
   return( bar )
+  })
 }
