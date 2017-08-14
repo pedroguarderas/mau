@@ -130,7 +130,7 @@ knitr::kable( utilities )
 ```
 
 4. Construction of the decision tree
-```{r,eval=TRUE, fig.show='hold', fig.align="center", fig.width=5, fig.height=5}
+```{r,eval=TRUE, fig.show='hold', fig.align="center", fig.width=7, fig.height=7}
 file<-system.file("extdata", "tree.csv", package = "mau" )
 tree.data<-Read.Tree( file, skip = 0, nrow = 8 )
 tree<-Make.Decision.Tree( tree.data )
@@ -145,8 +145,19 @@ weights<-tree.data[ !is.na( weight ) ]$weight
 model<-Compute.Model( tree, utilities, weights )
 ```
 
-6. Sensitivity simulation of weights. Simulation based in the Dirichlet distribution
-```{r,eval=TRUE, fig.show='hold', fig.show='hold', fig.align="center", fig.width=6, fig.height=4}
+6. Bar plot for every utility
+```{r,eval=TRUE, fig.show='hold', fig.align="center", fig.width=7, fig.height=4}
+xlab<-'Utility'
+ylab<-'Institutions'
+title<-'Criteria utilities'
+colors<-c( 'dodgerblue4', 'orange', 'gold', 'red3' )
+deep<-2
+bar<-Bar.Plot( model, deep, colors, title, xlab, ylab )
+plot( bar )
+```
+
+7. Sensitivity simulation of weights. Simulation based in the Dirichlet distribution
+```{r,eval=TRUE, fig.show='hold', fig.show='hold', fig.align="center", fig.width=7, fig.height=4}
 n<-200
 alpha<-c( 0.2, 0.5, 0.1, 0.2 )
 constraints<-list( list( c(1,2), 0.7 ), 
