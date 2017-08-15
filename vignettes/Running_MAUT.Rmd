@@ -1,10 +1,10 @@
 ---
-title: "Runing a MAUT Model"
+title: "Running a MAUT Model"
 author: "Pedro Guarderas"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Runing a MAUT Model}
+  %\VignetteIndexEntry{Running a MAUT Model}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
