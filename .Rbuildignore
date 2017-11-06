@@ -6,4 +6,5 @@
 ^README-.*\.png$
 ^cran-comments\.md$
 ^tests$
+^test$
 ^utilities\.R
