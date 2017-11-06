@@ -90,4 +90,3 @@ plot( bar )
 \author{
 Pedro Guarderas
 }
-

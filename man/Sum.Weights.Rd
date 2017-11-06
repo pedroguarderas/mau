@@ -16,10 +16,9 @@ igraph object updated
 The weights of the internal nodes has to be computed first is necessary to add each
 weights of the leaves.
 }
-\author{
-Pedro Guarderas, Andrés Lopez
-}
 \seealso{
 \code{\link{Read.Tree}}
 }
-
+\author{
+Pedro Guarderas, Andrés Lopez
+}

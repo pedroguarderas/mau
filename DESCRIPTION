@@ -7,7 +7,7 @@ Date: 2017-07-17
 Author: Felipe Aguirre, Julio Andrade, Pedro Guarderas, Daniel Lagos,
     Andres Lopez, Nelson Recalde, Edison Salazar.
 Maintainer: Pedro Guarderas <pedro.felipe.guarderas@gmail.com>
-Description: Build and test decision models based in Multi Attribute Utility
+Description: Build and test decision models employing Multi Attribute Utility
     Theory (MAUT). Automatic evaluation of utilities at any level of the decision
     tree, weight simulations for sensitivity analysis.
 License: LGPL-3
@@ -21,6 +21,6 @@ Imports:
     igraph,
     RColorBrewer,
     ggplot2
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
