@@ -13,29 +13,29 @@ Plot.Simulation.Weight(S, title = "Simulations", xlab = "ID",
 \item{S}{first element of the simulation list produced by the function 
 \code{\link{Sim.Weights}}, \code{\link{Sim.Const.Weights}}.}
 
-\item{title}{text for the title plot}
+\item{title}{text for the title plot.}
 
-\item{xlab}{text for x-axis label}
+\item{xlab}{text for x-axis label.}
 
-\item{ylab}{text for y-axis label}
+\item{ylab}{text for y-axis label.}
 
 \item{lines.cols}{the spectrum of colors for the simulation is selected randomly from a base 
-color}
+color.}
 
-\item{box.col}{color for the boxes}
+\item{box.col}{color for the boxes.}
 
 \item{box.outlier.col}{color for the outlier points representing the extreme observations in the
-boxplot}
+boxplot.}
 
-\item{utility.col}{the main utility value is also plotted with this specific color}
+\item{utility.col}{the main utility value is also plotted with this specific color.}
 
 \item{utility.point.col}{the line of main utilities is plotted with points represented with this
-color}
+color.}
 
-\item{text.col}{color for the text values plotted for each utility}
+\item{text.col}{color for the text values plotted for each utility.}
 }
 \value{
-ggplot object with the plot
+ggplot object with the plot of simulations.
 }
 \description{
 Spider plot for the decision model considering the weights simulated with a Dirichlet 

@@ -7,15 +7,15 @@
 Compute.Model(tree, utilities, weights)
 }
 \arguments{
-\item{tree}{inicial tree struture with utilities in its leafs}
+\item{tree}{inicial tree struture with utilities in its leafs.}
 
-\item{utilities}{data.table with ordered columns containing the values of utilities}
+\item{utilities}{data.table with ordered columns containing the values of utilities.}
 
-\item{weights}{decision model weights}
+\item{weights}{weights for the decision model.}
 }
 \value{
 data.table structure containing the utilities of the model for every level the decision
-tree
+tree.
 }
 \description{
 Evaluation of decision tree nodes. All the MAUT model is computed at every level 
@@ -86,4 +86,5 @@ plot( plot.S )
 }
 \author{
 Pedro Guarderas, Andrés Lopez
+\email{pedro.felipe.guarderas@gmail.com}
 }

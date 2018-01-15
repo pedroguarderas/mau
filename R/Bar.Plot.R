@@ -8,8 +8,9 @@
 #' @param title title for the bar plot
 #' @param xlab label for horizontal axis
 #' @param ylab label for vertical axis
-#' @return ggplot2 bar plot
+#' @return ggplot2 object.
 #' @author Pedro Guarderas
+#' \email{pedro.felipe.guarderas@@gmail.com}
 #' @examples
 #' # Loading packages ---------------------------------------------------------------------------------
 #' library( mau )

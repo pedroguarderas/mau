@@ -48,12 +48,7 @@ xlab<-'Utility'
 ylab<-'Institutions'
 title<-'Criteria utilities'
 
-colors<-c( 'dodgerblue3', 'orange' )
-deep<-1
-bar<-Bar.Plot( model, colors, deep, title, xlab, ylab )
-plot( bar )
-
 colors<-c( 'dodgerblue4', 'orange', 'gold', 'red3' )
 deep<-2
-bar<-Bar.Plot( model, colors, deep, title, xlab, ylab )
+bar<-Bar.Plot( model, deep, colors, title, xlab, ylab )
 plot( bar )

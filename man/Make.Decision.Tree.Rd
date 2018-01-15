@@ -7,13 +7,13 @@
 Make.Decision.Tree(tree.data)
 }
 \arguments{
-\item{tree.data}{data.table with decision tree information}
+\item{tree.data}{data.table with decision tree information.}
 }
 \value{
-igraph object
+igraph object containing the graph of the decision tree.
 }
 \description{
-Create decision tree for MAUT models exporting to an igraph object
+Create decision tree for MAUT models exporting to an igraph object.
 }
 \details{
 With the tree information loaded by the \code{\link{Read.Tree}} the decision tree
@@ -32,4 +32,5 @@ plot( tree )
 }
 \author{
 Pedro Guarderas, Andrés Lopez
+\email{pedro.felipe.guarderas@gmail.com}
 }

@@ -7,14 +7,14 @@
 Eval.Utilities(index, columns, functions)
 }
 \arguments{
-\item{index}{data.table of indexes}
+\item{index}{data.table of indexes.}
 
-\item{columns}{columns with indexes where the utilities will be computed}
+\item{columns}{columns with indexes where the utilities will be computed.}
 
-\item{functions}{vector of characters with name of functions}
+\item{functions}{vector of characters with name of functions.}
 }
 \value{
-data.table with utilities
+data.table with utilities evaluated for every index.
 }
 \description{
 Evaluaction of utilities for a data.table of indexes, the utilities functions are 
@@ -91,4 +91,5 @@ utilities<-Eval.Utilities( index, columns, functions )
 }
 \author{
 Pedro Guarderas, Andrés Lopez
+\email{pedro.felipe.guarderas@gmail.com}
 }

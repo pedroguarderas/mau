@@ -50,4 +50,5 @@ plot( plot.S )
 }
 \author{
 Pedro Guarderas
+\email{pedro.felipe.guarderas@gmail.com}
 }

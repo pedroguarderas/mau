@@ -7,21 +7,21 @@
 Read.Utilities(file, script, lines, skip = 2, encoding = "utf-8")
 }
 \arguments{
-\item{file}{standarized file with definitions}
+\item{file}{standarized file with definitions.}
 
-\item{script}{output script where the utility functions are defined automatically}
+\item{script}{output script where the utility functions are defined automatically.}
 
-\item{lines}{number lines to read in \code{file}}
+\item{lines}{number lines to read in \code{file}.}
 
-\item{skip}{to read the \code{file} it had to \code{skip} a given number of lines}
+\item{skip}{to read the \code{file} it had to \code{skip} a given number of lines.}
 
-\item{encoding}{file encoding}
+\item{encoding}{file encoding.}
 }
 \value{
-Returns data table with definition of utility functions by range
+Returns data table with definition of utility functions by range.
 }
 \description{
-Builds utility functions from definition standard
+Builds utility functions from definition standard.
 }
 \details{
 The baisc MAUT models are built with functions of constant absolute risk aversion, 

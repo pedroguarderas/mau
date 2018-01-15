@@ -7,6 +7,7 @@
 #' @param rep character vector of replacement characters
 #' @return Returns data table with definition of utility functions by range
 #' @author Julio Andrade, Pedro Guarderas, Andrés Lopez
+#' \email{pedro.felipe.guarderas@@gmail.com}
 #' @importFrom stringr str_trim
 #' @examples
 #'  x<-c( "H?\u00da\u00e0n with C@1_ad1", 

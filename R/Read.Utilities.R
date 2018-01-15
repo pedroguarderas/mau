@@ -1,12 +1,12 @@
 # Builds utility functions from definition standard ------------------------------------------------
 #' @title Read utilities
-#' @description Builds utility functions from definition standard
-#' @param file standarized file with definitions
-#' @param script output script where the utility functions are defined automatically
-#' @param lines number lines to read in \code{file}
-#' @param skip to read the \code{file} it had to \code{skip} a given number of lines 
-#' @param encoding file encoding
-#' @return Returns data table with definition of utility functions by range
+#' @description Builds utility functions from definition standard.
+#' @param file standarized file with definitions.
+#' @param script output script where the utility functions are defined automatically.
+#' @param lines number lines to read in \code{file}.
+#' @param skip to read the \code{file} it had to \code{skip} a given number of lines.
+#' @param encoding file encoding.
+#' @return Returns data table with definition of utility functions by range.
 #' @details The baisc MAUT models are built with functions of constant absolute risk aversion, 
 #' this functions could be defined with simple parameters, only is necessary a function name and
 #' the domain of definition of every function and more important is necesary no more than three

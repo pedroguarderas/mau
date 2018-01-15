@@ -44,6 +44,7 @@
 #' @param plot.margin plot margin
 #' @return ggplot2 object with the spider plot
 #' @author Pedro Guarderas, Andrés Lopez
+#' \email{pedro.felipe.guarderas@@gmail.com}
 #' @examples
 #' # Preparing data
 #' library( data.table )

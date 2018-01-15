@@ -150,6 +150,7 @@ model<-Compute.Model( tree, utilities, weights )
 xlab<-'Utility'
 ylab<-'Institutions'
 title<-'Criteria utilities'
+
 colors<-c( 'dodgerblue4', 'orange', 'gold', 'red3' )
 deep<-2
 bar<-Bar.Plot( model, deep, colors, title, xlab, ylab )

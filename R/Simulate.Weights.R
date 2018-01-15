@@ -9,6 +9,7 @@
 #' @details Taking advantage of the Dirichlet distribution properties, the weights could be 
 #' simulated with a concentration arround given weights.
 #' @author Pedro Guarderas
+#' \email{pedro.felipe.guarderas@@gmail.com}
 #' @seealso \code{\link{Eval.Utilities}}
 #' @importFrom gtools rdirichlet
 #' @examples
@@ -52,6 +53,7 @@ Sim.Weights<-function( n, utilities, alpha ) {
 #' with a given concentration, additionally this simulation can be carry out by subsets of weights
 #' only to meet specific constraints.
 #' @author Pedro Guarderas
+#' \email{pedro.felipe.guarderas@@gmail.com}
 #' @seealso \code{\link{Eval.Utilities}}
 #' @examples
 #' library( data.table )

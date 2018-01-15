@@ -41,4 +41,5 @@ S<-Sim.Weights( n, utilities, alpha )
 }
 \author{
 Pedro Guarderas
+\email{pedro.felipe.guarderas@gmail.com}
 }

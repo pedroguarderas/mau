@@ -30,4 +30,5 @@ spaces and other characters.
 }
 \author{
 Julio Andrade, Pedro Guarderas, Andrés Lopez
+\email{pedro.felipe.guarderas@gmail.com}
 }

@@ -7,14 +7,14 @@
 Read.Tree(file, skip, nrows)
 }
 \arguments{
-\item{file}{input file}
+\item{file}{input csv file containing the tree.}
 
-\item{skip}{starting row for read}
+\item{skip}{starting row for read.}
 
-\item{nrows}{number of rows to be readed}
+\item{nrows}{number of rows to be readed.}
 }
 \value{
-data.table with utilities
+data.table with utilities.
 }
 \description{
 Read a csv file where the decision tree is defined.

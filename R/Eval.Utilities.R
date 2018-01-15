@@ -2,10 +2,10 @@
 #' @title Evaluate utilities
 #' @description Evaluaction of utilities for a data.table of indexes, the utilities functions are 
 #' computed over every index represented by each column of the input table.
-#' @param index data.table of indexes
-#' @param columns columns with indexes where the utilities will be computed
-#' @param functions vector of characters with name of functions
-#' @return data.table with utilities
+#' @param index data.table of indexes.
+#' @param columns columns with indexes where the utilities will be computed.
+#' @param functions vector of characters with name of functions.
+#' @return data.table with utilities evaluated for every index.
 #' @details Every index has associated an utility function, inside \code{mau} is possible to employ
 #' any functions, the only special requeriment is that the utility has to be normalized, this means
 #' that the utility is bounded between 0 and 1.
@@ -34,6 +34,7 @@
 #' If the coeficient c is non zero the function is interpreted as an exponential type.
 #' 
 #' @author Pedro Guarderas, Andrés Lopez
+#' \email{pedro.felipe.guarderas@@gmail.com}
 #' @seealso \code{\link{Read.Utilities}}, \code{\link{Stand.String}}
 #' @examples
 #' # Loading packages --------------------------------------------------------------------------------
