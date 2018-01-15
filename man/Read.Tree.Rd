@@ -11,7 +11,7 @@ Read.Tree(file, skip, nrows)
 
 \item{skip}{starting row for read.}
 
-\item{nrows}{number of rows to be readed.}
+\item{nrows}{number of rows to read.}
 }
 \value{
 data.table with utilities.

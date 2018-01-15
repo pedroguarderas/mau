@@ -1,5 +1,5 @@
 # Standardize strings -------------------------------------------------------------------------------
-#' @title Standardice strings
+#' @title Standardize strings
 #' @description Function to correct and standardize names, designed to eliminate special characters,
 #' spaces and other characters.
 #' @param x text to be formatted

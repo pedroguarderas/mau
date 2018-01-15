@@ -3,7 +3,7 @@
 #' @description Read a csv file where the decision tree is defined. 
 #' @param file input csv file containing the tree.
 #' @param skip starting row for read.
-#' @param nrows number of rows to be readed.
+#' @param nrows number of rows to read.
 #' @return data.table with utilities.
 #' @author Pedro Guarderas, Andrés Lopez
 #' @seealso \code{\link{Read.Utilities}}, \code{\link{Make.Decision.Tree}}

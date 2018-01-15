@@ -1,7 +1,7 @@
 Package: mau
 Type: Package
 Title: Decision Models with Multi Attribute Utility Theory
-Version: 0.1.4.2000
+Version: 0.1.2
 Encoding: UTF-8
 Date: 2017-07-17
 Author: Felipe Aguirre, Julio Andrade, Pedro Guarderas, Daniel Lagos,

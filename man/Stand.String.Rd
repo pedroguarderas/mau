@@ -2,7 +2,7 @@
 % Please edit documentation in R/Stand.String.R
 \name{Stand.String}
 \alias{Stand.String}
-\title{Standardice strings}
+\title{Standardize strings}
 \usage{
 Stand.String(x, chr = NULL, rep = NULL)
 }
