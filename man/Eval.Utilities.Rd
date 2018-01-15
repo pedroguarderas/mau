@@ -17,15 +17,15 @@ Eval.Utilities(index, columns, functions)
 data.table with utilities evaluated for every index.
 }
 \description{
-Evaluaction of utilities for a data.table of indexes, the utilities functions are 
+Evaluation of utilities for a data.table of indexes, the utilities functions are 
 computed over every index represented by each column of the input table.
 }
 \details{
 Every index has associated an utility function, inside \code{mau} is possible to employ
-any functions, the only special requeriment is that the utility has to be normalized, this means
+any functions, the only special requirement is that the utility has to be normalized, this means
 that the utility is bounded between 0 and 1.
 
-Also is possible to consider utilities with constant risk adversion CRA, in the sense of Arrow, 
+Also is possible to consider utilities with constant risk aversion CRA, in the sense of Arrow, 
 for such case there is only two types of functions u(x) = a x + b or u(x) = a e^bx + c, to 
 determine these functions, it is only necessary to specify the parameters a, b and c. For a
 decision model only elaborated with CRA utilities, \code{mau} could read a text file where
@@ -46,7 +46,7 @@ The format for the text file is:
   [min3 max3 a3 b3 c3] \cr
 ... \cr
 
-If the coeficient c is non zero the function is interpreted as an exponential type.
+If the coefficient c is non zero the function is interpreted as an exponential type.
 }
 \examples{
 # Loading packages --------------------------------------------------------------------------------

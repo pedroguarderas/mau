@@ -20,7 +20,7 @@ List with data.frames \{simulation, weights\} with total utilities and simulated
 }
 \description{
 Simulation of weights employing the Dirichlet distribution. The concentration 
-parameters for the Dirichlet distributution are tentative weights, additionally constraints over
+parameters for the Dirichlet distribution are tentative weights, additionally constraints over
 partial sums of weights are introduced by a list ordered structure.
 }
 \details{

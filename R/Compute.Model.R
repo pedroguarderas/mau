@@ -3,7 +3,7 @@
 #' @title Evaluation of decision tree nodes
 #' @description Evaluation of decision tree nodes. All the MAUT model is computed at every level 
 #' the utilities are computed considering the given weights.
-#' @param tree inicial tree struture with utilities in its leafs.
+#' @param tree initial tree structure with utilities in its leafs.
 #' @param utilities data.table with ordered columns containing the values of utilities.
 #' @param weights weights for the decision model.
 #' @return data.table structure containing the utilities of the model for every level the decision

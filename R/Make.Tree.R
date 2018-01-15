@@ -117,7 +117,7 @@ Divide.Weights<-function( tree ) {
 
 # Assign deep identifier ---------------------------------------------------------------------------
 #' @title Compute the deep position of every node
-#' @description For the computation of the complete decision model is necessary to stablish the 
+#' @description For the computation of the complete decision model is necessary to establish the 
 #' deep position of every node.
 #' @param tree igraph object representing the tree
 #' @return igraph object updated

@@ -7,7 +7,7 @@
 Read.Utilities(file, script, lines, skip = 2, encoding = "utf-8")
 }
 \arguments{
-\item{file}{standarized file with definitions.}
+\item{file}{standardize file with definitions.}
 
 \item{script}{output script where the utility functions are defined automatically.}
 
@@ -25,9 +25,9 @@ Builds utility functions from definition standard.
 }
 \details{
 The baisc MAUT models are built with functions of constant absolute risk aversion, 
-this functions could be defined with simple parameters, only is necessary a function name and
-the domain of definition of every function and more important is necesary no more than three
-coeficients for the function definition.
+this functions could be defined with simple parameters, only is neccesary a function name and
+the domain of definition of every function and more important is neccesary no more than three
+coefficients for the function definition.
 }
 \examples{
 library( data.table )

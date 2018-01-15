@@ -7,7 +7,7 @@
 Compute.Model(tree, utilities, weights)
 }
 \arguments{
-\item{tree}{inicial tree struture with utilities in its leafs.}
+\item{tree}{initial tree structure with utilities in its leafs.}
 
 \item{utilities}{data.table with ordered columns containing the values of utilities.}
 

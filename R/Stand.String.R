@@ -1,8 +1,8 @@
-# Standarize strings -------------------------------------------------------------------------------
-#' @title Standarize strings
-#' @description Function to correct and standarize names, designed to eliminate special characters,
+# Standardize strings -------------------------------------------------------------------------------
+#' @title Standardice strings
+#' @description Function to correct and standardize names, designed to eliminate special characters,
 #' spaces and other characters.
-#' @param x text to be standarized
+#' @param x text to be formatted
 #' @param chr character vector of replace characters
 #' @param rep character vector of replacement characters
 #' @return Returns data table with definition of utility functions by range

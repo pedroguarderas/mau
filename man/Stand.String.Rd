@@ -2,12 +2,12 @@
 % Please edit documentation in R/Stand.String.R
 \name{Stand.String}
 \alias{Stand.String}
-\title{Standarize strings}
+\title{Standardice strings}
 \usage{
 Stand.String(x, chr = NULL, rep = NULL)
 }
 \arguments{
-\item{x}{text to be standarized}
+\item{x}{text to be formatted}
 
 \item{chr}{character vector of replace characters}
 
@@ -17,7 +17,7 @@ Stand.String(x, chr = NULL, rep = NULL)
 Returns data table with definition of utility functions by range
 }
 \description{
-Function to correct and standarize names, designed to eliminate special characters,
+Function to correct and standardize names, designed to eliminate special characters,
 spaces and other characters.
 }
 \examples{
