@@ -3,13 +3,14 @@
 #' @title Evaluation of decision tree nodes
 #' @description Evaluation of decision tree nodes. All the MAUT model is computed at every level 
 #' the utilities are computed considering the given weights.
-#' @param tree inicial tree struture with utilities in its leafs
-#' @param utilities data.table with ordered columns containing the values of utilities
-#' @param weights decision model weights
+#' @param tree initial tree structure with utilities in its leafs.
+#' @param utilities data.table with ordered columns containing the values of utilities.
+#' @param weights weights for the decision model.
 #' @return data.table structure containing the utilities of the model for every level the decision
-#' tree
+#' tree.
 #' @details The whole decision model can be computed a any level and represented in a table format.
 #' @author Pedro Guarderas, Andrés Lopez
+#' \email{pedro.felipe.guarderas@@gmail.com}
 #' @seealso \code{\link{Stand.String}}, \code{\link{Read.Utilities}}, \code{\link{Eval.Utilities}},
 #' \code{\link{Read.Tree}}, \code{\link{Make.Decision.Tree}}, \code{\link{Sim.Const.Weights}}.
 #' @examples

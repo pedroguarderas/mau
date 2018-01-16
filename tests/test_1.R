@@ -52,3 +52,4 @@ S<-Sim.Const.Weights( n, utilities, alpha, constraints )
 plot.S<-Plot.Simulation.Weight( S$simulation, title = 'Simulations',
                                 xlab = 'ID', ylab = 'Utility' )
 plot( plot.S )
+

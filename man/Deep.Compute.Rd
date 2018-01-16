@@ -13,13 +13,12 @@ Deep.Compute(tree)
 igraph object updated
 }
 \description{
-For the computation of the complete decision model is necessary to stablish the 
+For the computation of the complete decision model is necessary to establish the 
 deep position of every node.
-}
-\author{
-Pedro Guarderas, Andrés Lopez
 }
 \seealso{
 \code{\link{Read.Tree}}
 }
-
+\author{
+Pedro Guarderas, Andrés Lopez
+}

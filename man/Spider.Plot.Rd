@@ -208,5 +208,5 @@ plot(p)
 }
 \author{
 Pedro Guarderas, Andrés Lopez
+\email{pedro.felipe.guarderas@gmail.com}
 }
-

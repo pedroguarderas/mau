@@ -1,12 +1,13 @@
-# Standarize strings -------------------------------------------------------------------------------
-#' @title Standarize strings
-#' @description Function to correct and standarize names, designed to eliminate special characters,
+# Standardize strings -------------------------------------------------------------------------------
+#' @title Standardize strings
+#' @description Function to correct and standardize names, designed to eliminate special characters,
 #' spaces and other characters.
-#' @param x text to be standarized
+#' @param x text to be formatted
 #' @param chr character vector of replace characters
 #' @param rep character vector of replacement characters
 #' @return Returns data table with definition of utility functions by range
 #' @author Julio Andrade, Pedro Guarderas, Andrés Lopez
+#' \email{pedro.felipe.guarderas@@gmail.com}
 #' @importFrom stringr str_trim
 #' @examples
 #'  x<-c( "H?\u00da\u00e0n with C@1_ad1", 

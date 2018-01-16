@@ -16,10 +16,9 @@ igraph object updated
 After the addition of weights for internal nodes the final weights have to be 
 computed dividing by the total weight of each parent.
 }
-\author{
-Pedro Guarderas, Andrés Lopez
-}
 \seealso{
 \code{\link{Read.Tree}}
 }
-
+\author{
+Pedro Guarderas, Andrés Lopez
+}

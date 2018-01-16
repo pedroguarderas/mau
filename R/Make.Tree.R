@@ -1,9 +1,10 @@
 # Create decision tree -----------------------------------------------------------------------------
 #' @title Evaluate utilities
-#' @description Create decision tree for MAUT models exporting to an igraph object
-#' @param tree.data data.table with decision tree information
-#' @return igraph object
+#' @description Create decision tree for MAUT models exporting to an igraph object.
+#' @param tree.data data.table with decision tree information.
+#' @return igraph object containing the graph of the decision tree.
 #' @author Pedro Guarderas, Andrés Lopez
+#' \email{pedro.felipe.guarderas@@gmail.com}
 #' @seealso \code{\link{Read.Tree}}
 #' @details With the tree information loaded by the \code{\link{Read.Tree}} the decision tree
 #' could be represented like an igraph object.
@@ -116,7 +117,7 @@ Divide.Weights<-function( tree ) {
 
 # Assign deep identifier ---------------------------------------------------------------------------
 #' @title Compute the deep position of every node
-#' @description For the computation of the complete decision model is necessary to stablish the 
+#' @description For the computation of the complete decision model is necessary to establish the 
 #' deep position of every node.
 #' @param tree igraph object representing the tree
 #' @return igraph object updated

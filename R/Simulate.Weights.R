@@ -1,14 +1,15 @@
 # Simulation of weights ----------------------------------------------------------------------------
 #' @title Simulation of weights
 #' @description Simulation of weights employing the Dirichlet distribution. The concentration 
-#' parameters for the Dirichlet distributution are tentative weights.
+#' parameters for the Dirichlet distribution are tentative weights.
 #' @param n number of simulations
 #' @param utilities utility dataframe, first column is the identifier
 #' @param alpha concentration parameter for the Dirichlet distribution
 #' @return List with data.frames \{simulation, weights\} with total utilities and simulated weights
 #' @details Taking advantage of the Dirichlet distribution properties, the weights could be 
-#' simulated with a concentration arround given weights.
+#' simulated with a concentration around given weights.
 #' @author Pedro Guarderas
+#' \email{pedro.felipe.guarderas@@gmail.com}
 #' @seealso \code{\link{Eval.Utilities}}
 #' @importFrom gtools rdirichlet
 #' @examples
@@ -41,7 +42,7 @@ Sim.Weights<-function( n, utilities, alpha ) {
 # Simulation of constrained weights ----------------------------------------------------------------
 #' @title Simulation of constrained weights
 #' @description Simulation of weights employing the Dirichlet distribution. The concentration 
-#' parameters for the Dirichlet distributution are tentative weights, additionally constraints over
+#' parameters for the Dirichlet distribution are tentative weights, additionally constraints over
 #' partial sums of weights are introduced by a list ordered structure.
 #' @param n number of simulations
 #' @param utilities utility dataframe, first column is the identifier
@@ -52,6 +53,7 @@ Sim.Weights<-function( n, utilities, alpha ) {
 #' with a given concentration, additionally this simulation can be carry out by subsets of weights
 #' only to meet specific constraints.
 #' @author Pedro Guarderas
+#' \email{pedro.felipe.guarderas@@gmail.com}
 #' @seealso \code{\link{Eval.Utilities}}
 #' @examples
 #' library( data.table )

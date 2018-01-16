@@ -150,13 +150,15 @@ model<-Compute.Model( tree, utilities, weights )
 xlab<-'Utility'
 ylab<-'Institutions'
 title<-'Criteria utilities'
+
 colors<-c( 'dodgerblue4', 'orange', 'gold', 'red3' )
 deep<-2
 bar<-Bar.Plot( model, deep, colors, title, xlab, ylab )
 plot( bar )
 ```
 
-7. Sensitivity simulation of weights. Simulation based in the Dirichlet distribution
+7. Global utility sensitivity under weights change. The weights are simulated employing a Dirichlet
+distribution.
 ```{r,eval=TRUE, fig.show='hold', fig.show='hold', fig.align="center", fig.width=7, fig.height=4}
 n<-800
 alpha<-c( 0.2, 0.5, 0.1, 0.2 )

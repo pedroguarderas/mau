@@ -20,7 +20,7 @@ Bar.Plot(model, deep, colors, title, xlab, ylab)
 \item{ylab}{label for vertical axis}
 }
 \value{
-ggplot2 bar plot
+ggplot2 object.
 }
 \description{
 Create ggplot2 bar plots of the utilities at any level of the decision model
@@ -89,5 +89,5 @@ plot( bar )
 }
 \author{
 Pedro Guarderas
+\email{pedro.felipe.guarderas@gmail.com}
 }
-
