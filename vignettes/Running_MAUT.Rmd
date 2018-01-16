@@ -1,10 +1,10 @@
 ---
-title: "Runing a MAUT Model"
+title: "Running a MAUT Model"
 author: "Pedro Guarderas"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Runing a MAUT Model}
+  %\VignetteIndexEntry{Running a MAUT Model}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -15,7 +15,7 @@ $w_1,\ldots,w_n$, the whole final utility is given by the sum
 \[u(x_1,\ldots,x_n) = \sum_{i=1}^n\, w_i\, u_i\ ( x_i )\]
 every utility $u_i$ can be normalized to take values only between $0$ and $1$.
 
-A model based in Multi Attribute Utility Theory (MAUT) additionally has a decision tree that 
+A model based in *Multi Attribute Utility Theory* (MAUT) additionally has a decision tree that 
 represents the relations between subsets of utilities, given an ordered and conceptual development
 of the decision model.
 
@@ -23,8 +23,8 @@ With **mau** you can build and test decision models based in (MAUT).
 
 ## Utility definition
 The utility functions for a MAUT model could be defined in a practical format when the utilities
-are \emph{piecewise defined} like \emph{constant risk adverse utilities (CRAU for short)}, 
-satisfying the equation:
+are *piecewise defined* like *Constant Risk Adverse Utilities* (CRAU for short), satisfying the 
+equation:
 \[ \frac{u''}{u'} = \lambda \]
 being $\lambda$ a constant. The previous equation only admits two kind of solutions, 
 $u(x) = a \cdot x + b$ or $u(x) = a \cdot e^{b \cdot x} + c$. To determine and utility, it is only
@@ -130,13 +130,13 @@ knitr::kable( utilities )
 ```
 
 4. Construction of the decision tree
-```{r,eval=TRUE, fig.show='hold', fig.align="center", fig.width=7, fig.height=7}
+```{r,eval=TRUE, fig.show='hold', fig.align="center", fig.width=7, fig.height=6}
 file<-system.file("extdata", "tree.csv", package = "mau" )
 tree.data<-Read.Tree( file, skip = 0, nrow = 8 )
 tree<-Make.Decision.Tree( tree.data )
 utilities<-Eval.Utilities( index, columns, functions )
 
-plot( tree )
+plot( tree, layout = layout_as_tree )
 ```
 
 5. Computing the decision model
@@ -160,7 +160,7 @@ plot( bar )
 7. Global utility sensitivity under weights change. The weights are simulated employing a Dirichlet
 distribution.
 ```{r,eval=TRUE, fig.show='hold', fig.show='hold', fig.align="center", fig.width=7, fig.height=4}
-n<-500
+n<-800
 alpha<-c( 0.2, 0.5, 0.1, 0.2 )
 constraints<-list( list( c(1,2), 0.7 ), 
                    list( c(3,4), 0.3 ) )
