@@ -22,7 +22,7 @@ install_github( "pedroguarderas/mau" )
 Utility definition
 ------------------
 
-The utility functions for a MAUT model could be defined in a practical format when those are are piecewise defined like constant risk adverse functions, in such case it is only necessary to define the parameters of the function for each part of the domain of definition. This is because, the constant risk adversion functions are of the form *u*(*x*)=*a* ⋅ *x* + *b* or *u*(*x*)=*a* ⋅ *e*<sup>*b* ⋅ *x*</sup> + *c*.
+The utility functions for a MAUT model could be defined in a practical format when those are are piecewise defined like constant risk averse functions, in such case it is only necessary to define the parameters of the function for each part of the domain of definition. This is because, the constant risk averse functions are of the form *u*(*x*)=*a* ⋅ *x* + *b* or *u*(*x*)=*a* ⋅ *e*<sup>*b* ⋅ *x*</sup> + *c*.
 
 File format for the piecewise defintion of utilities, is specified as follows.
 > Header  
