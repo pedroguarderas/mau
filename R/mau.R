@@ -1,6 +1,6 @@
 # mau ----------------------------------------------------------------------------------------------
 #' @title mau
-#' @description Provides outils for the creation, evaluation and test of decision models based in
+#' @description Provides functions for the creation, evaluation and test of decision models based in
 #' Multi Attribute Utility Theory (MAUT).
 #'  
 #' @details MAUT models are defined employing a decision tree where similarity relations between 

@@ -4,7 +4,7 @@ Version: 0.1.2
 Title: Decision Models with Multi Attribute Utility Theory
 Encoding: UTF-8
 Date: 2018-01-15
-Description: Provides outils for the creation, evaluation and test of decision models based in
+Description: Provides functions for the creation, evaluation and test of decision models based in
     Multi Attribute Utility Theory (MAUT). Can process and evaluate local risk aversion utilities
     for a set of indexes, compute utilities and weights for the whole decision tree defining the
     decision model and simulate weights employing Dirichlet distributions under addition constraints 
