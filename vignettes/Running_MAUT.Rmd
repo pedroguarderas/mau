@@ -1,8 +1,8 @@
 ---
 title: "Running a MAUT Model"
 author: "Pedro Guarderas"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+date: "`January 15, 2018"
+output: html_vignette
 vignette: >
   %\VignetteIndexEntry{Running a MAUT Model}
   %\VignetteEngine{knitr::rmarkdown}

@@ -26,12 +26,12 @@ any functions, the only special requirement is that the utility has to be normal
 that the utility is bounded between 0 and 1.
 
 Also is possible to consider utilities with constant risk aversion CRA, in the sense of Arrow, 
-for such case there is only two types of functions u(x) = a x + b or u(x) = a e^bx + c, to 
-determine these functions, it is only necessary to specify the parameters a, b and c. For a
-decision model only elaborated with CRA utilities, \code{mau} could read a text file where
-every utility is piecewise defined.
+for such case there is only two types of functions \eqn{u(x) = a x + b} or 
+\eqn{u(x) = a e^{bx} + c}, to determine these functions, it is only necessary to specify the 
+parameters \eqn{a}, \eqn{b} and \eqn{c}. For a decision model only elaborated with CRA 
+utilities, \code{mau} could read a text file where every utility is piecewise defined.
 
-The format for the text file is:
+The format for the text file containing the definition of utility functions is given by is:
 
   [Header] \cr
 \cr
@@ -49,47 +49,12 @@ The format for the text file is:
 If the coefficient c is non zero the function is interpreted as an exponential type.
 }
 \examples{
-# Loading packages --------------------------------------------------------------------------------
 library( mau )
-library( data.table )
-library( igraph )
-library( ggplot2 )
-
-# Table of indexes --------------------------------------------------------------------------------
-index<-data.table( cod = paste( 'A', 1:10, sep = '' ), 
-                   i1 = c( 0.34, 1, 1, 1, 1, 0.2, 0.7, 0.5, 0.11, 0.8 ),
-                   i2 = c( 0.5, 0.5, 1, 0.5, 0.3, 0.1, 0.4, 0.13, 1, 0.74 ), 
-                   i3 = c( 0.5, 1.0, 0.75, 0.25, 0.1, 0.38, 0.57, 0.97, 0.3, 0.76 ),
-                   i4 = c( 0, 0.26, 0.67, 0.74, 0.84, 0.85, 0.74, 0.65, 0.37, 0.92 ) )
-
-# Loading utilities -------------------------------------------------------------------------------
-file<-system.file("extdata", "utilities.txt", package = "mau" )
-script<-'utilities.R'
-lines<-17
-skip<-2
-encoding<-'utf-8'
-functions<-Read.Utilities( file, script, lines, skip, encoding )
-source( 'utilities.R' )
-
-# Index positions ---------------------------------------------------------------------------------
-columns<-c( 2, 3, 4, 5 )
-
-# Function names
-functions<-sapply( c( 'Project', 
-                      'Self implementation',
-                      'External and local relations', 
-                      'Scope of capabilities' ),
-                   FUN = Stand.String )
-names( functions )<-NULL
-
-# Evaluation of utilities -------------------------------------------------------------------------
-utilities<-Eval.Utilities( index, columns, functions )
-
+vignette( topic = 'Running_MAUT', package = 'mau' ) 
 }
 \seealso{
 \code{\link{Read.Utilities}}, \code{\link{Stand.String}}
 }
 \author{
-Pedro Guarderas, Andrés Lopez
-\email{pedro.felipe.guarderas@gmail.com}
+Pedro Guarderas, \email{pedro.felipe.guarderas@gmail.com}, Andrés Lopez.
 }

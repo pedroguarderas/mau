@@ -1,32 +1,34 @@
 # mau ----------------------------------------------------------------------------------------------
 #' @title mau
-#' @description
-#' Build and test decision models employing Multi Attribute Utility Theory (MAUT). Automatic 
-#' evaluation of utilities at any level of the decision tree, weight simulations for sensitivity 
-#' analysis.
+#' @description Provides outils for the creation, evaluation and test of decision models based in
+#' Multi Attribute Utility Theory (MAUT).
 #'  
-#' MAUT models are based in a decision tree where similarity relations between different index 
-#' utilities are defined, this helps to group utilities following a criteria of similarity. 
-#' The global utility can be computed as a linear combination of given weights and the utility of 
-#' each index for any other level of the decision tree the utility can be computed by local linear 
-#' combitation of weights and child index utilities.
-#'  
-#' @details  Risk aversion utilites, are linear functions of the form:
-#'  \deqn{ a x + b}
-#' or exponential form 
-#'  
-#' \deqn{ a e^{cx} + b}
+#' @details MAUT models are defined employing a decision tree where similarity relations between 
+#' different index utilities are defined, this helps to group utilities following a criteria of 
+#' similarity. Each final node has an utility and weight associated, the utility of any internal 
+#' node in the decision tree is computed by adding the weighted sum of eaf of its final nodes. In a 
+#' model with \eqn{n} indexes, a criteria is composed by \eqn{C \subset \{1,\ldots,n\}}, the 
+#' respective utility is given by:
 #' 
-#' \deqn{ \sum_{i=1}^n w_i u_i( x_i ) }
+#' \deqn{ \sum_{i \in C}^n w_i u_i( x_i ) }
+#' 
+#' Currently, each utility is defined like a piecewise risk aversion utility, those functions are 
+#' of the following form:
+#' \deqn{a x + b}
+#' or
+#' \deqn{a e^{cx} + b}
 #'   
-#' The current capabilities of the mau are:
+#' The current capabilities of \pkg{mau} are:
 #' \enumerate{
-#'   \item Read list of risk aversion utilities defined in an standardized format.
+#'   \item Read a list of risk aversion utilities defined in a standardized format.
 #'   \item Evaluate utilities of a table of indexes.
-#'   \item Load decision trees defined in column standard.
-#'   \item Compute internal criteria utilities for a decision tree.
-#'   \item Simulate weights, under criteria constraints.
-#' } 
+#'   \item Load decision trees defined in column standard format.
+#'   \item Compute criteria utilities and weights for any internal node of the decision tree.
+#'   \item Simulate weights employing Dirichlet distributions under addition constraints in weights. 
+#' }
+#' @examples
+#' library( mau )
+#' vignette( topic = 'Running_MAUT', package = 'mau' ) 
 #' 
 #' @importFrom Rdpack reprompt
 #' 
