@@ -22,8 +22,9 @@ install_github( "pedroguarderas/mau" )
 Utility definition
 ------------------
 
-The utility functions for a MAUT model could be defined in a practical format when the utilities are piecewise defined like constant risk adverse functions, in such case it is only necessary to define the parameters of the function for each part of the domain of definition. This is because the constant risk adversion functions are only of the following form *u*(*x*)=*a* ⋅ *x* + *b* or *u*(*x*)=*a* ⋅ *e*<sup>*b* ⋅ *x*</sup> + *c*. Then the format for the piecewise defintion of the utility is
+The utility functions for a MAUT model could be defined in a practical format when those are are piecewise defined like constant risk adverse functions, in such case it is only necessary to define the parameters of the function for each part of the domain of definition. This is because, the constant risk adversion functions are of the form *u*(*x*)=*a* ⋅ *x* + *b* or *u*(*x*)=*a* ⋅ *e*<sup>*b* ⋅ *x*</sup> + *c*.
 
+File format for the piecewise defintion of utilities, is specified as follows.
 > Header  
 >  
 > Function name  
@@ -35,7 +36,7 @@ The utility functions for a MAUT model could be defined in a practical format wh
 > min1 max1 a1 b1 c1  
 > min2 max2 a2 b2 c2  
 > min3 max3 a3 b3 c3  
-> ...  
+> ... 
 
 If *c*<sub>*i*</sub> is 0 then the utility is linear, otherwise is an exponential function. For example:
 
@@ -68,7 +69,7 @@ for ( i in 1:length( lines ) ) {
 Main example
 ------------
 
-In the sources below is developed a complete example of a MAUT model, the package **mau** is employed to load utilities defined in the file `utilities.txt`, automatically the script with utilies is built and saved in the local working directory, after that with `Eval.Utilities` every function is evaluated over the columns of the index table, the names for utilities were previously standarized with `Stand.String`. With another file `tree.csv` the decision tree associated to the MAUT model is built and every weight and relative weight assigned with the `Make.Decision.Tree` function, in addition the whole model with utilies of every criteria is obtained with `Compute.Model`. The simulation of constrained weights is made with `Sim.Const.Weights`, the result could be employed for a sensitivy test of the decision model regarding concentrated weights variation.
+In the sources below is developed a complete example of a decision model, the package **mau** is employed to load utilities defined in the file `utilities.txt`, provided in the package itself, automatically the script with utilies is built and saved in the local working directory, after that with `Eval.Utilities` every function is evaluated over the columns of the index table, the names for utilities were previously standarized with `Stand.String`. With another file `tree.csv` the decision tree associated to the MAUT model is built and every weight and relative weight assigned with the `Make.Decision.Tree` function, in addition the whole model with utilies of every criteria is obtained with `Compute.Model`. The simulation of constrained weights is made with `Sim.Const.Weights`, the result could be employed for a sensitivy test of the decision model under a variation of weights.
 
 ``` r
 # Loading packages --------------------------------------------------------------------------------
