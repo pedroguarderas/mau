@@ -6,7 +6,7 @@
 \alias{mau-package}
 \title{mau}
 \description{
-Provides outils for the creation, evaluation and test of decision models based in
+Provides functions for the creation, evaluation and test of decision models based in
 Multi Attribute Utility Theory (MAUT).
 }
 \details{
