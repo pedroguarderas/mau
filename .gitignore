@@ -19,3 +19,5 @@
 *~
 *.out
 *.aux
+vignettes/*.R
+vignettes/*.html

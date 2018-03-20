@@ -1,42 +1,41 @@
 ---
 title: "Running a MAUT Model"
 author: "Pedro Guarderas"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+date: "`January 15, 2018"
+output: html_vignette
 vignette: >
   %\VignetteIndexEntry{Running a MAUT Model}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 ## Introduction
-The MAUT decision models are defined with aid of utility functions $u_1,\ldots,u_n$ which are 
-evaluated over indexes $x_1,\ldots,x_n$ and those utilities are aggregated considering additional weights 
-$w_1,\ldots,w_n$, the whole final utility is given by the sum
-\[u(x_1,\ldots,x_n) = \sum_{i=1}^n\, w_i\, u_i\ ( x_i )\]
-every utility $u_i$ can be normalized to take values only between $0$ and $1$.
+The decision models based in *Multi Attribute Utility Theory* (MAUT) are defined with aid of 
+utility functions $u_1,\ldots,u_n$ which are evaluated over indexes $x_1,\ldots,x_n$ and those 
+utilities are aggregated considering additional weights $w_1,\ldots,w_n$, the whole final utility 
+is given by the sum \[u(x_1,\ldots,x_n) = \sum_{i=1}^n\, w_i\, u_i\ ( x_i )\] every utility $u_i$ 
+can be normalized to take values only between $0$ and $1$.
 
-A model based in *Multi Attribute Utility Theory* (MAUT) additionally has a decision tree that 
-represents the relations between subsets of utilities, given an ordered and conceptual development
-of the decision model.
+A model based in MAUT additionally has a decision tree that represents the relations between 
+subsets of utilities, given an ordered and conceptual development of the decision model.
 
-With **mau** you can build and test decision models based in (MAUT). 
+This **mau** package is designed to implement and test decision models based in (MAUT). 
 
 ## Utility definition
 The utility functions for a MAUT model could be defined in a practical format when the utilities
-are *piecewise defined* like *Constant Risk Adverse Utilities* (CRAU for short), satisfying the 
+are *piecewise defined* like *Constant Risk Averse Utilities* (CRAU for short), satisfying the 
 equation:
 \[ \frac{u''}{u'} = \lambda \]
 being $\lambda$ a constant. The previous equation only admits two kind of solutions, 
-$u(x) = a \cdot x + b$ or $u(x) = a \cdot e^{b \cdot x} + c$. To determine and utility, it is only
-necesarry to know the parameter $a,b,c$. Additionally the following convention is assumed, iff 
-$c_i$ is $0$ then the utility is linear, otherwise is an exponential function.
+$u(x) = a \cdot x + b$ or $u(x) = a \cdot e^{b \cdot x} + c$. To completely determine an utility, 
+it is only necesarry to know the three parameters $a,b,c$. Additionally, the following convention is 
+assumed, if $c_i$ is $0$ then the utility is linear otherwise is an exponential function.
 
 For piecewise CRAU, it is only necessary to define the parameters $a,b,c$ of the function for each 
 part of the domain of definition. The **mau** package could load the utilies from an standarized 
-text file, with the following internal structure.
+text file with the following internal structure.
 
-**mau** is not only restricted to CRAU class, you can define any utility with the appropiated R 
-script.
+The capabilities of **mau** are not only restricted to work with CRAU class, you can define any 
+utility with the appropiated R script.
 
 >Header    
 >  
@@ -54,7 +53,7 @@ script.
 Here an example of the scructure of the standarized file for utility definitions
 ```{r, eval=TRUE}
 library( mau )
-file<-system.file("extdata", "utilities.txt", package = "mau" )
+file<-system.file( "extdata", "utilities.txt", package = "mau" )
 lines<-readLines( file )
 for ( i in 1:length( lines ) ) { 
   cat( lines[i], '\n' )
@@ -157,7 +156,7 @@ bar<-Bar.Plot( model, deep, colors, title, xlab, ylab )
 plot( bar )
 ```
 
-7. Global utility sensitivity under weights change. The weights are simulated employing a Dirichlet
+7. Sensitivity analysis under weights change. The weights are simulated employing a Dirichlet
 distribution.
 ```{r,eval=TRUE, fig.show='hold', fig.show='hold', fig.align="center", fig.width=7, fig.height=4}
 n<-800
