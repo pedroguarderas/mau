@@ -229,12 +229,15 @@ Spider.Plot<-function( data, # Datos con los valores a plotear, data.frame
   k<-max( which( t <= axis.angle  ) )
   l<-(k+1) %% n
   alpha<-sapply( grid, FUN = find.radius, t[l], t[k], axis.angle )
+
+  # axis.break.position<-data.frame( x = grid[m] * alpha * cos( axis.angle ),
+  #                                  y = grid[m] * alpha * sin( axis.angle ),
+  #                                  xlab = grid[m] * alpha * cos( axis.angle ) + ald[1],
+  #                                  ylab = grid[m] * alpha * sin( axis.angle ) + ald[2] )
   
-  axis.break.position<-data.frame( x = grid[m] * alpha * cos( axis.angle ),
-                                   y = grid[m] * alpha * sin( axis.angle ),
-                                   xlab = grid[m] * alpha * cos( axis.angle ) + ald[1],
-                                   ylab = grid[m] * alpha * sin( axis.angle ) + ald[2] )
-  
+  axis.break.position<-data.frame( x = grid,
+                                   y = rep( 0, length( grid ) ) )
+
   axis.break.position<-data.frame( axis.break.position, label = axis.label )
   
   with( Data, {
@@ -254,20 +257,26 @@ Spider.Plot<-function( data, # Datos con los valores a plotear, data.frame
                        linetype = grid.radius.linetype,
                        size = grid.radius.size )  
   
-  p<-p + geom_segment( data = X, 
-                       aes( x = 0, y = 0, 
-                            xend = axis.break.position[m,1], 
-                            yend = axis.break.position[m,2] ), 
-                       colour = axis.color, 
-                       linetype = axis.linetype,
-                       size = axis.size  )
+  # p<-p + geom_segment( data = X,
+  #                      aes( x = 0, y = 0,
+  #                           xend = axis.break.position[m,1],
+  #                           yend = axis.break.position[m,2] ),
+  #                      colour = axis.color,
+  #                      linetype = axis.linetype,
+  #                      size = axis.size  )
+  # 
+  # p<-p + geom_text( data = axis.break.position,
+  #                   aes( x = xlab, y = ylab, label = label ),
+  #                   size = axis.label.size,
+  #                   color = axis.label.color,
+  #                   angle = axis.label.angle )
   
-  p<-p + geom_text( data = axis.break.position, 
-                    aes( x = xlab, y = ylab, label = label ), 
+  p<-p + geom_text( data = axis.break.position,
+                    aes( x = x, y = y, label = label ),
                     size = axis.label.size,
-                    color = axis.label.color, 
+                    color = axis.label.color,
                     angle = axis.label.angle )
-#   
+  
   p<-p + geom_polygon( aes( fill = Data[[Grp]],
                             group = Data[[Grp]],
                             colour = Data[[Grp]], 
@@ -307,7 +316,7 @@ Spider.Plot<-function( data, # Datos con los valores a plotear, data.frame
                 axis.title.x = element_blank(),
                 axis.text.y = element_blank(), 
                 axis.title.y = element_blank(),
-                legend.position = legend.position,
+                legend.position = 'none',
                 legend.background =  element_blank(),
                 legend.title = element_blank() )
   
