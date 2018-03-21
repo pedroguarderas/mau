@@ -217,8 +217,8 @@ Spider.Plot<-function( data, # Datos con los valores a plotear, data.frame
   t<-t[-N]
   
   Data<-data
-  Data$x<-Data$val * cos( t[ as.numeric( Data[[Cri]] ) ] )
-  Data$y<-Data$val * sin( t[ as.numeric( Data[[Cri]] ) ] )
+  Data$x<-Data[[Val]] * cos( t[ as.numeric( Data[[Cri]] ) ] )
+  Data$y<-Data[[Val]] * sin( t[ as.numeric( Data[[Cri]] ) ] )
   
   Labels<-data.frame( label = levels( Data[[Cri]] ) )
   Labels$x<-label.position * cos( t )
