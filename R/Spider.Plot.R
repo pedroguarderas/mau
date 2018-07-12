@@ -118,8 +118,10 @@
 #'                 cri,
 #'                 val, 
 #'                 title,
+#'                 title.font,
 #'                 title.color,
 #'                 title.size,
+#'                 label.font,
 #'                 label.size, 
 #'                 label.color,
 #'                 label.angle,
@@ -164,9 +166,11 @@ Spider.Plot<-function( data, # Datos con los valores a plotear, data.frame
                        group, # Columna de data por la cual se agrupan los datos
                        criteria, # Columna con los criterios de evaluación, debe ser 
                        valor, # Columna con los valores de los polígonos
-                       title, # Título para el plot
+                       title, # Título para el plot (por ahora no en uso)
+                       title.font, # Tipo de letra para el título (por ahora no en uso)
                        title.color, # Color del título
                        title.size, # Tamaño del título
+                       label.font, # Tipo de letra para label
                        label.size, # Tamaño de etiquetas
                        label.color, # Color de etiquetas
                        label.angle, # Ángulo de etiqueas
@@ -287,9 +291,9 @@ Spider.Plot<-function( data, # Datos con los valores a plotear, data.frame
 
   p<-p + scale_fill_manual( values = data.fill, 
                             labels = data.label,
-      guide = guide_legend( label.theme = element_text( family = 'Times', angle = 0,
-                                                        colour = data.label.color, 
-                                                        size = data.label.size ) ) ) + 
+                            guide = guide_legend( label.theme = element_text( family = label.font, angle = 0,
+                                                                              colour = data.label.color, 
+                                                                              size = data.label.size ) ) ) + 
     scale_color_manual( values = data.color, guide = "none" ) + 
     scale_linetype_manual( values = data.linetype, guide = "none" ) + 
     scale_alpha_manual( values = data.alpha, guide = "none" ) +
@@ -310,7 +314,7 @@ Spider.Plot<-function( data, # Datos con los valores a plotear, data.frame
                 panel.grid.major.y = element_blank(),
                 panel.grid.minor.x = element_blank(),
                 panel.grid.minor.y = element_blank(),
-                title = element_text( family = 'Times', colour = title.color, size = title.size ),
+                title = element_text( family = title.font, colour = title.color, size = title.size ),
                 axis.ticks = element_blank(),
                 axis.text.x = element_blank(), 
                 axis.title.x = element_blank(),

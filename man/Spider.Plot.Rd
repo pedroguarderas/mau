@@ -6,12 +6,12 @@
 \usage{
 Spider.Plot(data, data.label, data.fill, data.color, data.linetype, data.alpha,
   data.size, data.label.color, data.label.size, group, criteria, valor, title,
-  title.color, title.size, label.size, label.color, label.angle, label.position,
-  theta, grid, grid.color, grid.radius.color, grid.linetype, grid.size,
-  grid.radius.linetype, grid.radius.size, axis, axis.label, axis.color,
-  axis.size, axis.linetype, axis.angle, axis.label.color, axis.label.size,
-  axis.label.displace, axis.label.angle, legend.position, legend.size,
-  legend.text.color, plot.margin)
+  title.font, title.color, title.size, label.font, label.size, label.color,
+  label.angle, label.position, theta, grid, grid.color, grid.radius.color,
+  grid.linetype, grid.size, grid.radius.linetype, grid.radius.size, axis,
+  axis.label, axis.color, axis.size, axis.linetype, axis.angle,
+  axis.label.color, axis.label.size, axis.label.displace, axis.label.angle,
+  legend.position, legend.size, legend.text.color, plot.margin)
 }
 \arguments{
 \item{data}{data.table with the utilities of a decision model}
@@ -175,8 +175,10 @@ p<-Spider.Plot( data,
                 cri,
                 val, 
                 title,
+                title.font,
                 title.color,
                 title.size,
+                label.font,
                 label.size, 
                 label.color,
                 label.angle,
