@@ -30,7 +30,8 @@ Imports:
     igraph,
     RColorBrewer,
     ggplot2,
-    Rdpack
+    Rdpack,
+    markdown
 RoxygenNote: 6.0.1
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
