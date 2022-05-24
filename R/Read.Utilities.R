@@ -32,7 +32,7 @@ Read.Utilities<-function( file, script, lines, skip = 2, encoding = 'utf-8' ) {
 
   funs<-data.frame( funs, fun = sapply( funs[,1], FUN = Stand.String ), stringsAsFactors = FALSE )
   
-  colnames( funs )<-c( 'nom','min','max', 'a','b','c','fun' )
+  colnames( funs )<-c( 'nom', 'min', 'max', 'a', 'b', 'c', 'fun' )
   
   nom<-funs$nom[1]
   nomf<-funs$fun[1]
