@@ -281,12 +281,12 @@ Spider.Plot<-function( data, # Datos con los valores a plotear, data.frame
                     color = axis.label.color,
                     angle = axis.label.angle )
   
-  p<-p + geom_polygon( aes( fill = Data[[Grp]],
-                            group = Data[[Grp]],
-                            colour = Data[[Grp]], 
-                            linetype = Data[[Grp]], 
-                            alpha = Data[[Grp]],                                                     
-                            size = Data[[Grp]] ),
+  p<-p + geom_polygon( aes( fill = .data[[Grp]],
+                            group = .data[[Grp]],
+                            colour = .data[[Grp]], 
+                            linetype = .data[[Grp]], 
+                            alpha = .data[[Grp]],                                                     
+                            size = .data[[Grp]] ),
                        show.legend = TRUE )
 
   p<-p + scale_fill_manual( values = data.fill, 
