@@ -1,3 +1,7 @@
+# mau 0.2.0
+* Adding new functions for computations and aggregation of rating `colley_rating`, `od_rating`, 
+  `borda_count`
+
 # mau 0.1.2
 
 * `Bar.Plot` Improving bar plots.
