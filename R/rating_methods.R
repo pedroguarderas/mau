@@ -84,9 +84,9 @@ od_rating <- function( A, iter = 1000, rer = 1e-12 ) {
 
 # Borda count rank aggregation ---------------------------------------------------------------------
 #' @title Borda count
-#' @description Rank aggreation with the Borda count method
-#' @param R matrix with rakings
-#' @return Vector with aggregated raking
+#' @description Rank aggregation with the Borda count method
+#' @param R matrix with rankings
+#' @return Vector with aggregated ranking
 #' @author Pedro Guarderas
 #' \email{pedro.felipe.guarderas@@gmail.com}
 #' @examples

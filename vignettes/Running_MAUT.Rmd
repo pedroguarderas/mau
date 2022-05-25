@@ -27,15 +27,15 @@ equation:
 \[ \frac{u''}{u'} = \lambda \]
 being $\lambda$ a constant. The previous equation only admits two kind of solutions, 
 $u(x) = a \cdot x + b$ or $u(x) = a \cdot e^{b \cdot x} + c$. To completely determine an utility, 
-it is only necesarry to know the three parameters $a,b,c$. Additionally, the following convention is 
+it is only necessary to know the three parameters $a,b,c$. Additionally, the following convention is 
 assumed, if $c_i$ is $0$ then the utility is linear otherwise is an exponential function.
 
 For piecewise CRAU, it is only necessary to define the parameters $a,b,c$ of the function for each 
-part of the domain of definition. The **mau** package could load the utilies from an standarized 
+part of the domain of definition. The **mau** package could load the utilities from an standardized 
 text file with the following internal structure.
 
 The capabilities of **mau** are not only restricted to work with CRAU class, you can define any 
-utility with the appropiated R script.
+utility by employing the correct R script.
 
 >Header    
 >  
@@ -50,7 +50,7 @@ utility with the appropiated R script.
 >min3 max3 a3 b3 c3    
 >...    
 
-Here an example of the scructure of the standarized file for utility definitions
+Here an example of the structure of the standardized file for utility definitions
 ```{r, eval=TRUE}
 library( mau )
 file<-system.file( "extdata", "utilities.txt", package = "mau" )
@@ -63,13 +63,13 @@ for ( i in 1:length( lines ) ) {
 ## Main example
 In the sources below is developed a complete example of a MAUT model, the package **mau** is 
 employed to load utilities defined in the file `utilities.txt`, automatically the script with 
-utilies is built and saved in the local working directory, after that with `Eval.Utilities` every 
+utilities is built and saved in the local working directory, after that with `Eval.Utilities` every 
 function is evaluated over the columns of the index table, the names for utilities were previously
-standarized with `Stand.String`. With another file `tree.csv` the decision tree associated to the
+standardized with `Stand.String`. With another file `tree.csv` the decision tree associated to the
 MAUT model is built and every weight and relative weight assigned with the `Make.Decision.Tree`
-function, in addition the whole model with utilies of every criteria is obtained with 
+function, in addition the whole model with utilities of every criteria is obtained with 
 `Compute.Model`. The simulation of constrained weights is made with `Sim.Const.Weights`, the result
-could be employed for a sensitivy test of the decision model regarding concentrated weights 
+could be employed for a sensitivity test of the decision model regarding concentrated weights 
 variation.
 
 1. Loading necessary packages
@@ -102,7 +102,7 @@ encoding<-'utf-8'
 functions<-Read.Utilities( file, script, lines, skip, encoding )
 source( 'utilities.R' )
 ```
-The `functions` data.table has the following structure with the picewise definition of CRAU's
+The `functions` data.table has the following structure with the piecewise definition of CRAU's
 ```{r, echo=FALSE, results='asis'}
 knitr::kable( functions )
 ```

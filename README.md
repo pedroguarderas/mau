@@ -1,44 +1,64 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-Introduction
-------------
 
-The MAUT decision models are defined with aid of utility functions *u*<sub>1</sub>, …, *u*<sub>*n*</sub> which are evaluated over indexes *x*<sub>1</sub>, …, *x*<sub>*n*</sub> and those utilities are aggregated considering additional weights *w*<sub>1</sub>, …, *w*<sub>*n*</sub>, the whole final utility is given by the sum
+## Introduction
 
-*u*(*x*<sub>1</sub>, …, *x*<sub>*n*</sub>)=∑<sub>1 ≤ *i* ≤ *n*</sub> *w*<sub>*i*</sub> *u*<sub>*i*</sub> (*x*<sub>*i*</sub>)
+The MAUT decision models are defined with aid of utility functions
+![u_1,\\ldots,u_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;u_1%2C%5Cldots%2Cu_n "u_1,\ldots,u_n")
+which are evaluated over indexes
+![x_1,\\ldots,x_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;x_1%2C%5Cldots%2Cx_n "x_1,\ldots,x_n")
+and those utilities are aggregated considering additional weights
+![w_1,\\ldots,w_n](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;w_1%2C%5Cldots%2Cw_n "w_1,\ldots,w_n"),
+the whole final utility is given by the sum
 
-With **mau** you can build and test decision models based in Multi Attribute Utility Theory (MAUT). The utilities of any level of the decision model can be easily evaluated.
+![u(x_1,\\ldots,x_n) = \\sum\_{1\\leq i \\leq n}\\, w_i\\, u_i\\ ( x_i )](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;u%28x_1%2C%5Cldots%2Cx_n%29%20%3D%20%5Csum_%7B1%5Cleq%20i%20%5Cleq%20n%7D%5C%2C%20w_i%5C%2C%20u_i%5C%20%28%20x_i%20%29 "u(x_1,\ldots,x_n) = \sum_{1\leq i \leq n}\, w_i\, u_i\ ( x_i )")
 
-Installation
-------------
+With **mau** you can build and test decision models based in Multi
+Attribute Utility Theory (MAUT). The utilities of any level of the
+decision model can be easily evaluated.
 
-To install **mau** you can proceed in the following way making use of the devtools library
+## Installation
+
+To install **mau** you can proceed in the following way making use of
+the devtools library
 
 ``` r
 library( devtools )
 install_github( "pedroguarderas/mau" )
 ```
 
-Utility definition
-------------------
+## Utility definition
 
-The utility functions for a MAUT model could be defined in a practical format when those are are piecewise defined like constant risk averse functions, in such case it is only necessary to define the parameters of the function for each part of the domain of definition. This is because, the constant risk averse functions are of the form *u*(*x*)=*a* ⋅ *x* + *b* or *u*(*x*)=*a* ⋅ *e*<sup>*b* ⋅ *x*</sup> + *c*.
+The utility functions for a MAUT model could be defined in a practical
+format when those are are piecewise defined like constant risk averse
+functions, in such case it is only necessary to define the parameters of
+the function for each part of the domain of definition. This is because,
+the constant risk averse functions are of the form
+![u(x) = a \\cdot x + b](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;u%28x%29%20%3D%20a%20%5Ccdot%20x%20%2B%20b "u(x) = a \cdot x + b")
+or
+![u(x) = a \\cdot e^{b \\cdot x} + c](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;u%28x%29%20%3D%20a%20%5Ccdot%20e%5E%7Bb%20%5Ccdot%20x%7D%20%2B%20c "u(x) = a \cdot e^{b \cdot x} + c").
 
-File format for the piecewise defintion of utilities, is specified as follows.
-> Header  
->  
-> Function name  
-> min1 max1 a1 b1 c1  
-> min2 max2 a2 b2 c2  
-> min3 max3 a3 b3 c3  
-> ...  
-> Function name  
-> min1 max1 a1 b1 c1  
-> min2 max2 a2 b2 c2  
-> min3 max3 a3 b3 c3  
-> ... 
+File format for the piecewise definition of utilities, is specified as
+follows.  
+\>Header  
+\>  
+\>Function name  
+\>min1 max1 a1 b1 c1  
+\>min2 max2 a2 b2 c2  
+\>min3 max3 a3 b3 c3  
+\>…  
+\>Function name  
+\>min1 max1 a1 b1 c1  
+\>min2 max2 a2 b2 c2  
+\>min3 max3 a3 b3 c3  
+\>…
 
-If *c*<sub>*i*</sub> is 0 then the utility is linear, otherwise is an exponential function. For example:
+If
+![c_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;c_i "c_i")
+is
+![0](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;0 "0")
+then the utility is linear, otherwise is an exponential function. For
+example:
 
 ``` r
 library( mau )
@@ -66,10 +86,21 @@ for ( i in 1:length( lines ) ) {
 #>  0   6   1.225   -1.225  0.2824
 ```
 
-Main example
-------------
+## Main example
 
-In the sources below is developed a complete example of a decision model, the package **mau** is employed to load utilities defined in the file `utilities.txt`, provided in the package itself, automatically the script with utilies is built and saved in the local working directory, after that with `Eval.Utilities` every function is evaluated over the columns of the index table, the names for utilities were previously standarized with `Stand.String`. With another file `tree.csv` the decision tree associated to the MAUT model is built and every weight and relative weight assigned with the `Make.Decision.Tree` function, in addition the whole model with utilies of every criteria is obtained with `Compute.Model`. The simulation of constrained weights is made with `Sim.Const.Weights`, the result could be employed for a sensitivy test of the decision model under a variation of weights.
+In the sources below is developed a complete example of a decision
+model, the package **mau** is employed to load utilities defined in the
+file `utilities.txt`, provided in the package itself, automatically the
+script with utilities is built and saved in the local working directory,
+after that with `Eval.Utilities` every function is evaluated over the
+columns of the index table, the names for utilities were previously
+standardized with `Stand.String`. With another file `tree.csv` the
+decision tree associated to the MAUT model is built and every weight and
+relative weight assigned with the `Make.Decision.Tree` function, in
+addition the whole model with utilities of every criteria is obtained
+with `Compute.Model`. The simulation of constrained weights is made with
+`Sim.Const.Weights`, the result could be employed for a sensitivity test
+of the decision model under a variation of weights.
 
 ``` r
 # Loading packages --------------------------------------------------------------------------------

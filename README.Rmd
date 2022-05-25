@@ -36,7 +36,7 @@ to define the parameters of the function for each part of the domain of definiti
 the constant risk averse functions are of the form $u(x) = a \cdot x + b$ or 
 $u(x) = a \cdot e^{b \cdot x} + c$. 
 
-File format for the piecewise defintion of utilities, is specified as follows.  
+File format for the piecewise definition of utilities, is specified as follows.  
 >Header    
 >  
 >Function name    
@@ -63,13 +63,13 @@ for ( i in 1:length( lines ) ) {
 ## Main example
 In the sources below is developed a complete example of a decision model, the package **mau** is 
 employed to load utilities defined in the file `utilities.txt`, provided in the package itself,
-automatically the script with utilies is built and saved in the local working directory, after that 
+automatically the script with utilities is built and saved in the local working directory, after that 
 with `Eval.Utilities` every function is evaluated over the columns of the index table, the names 
-for utilities were previously standarized with `Stand.String`. With another file `tree.csv` the 
+for utilities were previously standardized with `Stand.String`. With another file `tree.csv` the 
 decision tree associated to the MAUT model is built and every weight and relative weight assigned 
-with the `Make.Decision.Tree` function, in addition the whole model with utilies of every criteria 
+with the `Make.Decision.Tree` function, in addition the whole model with utilities of every criteria 
 is obtained with `Compute.Model`. The simulation of constrained weights is made with 
-`Sim.Const.Weights`, the result could be employed for a sensitivy test of the decision model 
+`Sim.Const.Weights`, the result could be employed for a sensitivity test of the decision model 
 under a variation of weights.
 ```{r,eval=FALSE}
 # Loading packages --------------------------------------------------------------------------------
