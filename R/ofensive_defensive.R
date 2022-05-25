@@ -35,5 +35,5 @@ od_rating <- function( A, iter = 1000, rer = 1e-12 ) {
     err <- norm( o - o0, type = '2' ) / norm( o0, type = '2' )
   }
   
-  return( list( r = o / d, o = o, d = d, k ) )
+  return( list( r = o / d, o = o, d = d, iter = k ) )
 }
