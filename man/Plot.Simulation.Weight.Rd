@@ -4,10 +4,18 @@
 \alias{Plot.Simulation.Weight}
 \title{Plot decision MAUT model with weights simulations}
 \usage{
-Plot.Simulation.Weight(S, title = "Simulations", xlab = "ID",
-  ylab = "Utility", lines.cols = "blue", box.col = "gold",
-  box.outlier.col = "darkred", utility.col = "darkgreen",
-  utility.point.col = "darkgreen", text.col = "black")
+Plot.Simulation.Weight(
+  S,
+  title = "Simulations",
+  xlab = "ID",
+  ylab = "Utility",
+  lines.cols = "blue",
+  box.col = "gold",
+  box.outlier.col = "darkred",
+  utility.col = "darkgreen",
+  utility.point.col = "darkgreen",
+  text.col = "black"
+)
 }
 \arguments{
 \item{S}{first element of the simulation list produced by the function 

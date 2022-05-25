@@ -4,14 +4,51 @@
 \alias{Spider.Plot}
 \title{Spider plot}
 \usage{
-Spider.Plot(data, data.label, data.fill, data.color, data.linetype, data.alpha,
-  data.size, data.label.color, data.label.size, group, criteria, valor, title,
-  title.font, title.color, title.size, label.font, label.size, label.color,
-  label.angle, label.position, theta, grid, grid.color, grid.radius.color,
-  grid.linetype, grid.size, grid.radius.linetype, grid.radius.size, axis,
-  axis.label, axis.color, axis.size, axis.linetype, axis.angle,
-  axis.label.color, axis.label.size, axis.label.displace, axis.label.angle,
-  legend.position, legend.size, legend.text.color, plot.margin)
+Spider.Plot(
+  data,
+  data.label,
+  data.fill,
+  data.color,
+  data.linetype,
+  data.alpha,
+  data.size,
+  data.label.color,
+  data.label.size,
+  group,
+  criteria,
+  valor,
+  title,
+  title.font,
+  title.color,
+  title.size,
+  label.font,
+  label.size,
+  label.color,
+  label.angle,
+  label.position,
+  theta,
+  grid,
+  grid.color,
+  grid.radius.color,
+  grid.linetype,
+  grid.size,
+  grid.radius.linetype,
+  grid.radius.size,
+  axis,
+  axis.label,
+  axis.color,
+  axis.size,
+  axis.linetype,
+  axis.angle,
+  axis.label.color,
+  axis.label.size,
+  axis.label.displace,
+  axis.label.angle,
+  legend.position,
+  legend.size,
+  legend.text.color,
+  plot.margin
+)
 }
 \arguments{
 \item{data}{data.table with the utilities of a decision model}
@@ -106,105 +143,75 @@ Generates an spider plot for a decision model
 # Preparing data
 library( data.table )
 library( ggplot2 )
-n<-10
-m<-7
-cols<-sample( colors()[ grepl('(red|blue|olive|darkgree)', colors() ) ], m, replace = TRUE )
+library( mau )
+n<-27
+m<-4
+cols<-sample( colors()[ grepl('(purple|blue|olive)', colors() ) ], m, replace = TRUE )
 
-data<-data.frame( grp = paste( 'A', sort( rep( 1:m, n ) ), sep = '' ),
-                  cri = factor( rep( paste( 'c', 1:n, sep = '' ), m ), 
-                                levels = paste( 'c', 1:n, sep = '' ), ordered = TRUE ),
-                  val = runif( m * n ) )
+axis<-seq( 0.1, 1, 0.1 )
+dat<-data.table( grp = paste( 'A', sort( rep( 1:m, n ) ), sep = '' ),
+                 val = qlnorm( runif( m * n ) * plnorm( 1, 3, 4 ), 3, 4 ) )
 
-data.label<-paste( 'A', 1:m,  ' class', sep = '' )
-data.fill<-cols
-data.color<-cols
-data.linetype<-rep( 'solid', m )
-data.alpha<-rep( 0.05, m )
-data.size<-rep( 0.7, m )
-data.label.color<-'black'
-data.label.size<-15
+dat<-dat[ order( grp, val ) ]
+dat[ , cri := factor( rep( paste( 'c', n:1, sep = '' ), m ), 
+              levels = paste( 'c', n:1, sep = '' ), ordered = TRUE ) ]
+dat<-as.data.frame( dat )
 
-# Spider plot parameters
-title<-'Spider'
-title.color<-'red3'
-title.size<-20
+parameters<-list( data = dat,
+                  data.label = paste( 'A', 1:m,  ' class', sep = '' ),
+                  data.fill = cols,
+                  data.color = cols,
+                  data.linetype = rep( 'solid', m ),
+                  data.alpha = rep( 0.05, m ),
+                  data.size = rep( 0.7, m ),
+                  data.label.color = 'black',
+                  data.label.size = 15,
+                  
+                  group = as.name( 'grp' ),
+                  criteria = as.name( 'cri' ),
+                  valor = as.name( 'val' ),
+                  
+                  # Spider plot parameters
+                  title = 'Spider',
+                  title.font = 'New Times Roman',
+                  title.color = 'red3',
+                  title.size = 20,
+                  
+                  label.font = 'New Times Roman',
+                  label.size = rep( 3, n ),
+                  label.color = rep( 'steelblue4', n ),
+                  label.angle = rep( 0, n ),
+                  label.position = rep( 1.05, n ),
+                  
+                  theta = pi/3,
+                  
+                  grid = seq( 0.1, 1, 0.1 ),
+                  grid.color = 'grey75',
+                  grid.radius.color = 'grey75',
+                  grid.linetype = 'dashed',
+                  grid.size = 0.5,
+                  grid.radius.linetype = 'solid',
+                  grid.radius.size = 0.5,
+                  
+                  axis = axis, # Same as grid
+                  axis.label = paste( 100 * axis, '\%', sep = '' ),
+                  axis.color = 'black',
+                  axis.size = 0.7,
+                  axis.linetype = 'solid',
+                  axis.angle = 0.4*pi,
+                  axis.label.color = 'darkgreen',
+                  axis.label.size = 3,
+                  axis.label.displace = -0.07,
+                  axis.label.angle = 0,
+                  
+                  legend.position = c(0.9, 0.9),
+                  legend.size = 0.5,
+                  legend.text.color = 'black',
+                  
+                  plot.margin = unit( c( 1.0, 1.0, 1.0, 1.0 ),"cm") )
 
-label.size<-rep( 8, n )
-label.color<-rep( 'steelblue4', n )
-label.angle<-rep( 0, n )
-label.position<-rep( 1.1, n )
 
-theta<-pi/2
-
-grid<-sort( c( 0.1, 0.25, 0.5, 0.75, 1.0 ) )
-grid.color<-'grey'
-grid.radius.color<-'dodgerblue3'
-grid.linetype<-'dashed'
-grid.size<-0.5
-grid.radius.linetype<-'solid'
-grid.radius.size<-0.5
-
-axis<-grid # Same as grid
-axis.label<-paste( 100 * axis, '\%', sep = '' )
-axis.color<-'black'
-axis.size<-0.7
-axis.linetype<-'solid'
-axis.angle<-0.4*pi
-axis.label.color<-'darkgreen'
-axis.label.size<-5
-axis.label.displace<- -0.07
-axis.label.angle<-0
-
-legend.position<-c(0.9, 0.9)
-legend.size<-0.5
-legend.text.color<-'black'
-
-plot.margin<-unit( c( 1.0, 1.0, 1.0, 1.0 ),"cm")
-
-
-p<-Spider.Plot( data,
-                data.label,
-                data.fill,
-                data.color,
-                data.linetype,
-                data.alpha,
-                data.size,
-                data.label.color, 
-                data.label.size,
-                grp,
-                cri,
-                val, 
-                title,
-                title.font,
-                title.color,
-                title.size,
-                label.font,
-                label.size, 
-                label.color,
-                label.angle,
-                label.position,
-                theta, 
-                grid, 
-                grid.color, 
-                grid.radius.color,
-                grid.linetype, 
-                grid.size, 
-                grid.radius.linetype, 
-                grid.radius.size, 
-                axis, 
-                axis.label,
-                axis.color,
-                axis.size, 
-                axis.linetype, 
-                axis.angle, 
-                axis.label.color,
-                axis.label.size, 
-                axis.label.displace,
-                axis.label.angle,
-                legend.position,
-                legend.size,
-                legend.text.color,
-                plot.margin )
+p<-do.call( Spider.Plot, parameters )
 
 plot(p)
 }
