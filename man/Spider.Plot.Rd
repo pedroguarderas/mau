@@ -77,9 +77,13 @@ Spider.Plot(
 
 \item{title}{plot title}
 
+\item{title.font}{font type for title}
+
 \item{title.color}{plot title color}
 
 \item{title.size}{plot title size}
+
+\item{label.font}{font type for labels}
 
 \item{label.size}{labels size}
 
