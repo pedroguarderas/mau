@@ -14,8 +14,10 @@
 #' @param criteria column name for criteria
 #' @param valor column name for utilities
 #' @param title plot title
+#' @param title.font font type for title
 #' @param title.color plot title color
 #' @param title.size plot title size
+#' @param label.font font type for labels
 #' @param label.size labels size
 #' @param label.color labels color
 #' @param label.angle labels angle
