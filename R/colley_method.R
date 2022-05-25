@@ -16,9 +16,9 @@
 #' g <- rep( 4, 5 )
 #' w <- c( 0, 4, 0, 0, 2 )
 #' l <- c( 4, 0, 0, 2, 0 )
-#' r <- colley_rank( n, g, w, l )
+#' r <- colley_rating( n, g, w, l )
 #' @export
-colley_rank <- function( n, g, w, l, t = NULL ) {
+colley_rating <- function( n, g, w, l, t = NULL ) {
   
   b <- 1 + 0.5 * ( w - l )
   
