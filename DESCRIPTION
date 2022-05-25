@@ -9,6 +9,8 @@ Description: Provides functions for the creation, evaluation and test of decisio
     for a set of indexes, compute utilities and weights for the whole decision tree defining the
     decision model and simulate weights employing Dirichlet distributions under addition constraints 
     in weights.
+    Also includes other rating analysis methods as for example the Colley, Offensive - Defensive 
+    ratings and the ranking aggregation with Borda count.
 Authors@R: c(
     person("Felipe", "Aguirre", role="ctb"),
     person("Julio", "Andrade", role="ctb"),
