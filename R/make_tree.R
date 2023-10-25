@@ -52,9 +52,9 @@ make_decision_tree <- function( tree.data ) {
     }
   }
   
-  tree <- Sum.Weights( tree ) # weights
-  tree <- Divide.Weights( tree ) # relative weights
-  tree <- Deep.Compute( tree )
+  tree <- sum_weights( tree ) # weights
+  tree <- divide_weights( tree ) # relative weights
+  tree <- deep_compute( tree )
   
   return( tree )
 }
