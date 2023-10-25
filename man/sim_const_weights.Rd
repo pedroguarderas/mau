@@ -41,8 +41,8 @@ alpha <- c( 0.2, 0.5, 0.1, 0.2 )
 constraints <- list( list( c(1,2), 0.7 ), 
                    list( c(3,4), 0.3 ) )
 S <- sim_const_weights( n, utilities, alpha, constraints )
-plot.S <- Plot.Simulation.Weight( S$simulation, title = 'Simulations', 
-                                xlab = 'ID', ylab = 'Utility' ) 
+plot.S <- plot_sim_weight( S$simulation, title = 'Simulations', 
+                           xlab = 'ID', ylab = 'Utility' ) 
 plot( plot.S )
 }
 \seealso{
