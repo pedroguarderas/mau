@@ -1,3 +1,6 @@
+# mau 0.3.0
+* New standard for naming functions
+  
 # mau 0.2.0
 * Adding new functions for computations and aggregation of rating `colley_rating`, `od_rating`, 
   `borda_count`
