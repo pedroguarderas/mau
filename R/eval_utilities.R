@@ -39,20 +39,20 @@
 #' library( mau )
 #' vignette( topic = 'Running_MAUT', package = 'mau' ) 
 #' @export
-Eval.Utilities<-function( index, columns, functions ) {
+eval_utilities <- function( index, columns, functions ) {
   
-  utilities<-copy( index )
+  utilities <- copy( index )
   
   if ( length( columns ) == length( functions ) ) {
-    N<-length( columns )
+    N <- length( columns )
     for ( i in 1:N ) {
-      c<-names( utilities )[ columns[i] ]
-      c<-as.name( c )
-      f<-functions[i]
-      f<-as.name( f )
-      E<-substitute( expression( utilities$column<-sapply( utilities$column, FUN = Function  ) ), 
+      c <- names( utilities )[ columns[i] ]
+      c <- as.name( c )
+      f <- functions[i]
+      f <- as.name( f )
+      E <- substitute( expression( utilities$column <- sapply( utilities$column, FUN = Function  ) ), 
                      list( column = c, Function = f ) )
-      E<-eval( E )
+      E <- eval( E )
       eval( E )
     }
   }
@@ -61,4 +61,12 @@ Eval.Utilities<-function( index, columns, functions ) {
             c( names( utilities )[1], paste( 'u', 1:( ncol(utilities) - 1 ), sep = '' ) ) )
 
   return( utilities )
+}
+
+Eval.Utilities <- function( index, columns, functions ) {
+  .Deprecated(
+    new = 'eval_utilities',
+    msg = 'The function Eval.Utilities will be replaced by the function eval_utilities',
+    old = 'Eval.Utilities' )
+  return( eval_utilities( index, columns, functions ) )
 }
