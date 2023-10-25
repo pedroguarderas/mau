@@ -52,10 +52,10 @@ stand_string <- function( x, chr = NULL, rep = NULL ) {
   return( y )
 }
 
-Stand.String  <-  function( file, skip, nrows ) {
+Stand.String  <-  function( x, chr = NULL, rep = NULL ) {
   .Deprecated(
     new = 'stand_string',
     msg = 'The function Stand.String will be replaced by the function stand_string',
     old = 'Stand.String' )
-  return( stand_string( file, skip, nrows ) )
+  return( stand_string( x, chr, rep ) )
 }
