@@ -115,6 +115,6 @@ Read.Utilities <- function( file, script, lines, skip = 2, encoding = 'utf-8' ) 
   .Deprecated(
     new = 'read_utilities',
     msg = 'The function Read.Utilities will be replaced by the function read_utilities',
-    old = 'read_utilities' )
-  return( read_utilities( file, script, lines, skip = 2, encoding = 'utf-8' ) )
+    old = 'Read.Utilities' )
+  return( read_utilities( file, script, lines, skip, encoding ) )
 }
