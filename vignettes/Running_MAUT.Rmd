@@ -94,7 +94,7 @@ knitr::kable( index )
 
 2. Loading file with utilities
 ```{r,eval=TRUE}
-file <- system.file("extdata", "utilities.txt", package = "mau" )
+file <- system.file( "extdata", "utilities.txt", package = "mau" )
 script <- 'utilities.R'
 lines <- 17
 skip <- 2
@@ -117,7 +117,7 @@ functions <- sapply( c( 'Project',
                         'Self implementation',
                         'External and local relations', 
                         'Scope of capabilities' ),
-                     FUN = Stand.String )
+                     FUN = stand_string )
 names( functions ) <- NULL
 
 # Evaluation of utilities
