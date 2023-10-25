@@ -71,10 +71,14 @@ plot_sim_weight <- function( S, title = 'Simulations', xlab = 'ID', ylab = 'Util
   })
 }
 
-Plot.Simulation.Weight <- function( file, skip, nrows ) {
+Plot.Simulation.Weight <- function( S, title = 'Simulations', xlab = 'ID', ylab = 'Utility',
+                                    lines.cols = 'blue', box.col = 'gold', box.outlier.col = 'darkred', 
+                                    utility.col = 'darkgreen', utility.point.col = 'darkgreen',
+                                    text.col = 'black' ) {
   .Deprecated(
     new = 'plot_sim_weight',
     msg = 'The function Plot.Simulation.Weight will be replaced by the function plot_sim_weight',
     old = 'Plot.Simulation.Weight' )
-  return( plot_sim_weight( file, skip, nrows ) )
+  return( plot_sim_weight( S, title, xlab, ylab, lines.cols, box.col, box.outlier.col, 
+                           utility.col, utility.point.col, text.col ) )
 }
