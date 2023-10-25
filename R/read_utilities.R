@@ -30,7 +30,7 @@ read_utilities <- function( file, script, lines, skip = 2, encoding = 'utf-8' ) 
                       colClasses = c( 'character', 'numeric', 'numeric', 'numeric', 'numeric', 'numeric' ),
                       stringsAsFactors = FALSE )
   
-  funs <- data.frame( funs, fun = sapply( funs[,1], FUN = Stand.String ), stringsAsFactors = FALSE )
+  funs <- data.frame( funs, fun = sapply( funs[,1], FUN = stand_string ), stringsAsFactors = FALSE )
   
   colnames( funs ) <- c( 'nom', 'min', 'max', 'a', 'b', 'c', 'fun' )
   

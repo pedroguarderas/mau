@@ -83,14 +83,14 @@ In the sources below is developed a complete example of a decision
 model, the package **mau** is employed to load utilities defined in the
 file `utilities.txt`, provided in the package itself, automatically the
 script with utilities is built and saved in the local working directory,
-after that with `Eval.Utilities` every function is evaluated over the
+after that with `eval_utilities` every function is evaluated over the
 columns of the index table, the names for utilities were previously
-standardized with `Stand.String`. With another file `tree.csv` the
+standardized with `stand_string`. With another file `tree.csv` the
 decision tree associated to the MAUT model is built and every weight and
-relative weight assigned with the `Make.Decision.Tree` function, in
+relative weight assigned with the `make_decision_tree` function, in
 addition the whole model with utilities of every criteria is obtained
-with `Compute.Model`. The simulation of constrained weights is made with
-`Sim.Const.Weights`, the result could be employed for a sensitivity test
+with `compute_model`. The simulation of constrained weights is made with
+`sim_const_weights`, the result could be employed for a sensitivity test
 of the decision model under a variation of weights.
 
 ``` r
@@ -124,7 +124,7 @@ functions <- sapply( c( 'Project',
                         'Self implementation',
                         'External and local relations', 
                         'Scope of capabilities' ),
-                     FUN = Stand.String )
+                     FUN = stand_string )
 names( functions ) <- NULL
 
 # Evaluation of utilities -------------------------------------------------------------------------
