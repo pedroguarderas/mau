@@ -51,7 +51,7 @@ eval_utilities <- function( index, columns, functions ) {
       f <- functions[i]
       f <- as.name( f )
       E <- substitute( expression( utilities$column <- sapply( utilities$column, FUN = Function  ) ), 
-                     list( column = c, Function = f ) )
+                       list( column = c, Function = f ) )
       E <- eval( E )
       eval( E )
     }
@@ -59,7 +59,7 @@ eval_utilities <- function( index, columns, functions ) {
   
   setnames( utilities, 1:ncol( utilities ), 
             c( names( utilities )[1], paste( 'u', 1:( ncol(utilities) - 1 ), sep = '' ) ) )
-
+  
   return( utilities )
 }
 
