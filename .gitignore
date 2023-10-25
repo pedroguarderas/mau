@@ -21,3 +21,4 @@
 *.aux
 vignettes/*.R
 vignettes/*.html
+utilities.R
