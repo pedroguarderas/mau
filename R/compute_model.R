@@ -11,8 +11,8 @@
 #' @details The whole decision model can be computed a any level and represented in a table format.
 #' @author Pedro Guarderas, Andrés Lopez
 #' \email{pedro.felipe.guarderas@@gmail.com}
-#' @seealso \code{\link{Stand.String}}, \code{\link{Read.Utilities}}, \code{\link{Eval.Utilities}},
-#' \code{\link{Read.Tree}}, \code{\link{Make.Decision.Tree}}, \code{\link{Sim.Const.Weights}}.
+#' @seealso \code{\link{stand_string}}, \code{\link{read_utilities}}, \code{\link{eval_utilities}},
+#' \code{\link{read_tree}}, \code{\link{make_decision_tree}}, \code{\link{sim_const_weights}}.
 #' @examples
 #' vignette( topic = 'Running_MAUT', package = 'mau' )
 #' @import data.table

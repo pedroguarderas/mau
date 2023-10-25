@@ -119,7 +119,7 @@
 #'                     plot.margin = unit( c( 1.0, 1.0, 1.0, 1.0 ),"cm") )
 #' 
 #' 
-#' p <- do.call( Spider.Plot, parameters )
+#' p <- do.call( spider_plot, parameters )
 #' 
 #' plot(p)
 #' @importFrom ggplot2 aes geom_polygon geom_segment geom_text scale_fill_manual ggplot theme element_text element_blank

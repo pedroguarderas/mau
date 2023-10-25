@@ -34,7 +34,7 @@
 #' If the coefficient c is non zero the function is interpreted as an exponential type.
 #' 
 #' @author Pedro Guarderas, \email{pedro.felipe.guarderas@@gmail.com}, Andrés Lopez.
-#' @seealso \code{\link{Read.Utilities}}, \code{\link{Stand.String}}
+#' @seealso \code{\link{read_utilities}}, \code{\link{stand_string}}
 #' @examples
 #' library( mau )
 #' vignette( topic = 'Running_MAUT', package = 'mau' ) 

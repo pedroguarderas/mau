@@ -17,7 +17,7 @@ The weights of the internal nodes has to be computed first is necessary to add e
 weights of the leaves.
 }
 \seealso{
-\code{\link{Read.Tree}}
+\code{\link{read_tree}}
 }
 \author{
 Pedro Guarderas, Andrés Lopez

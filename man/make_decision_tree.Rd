@@ -16,7 +16,7 @@ igraph object containing the graph of the decision tree.
 Create decision tree for MAUT models exporting to an igraph object.
 }
 \details{
-With the tree information loaded by the \code{\link{Read.Tree}} the decision tree
+With the tree information loaded by the \code{\link{read_tree}} the decision tree
 could be represented like an igraph object.
 }
 \examples{
@@ -28,7 +28,7 @@ tree <- make_decision_tree( tree.data )
 plot( tree )
 }
 \seealso{
-\code{\link{Read.Tree}}
+\code{\link{read_tree}}
 }
 \author{
 Pedro Guarderas, Andrés Lopez

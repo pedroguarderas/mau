@@ -36,10 +36,10 @@ script <- 'utilities.R'
 lines <- 17
 skip <- 2
 encoding <- 'utf-8'
-functions <- Read.Utilities( file, script, lines, skip, encoding )
+functions <- read_utilities( file, script, lines, skip, encoding )
 }
 \seealso{
-\code{\link{Stand.String}}
+\code{\link{stand_string}}
 }
 \author{
 Pedro Guarderas, Andrés Lopez

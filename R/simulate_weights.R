@@ -10,7 +10,7 @@
 #' simulated with a concentration around given weights.
 #' @author Pedro Guarderas
 #' \email{pedro.felipe.guarderas@@gmail.com}
-#' @seealso \code{\link{Eval.Utilities}}
+#' @seealso \code{\link{eval_utilities}}
 #' @importFrom gtools rdirichlet
 #' @examples
 #' library( data.table )
@@ -62,7 +62,7 @@ Sim.Weights <- function( n, utilities, alpha ) {
 #' only to meet specific constraints.
 #' @author Pedro Guarderas
 #' \email{pedro.felipe.guarderas@@gmail.com}
-#' @seealso \code{\link{Eval.Utilities}}
+#' @seealso \code{\link{eval_utilities}}
 #' @examples
 #' library( data.table )
 #' N <- 10
@@ -81,7 +81,7 @@ Sim.Weights <- function( n, utilities, alpha ) {
 #' plot( plot.S )
 #' @importFrom gtools rdirichlet
 #' @export
-Sim.Const.Weights <- function( n, utilities, alpha, constraints ) {
+sim_const_weights <- function( n, utilities, alpha, constraints ) {
   
   W <- matrix( 0, length(alpha), n - 1 )
   
@@ -104,10 +104,10 @@ Sim.Const.Weights <- function( n, utilities, alpha, constraints ) {
   return( list( simulation = S, weights = W ) )
 }
 
-sim_const_weights <- function( n, utilities, alpha, constraints ) {
+Sim.Const.Weights <- function( n, utilities, alpha, constraints ) {
   .Deprecated(
     new = 'sim_const_weights',
     msg = 'The function Sim.Const.Weights will be replaced by the function sim_const_weights',
     old = 'Sim.Const.Weights' )
-  return( sim_weights( n, utilities, alpha, constraints ) )
+  return( sim_const_weights( n, utilities, alpha, constraints ) )
 }

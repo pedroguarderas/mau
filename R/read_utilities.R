@@ -12,7 +12,7 @@
 #' the domain of definition of every function and more important is necessary no more than three
 #' coefficients for the function definition.
 #' @author Pedro Guarderas, Andrés Lopez
-#' @seealso \code{\link{Stand.String}}
+#' @seealso \code{\link{stand_string}}
 #' @examples
 #' library( data.table )
 #' file <- system.file("extdata", "utilities.txt", package = "mau" )
@@ -20,7 +20,7 @@
 #' lines <- 17
 #' skip <- 2
 #' encoding <- 'utf-8'
-#' functions <- Read.Utilities( file, script, lines, skip, encoding )
+#' functions <- read_utilities( file, script, lines, skip, encoding )
 #' @importFrom utils read.csv read.table
 #' @export
 read_utilities <- function( file, script, lines, skip = 2, encoding = 'utf-8' ) {

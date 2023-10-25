@@ -215,7 +215,7 @@ parameters <- list( data = dat,
                     plot.margin = unit( c( 1.0, 1.0, 1.0, 1.0 ),"cm") )
 
 
-p <- do.call( Spider.Plot, parameters )
+p <- do.call( spider_plot, parameters )
 
 plot(p)
 }

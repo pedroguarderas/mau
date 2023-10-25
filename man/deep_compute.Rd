@@ -17,7 +17,7 @@ For the computation of the complete decision model is necessary to establish the
 deep position of every node.
 }
 \seealso{
-\code{\link{Read.Tree}}
+\code{\link{read_tree}}
 }
 \author{
 Pedro Guarderas, Andrés Lopez

@@ -28,8 +28,8 @@ The whole decision model can be computed a any level and represented in a table 
 vignette( topic = 'Running_MAUT', package = 'mau' )
 }
 \seealso{
-\code{\link{Stand.String}}, \code{\link{Read.Utilities}}, \code{\link{Eval.Utilities}},
-\code{\link{Read.Tree}}, \code{\link{Make.Decision.Tree}}, \code{\link{Sim.Const.Weights}}.
+\code{\link{stand_string}}, \code{\link{read_utilities}}, \code{\link{eval_utilities}},
+\code{\link{read_tree}}, \code{\link{make_decision_tree}}, \code{\link{sim_const_weights}}.
 }
 \author{
 Pedro Guarderas, Andrés Lopez

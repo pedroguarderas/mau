@@ -2,7 +2,7 @@
 # Make bar plots of utilities ----------------------------------------------------------------------
 #' @title Bar plot of utilities
 #' @description Create ggplot2 bar plots of the utilities at any level of the decision model
-#' @param model data.table obtained with \code{\link{Compute.Model}}
+#' @param model data.table obtained with \code{\link{compute_model}}
 #' @param colors a list of colors for the bars
 #' @param deep the deep to navigate the model object a select the utilities
 #' @param title title for the bar plot

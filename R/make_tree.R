@@ -5,8 +5,8 @@
 #' @return igraph object containing the graph of the decision tree.
 #' @author Pedro Guarderas, Andrés Lopez
 #' \email{pedro.felipe.guarderas@@gmail.com}
-#' @seealso \code{\link{Read.Tree}}
-#' @details With the tree information loaded by the \code{\link{Read.Tree}} the decision tree
+#' @seealso \code{\link{read_tree}}
+#' @details With the tree information loaded by the \code{\link{read_tree}} the decision tree
 #' could be represented like an igraph object.
 #' @examples
 #' library( data.table )
@@ -74,7 +74,7 @@ Make.Decision.Tree <- function( tree.data ) {
 #' @param tree igraph object representing the tree
 #' @return igraph object updated
 #' @author Pedro Guarderas, Andrés Lopez
-#' @seealso \code{\link{Read.Tree}}
+#' @seealso \code{\link{read_tree}}
 #' @importFrom igraph V ego
 #' @export
 sum_weights <- function( tree ) {
@@ -107,7 +107,7 @@ Sum.Weights <- function( tree ) {
 #' @param tree igraph object representing the tree
 #' @return igraph object updated
 #' @author Pedro Guarderas, Andrés Lopez
-#' @seealso \code{\link{Read.Tree}}
+#' @seealso \code{\link{read_tree}}
 #' @importFrom igraph V ego neighborhood
 #' @export
 divide_weights <- function( tree ) {
@@ -146,7 +146,7 @@ Divide.Weights <- function( tree ) {
 #' @param tree igraph object representing the tree
 #' @return igraph object updated
 #' @author Pedro Guarderas, Andrés Lopez
-#' @seealso \code{\link{Read.Tree}}
+#' @seealso \code{\link{read_tree}}
 #' @importFrom igraph V ego neighborhood
 #' @export
 deep_compute <- function( tree ) {
@@ -191,7 +191,7 @@ Deep.Compute <- function( tree ) {
 #' @param tree igraph object representing the tree
 #' @return igraph object updated
 #' @author Pedro Guarderas, Andrés Lopez
-#' @seealso \code{\link{Read.Tree}}
+#' @seealso \code{\link{read_tree}}
 #' @importFrom igraph V ego neighborhood
 #' @export
 index_weights <- function( tree ) {

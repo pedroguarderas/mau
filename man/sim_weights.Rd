@@ -37,7 +37,7 @@ alpha <- c( 0.2, 0.5, 0.1, 0.2 )
 S <- sim_weights( n, utilities, alpha )
 }
 \seealso{
-\code{\link{Eval.Utilities}}
+\code{\link{eval_utilities}}
 }
 \author{
 Pedro Guarderas

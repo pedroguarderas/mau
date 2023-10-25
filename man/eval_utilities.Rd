@@ -53,7 +53,7 @@ library( mau )
 vignette( topic = 'Running_MAUT', package = 'mau' ) 
 }
 \seealso{
-\code{\link{Read.Utilities}}, \code{\link{Stand.String}}
+\code{\link{read_utilities}}, \code{\link{stand_string}}
 }
 \author{
 Pedro Guarderas, \email{pedro.felipe.guarderas@gmail.com}, Andrés Lopez.

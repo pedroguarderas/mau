@@ -7,7 +7,7 @@
 bar_plot(model, deep, colors, title, xlab, ylab)
 }
 \arguments{
-\item{model}{data.table obtained with \code{\link{Compute.Model}}}
+\item{model}{data.table obtained with \code{\link{compute_model}}}
 
 \item{deep}{the deep to navigate the model object a select the utilities}
 

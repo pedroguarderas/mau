@@ -17,7 +17,7 @@ The computation of weights could be determined in an inverse processes given the
 internal weights.
 }
 \seealso{
-\code{\link{Read.Tree}}
+\code{\link{read_tree}}
 }
 \author{
 Pedro Guarderas, Andrés Lopez
