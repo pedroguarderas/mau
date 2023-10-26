@@ -92,7 +92,7 @@ index <- data.table( cod = paste( 'A', 1:10, sep = '' ),
 knitr::kable( index )
 ```
 
-2. Loading file with utilities
+3. Loading file with utilities
 ```{r,eval=TRUE}
 file <- system.file( "extdata", "utilities.txt", package = "mau" )
 script <- 'utilities.R'
@@ -143,9 +143,12 @@ plot( tree, layout = layout_as_tree )
 weights <- tree.data[ !is.na( weight ) ]$weight
 model <- compute_model( tree, utilities, weights )
 ```
+```{r, echo=FALSE, results='asis'}
+knitr::kable( model )
+```
 
 6. Bar plot for every utility
-```{r,eval=TRUE, fig.show='hold', fig.align="center", fig.width=7, fig.height=4}
+```{r,eval=TRUE, fig.show='hold', fig.align="center", fig.width=7, fig.height=5}
 xlab <- 'Utility'
 ylab <- 'Institutions'
 title <- 'Criteria utilities'
