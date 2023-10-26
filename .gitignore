@@ -22,3 +22,5 @@
 vignettes/*.R
 vignettes/*.html
 utilities.R
+/doc/
+/Meta/

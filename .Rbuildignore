@@ -9,3 +9,5 @@
 ^test$
 ^Rold$
 ^vignettes/utilities\.R$
+^doc$
+^Meta$
