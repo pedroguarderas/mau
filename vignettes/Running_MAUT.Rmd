@@ -28,7 +28,7 @@ equation:
 being $\lambda$ a constant. The previous equation only admits two kind of solutions, 
 $u(x) = a \cdot x + b$ or $u(x) = a \cdot e^{b \cdot x} + c$. To completely determine an utility, 
 it is only necessary to know the three parameters $a,b,c$. Additionally, the following convention is 
-assumed, if $c_i$ is $0$ then the utility is linear otherwise is an exponential function.
+assumed, if $c$ is $0$ then the utility is linear otherwise is an exponential function.
 
 For piecewise CRAU, it is only necessary to define the parameters $a,b,c$ of the function for each 
 part of the domain of definition. The **mau** package could load the utilities from an standardized 

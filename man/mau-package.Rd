@@ -36,7 +36,7 @@ The current capabilities of \pkg{mau} are:
 }
 \examples{
 library( mau )
-vignette( topic = 'Running_MAUT', package = 'mau' ) 
+vignette( topic = 'Running_MAUT', package = 'mau' )
 
 }
 \references{

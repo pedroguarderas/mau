@@ -33,7 +33,7 @@ read_tree <- function( file, skip, nrows ) {
   
   with( graph, {
     graph[ !is.na( cod ), funct := name ]
-    graph$funct <- sapply( graph$funct, FUN = Stand.String )
+    graph$funct <- sapply( graph$funct, FUN = stand_string )
     
     graph <- graph[ , list( parent, id, name, cod, weight, name.parent, funct )  ]
     graph <- graph[ with( graph, order( id ) ) ]

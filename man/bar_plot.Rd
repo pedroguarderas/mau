@@ -26,6 +26,7 @@ ggplot2 object.
 Create ggplot2 bar plots of the utilities at any level of the decision model
 }
 \examples{
+library( mau )
 vignette( topic = 'Running_MAUT', package = 'mau' ) 
 }
 \author{

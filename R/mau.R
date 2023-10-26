@@ -28,7 +28,7 @@
 #' }
 #' @examples
 #' library( mau )
-#' vignette( topic = 'Running_MAUT', package = 'mau' ) 
+#' vignette( topic = 'Running_MAUT', package = 'mau' )
 #' 
 #' @importFrom Rdpack reprompt
 #' 
