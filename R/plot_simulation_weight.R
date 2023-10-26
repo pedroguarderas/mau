@@ -21,7 +21,7 @@
 #' @author Pedro Guarderas
 #' @seealso \code{\link{sim_const_weights}} \code{\link{sim_weights}}
 #' @importFrom ggplot2 %+% ggplot geom_line scale_colour_manual geom_boxplot geom_point geom_text 
-#' xlab ylab theme_minimal scale_y_continuous theme ggtitle
+#' xlab ylab theme_minimal scale_y_continuous theme ggtitle unit element_line element_blank
 #' @importFrom grDevices colorRampPalette colors
 #' @export
 plot_sim_weight <- function( S, title = 'Simulations', xlab = 'ID', ylab = 'Utility',
