@@ -28,7 +28,7 @@ n <- n + t( n )
 diag( n ) <- 0
 g <- rowSums( n )
 # Number of win matches for each team
-# w <- sapply( 1:d, FUN = function( i ) sample( x = 1:g[i], size = 1, replace = TRUE ) )
+w <- sapply( 1:d, FUN = function( i ) sample( x = 1:g[i], size = 1, replace = TRUE ) )
 # Number of lost matches for ech team
 l <- rowSums( n ) - w
 r <- colley_rating( n, w, l )
