@@ -1,0 +1,49 @@
+---
+title: "Rankings"
+author: "Pedro Guarderas"
+date: "October 25, 2023"
+output: html_vignette
+vignette: >
+  %\VignetteIndexEntry{Rankings}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Introduction
+## Colley method
+```{r, eval=TRUE}
+library( mau )
+# Example without ties
+d <- 10
+n <- matrix( sample( x = 0:5, size = d * d, replace = TRUE ), d, d )
+n <- n + t( n )
+diag( n ) <- 0
+g <- rowSums( n )
+# Number of win matches for each team
+w <- sapply( 1:d, FUN = function( i ) sample( x = 1:g[i], size = 1, replace = TRUE ) )
+# Number of lost matches for ech team
+l <- rowSums( n ) - w
+r <- colley_rating( n, w, l )
+print( r )
+```
+
+## Offensive - Defensive rating method
+```{r, eval=TRUE}
+A <- matrix( c( 0, 7, 21, 7, 0,
+                52, 0, 34, 25, 27, 
+                24, 16, 0, 7, 3,
+                38, 17, 5, 0, 14,
+                45, 7, 30, 52, 0 ), 
+             nrow = 5, ncol = 5 )
+r <- od_rating( A )
+```
+
+## Borda counts
+```{r, eval=TRUE}
+library( mau )
+m <- 10
+n <- 5
+R <- matrix( runif( m * n ), m, n )
+v <- sample( x = 50:100, size = n )
+r <- borda_count( R, v )
+```
