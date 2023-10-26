@@ -9,15 +9,16 @@
 #' @author Pedro Guarderas
 #' \email{pedro.felipe.guarderas@@gmail.com}
 #' @examples
-#' # Example without ties
-#' n <- matrix( 1, 5, 5 )
+#' d <- 10
+#' n <- matrix( sample( x = 0:5, size = d * d, replace = TRUE ), d, d )
+#' n <- n + t( n )
 #' diag( n ) <- 0
-#' g <- rep( 4, 5 )
+#' g <- rowSums( n )
 #' # Number of win matches for each team
-#' w <- c( 0, 4, 0, 0, 2 )
+#' # w <- sapply( 1:d, FUN = function( i ) sample( x = 1:g[i], size = 1, replace = TRUE ) )
 #' # Number of lost matches for ech team
-#' l <- c( 4, 0, 0, 2, 0 )
-#' r <- colley_rating( n, g, w, l )
+#' l <- rowSums( n ) - w
+#' r <- colley_rating( n, w, l )
 #' @export
 colley_rating <- function( n, w, l, t = NULL ) {
   
