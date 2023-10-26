@@ -4,16 +4,25 @@
 \alias{borda_count}
 \title{Borda count}
 \usage{
-borda_count(R)
+borda_count(R, v = NULL)
 }
 \arguments{
 \item{R}{matrix with rankings}
+
+\item{v}{vector of votes for each ranking}
 }
 \value{
 Vector with aggregated ranking
 }
 \description{
 Rank aggregation with the Borda count method
+}
+\examples{
+m <- 10
+n <- 5
+R <- matrix( runif( m * n ), m, n )
+v <- sample( 50:100, n )
+r <- borda_count( R, v )
 }
 \author{
 Pedro Guarderas

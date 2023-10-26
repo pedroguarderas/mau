@@ -14,7 +14,9 @@
 #' n <- matrix( 1, 5, 5 )
 #' diag( n ) <- 0
 #' g <- rep( 4, 5 )
+#' # Number of win matches for each team
 #' w <- c( 0, 4, 0, 0, 2 )
+#' # Number of lost matches for ech team
 #' l <- c( 4, 0, 0, 2, 0 )
 #' r <- colley_rating( n, g, w, l )
 #' @export
@@ -34,7 +36,7 @@ colley_rating <- function( n, g, w, l, t = NULL ) {
     C <- -n - t
     diag( C ) <- 2 + g + c
   }
-
+  
   U <- chol( C )
   U <- chol2inv( U )
   r <- U %*% b
@@ -57,9 +59,10 @@ colley_rating <- function( n, g, w, l, t = NULL ) {
 #' 24, 16, 0, 7, 3,
 #' 38, 17, 5, 0, 14,
 #' 45, 7, 30, 52, 0 ), nrow = 5, ncol = 5 )
-#' od_rating( A ) 
+#' r <- od_rating( A )
 #' @export
 od_rating <- function( A, iter = 1000, rer = 1e-12 ) {
+  
   m <- nrow( A )
   
   d <- rep( 1, m )
@@ -86,13 +89,38 @@ od_rating <- function( A, iter = 1000, rer = 1e-12 ) {
 #' @title Borda count
 #' @description Rank aggregation with the Borda count method
 #' @param R matrix with rankings
+#' @param v vector of votes for each ranking
 #' @return Vector with aggregated ranking
 #' @author Pedro Guarderas
 #' \email{pedro.felipe.guarderas@@gmail.com}
 #' @examples
+#' m <- 10
+#' n <- 5
+#' R <- matrix( runif( m * n ), m, n )
+#' v <- sample( 50:100, n )
+#' r <- borda_count( R, v )
 #' @export
-borda_count <- function( R ) {
-  n <- nrow( R )
-  b <- rowSums( apply( R, 2, FUN = function( r ) n - order( -r ) ) )
-  return( b ) 
+borda_count <- function( R, v = NULL ) {
+  
+  m <- nrow( R )
+  n <- ncol( R )
+  if ( is.null( v ) ) {
+    v <- rep( 1, n )
+  }
+  W <- matrix( 0, m, n )
+  
+  for ( i in 1:n ) {
+    
+    r <- R[ , i ]
+    w <- rep( 0, m )
+    w[ order( -r ) ] <- m:1
+    W[ , i ] <- w
+    
+  }
+  
+  w <- as.vector( W %*% v )
+  r <- rep( 0, m )
+  r[ order( -w ) ] <- 1:m
+  
+  return( list( r, w ) ) 
 }

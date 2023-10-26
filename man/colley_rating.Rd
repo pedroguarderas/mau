@@ -28,7 +28,9 @@ Rank computation using the Cooley method with ties if required
 n <- matrix( 1, 5, 5 )
 diag( n ) <- 0
 g <- rep( 4, 5 )
+# Number of win matches for each team
 w <- c( 0, 4, 0, 0, 2 )
+# Number of lost matches for ech team
 l <- c( 4, 0, 0, 2, 0 )
 r <- colley_rating( n, g, w, l )
 }

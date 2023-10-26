@@ -25,7 +25,7 @@ A <- matrix( c( 0, 7, 21, 7, 0,
 24, 16, 0, 7, 3,
 38, 17, 5, 0, 14,
 45, 7, 30, 52, 0 ), nrow = 5, ncol = 5 )
-od_rating( A ) 
+r <- od_rating( A )
 }
 \author{
 Pedro Guarderas
