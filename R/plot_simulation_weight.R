@@ -51,6 +51,10 @@ plot_sim_weight <- function( S, title = 'Simulations', xlab = 'ID', ylab = 'Util
     pcolors <- sample( gamma, N, replace = TRUE )
     sim <- merge( sim, data.table( s = 1:N, col = pcolors ), by = 's' )
     
+    ylim <- c( 0, 1 )
+    ybrk <- seq( ylim[1], ylim[2], 0.05 )
+    ylbl <- formatC( ybrk, digits = 2, format = 'f' )
+    
     sim_plot <- ggplot( sim ) + 
       geom_line( aes( x = id, y = val, group = s, colour = col ), size = 0.1, alpha = 0.4 ) +
       scale_colour_manual( values = pcolors, name = '', labels = ''  ) +
@@ -58,15 +62,18 @@ plot_sim_weight <- function( S, title = 'Simulations', xlab = 'ID', ylab = 'Util
       geom_line( data = sim_first, aes( x = id, y = s1, group = 'v' ), colour = utility.col, size = 1.5  ) +
       geom_point( data = sim_first, aes( x = id, y = s1 ), colour = utility.point.col, size = 3  ) +
       geom_text( data = sim_first, aes( x = id, y = s1 + 0.05, label = E ), colour = text.col, size = 5  ) +
+      ggtitle( title ) +
       ylab( ylab ) +
       xlab( xlab ) +
       theme_minimal() +
-      scale_y_continuous( breaks = seq( 0, 1, 0.05 ),
-                          labels = format( seq( 0, 1, 0.05 ), digits = 2 ),
-                          limits = c( 0, 1 ) ) +
-      theme( legend.position = "none" ) +
-      ggtitle( title )
-    
+      scale_y_continuous( breaks = ybrk, labels = ylbl, limits = ylim ) +
+      theme( panel.spacing = unit( 0.25, "lines" ),
+             panel.grid.major.x = element_line( colour = "grey85", linewidth = 0.40, linetype = 3 ),
+             panel.grid.major.y = element_line( colour = "grey85", linewidth = 0.40, linetype = 3 ),
+             panel.grid.minor.x = element_blank(),
+             panel.grid.minor.y = element_blank(),
+             legend.position = 'none' )
+      
     return( sim_plot )
   })
 }
