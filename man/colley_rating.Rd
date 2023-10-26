@@ -4,12 +4,10 @@
 \alias{colley_rating}
 \title{Colley method}
 \usage{
-colley_rating(n, g, w, l, t = NULL)
+colley_rating(n, w, l, t = NULL)
 }
 \arguments{
 \item{n}{symmetric matrix of number of times each player faced another, zero diagonal}
-
-\item{g}{total number of games played by each player}
 
 \item{w}{accumulated vector of wins for each player}
 

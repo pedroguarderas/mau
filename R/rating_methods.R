@@ -2,7 +2,6 @@
 #' @title Colley method
 #' @description Rank computation using the Cooley method with ties if required
 #' @param n symmetric matrix of number of times each player faced another, zero diagonal
-#' @param g total number of games played by each player
 #' @param w accumulated vector of wins for each player
 #' @param l accumulated vector of losses for each player
 #' @param t symmetric matrix of ties, with zero diagonal
@@ -20,9 +19,10 @@
 #' l <- c( 4, 0, 0, 2, 0 )
 #' r <- colley_rating( n, g, w, l )
 #' @export
-colley_rating <- function( n, g, w, l, t = NULL ) {
+colley_rating <- function( n, w, l, t = NULL ) {
   
   b <- 1 + 0.5 * ( w - l )
+  g <- rowSums( n )
   
   if ( is.null( t ) ) {
     C <- -n
@@ -37,11 +37,11 @@ colley_rating <- function( n, g, w, l, t = NULL ) {
     diag( C ) <- 2 + g + c
   }
   
-  U <- chol( C )
-  U <- chol2inv( U )
-  r <- U %*% b
-  
-  return( r ) 
+  r <- solve( C, b )
+  v <- rep( 0, length( r ) )
+  v[ order( -r ) ] <- 1:length( r )
+    
+  return( list( v, r ) )
 }
 
 # Offensive - Defensive rating method --------------------------------------------------------------
