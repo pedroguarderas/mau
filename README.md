@@ -1,5 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- badges: start -->
+
+[![R-CMD-check](https://github.com/pedroguarderas/mau/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/pedroguarderas/mau/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
 
 ## Introduction
 
@@ -8,7 +12,7 @@ $u_1,\ldots,u_n$ which are evaluated over indexes $x_1,\ldots,x_n$ and
 those utilities are aggregated considering additional weights
 $w_1,\ldots,w_n$, the whole final utility is given by the sum
 
-$$u(x_1,\ldots,x_n) = \sum_{1\leq i \leq n}\, w_i\, u_i\ ( x_i )$$
+$$u(x_1,\ldots,x_n) = \sum_{1\leq i \leq n} w_i u_i\ ( x_i )$$
 
 With **mau** you can build and test decision models based in Multi
 Attribute Utility Theory (MAUT). The utilities of any level of the
