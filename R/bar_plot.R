@@ -12,6 +12,7 @@
 #' @author Pedro Guarderas
 #' \email{pedro.felipe.guarderas@@gmail.com}
 #' @examples
+#' library( mau )
 #' vignette( topic = 'Running_MAUT', package = 'mau' ) 
 #' @import data.table
 #' @importFrom ggplot2 %+% ggplot geom_bar scale_fill_manual geom_boxplot geom_point geom_text 
@@ -33,9 +34,9 @@ bar_plot <- function( model, deep, colors, title, xlab, ylab ) {
     bar <- ggplot( data = M ) + 
       geom_bar( aes( x = cod, y = utility, fill = as.character( id ) ), stat = 'identity' ) +
       scale_fill_manual( values = colors ) +
+      ylab( xlab ) +
+      xlab( ylab ) +
       coord_flip() +
-      ylab( ylab ) +
-      xlab( xlab ) +
       theme_minimal() +
       scale_y_continuous( breaks = seq( 0, LMax, 0.05 ),
                           labels = format( seq( 0, LMax, 0.05 ), digits = 2 ),
