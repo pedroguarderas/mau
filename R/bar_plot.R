@@ -26,23 +26,30 @@ bar_plot <- function( model, deep, colors, title, xlab, ylab ) {
     m <- m[ order( u ) ]
     M[ , cod := factor( cod, levels = m$cod, ordered = TRUE ) ]
     
-    UMax <- max( m$u )
-    LMax <- ( ( round( UMax * 100, 0 ) %/% 5 ) * 5 ) / 100
-    
-    if ( UMax > LMax ) LMax <- LMax + 0.05
-    
+    aux <- unique( M[ , list( id, name ) ] )
+    setorder( aux, id )
+    M[ , name := factor( name, aux$name, ordered = TRUE ) ]
+
+    ylim <- c( 0, 1.025 * max( m$u ) )    
+    ybrk <- seq( ylim[1], ylim[2], length.out = 11 )
+    ylbl <- formatC( ybrk, digits = 2, format = 'f' )
+
     bar <- ggplot( data = M ) + 
-      geom_bar( aes( x = cod, y = utility, fill = as.character( id ) ), stat = 'identity' ) +
-      scale_fill_manual( values = colors ) +
+      geom_bar( aes( x = cod, y = utility, fill = name ), stat = 'identity' ) +
+      scale_fill_manual( name = 'Utilities', values = colors ) +
+      scale_y_continuous( breaks = ybrk, labels = ylbl, limits = ylim, 
+                          expand = expansion( mult = c( 0, 0.025 ) ) ) +
+      ggtitle( title ) +
       ylab( xlab ) +
       xlab( ylab ) +
       coord_flip() +
       theme_minimal() +
-      scale_y_continuous( breaks = seq( 0, LMax, 0.05 ),
-                          labels = format( seq( 0, LMax, 0.05 ), digits = 2 ),
-                          limits = c( 0, LMax ) ) +
-      theme( legend.position = "none" ) +
-      ggtitle( title )
+      theme( panel.spacing = unit( 0.25, "lines" ),
+             panel.grid.major.x = element_line( colour = "grey85", linewidth = 0.40, linetype = 3 ),
+             panel.grid.major.y = element_line( colour = "grey85", linewidth = 0.40, linetype = 3 ),
+             panel.grid.minor.x = element_blank(),
+             panel.grid.minor.y = element_blank(),
+             legend.position = 'right' )
     
     return( bar )
   })
