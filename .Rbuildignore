@@ -11,3 +11,4 @@
 ^vignettes/utilities\.R$
 ^doc$
 ^Meta$
+^\.github$
