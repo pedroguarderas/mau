@@ -35,6 +35,10 @@ Imports:
     Rdpack,
     markdown
 RoxygenNote: 7.2.3
-Suggests: knitr, rmarkdown
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.1.0)
 VignetteBuilder: knitr
 RdMacros: Rdpack
+Config/testthat/edition: 3
