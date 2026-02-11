@@ -154,7 +154,7 @@ cols <- sample( colors()[ grepl('(purple|blue|olive)', colors() ) ], m, replace 
 
 axis <- seq( 0.1, 1, 0.1 )
 dat <- data.table( grp = paste( 'A', sort( rep( 1:m, n ) ), sep = '' ),
-                 val = qlnorm( runif( m * n ) * plnorm( 1, 3, 4 ), 3, 4 ) )
+                   val = qlnorm( runif( m * n ) * plnorm( 1, 3, 4 ), 3, 4 ) )
 
 dat <- dat[ order( grp, val ) ]
 dat[ , cri := factor( rep( paste( 'c', n:1, sep = '' ), m ), 

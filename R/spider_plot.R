@@ -58,7 +58,7 @@
 #' 
 #' axis <- seq( 0.1, 1, 0.1 )
 #' dat <- data.table( grp = paste( 'A', sort( rep( 1:m, n ) ), sep = '' ),
-#'                  val = qlnorm( runif( m * n ) * plnorm( 1, 3, 4 ), 3, 4 ) )
+#'                    val = qlnorm( runif( m * n ) * plnorm( 1, 3, 4 ), 3, 4 ) )
 #' 
 #' dat <- dat[ order( grp, val ) ]
 #' dat[ , cri := factor( rep( paste( 'c', n:1, sep = '' ), m ), 
@@ -122,8 +122,9 @@
 #' p <- do.call( spider_plot, parameters )
 #' 
 #' plot(p)
-#' @importFrom ggplot2 aes geom_polygon geom_segment geom_text scale_fill_manual ggplot theme element_text element_blank
-#' @importFrom ggplot2 scale_color_manual scale_linetype_manual scale_alpha_manual scale_size_manual guide_legend element_rect
+#' @importFrom ggplot2 %+% aes geom_polygon geom_segment geom_text scale_fill_manual ggplot theme 
+#' element_text element_blank scale_color_manual scale_linetype_manual scale_alpha_manual 
+#' scale_size_manual guide_legend element_rect
 #' @import RColorBrewer
 #' @export
 spider_plot <- function( data, # Datos con los valores a plotear, data.frame 
