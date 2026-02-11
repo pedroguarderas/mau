@@ -1,3 +1,6 @@
+# mau 0.4.0
+* Update function read_utilities, now script with utilities functions it is not created for each read.
+
 # mau 0.3.0
 * New standard for naming functions
   
