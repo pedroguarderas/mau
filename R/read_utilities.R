@@ -117,10 +117,10 @@ read_utilities <- function( file, lines, skip = 2, encoding = 'utf-8', envir = .
   return( list( funs, strf ) )
 }
 
-Read.Utilities <- function( file, script, lines, skip = 2, encoding = 'utf-8' ) {
+Read.Utilities <- function( file, lines, skip = 2, encoding = 'utf-8' ) {
   .Deprecated(
     new = 'read_utilities',
     msg = 'The function Read.Utilities will be replaced by the function read_utilities',
     old = 'Read.Utilities' )
-  return( read_utilities( file, script, lines, skip, encoding ) )
+  return( read_utilities( file, lines, skip, encoding ) )
 }
