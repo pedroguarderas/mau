@@ -1,5 +1,6 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/pedroguarderas/mau/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/pedroguarderas/mau/actions/workflows/R-CMD-check.yaml)
@@ -113,12 +114,13 @@ index <- data.table( cod = paste( 'A', 1:10, sep = '' ),
 
 # Loading utilities -------------------------------------------------------------------------------
 file <- system.file("extdata", "utilities.txt", package = "mau" )
-script <- 'utilities.R'
 lines <- 17
 skip <- 2
 encoding <- 'utf-8'
-functions <- read_utilities( file, script, lines, skip, encoding )
-source( 'utilities.R' )
+functions <- read_utilities( file, lines, skip, encoding )
+# script <- 'utilities.R'
+# write( functions[[ 2 ]], script )
+functions <- functions[[ 1 ]]
 
 # Index positions ---------------------------------------------------------------------------------
 columns <- c( 2, 3, 4, 5 )

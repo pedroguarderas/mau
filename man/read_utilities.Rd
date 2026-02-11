@@ -4,18 +4,18 @@
 \alias{read_utilities}
 \title{Read utilities}
 \usage{
-read_utilities(file, script, lines, skip = 2, encoding = "utf-8")
+read_utilities(file, lines, skip = 2, encoding = "utf-8", envir = .GlobalEnv)
 }
 \arguments{
 \item{file}{standardize file with definitions.}
-
-\item{script}{output script where the utility functions are defined automatically.}
 
 \item{lines}{number lines to read in \code{file}.}
 
 \item{skip}{to read the \code{file} it had to \code{skip} a given number of lines.}
 
 \item{encoding}{file encoding.}
+
+\item{envir}{environment where utility functions will be created.}
 }
 \value{
 Returns data table with definition of utility functions by range.
@@ -32,11 +32,10 @@ coefficients for the function definition.
 \examples{
 library( data.table )
 file <- system.file("extdata", "utilities.txt", package = "mau" )
-script <- 'utilities.R'
 lines <- 17
 skip <- 2
 encoding <- 'utf-8'
-functions <- read_utilities( file, script, lines, skip, encoding )
+functions <- read_utilities( file, lines, skip, encoding )
 }
 \seealso{
 \code{\link{stand_string}}
