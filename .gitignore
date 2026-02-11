@@ -24,3 +24,7 @@ vignettes/*.html
 utilities.R
 /doc/
 /Meta/
+Rold/*
+cran-comments.md
+revdep/*
+test/*
