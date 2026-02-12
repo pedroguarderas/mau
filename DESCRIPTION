@@ -3,7 +3,7 @@ Type: Package
 Version: 0.4.0
 Title: Decision Models with Multi Attribute Utility Theory
 Encoding: UTF-8
-Date: 2026-02-12
+Date: 2026-02-11
 Description: Provides functions for the creation, evaluation and test of decision models based in
     Multi Attribute Utility Theory (MAUT). Can process and evaluate local risk aversion utilities
     for a set of indexes, compute utilities and weights for the whole decision tree defining the
