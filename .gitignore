@@ -29,3 +29,4 @@ cran-comments.md
 revdep/*
 test/*
 CRAN-SUBMISSION
+inst/doc
