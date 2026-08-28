@@ -135,5 +135,5 @@ borda_count <- function( R, v = NULL, u = NULL ) {
   r[ order( -w ) ] <- 1:m
   r <- setNames( r, nn )
   
-  return( list( r, rn, Rn, w, W ) ) 
+  return( list( rank = r, vrank = w, mranks = W, labels = rn, mlabels = Rn ) ) 
 }
