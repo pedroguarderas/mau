@@ -106,7 +106,7 @@ borda_count <- function( R, v = NULL, u = NULL ) {
   n <- ncol( R )
   nn <- sort( unique( as.vector( R ) ) )
   N <- length( nn )
-  rn <- as.list( 1:N )
+  rn <- 1:N
   rn <- setNames( rn, nn )
   Rn <- matrix( 0, m, n )
 
@@ -123,7 +123,7 @@ borda_count <- function( R, v = NULL, u = NULL ) {
   for ( i in 1:m ) {
     for ( j in 1:n ) {
       
-      I <- rn[[ R[ i, j ] ]]
+      I <- rn[ R[ i, j ] ]
       Rn[ i, j ] <- I
       W[ I, j ] <- u[ i ]
       
