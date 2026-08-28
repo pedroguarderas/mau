@@ -14,3 +14,6 @@
 ^\.github$
 ^revdep$
 ^CRAN-SUBMISSION$
+^\.positai$
+^\.claude$
+R/model.R
