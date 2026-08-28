@@ -4,12 +4,14 @@
 \alias{borda_count}
 \title{Borda count}
 \usage{
-borda_count(R, v = NULL)
+borda_count(R, v = NULL, u = NULL)
 }
 \arguments{
 \item{R}{matrix with rankings}
 
 \item{v}{vector of votes for each ranking}
+
+\item{u}{vector of weight for each ranking}
 }
 \value{
 Vector with aggregated ranking
@@ -18,10 +20,8 @@ Vector with aggregated ranking
 Rank aggregation with the Borda count method
 }
 \examples{
-R <- matrix( c( 1, 3, 2,
-                2, 1, 3, 
-                3, 2, 1 ), nrow = 3, ncol = 3 )
-v <- c( 7, 5, 2 )
+R <- matrix( c( 'A', 'B', 'C', 'B', 'A', 'C', 'C', 'A', 'B' ), nrow = 3, ncol = 3 )
+v <- c( 5, 4, 3 )
 r <- borda_count( R, v )
 }
 \author{

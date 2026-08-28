@@ -91,35 +91,49 @@ od_rating <- function( A, iter = 1000, rer = 1e-12 ) {
 #' @description Rank aggregation with the Borda count method
 #' @param R matrix with rankings
 #' @param v vector of votes for each ranking
+#' @param u vector of weight for each ranking
 #' @return Vector with aggregated ranking
 #' @author Pedro Guarderas
 #' \email{pedro.felipe.guarderas@@gmail.com}
 #' @examples
-#' R <- matrix( c( 1, 3, 2,
-#'                 2, 1, 3, 
-#'                 3, 2, 1 ), nrow = 3, ncol = 3 )
-#' v <- c( 7, 5, 2 )
+#' R <- matrix( c( 'A', 'B', 'C', 'B', 'A', 'C', 'C', 'A', 'B' ), nrow = 3, ncol = 3 )
+#' v <- c( 5, 4, 3 )
 #' r <- borda_count( R, v )
 #' @export
-borda_count <- function( R, v = NULL ) {
+borda_count <- function( R, v = NULL, u = NULL ) {
   
   m <- nrow( R )
   n <- ncol( R )
+  nn <- sort( unique( as.vector( R ) ) )
+  N <- length( nn )
+  rn <- as.list( 1:N )
+  rn <- setNames( rn, nn )
+  Rn <- matrix( 0, m, n )
+
   if ( is.null( v ) ) {
     v <- rep( 1, n )
   }
-  W <- matrix( 0, m, n )
   
-  for ( i in 1:n ) {
-    
-    r <- R[ , i ]
-    W[ order( -r ), i ] <- m:1
-    
+  if ( is.null( u ) ) {
+    u <- m:1
+  }
+  
+  W <- matrix( 0, N, n )
+  
+  for ( i in 1:m ) {
+    for ( j in 1:n ) {
+      
+      I <- rn[[ R[ i, j ] ]]
+      Rn[ i, j ] <- I
+      W[ I, j ] <- u[ i ]
+      
+    }  
   }
   
   w <- as.vector( W %*% v )
   r <- rep( 0, m )
   r[ order( -w ) ] <- 1:m
+  r <- setNames( r, nn )
   
-  return( list( r, w, W ) ) 
+  return( list( r, rn, Rn, w, W ) ) 
 }
