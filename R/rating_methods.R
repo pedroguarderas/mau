@@ -123,9 +123,9 @@ borda_count <- function( R, v = NULL, u = NULL ) {
   for ( i in 1:m ) {
     for ( j in 1:n ) {
       
-      I <- rn[ R[ i, j ] ]
-      Rn[ i, j ] <- I
-      W[ I, j ] <- u[ i ]
+      k <- rn[ R[ i, j ] ]
+      Rn[ i, j ] <- k
+      W[ k, j ] <- u[ i ]
       
     }  
   }

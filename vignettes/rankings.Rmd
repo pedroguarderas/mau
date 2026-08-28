@@ -39,6 +39,21 @@ print( r )
 ```
 
 ## Borda counts
+We take $C$ the finite set of options of candidates, ranking matrix $R \in C^{m\times n}$, number of 
+votes for each case $v \in \mathbb{R}^n$, and weights for each rank $u \in \mathbb{R}^m$, $N = |C|$ 
+number of options or candidates, $l : C \longrightarrow \{1, \ldots, N\}$ labels by option, 
+$W \in \mathbb{R}^{N \times n}$ the ranking matrix. For each $i \in \{1, \ldots, N\}$ and 
+$j \in \{1, \ldots, n\}$ we compute
+$$
+k = l( R_{i,j} ), \qquad W_{k,j} = u_i
+$$
+
+$\text{order}$ returns the order index of a vector.
+$$
+w = W v,\qquad r = \text{order}( w )
+$$
+
+
 ```{r, eval=TRUE}
 # Position of each participant
 R <- matrix( c( 2, 3, 1, 3, 1, 2, 1, 2, 3 ), nrow = 3, ncol = 3 )
