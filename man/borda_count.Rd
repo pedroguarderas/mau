@@ -18,10 +18,10 @@ Vector with aggregated ranking
 Rank aggregation with the Borda count method
 }
 \examples{
-m <- 10
-n <- 5
-R <- matrix( runif( m * n ), m, n )
-v <- sample( 50:100, n )
+R <- matrix( c( 1, 3, 2,
+                2, 1, 3, 
+                3, 2, 1 ), nrow = 3, ncol = 3 )
+v <- c( 7, 5, 2 )
 r <- borda_count( R, v )
 }
 \author{

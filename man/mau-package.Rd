@@ -63,7 +63,7 @@ Useful links:
 Authors:
 \itemize{
   \item Pedro Guarderas \email{pedro.felipe.guarderas@gmail.com}
-  \item Andrés Lopez \email{andrelo@gmail.com} [contributor]
+  \item Andrés Lopez \email{andylo1d@gmail.com} [contributor]
 }
 
 Other contributors:

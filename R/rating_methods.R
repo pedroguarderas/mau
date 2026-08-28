@@ -95,10 +95,10 @@ od_rating <- function( A, iter = 1000, rer = 1e-12 ) {
 #' @author Pedro Guarderas
 #' \email{pedro.felipe.guarderas@@gmail.com}
 #' @examples
-#' m <- 10
-#' n <- 5
-#' R <- matrix( runif( m * n ), m, n )
-#' v <- sample( 50:100, n )
+#' R <- matrix( c( 1, 3, 2,
+#'                 2, 1, 3, 
+#'                 3, 2, 1 ), nrow = 3, ncol = 3 )
+#' v <- c( 7, 5, 2 )
 #' r <- borda_count( R, v )
 #' @export
 borda_count <- function( R, v = NULL ) {
@@ -113,9 +113,7 @@ borda_count <- function( R, v = NULL ) {
   for ( i in 1:n ) {
     
     r <- R[ , i ]
-    w <- rep( 0, m )
-    w[ order( -r ) ] <- m:1
-    W[ , i ] <- w
+    W[ order( -r ), i ] <- m:1
     
   }
   
@@ -123,5 +121,5 @@ borda_count <- function( R, v = NULL ) {
   r <- rep( 0, m )
   r[ order( -w ) ] <- 1:m
   
-  return( list( r, w ) ) 
+  return( list( r, w, W ) ) 
 }
