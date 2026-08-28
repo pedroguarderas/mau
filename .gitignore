@@ -30,3 +30,4 @@ revdep/*
 test/*
 CRAN-SUBMISSION
 inst/doc
+.positai
