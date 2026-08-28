@@ -60,12 +60,17 @@ Useful links:
 \author{
 \strong{Maintainer}: Pedro Guarderas \email{pedro.felipe.guarderas@gmail.com}
 
+Authors:
+\itemize{
+  \item Pedro Guarderas \email{pedro.felipe.guarderas@gmail.com}
+  \item Andrés Lopez \email{andrelo@gmail.com} [contributor]
+}
+
 Other contributors:
 \itemize{
   \item Felipe Aguirre [contributor]
   \item Julio Andrade [contributor]
   \item Daniel Lagos [contributor]
-  \item Andrés Lopez [contributor]
   \item Nelson Recalde [contributor]
   \item Edison Salazar [contributor]
 }
