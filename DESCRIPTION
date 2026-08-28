@@ -12,13 +12,13 @@ Description: Provides functions for the creation, evaluation and test of decisio
     Also includes other rating analysis methods as for example the Colley, Offensive - Defensive 
     ratings and the ranking aggregation with Borda count.
 Authors@R: c(
-    person("Felipe", "Aguirre", role="ctb"),
-    person("Julio", "Andrade", role="ctb"),
-    person("Pedro", "Guarderas", email = "pedro.felipe.guarderas@gmail.com", role = c("aut","cre") ),
-    person("Daniel", "Lagos", role="ctb"),
-    person("Andrés", "Lopez", role="ctb"),
-    person("Nelson", "Recalde", role="ctb"),
-    person("Edison", "Salazar", role="ctb")
+    person("Felipe", "Aguirre", role = "ctb"),
+    person("Julio", "Andrade", role = "ctb"),
+    person("Pedro", "Guarderas", role = c("aut","cre"), email = "pedro.felipe.guarderas@gmail.com" ),
+    person("Daniel", "Lagos", role = "ctb"),
+    person("Andrés", "Lopez", role = c("aut","ctb"), email = "andylo1d@gmail.com" ),
+    person("Nelson", "Recalde", role = "ctb" ),
+    person("Edison", "Salazar", role = "ctb" )
     )
 Maintainer: Pedro Guarderas <pedro.felipe.guarderas@gmail.com>
 License: LGPL-3
@@ -33,7 +33,6 @@ Imports:
     RColorBrewer,
     ggplot2,
     Rdpack
-RoxygenNote: 7.3.3
 Suggests: 
     knitr,
     rmarkdown,
@@ -41,3 +40,4 @@ Suggests:
 VignetteBuilder: knitr
 RdMacros: Rdpack
 Config/testthat/edition: 3
+Config/roxygen2/version: 8.0.0
