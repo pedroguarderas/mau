@@ -10,8 +10,11 @@ vignette: >
 ---
 
 ## Colley method
-```{r, eval=TRUE}
+```{r,eval=TRUE,message=FALSE, warning=FALSE}
 library( mau )
+```
+
+```{r, eval=TRUE}
 # Example without ties
 d <- 10
 n <- matrix( sample( x = 0:5, size = d * d, replace = TRUE ), d, d )
@@ -40,7 +43,7 @@ print( r )
 
 ## Borda counts
 We take $C$ the finite set of options of candidates, ranking matrix $R \in C^{m\times n}$, number of 
-votes for each case $v \in \mathbb{R}^n$, and weights for each rank $u \in \mathbb{R}^m$, $N = |C|$ 
+votes for each case $v \in \mathbb{R}^n$, $u \in \mathbb{R}^m$ weights for each rank, $N = |C|$ 
 number of options or candidates, $l : C \longrightarrow \{1, \ldots, N\}$ labels by option, 
 $W \in \mathbb{R}^{N \times n}$ the ranking matrix. For each $i \in \{1, \ldots, N\}$ and 
 $j \in \{1, \ldots, n\}$ we compute
