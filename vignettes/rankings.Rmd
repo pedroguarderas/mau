@@ -62,20 +62,30 @@ $$
 R <- matrix( c( 2, 3, 1, 3, 1, 2, 1, 2, 3 ), nrow = 3, ncol = 3 )
 v <- c( 7, 5, 2 )
 bc <- borda_count( R, v )
+print( bc )
+```
 
+```{r, eval=TRUE}
 R <- matrix( c( 'A', 'B', 'C', 'B', 'A', 'C', 'C', 'A', 'B' ), nrow = 3, ncol = 3 )
 v <- c( 5, 4, 3 )
 bc <- borda_count( R, v )
+print( bc )
+```
 
+```{r, eval=TRUE}
 R <- matrix( c( 'Steak', 'Chicken', 'Barbacoa', 'Carnitas', 
                 'Carnitas', 'Barbacoa', 'Chicken', 'Steak', 
                 'Chicken', 'Carnitas', 'Steak', 'Barbacoa',
                 'Steak', 'Barbacoa', 'Chicken', 'Carnitas' ), nrow = 4, ncol = 4 )
 v <- c( 8, 7, 5, 3 )
 bc <- borda_count( R, v )
+print( bc )
+```
 
+```{r, eval=TRUE}
 R <- matrix( c( 'A', 'B', 'C', 'B', 'A', 'C', 'C', 'A', 'B' ), nrow = 3, ncol = 3 )
 v <- c( 5, 4, 3 )
 u <- c( 6, 4, 2 )
 bc <- borda_count( R, v, u )
+print( bc )
 ```
