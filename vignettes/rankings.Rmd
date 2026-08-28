@@ -55,4 +55,9 @@ R <- matrix( c( 'Steak', 'Chicken', 'Barbacoa', 'Carnitas',
                 'Steak', 'Barbacoa', 'Chicken', 'Carnitas' ), nrow = 4, ncol = 4 )
 v <- c( 8, 7, 5, 3 )
 r <- borda_count( R, v )
+
+R <- matrix( c( 'A', 'B', 'C', 'B', 'A', 'C', 'C', 'A', 'B' ), nrow = 3, ncol = 3 )
+v <- c( 5, 4, 3 )
+u <- c( 6, 4, 2 )
+r <- borda_count( R, v, u )
 ```
